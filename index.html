@@ -3,332 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فكرة للدعاية والإعلان</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #00e0ff; /* اللون الأزرق من صورتك */
-            --dark-bg: #050505;
-            --card-bg: #0d0d0d;
-            --text-light: #ffffff;
-            --text-gray: #b0b0b0;
+            --primary: #00d4ff;
+            --secondary: #0099cc;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #1a1a1a;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background: var(--dark); 
+            color: var(--light); 
+            overflow-x: hidden; 
             scroll-behavior: smooth;
         }
-
-        body {
+        header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            z-index: 1000; 
+            background: rgba(10, 10, 10, 0.95); 
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1); 
+        }
+        nav { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        
+        /* Hero Section */
+        .hero { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding-top: 100px; 
+            background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, var(--dark) 70%); 
+        }
+        .cta-button { 
+            display: inline-block; 
+            padding: 1rem 2.5rem; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            color: var(--darker); 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            transition: 0.3s; 
+            border: none; 
+            cursor: pointer; 
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM2NjYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
-        }
-
-        /* رأس الصفحة - Header */
-        header {
-            background-color: rgba(5, 5, 5, 0.9);
-            border-bottom: 1px solid rgba(0, 224, 255, 0.1);
-            padding: 1rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* القسم الرئيسي - Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
-            padding-top: 100px;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 50px;
-            border: 1px solid #0099cc;
-            background: linear-gradient(135deg, rgba(0, 224, 255, 0.1), rgba(0, 153, 204, 0.1));
-            color: #ccc;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-gray);
-            line-height: 1.6;
-            margin-bottom: 3rem;
-        }
-
-        /* أزرار التواصل السريع - المظهر المطلوب */
-        .fast-contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .contact-card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            text-align: right;
-            transition: transform 0.3s, border-color 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 224, 255, 0.3);
-        }
-
-        .card-meta {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .card-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        /* قسم تقديم الطلب - Contact Form Section */
-        #request {
-            padding: 6rem 1rem;
-            text-align: center;
-            background-color: #080808;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            margin: 10px auto;
-        }
-
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 1rem;
-            background-color: #111;
-            border: 1px solid #222;
-            border-radius: 8px;
-            color: var(--text-light);
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: var(--primary);
-            color: #000;
-            padding: 1rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
             font-size: 1.1rem;
-            cursor: pointer;
-            transition: opacity 0.3s;
+        }
+        .cta-button:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3); 
         }
 
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
+        /* Titles */
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2.5rem; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 10px; }
 
-        /* عائمة الواتساب */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background-color: #25d366;
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
-            text-decoration: none;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+        /* Portfolio */
+        .portfolio { padding: 5rem 2rem; background: var(--darker); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .portfolio-item { position: relative; border-radius: 15px; overflow: hidden; height: 250px; border: 1px solid rgba(0, 212, 255, 0.1); }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .portfolio-item:hover img { transform: scale(1.1); }
 
-        /* الهواتف والتابلت */
+        /* Contact Section & Cards */
+        .contact-section { padding: 5rem 2rem; background: var(--dark); }
+        .contact-container { max-width: 1000px; margin: 0 auto 4rem auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .contact-card { background: var(--gray); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: 0.3s; text-decoration: none; color: var(--light); display: block;}
+        .contact-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1); }
+        .contact-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .contact-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .contact-card p { color: #ccc; font-size: 1.1rem; word-break: break-all;}
+
+        /* Contact Form */
+        .form-container { max-width: 700px; margin: 0 auto; background: var(--gray); padding: 3rem; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.1); }
+        input, select, textarea { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #333; background: var(--dark); color: var(--light); font-family: 'Tajawal', sans-serif; font-size: 1rem; }
+        input:focus, select:focus, textarea:focus { border-color: var(--primary); outline: none; }
+        
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        footer { padding: 2rem; text-align: center; background: var(--darker); border-top: 1px solid #222; }
+
         @media (max-width: 768px) {
-            header { padding: 1rem; flex-direction: column; gap: 10px; text-align: center;}
-            .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center;}
-            .hero h1 { font-size: 2.5rem; }
-            .fast-contact-grid { grid-template-columns: 1fr; padding: 0 1rem;}
-            .section-title { font-size: 2rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            .hero h1 { font-size: 2.5rem !important; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <i class="far fa-lightbulb"></i>
-            <span>فكرة للدعاية</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#request">خدماتنا</a></li>
-            <li><a href="#request">أعمالنا</a></li>
-            <li><a href="#request">تواصل معنا</a></li>
-        </ul>
+        <nav>
+            <a href="#" class="logo"><i class="far fa-lightbulb"></i> فكرة للدعاية</a>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#portfolio">سابقة الأعمال</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="badge">شركة دعاية وإعلان مصرية</div>
-            <h1>فكرة للدعاية والإعلان</h1>
-            <p>من الخيال إلى الواقع... نقدم مجموعة متكاملة من خدمات الطباعة والافتات الخارجية بأعلى جودة وأفضل سعر</p>
-            
-            <div class="fast-contact-grid">
-                
-                <a href="mailto:Fekrah_marketing@outlook.com" class="contact-card">
-                    <div class="card-meta">البريد الإلكتروني</div>
-                    <div class="card-main">
-                        <span class="card-value">Fekrah_marketing@outlook.com</span>
-                        <span class="card-icon"><i class="far fa-envelope"></i></span>
-                    </div>
-                </a>
-
-                <a href="tel:01275209778" class="contact-card">
-                    <div class="card-meta">اتصل بنا</div>
-                    <div class="card-main">
-                        <span class="card-value">01275209778</span>
-                        <span class="card-icon"><i class="fas fa-phone-alt"></i></span>
-                    </div>
-                </a>
-
-                <a href="https://wa.me/201111049778" target="_blank" class="contact-card">
-                    <div class="card-meta">واتساب</div>
-                    <div class="card-main">
-                        <span class="card-value">+201111049778</span>
-                        <span class="card-icon"><i class="fab fa-whatsapp"></i></span>
-                    </div>
-                </a>
-
-            </div>
+    <section class="hero" id="home">
+        <div style="padding: 0 1rem;">
+            <h1 style="font-size: 4rem; margin-bottom: 1rem; font-weight: 800;">فكرة للدعاية والإعلان</h1>
+            <p style="font-size: 1.5rem; opacity: 0.8; margin-bottom: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">من الخيال إلى الواقع.. نقدم لك مجموعة متكاملة من خدمات الطباعة، اللافتات الخارجية، والهدايا الدعائية بأعلى جودة.</p>
+            <a href="#contact" class="cta-button">قدم طلبك الآن</a>
         </div>
     </section>
 
-    <section id="request">
-        <h2 class="section-title">تقديم طلب تواصل</h2>
-        <p style="color: #b0b0b0; margin-bottom: 2rem;">سجل بياناتك وفكرة مشروعك، وسنقوم بالتواصل معك لمناقشة التفاصيل.</p>
-        
-        <form>
-            <input type="text" name="name" placeholder="الاسم بالكامل" required>
-            <input type="tel" name="phone" placeholder="رقم الهاتف" required>
-            <input type="email" name="email" placeholder="البريد الإلكتروني">
-            
-            <select name="service_type">
-                <option value="" disabled selected>نوع الخدمة المطلوبة</option>
-                <option value="طباعة لافتات">طباعة لافتات خارجية</option>
-                <option value="هدايا دعائية">هدايا دعائية</option>
-                <option value="رول أب">رول أب وبوب أب</option>
-                <option value="لوحات مضيئة">لوحات مضيئة</option>
-                <option value="أخرى">أخرى</option>
-            </select>
-
-            <textarea name="project_details" rows="5" placeholder="أخبرنا المزيد عن فكرتك أو مشروعك (التفاصيل، المقاسات، الكمية...)"></textarea>
-            
-            <button type="submit" class="submit-btn">إرسال طلب التواصل</button>
-        </form>
+    <section id="portfolio" class="portfolio">
+        <div class="section-title">
+            <h2>سابقة أعمالنا</h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="Etisalat"></div>
+            <div class="portfolio-item"><img src="outdoor-gazprom.jpg" alt="Gazprom"></div>
+            <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="Sigma"></div>
+            <div class="portfolio-item"><img src="giveaway-betek.jpg" alt="Betek"></div>
+            <div class="portfolio-item"><img src="giveaway-office.jpg" alt="Office"></div>
+            <div class="portfolio-item"><img src="giveaway-usb.jpg" alt="USB"></div>
+        </div>
     </section>
+
+    <section id="contact" class="contact-section">
+        <div class="section-title">
+            <h2>تواصل معنا</h2>
+        </div>
+        
+        <div class="contact-container">
+            <a href="mailto:Fekrah_marketing@outlook.com" class="contact-card">
+                <i class="far fa-envelope"></i>
+                <h3>البريد الإلكتروني</h3>
+                <p>Fekrah_marketing@outlook.com</p>
+            </a>
+
+            <a href="tel:01275209778" class="contact-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>اتصل بنا</h3>
+                <p dir="ltr">012 7520 9778</p>
+            </a>
+
+            <a href="https://wa.me/201111049778" target="_blank" class="contact-card">
+                <i class="fab fa-whatsapp"></i>
+                <h3>واتساب</h3>
+                <p dir="ltr">+20 111 104 9778</p>
+            </a>
+        </div>
+
+        <div class="form-container">
+            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.8rem; color: var(--primary);">تقديم طلب تنفيذ مشروع</h3>
+            
+            <form action="https://formspree.io/f/mzdkdebd" method="POST">
+                <input type="text" name="name" placeholder="الاسم بالكامل / اسم الشركة" required>
+                <input type="tel" name="phone" placeholder="رقم الهاتف للتواصل" required>
+                <input type="email" name="email" placeholder="البريد الإلكتروني (اختياري)">
+                
+                <select name="service_type" required>
+                    <option value="" disabled selected>اختر نوع الخدمة المطلوبة</option>
+                    <option value="لافتات خارجية">طباعة وتركيب لافتات خارجية</option>
+                    <option value="هدايا دعائية">هدايا دعائية ومطبوعات</option>
+                    <option value="رول أب">رول أب وتجهيز معارض</option>
+                    <option value="كلادينج">واجهات كلادينج</option>
+                    <option value="أخرى">أخرى</option>
+                </select>
+
+                <textarea name="details" rows="5" placeholder="تفاصيل الطلب (المقاسات، الكمية، أو الفكرة التي تريد تنفيذها...)" required></textarea>
+                
+                <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب الآن</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 فكرة للدعاية والإعلان - جميع الحقوق محفوظة</p>
+    </footer>
 
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
