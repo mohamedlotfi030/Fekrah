@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
-    <!-- ربط ملف CSS الخارجي -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +13,6 @@
     <header>
         <nav>
             <a href="#" class="logo">
-                <!-- استخدام اسم الملف الصحيح كما يظهر في مستودعك -->
                 <img src="logo.png.png" alt="لوجو فكرة للدعاية والإعلان" class="logo-img">
             </a>
             <ul class="nav-links">
@@ -28,13 +26,14 @@
 
     <main>
         <section class="hero" id="home">
-            <div>
+            <div class="hero-content">
                 <h1>فكرة للدعاية والإعلان</h1>
                 <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
                 <a href="#services" class="cta-button">ابدأ مشروعك الآن</a>
             </div>
         </section>
 
+        <!-- باقي الأقسام تظل كما هي -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا</h2></div>
             <div class="services-grid">
@@ -44,27 +43,15 @@
             </div>
         </section>
 
-        <section id="portfolio">
-            <div class="section-title"><h2>أعمالنا</h2></div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="فكرة"></div>
-                <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="فكرة"></div>
-                <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="فكرة"></div>
-            </div>
-        </section>
-
         <section id="contact">
-            <div class="section-title"><h2>اطلب خدمتك الآن</h2></div>
+            <div class="section-title"><h2>تواصل معنا</h2></div>
             <div class="form-container">
                 <form id="contactForm" action="https://script.google.com/macros/s/AKfycbyxpFU_ycHRbKgPhqE1wknegHtLCQZdwHZ5fXqzBD7NROcs9oszbz_y7c1xF9Ein2yI/exec" method="POST">
                     <input type="text" name="name" placeholder="الاسم الكريم" required>
-                    <input type="tel" name="phone" placeholder="رقم الهاتف (واتساب)" required>
+                    <input type="tel" name="phone" placeholder="رقم الهاتف" required>
                     <textarea name="message" rows="4" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
-                    <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب</button>
+                    <button type="submit" class="cta-button" style="width: 100%;">إرسال</button>
                 </form>
-                <div id="successMessage" style="display:none; text-align:center; padding: 20px; color:#25d366;">
-                    ✅ تم استلام طلبك بنجاح!
-                </div>
             </div>
         </section>
     </main>
@@ -77,10 +64,7 @@
             const formData = new FormData(this);
             const queryString = new URLSearchParams(formData).toString();
             fetch(this.action + "?" + queryString, { method: 'POST' })
-            .then(() => {
-                this.style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-            });
+            .then(() => alert("تم استلام طلبك بنجاح!"));
         });
     </script>
 </body>
