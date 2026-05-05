@@ -53,4 +53,5 @@ nav {
     gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
 }
 .service-card { 
-    background: var(--gray); padding: 2rem; border-radius: 20px
+    background: var(--gray); padding: 2rem; border-radius: 20px; 
+    border
