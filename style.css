@@ -1,4 +1,4 @@
-/* الإعدادات العامة والمتغيرات */
+/* الإعدادات العامة والمتغيرات المستوحاة من شعار فكرة */
 :root {
     --primary: #2e7d32;   /* الأخضر من اللوجو */
     --secondary: #0277bd; /* الأزرق من اللوجو */
@@ -43,12 +43,15 @@ nav {
     align-items: center; 
 }
 
+/* حل مشكلة الخلفية البيضاء في logo.png.png */
 .logo-img { 
-    height: 65px; /* حجم مناسب للوجو في الهيدر */
+    height: 65px; 
     width: auto; 
     transition: var(--transition);
-    /* إذا لم تحذف الخلفية البيضاء بعد، يمكنك تجربة السطر التالي */
-    /* mix-blend-mode: screen; */
+    /* خاصية لدمج اللون الأبيض مع الخلفية السوداء */
+    mix-blend-mode: screen; 
+    /* تحسين وضوح ألوان الشعار فوق الخلفية المظلمة */
+    filter: brightness(1.1) contrast(1.1);
 }
 
 .logo-img:hover {
@@ -72,7 +75,7 @@ nav {
     color: var(--secondary); 
 }
 
-/* تنسيق قسم الترحيب (Hero) */
+/* تنسيق قسم الترحيب الرئيسي */
 .hero { 
     min-height: 100vh; 
     display: flex; 
@@ -89,7 +92,7 @@ nav {
     font-weight: 800;
 }
 
-/* الأزرار */
+/* الأزرار بنظام التدرج اللوني للفكرة */
 .cta-button { 
     display: inline-block; 
     padding: 1rem 2.5rem; 
@@ -108,7 +111,7 @@ nav {
     box-shadow: 0 10px 20px rgba(2, 119, 189, 0.3); 
 }
 
-/* الأقسام (الخدمات والأعمال) */
+/* تنسيق الأقسام والعناوين */
 .section-title { 
     text-align: center; 
     margin: 6rem 0 3rem 0; 
@@ -164,11 +167,7 @@ nav {
     transition: 0.5s ease; 
 }
 
-.portfolio-item:hover img { 
-    transform: scale(1.1); 
-}
-
-/* تنسيق النموذج (Form) */
+/* نموذج التواصل المنسق */
 .form-container {
     max-width: 650px; 
     margin: 2rem auto;
@@ -190,12 +189,7 @@ nav {
     transition: var(--transition);
 }
 
-.form-container input:focus, .form-container textarea:focus {
-    border-color: var(--secondary);
-    outline: none;
-}
-
-/* زر الواتساب العائم */
+/* زر الواتساب العائم بتأثير النبض */
 .whatsapp-float {
     position: fixed; 
     bottom: 30px; 
@@ -221,7 +215,7 @@ nav {
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
-/* التنسيق للهواتف */
+/* توافق الشاشات الصغيرة (الجوال) */
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero h1 { font-size: 2.5rem; }
