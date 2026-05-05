@@ -1,5 +1,5 @@
 :root {
-    --neon-blue: #00d8ff;
+    --neon-blue: #00d8ff; /* اللون السماوي المطلوب */
     --dark-bg: #000000;
     --card-bg: #0f0f0f;
     --transition: all 0.3s ease;
@@ -13,7 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-/* الهيدر واللوجو */
 header {
     position: fixed; top: 0; width: 100%; z-index: 1000;
     background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
@@ -25,13 +24,13 @@ nav {
 }
 
 .logo-img {
-    height: 65px; mix-blend-mode: screen; filter: brightness(1.1);
+    height: 65px; mix-blend-mode: screen; filter: brightness(1.2);
 }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a { color: white; text-decoration: none; font-weight: 700; }
+.nav-links a { color: white; text-decoration: none; font-weight: 700; transition: var(--transition); }
+.nav-links a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
 
-/* قسم الترحيب مع الخلفية */
 .hero {
     position: relative; min-height: 100vh;
     display: flex; align-items: center; justify-content: center; text-align: center;
@@ -41,31 +40,28 @@ nav {
 
 .hero-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9));
 }
 
 .hero-content { position: relative; z-index: 2; }
-.hero h1 { font-size: 4rem; font-weight: 900; text-shadow: 0 0 20px rgba(0,216,255,0.4); }
+.hero h1 { font-size: 3.8rem; font-weight: 900; text-shadow: 0 0 20px rgba(0,216,255,0.4); }
 
-/* أزرار وكروت */
 .cta-button {
     display: inline-block; padding: 1.2rem 3rem; border-radius: 50px;
     background: linear-gradient(135deg, #0277bd, var(--neon-blue));
     color: white; font-weight: 900; text-decoration: none; transition: var(--transition);
+    border: none; cursor: pointer;
 }
 
 .section-title { text-align: center; margin: 60px 0; }
-.section-title h2 {
-    font-size: 2.8rem; font-weight: 900; position: relative; padding-top: 20px;
-}
+.section-title h2 { font-size: 2.8rem; font-weight: 900; position: relative; padding-top: 20px; }
 .section-title h2::before {
     content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: 100px; height: 5px; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
 }
 
-/* شبكة الخدمات المتوهجة */
 .services-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px;
 }
 
@@ -77,7 +73,7 @@ nav {
 
 .service-card:hover {
     transform: translateY(-10px); border-color: var(--neon-blue);
-    box-shadow: 0 0 40px rgba(0, 216, 255, 0.3); background: #050505;
+    box-shadow: 0 10px 40px rgba(0, 216, 255, 0.2); background: #151515;
 }
 
 .service-card i {
@@ -85,9 +81,6 @@ nav {
     filter: drop-shadow(0 0 10px var(--neon-blue));
 }
 
-.service-card h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
-
-/* Lightbox معرض الصور */
 .lightbox {
     display: none; position: fixed; z-index: 9999; top: 0; left: 0;
     width: 100%; height: 100%; background: rgba(0,0,0,0.95);
@@ -95,15 +88,15 @@ nav {
 }
 .lightbox:target { display: flex; }
 .lightbox img {
-    max-width: 85%; max-height: 80%; border-radius: 15px;
-    border: 2px solid var(--neon-blue); box-shadow: 0 0 50px rgba(0,216,255,0.4);
+    max-width: 85%; max-height: 80%; border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 50px rgba(0,216,255,0.4); border-radius: 10px;
 }
 .lightbox .close {
     position: absolute; top: 30px; right: 50px;
     color: var(--neon-blue); font-size: 60px; text-decoration: none;
 }
 
-.form-container { max-width: 650px; margin: 0 auto 100px; background: #0f0f0f; padding: 3rem; border-radius: 25px; }
+.form-container { max-width: 650px; margin: 0 auto 100px; background: #0f0f0f; padding: 3rem; border-radius: 25px; border: 1px solid #222; }
 .form-container input, .form-container textarea {
     width: 100%; margin-bottom: 1.5rem; padding: 15px; background: #000;
     border: 1px solid #333; color: white; border-radius: 10px; font-family: 'Tajawal';
@@ -111,7 +104,10 @@ nav {
 
 .whatsapp-float {
     position: fixed; bottom: 30px; left: 30px; background: #25d366;
-    width: 75px; height: 75px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; font-size: 40px; color: white;
+    width: 70px; height: 70px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 35px; color: white;
     text-decoration: none; z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
 }
+
+@media (max-width: 992px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
