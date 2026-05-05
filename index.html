@@ -4,119 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
-    <meta name="description" content="شركة فكرة للدعاية والإعلان تقدم خدمات التصميم الجرافيكي، الطباعة، اللافتات الخارجية، والكلادينج بأعلى جودة في مصر.">
-    
-    <!-- الخطوط والأيقونات -->
+    <!-- ربط ملف CSS الخارجي -->
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #2e7d32; /* الأخضر المستوحى من اللوجو */
-            --secondary: #0277bd; /* الأزرق المستوحى من اللوجو */
-            --accent: #ef6c00; /* البرتقالي المستوحى من اللوجو */
-            --dark: #0a0a0a;
-            --light: #ffffff;
-            --gray: #1a1a1a;
-        }
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            background: var(--dark); 
-            color: var(--light); 
-            scroll-behavior: smooth;
-        }
-
-        /* الهيدر */
-        header { 
-            position: fixed; top: 0; width: 100%; z-index: 1000; 
-            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1); 
-        }
-        nav { 
-            max-width: 1400px; margin: 0 auto; padding: 0.5rem 2rem; 
-            display: flex; justify-content: space-between; align-items: center; 
-        }
-        .logo-img { height: 70px; width: auto; transition: 0.3s; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: var(--light); text-decoration: none; font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--secondary); }
-
-        /* قسم الترحيب */
-        .hero { 
-            min-height: 100vh; display: flex; align-items: center; justify-content: center; 
-            text-align: center; padding-top: 100px; 
-            background: radial-gradient(circle, rgba(2,119,189,0.1) 0%, var(--dark) 70%); 
-        }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-        .cta-button { 
-            display: inline-block; padding: 1rem 2.5rem; border-radius: 50px;
-            background: linear-gradient(135deg, var(--secondary), var(--primary)); 
-            color: white; text-decoration: none; font-weight: 700; transition: 0.3s; 
-            cursor: pointer; border: none; font-family: 'Tajawal';
-        }
-        .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(2, 119, 189, 0.4); }
-
-        /* الخدمات والأعمال */
-        .section-title { text-align: center; margin: 5rem 0 3rem 0; }
-        .section-title h2 { font-size: 2.5rem; border-bottom: 3px solid var(--accent); display: inline-block; padding-bottom: 10px; }
-
-        .services-grid, .portfolio-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-        }
-        .service-card { 
-            background: var(--gray); padding: 2rem; border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: 0.3s;
-        }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
-        .service-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
-
-        .portfolio-item { border-radius: 15px; overflow: hidden; height: 300px; border: 1px solid rgba(255,255,255,0.1); }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-
-        /* نموذج التواصل */
-        .form-container {
-            max-width: 600px; margin: 2rem auto;
-            background: linear-gradient(145deg, var(--gray), #111);
-            padding: 2.5rem; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .form-container input, .form-container textarea {
-            width: 100%; padding: 12px 15px; margin-bottom: 20px;
-            background: rgba(0,0,0,0.3); border: 1px solid #333;
-            border-radius: 10px; color: white; font-family: 'Tajawal';
-        }
-
-        /* زر الواتساب المفعّل */
-        .whatsapp-float {
-            position: fixed; bottom: 30px; left: 30px;
-            background: #25d366; width: 90px; height: 90px;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 45px; color: white;
-            text-decoration: none; z-index: 1000;
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.2rem; }
-            .whatsapp-float { width: 65px; height: 65px; font-size: 35px; }
-        }
-    </style>
 </head>
 <body>
 
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="logo.png" alt="فكرة للدعاية والإعلان" class="logo-img">
+                <!-- استخدام اسم الملف الصحيح كما يظهر في مستودعك -->
+                <img src="logo.png.png" alt="لوجو فكرة للدعاية والإعلان" class="logo-img">
             </a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
@@ -131,71 +30,57 @@
         <section class="hero" id="home">
             <div>
                 <h1>فكرة للدعاية والإعلان</h1>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
+                <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
                 <a href="#services" class="cta-button">ابدأ مشروعك الآن</a>
             </div>
         </section>
 
-        <!-- قسم الخدمات -->
         <section id="services">
-            <div class="section-title"><h2>خدماتنا المميزة</h2></div>
+            <div class="section-title"><h2>خدماتنا</h2></div>
             <div class="services-grid">
-                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>التصميم الجرافيكي</h3><p>تصميم هويات بصرية وشعارات مبتكرة.</p></div>
-                <div class="service-card"><i class="fas fa-store"></i><h3>اللافتات الخارجية</h3><p>تنفيذ كافة أنواع اليافط والواجهات باحترافية.</p></div>
-                <div class="service-card"><i class="fas fa-print"></i><h3>الطباعة والورقيات</h3><p>طباعة الكروت، الكتالوجات، والمطبوعات الدعائية.</p></div>
+                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>التصميم الجرافيكي</h3><p>هوية بصرية مميزة تعبر عن عملك.</p></div>
+                <div class="service-card"><i class="fas fa-store"></i><h3>اللافتات الخارجية</h3><p>تنفيذ اللافتات باحترافية وأجود الخامات.</p></div>
+                <div class="service-card"><i class="fas fa-print"></i><h3>خدمات الطباعة</h3><p>طباعة الكتالوجات والمطبوعات الورقية.</p></div>
             </div>
         </section>
 
-        <!-- قسم الأعمال -->
         <section id="portfolio">
-            <div class="section-title"><h2>معرض أعمالنا</h2></div>
+            <div class="section-title"><h2>أعمالنا</h2></div>
             <div class="portfolio-grid">
-                <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="عمل سابق"></div>
-                <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="عمل سابق"></div>
-                <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="عمل سابق"></div>
+                <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="فكرة"></div>
+                <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="فكرة"></div>
+                <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="فكرة"></div>
             </div>
         </section>
 
-        <!-- نموذج التواصل المربوط بـ Google Sheet -->
-        <section id="contact" class="contact-section">
+        <section id="contact">
             <div class="section-title"><h2>اطلب خدمتك الآن</h2></div>
             <div class="form-container">
                 <form id="contactForm" action="https://script.google.com/macros/s/AKfycbyxpFU_ycHRbKgPhqE1wknegHtLCQZdwHZ5fXqzBD7NROcs9oszbz_y7c1xF9Ein2yI/exec" method="POST">
                     <input type="text" name="name" placeholder="الاسم الكريم" required>
                     <input type="tel" name="phone" placeholder="رقم الهاتف (واتساب)" required>
-                    <textarea name="message" rows="4" placeholder="تفاصيل الطلب أو الاستفسار" required></textarea>
-                    <button type="submit" class="cta-button" style="width: 100%;">إرسال البيانات</button>
+                    <textarea name="message" rows="4" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
+                    <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب</button>
                 </form>
-                <div id="successMessage" style="display:none; text-align:center; padding: 20px; color:#25d366; font-weight:bold;">
-                    ✅ تم استلام طلبك بنجاح! سيتواصل معك فريق فكرة قريباً.
+                <div id="successMessage" style="display:none; text-align:center; padding: 20px; color:#25d366;">
+                    ✅ تم استلام طلبك بنجاح!
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- زر الواتساب المباشر -->
-    <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <footer style="text-align:center; padding: 3rem; background: var(--gray); margin-top: 5rem;">
-        <p>📞 +20 1111049778 | ✉️ Fekrah_marketing@outlook.com</p>
-        <p style="opacity:0.6; margin-top:1rem;">© 2026 فكرة للدعاية والإعلان - fekrah-adv.com</p>
-    </footer>
+    <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const queryString = new URLSearchParams(formData).toString();
-            
-            // الإرسال إلى السكربت الخاص بك
             fetch(this.action + "?" + queryString, { method: 'POST' })
             .then(() => {
                 this.style.display = 'none';
                 document.getElementById('successMessage').style.display = 'block';
-            })
-            .catch(() => alert("عذراً، حدث خطأ. يمكنك التواصل معنا عبر الواتساب مباشرة."));
+            });
         });
     </script>
 </body>
