@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
-    <meta name="description" content="شركة فكرة للدعاية والإعلان تقدم خدمات التصميم الجرافيكي، الطباعة، اللافتات الخارجية، الكلادينج، والإعلانات الداخلية بأعلى جودة.">
+    <meta name="description" content="شركة فكرة للدعاية والإعلان تقدم خدمات التصميم الجرافيكي، الطباعة، اللافتات الخارجية، والإعلانات الداخلية بأعلى جودة.">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* التنسيقات الأساسية */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #00d4ff;
@@ -24,6 +25,7 @@
             scroll-behavior: smooth;
         }
 
+        /* الهيدر والقائمة */
         header { 
             position: fixed; top: 0; width: 100%; z-index: 1000; 
             background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); 
@@ -42,6 +44,7 @@
         .nav-links a { color: var(--light); text-decoration: none; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary); }
 
+        /* قسم الترحيب */
         .hero { 
             min-height: 100vh; display: flex; align-items: center; justify-content: center; 
             text-align: center; padding-top: 100px; 
@@ -52,10 +55,11 @@
             display: inline-block; padding: 1rem 2.5rem; border-radius: 50px;
             background: linear-gradient(135deg, var(--primary), var(--secondary)); 
             color: var(--darker); text-decoration: none; font-weight: 700; transition: 0.3s; 
-            cursor: pointer; border: none; font-family: 'Tajawal', sans-serif;
+            cursor: pointer; border: none; font-family: 'Tajawal';
         }
         .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
 
+        /* العناوين والشبكات */
         .section-title { text-align: center; margin: 5rem 0 3rem 0; }
         .section-title h2 { font-size: 2.5rem; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 10px; }
 
@@ -73,6 +77,7 @@
         .portfolio-item { border-radius: 15px; overflow: hidden; height: 300px; border: 1px solid rgba(0, 212, 255, 0.1); }
         .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 
+        /* صندوق الطلبات المنسق */
         .contact-section { padding-bottom: 5rem; }
         .form-container {
             max-width: 600px; margin: 2rem auto;
@@ -88,6 +93,7 @@
         }
         .form-container input:focus, .form-container textarea:focus { border-color: var(--primary); outline: none; }
 
+        /* زر الواتساب الضخم (90x90) وحركة Pulse */
         .whatsapp-float {
             position: fixed; bottom: 30px; left: 30px;
             background: #25d366; width: 90px; height: 90px;
@@ -103,6 +109,7 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
+        /* تنسيق الهاتف */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             .whatsapp-float { width: 65px; height: 65px; font-size: 35px; bottom: 20px; left: 20px; }
@@ -133,68 +140,68 @@
             </div>
         </section>
 
+        <!-- الخدمات -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا</h2></div>
             <div class="services-grid">
-                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>التصميم الجرافيكي</h3><p>فريق متخصص في التصميم الإبداعي لهوية بصرية مميزة.</p></div>
-                <div class="service-card"><i class="fas fa-store"></i><h3>اللافتات الخارجية</h3><p>تنفيذ اللافتات باحترافية عالية وأجود أنواع الخامات.</p></div>
-                <div class="service-card"><i class="fas fa-print"></i><h3>خدمات الطباعة</h3><p>طباعة المطبوعات الورقية والكتالوجات بأحدث التقنيات.</p></div>
-                <div class="service-card"><i class="fas fa-building"></i><h3>كلادينج وواجهات</h3><p>تغطية واجهات المباني بالكلادينج والألوميتال بأفضل تشطيب.</p></div>
-                <div class="service-card"><i class="fas fa-scroll"></i><h3>رول أب وبوب أب</h3><p>تصميم وتنفيذ ستاندات العرض المتنقلة للمؤتمرات.</p></div>
-                <div class="service-card"><i class="fas fa-ad"></i><h3>الإعلانات الداخلية</h3><p>تصميم وتفيذ الإعلانات الداخلية للمحلات والمعارض.</p></div>
+                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>التصميم الجرافيكي</h3><p>هوية بصرية مميزة تعبر عن عملك.</p></div>
+                <div class="service-card"><i class="fas fa-store"></i><h3>اللافتات الخارجية</h3><p>تنفيذ اللافتات باحترافية وأجود الخامات.</p></div>
+                <div class="service-card"><i class="fas fa-print"></i><h3>خدمات الطباعة</h3><p>طباعة الكتالوجات والمطبوعات الورقية.</p></div>
+                <div class="service-card"><i class="fas fa-building"></i><h3>كلادينج وواجهات</h3><p>تغطية واجهات المباني بأفضل تشطيب.</p></div>
+                <div class="service-card"><i class="fas fa-scroll"></i><h3>رول أب وبوب أب</h3><p>ستاندات العرض المتنقلة للمؤتمرات.</p></div>
+                <div class="service-card"><i class="fas fa-ad"></i><h3>الإعلانات الداخلية</h3><p>تصميم وتنفيذ إعلانات المحلات والمعارض.</p></div>
             </div>
         </section>
 
+        <!-- الأعمال -->
         <section id="portfolio">
             <div class="section-title"><h2>أعمالنا</h2></div>
             <div class="portfolio-grid">
-                <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="لافتة اتصالات الخارجية"></div>
-                <div class="portfolio-item"><img src="outdoor-gazprom.jpg" alt="لافتة جازبروم الخارجية"></div>
-                <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="لافتة سيجما الخارجية"></div>
-                <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="لافتة يونيفرسال الخارجية"></div>
-                <div class="portfolio-item"><img src="giveaway-betek.jpg" alt="هدايا دعائية لشركة بيتك"></div>
-                <div class="portfolio-item"><img src="giveaway-office.jpg" alt="هدايا دعائية للمكاتب"></div>
+                <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="أعمال فكرة"></div>
+                <div class="portfolio-item"><img src="outdoor-gazprom.jpg" alt="أعمال فكرة"></div>
+                <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="أعمال فكرة"></div>
+                <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="أعمال فكرة"></div>
+                <div class="portfolio-item"><img src="giveaway-betek.jpg" alt="أعمال فكرة"></div>
+                <div class="portfolio-item"><img src="giveaway-office.jpg" alt="أعمال فكرة"></div>
             </div>
         </section>
 
+        <!-- صندوق الطلبات المربوط بالسكربت الخاص بك -->
         <section id="contact" class="contact-section">
             <div class="section-title"><h2>اطلب خدمتك الآن</h2></div>
             <div class="form-container">
-                <form id="contactForm" action="https://formspree.io/f/mzdkdebd" method="POST">
+                <form id="contactForm" action="https://script.google.com/macros/s/AKfycbyxpFU_ycHRbKgPhqE1wknegHtLCQZdwHZ5fXqzBD7NROcs9oszbz_y7c1xF9Ein2yI/exec" method="POST">
                     <input type="text" name="name" placeholder="الاسم الكريم" required>
                     <input type="tel" name="phone" placeholder="رقم الهاتف (واتساب)" required>
-                    <textarea name="message" rows="4" placeholder="كيف يمكننا مساعدتك في فكرة؟" required></textarea>
+                    <textarea name="message" rows="4" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
                     <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب</button>
                 </form>
                 <div id="successMessage" style="display:none; text-align:center; padding: 20px; color:#25d366; font-weight:bold; font-size: 1.2rem;">
-                    ✅ تم إرسال طلبك بنجاح! سيتواصل معك فريق فكرة قريباً.
+                    ✅ تم استلام طلبك بنجاح! سيتواصل معك فريق فكرة قريباً.
                 </div>
             </div>
             <footer style="text-align:center; margin-top:2rem;">
-                <p>📞 هاتف: +20 1111049778 | ✉️ بريد: Fekrah_marketing@outlook.com</p>
-                <p style="opacity:0.7; margin-top:1rem;">© 2026 فكرة للدعاية والإعلان - جميع الحقوق محفوظة</p>
+                <p>✉️ بريد: Fekrah_marketing@outlook.com</p>
+                <p style="opacity:0.7; margin-top:1rem;">© 2026 فكرة للدعاية والإعلان</p>
             </footer>
         </section>
     </main>
 
-    <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- زر الواتساب -->
+    <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const data = new FormData(this);
-            const response = await fetch(this.action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            });
-            if (response.ok) {
+            const formData = new FormData(this);
+            const queryString = new URLSearchParams(formData).toString();
+            
+            fetch(this.action + "?" + queryString, { method: 'POST' })
+            .then(() => {
                 this.style.display = 'none';
                 document.getElementById('successMessage').style.display = 'block';
-                this.reset();
-            }
+            })
+            .catch(() => alert("حدث خطأ، يرجى المحاولة لاحقاً"));
         });
     </script>
 </body>
