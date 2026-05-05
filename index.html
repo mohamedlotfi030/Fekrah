@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- الخطوط العريضة والمميزة -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -13,19 +14,20 @@
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="logo.png.png" alt="لوجو فكرة للدعاية والإعلان" class="logo-img">
+                <img src="logo.png.png" alt="فكرة للدعاية والإعلان" class="logo-img">
             </a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#services">خدماتنا</a></li>
-                <li><a href="#portfolio">أعمالنا</a></li>
                 <li><a href="#contact">تواصل معنا</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <!-- قسم الترحيب مع معالجة الخلفية -->
         <section class="hero" id="home">
+            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>فكرة للدعاية والإعلان</h1>
                 <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
@@ -33,25 +35,25 @@
             </div>
         </section>
 
-        <!-- باقي الأقسام تظل كما هي -->
+        <!-- قسم الخدمات المتوهجة والقابلة للضغط -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا</h2></div>
             <div class="services-grid">
-                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>التصميم الجرافيكي</h3><p>هوية بصرية مميزة تعبر عن عملك.</p></div>
-                <div class="service-card"><i class="fas fa-store"></i><h3>اللافتات الخارجية</h3><p>تنفيذ اللافتات باحترافية وأجود الخامات.</p></div>
-                <div class="service-card"><i class="fas fa-print"></i><h3>خدمات الطباعة</h3><p>طباعة الكتالوجات والمطبوعات الورقية.</p></div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="section-title"><h2>تواصل معنا</h2></div>
-            <div class="form-container">
-                <form id="contactForm" action="https://script.google.com/macros/s/AKfycbyxpFU_ycHRbKgPhqE1wknegHtLCQZdwHZ5fXqzBD7NROcs9oszbz_y7c1xF9Ein2yI/exec" method="POST">
-                    <input type="text" name="name" placeholder="الاسم الكريم" required>
-                    <input type="tel" name="phone" placeholder="رقم الهاتف" required>
-                    <textarea name="message" rows="4" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
-                    <button type="submit" class="cta-button" style="width: 100%;">إرسال</button>
-                </form>
+                <a href="#contact" class="service-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>التصميم الجرافيكي</h3>
+                    <p>هوية بصرية مميزة تعبر عن عملك.</p>
+                </a>
+                <a href="#contact" class="service-card">
+                    <i class="fas fa-store"></i>
+                    <h3>اللافتات الخارجية</h3>
+                    <p>تنفيذ اللافتات باحترافية وأجود الخامات.</p>
+                </a>
+                <a href="#contact" class="service-card">
+                    <i class="fas fa-print"></i>
+                    <h3>خدمات الطباعة</h3>
+                    <p>طباعة الكتالوجات والمطبوعات الورقية.</p>
+                </a>
             </div>
         </section>
     </main>
@@ -59,12 +61,14 @@
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const queryString = new URLSearchParams(formData).toString();
-            fetch(this.action + "?" + queryString, { method: 'POST' })
-            .then(() => alert("تم استلام طلبك بنجاح!"));
+        // سكربت بسيط لضمان سلاسة التنقل بين الأقسام
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
