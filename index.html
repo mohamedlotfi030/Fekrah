@@ -123,7 +123,7 @@
 
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- كود إرسال النموذج ومعالجة الرسالة الخضراء -->
+    <!-- كود الربط مع Google Apps Script -->
     <script>
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('success-message');
@@ -136,13 +136,14 @@
             submitBtn.disabled = true;
 
             const formData = new FormData(contactForm);
-            // الرابط المحدث الخاص بك
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyWHD3y98W_lAzRNM1zh82A4lkqrkmwh0iiJORb7jJ9DUW6rw-RVTNi8wSFBbUZd-iKsw/exec';
+            
+            // الرابط الجديد الخاص بك
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbw9FWMWLyQtgUmxnktzq-_T3t8VYbtRkmTudIETd4awZGREsWN-DcNO9XKiWpYYmev8dQ/exec';
 
             fetch(scriptURL, { 
                 method: 'POST', 
                 body: formData,
-                mode: 'no-cors' // يضمن بقاء المستخدم في الصفحة الحالية
+                mode: 'no-cors' 
             })
             .then(() => {
                 successMessage.style.display = 'block';
@@ -153,7 +154,7 @@
             })
             .catch(error => {
                 console.error('Error!', error.message);
-                // نظهر الرسالة أيضاً لأن no-cors أحياناً لا يعيد استجابة واضحة للنجاح
+                // نظهر الرسالة أيضاً لأن no-cors أحياناً لا يعيد استجابة صريحة بالنجاح رغم وصول البيانات
                 successMessage.style.display = 'block';
                 contactForm.reset();
                 submitBtn.disabled = false;
