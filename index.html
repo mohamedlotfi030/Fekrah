@@ -51,7 +51,7 @@
                 </a>
             </div>
 
-            <!-- معرض الصور المطور -->
+            <!-- معرض الصور -->
             <div id="portfolio-gallery">
                 <div id="img-rollup" class="lightbox">
                     <a href="#services" class="close">&times;</a>
@@ -94,12 +94,16 @@
         <section id="contact">
             <div class="section-title"><h2>تواصل معنا</h2></div>
             <div class="form-container">
-                <!-- تم تحديث رابط الأكشن هنا بالرابط الجديد -->
-                <form id="contactForm" action="https://script.google.com/macros/s/AKfycbw5Am-6DplxKzohlBL_NMyThfVcxNPKUCREkl-WXs2eF24ziO8doUOJckbRrsw6-cwE3Q/exec" method="POST">
+                <!-- رسالة النجاح -->
+                <div id="success-message" style="display: none; background: rgba(37, 211, 102, 0.2); border: 1px solid #25d366; color: #25d366; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; font-weight: bold;">
+                    تم إرسال الطلب بنجاح، وسيتم التواصل معكم في أسرع وقت.
+                </div>
+
+                <form id="contactForm">
                     <input type="text" name="name" placeholder="اسم الشركة / العميل" required>
                     <input type="tel" name="phone" placeholder="رقم الهاتف" required>
                     <textarea name="message" rows="4" placeholder="ما هي تفاصيل مشروعك؟" required></textarea>
-                    <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب</button>
+                    <button type="submit" id="submitBtn" class="cta-button" style="width: 100%;">إرسال الطلب</button>
                 </form>
             </div>
         </section>
@@ -120,5 +124,36 @@
 
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
+    <!-- كود إرسال النموذج -->
+    <script>
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('success-message');
+        const submitBtn = document.getElementById('submitBtn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            submitBtn.innerText = "جاري الإرسال...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(contactForm);
+            // الرابط الجديد الذي أرسلته
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbz8nxazPHGMFumyPdwy4id7aE3PFXSMMlqzq5-Kzqejq3ik7tGiZ9c2EPqM3qdYsgak5w/exec';
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    successMessage.style.display = 'block';
+                    contactForm.reset();
+                    submitBtn.innerText = "إرسال الطلب";
+                    submitBtn.disabled = false;
+                    setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "إرسال الطلب";
+                });
+        });
+    </script>
 </body>
 </html>
