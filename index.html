@@ -4,112 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
+    <meta name="description" content="شركة فكرة للدعاية والإعلان تقدم خدمات التصميم الجرافيكي، الطباعة، اللافتات الخارجية، الكلادينج، والإعلانات الداخلية بأعلى جودة.">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #00d4ff;
-            --secondary: #0099cc;
-            --dark: #0a0a0a;
-            --darker: #050505;
-            --light: #ffffff;
-            --gray: #1a1a1a;
-        }
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            background: var(--dark); 
-            color: var(--light); 
-            overflow-x: hidden; 
-            scroll-behavior: smooth;
-        }
-        header { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            z-index: 1000; 
-            background: rgba(10, 10, 10, 0.95); 
-            backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1); 
-        }
-        nav { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 1rem 2rem; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        .logo { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-            text-decoration: none;
-        }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: var(--light); text-decoration: none; font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        
-        .hero { 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            padding-top: 100px; 
-            background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, var(--dark) 70%); 
-        }
-        .cta-button { 
-            display: inline-block; 
-            padding: 1rem 2.5rem; 
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            color: var(--darker); 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: 700; 
-            transition: 0.3s; 
-            border: none; 
-            cursor: pointer; 
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1.1rem;
-        }
-
-        .section-title { text-align: center; margin-bottom: 3rem; }
-        .section-title h2 { font-size: 2.5rem; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 10px; }
-
-        /* قسم الخدمات الجديد */
-        .services { padding: 5rem 2rem; background: var(--dark); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-        .service-card { background: var(--gray); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; text-align: center; }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1); }
-        .service-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
-        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--light); }
-        .service-card p { color: #aaa; line-height: 1.6; }
-
-        .portfolio { padding: 5rem 2rem; background: var(--darker); }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .portfolio-item { border-radius: 15px; overflow: hidden; height: 300px; border: 1px solid rgba(0, 212, 255, 0.1); }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .portfolio-item:hover img { transform: scale(1.1); }
-
-        .contact-section { padding: 5rem 2rem; background: var(--dark); }
-        .form-container { max-width: 700px; margin: 4rem auto 0 auto; background: var(--gray); padding: 3rem; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.1); }
-        input, select, textarea { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #333; background: var(--dark); color: var(--light); font-family: 'Tajawal', sans-serif; }
-        
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; }
-        footer { padding: 2rem; text-align: center; background: var(--darker); }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="#" class="logo"><i class="far fa-lightbulb"></i> فكرة للدعاية</a>
+            <a href="#" class="logo">فكرة للدعاية <i class="far fa-lightbulb"></i></a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#services">خدماتنا</a></li>
@@ -119,69 +23,46 @@
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <div>
-            <h1 style="font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800;">فكرة للدعاية والإعلان</h1>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2.5rem;">من الخيال إلى الواقع.. خدمات متكاملة بأعلى جودة</p>
-            <a href="#services" class="cta-button">اكتشف خدماتنا</a>
-        </div>
-    </section>
+    <main>
+        <section class="hero" id="home">
+            <div>
+                <h1>فكرة للدعاية والإعلان</h1>
+                <p>من الخيال إلى الواقع.. خدمات متكاملة بأعلى جودة</p>
+                <a href="#services" class="cta-button">اكتشف خدماتنا</a>
+            </div>
+        </section>
 
-    <section id="services" class="services">
-        <div class="section-title">
-            <h2>خدماتنا</h2>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-brush"></i>
-                <h3>التصميم الجرافيكي</h3>
-                <p>نقدم هويات بصرية مبتكرة وتصاميم إبداعية تعكس قوة علامتك التجارية.</p>
+        <section id="services">
+            <div class="section-title"><h2>خدماتنا</h2></div>
+            <div class="services-grid">
+                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>التصميم الجرافيكي</h3><p>فريق متخصص في التصميم الإبداعي لهوية بصرية مميزة.</p></div>
+                <div class="service-card"><i class="fas fa-store"></i><h3>اللافتات الخارجية</h3><p>تنفيذ اللافتات باحترافية عالية وأجود أنواع الخامات.</p></div>
+                <div class="service-card"><i class="fas fa-print"></i><h3>خدمات الطباعة</h3><p>طباعة المطبوعات الورقية والكتالوجات بأحدث التقنيات.</p></div>
+                <div class="service-card"><i class="fas fa-building"></i><h3>كلادينج وواجهات</h3><p>تغطية واجهات المباني بالكلادينج والألوميتال بأفضل تشطيب.</p></div>
+                <div class="service-card"><i class="fas fa-scroll"></i><h3>رول أب وبوب أب</h3><p>تصميم وتنفيذ ستاندات العرض المتنقلة للمؤتمرات.</p></div>
+                <div class="service-card"><i class="fas fa-ad"></i><h3>الإعلانات الداخلية</h3><p>تصميم وتفيذ الإعلانات الداخلية للمحلات والمعارض.</p></div>
             </div>
-            <div class="service-card">
-                <i class="fas fa-store"></i>
-                <h3>اللافتات الخارجية</h3>
-                <p>تصنيع وتركيب اللوحات الإعلانية، والكلادينج، والحروف البارزة بأجود الخامات.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-print"></i>
-                <h3>خدمات الطباعة</h3>
-                <p>طباعة المسطحات، البروشورات، الكروت الشخصية، والبنرات بأحدث التقنيات.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-gift"></i>
-                <h3>الهدايا الدعائية</h3>
-                <p>تجهيز اليونيفورم، الأقلام، الميداليات، والـ USB المطبوع بشعار شركتك.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="portfolio" class="portfolio">
-        <div class="section-title">
-            <h2>قائمة أعمالنا</h2>
-        </div>
-        <div class="portfolio-grid">
-            <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="اتصالات"></div>
-            <div class="portfolio-item"><img src="outdoor-gazprom.jpg" alt="جازبروم"></div>
-            <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="سيجما"></div>
-            <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="يونيفرسال"></div>
-            <div class="portfolio-item"><img src="giveaway-betek.jpg" alt="بيتك"></div>
-            <div class="portfolio-item"><img src="giveaway-office.jpg" alt="أوفيس"></div>
-        </div>
-    </section>
+        <section id="portfolio">
+            <div class="section-title"><h2>أعمالنا</h2></div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><img src="outdoor-etisalat.jpg" alt="لافتة اتصالات الخارجية"></div>
+                <div class="portfolio-item"><img src="outdoor-gazprom.jpg" alt="لافتة جازبروم الخارجية"></div>
+                <div class="portfolio-item"><img src="outdoor-sigma.jpg" alt="لافتة سيجما الخارجية"></div>
+                <div class="portfolio-item"><img src="outdoor-universal.jpg" alt="لافتة يونيفرسال الخارجية"></div>
+                <div class="portfolio-item"><img src="giveaway-betek.jpg" alt="هدايا دعائية لشركة بيتك"></div>
+                <div class="portfolio-item"><img src="giveaway-office.jpg" alt="هدايا دعائية للمكاتب"></div>
+            </div>
+        </section>
+    </main>
 
-    <section id="contact" class="contact-section">
+    <footer id="contact">
         <div class="section-title"><h2>تواصل معنا</h2></div>
-        <div class="form-container">
-            <form action="https://formspree.io/f/mzdkdebd" method="POST">
-                <input type="text" name="name" placeholder="الاسم" required>
-                <input type="tel" name="phone" placeholder="رقم الهاتف" required>
-                <textarea name="details" rows="4" placeholder="تفاصيل طلبك" required></textarea>
-                <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب</button>
-            </form>
-        </div>
-    </section>
+        <p style="text-align:center; margin-bottom:1rem;">📞 هاتف: +20 1111049778 | ✉️ البريد الإلكتروني: info@fekrah.com</p>
+        <p style="text-align:center; opacity:0.7;">© 2026 فكرة للدعاية والإعلان - جميع الحقوق محفوظة</p>
+    </footer>
 
-    <footer><p>© 2026 فكرة للدعاية والإعلان</p></footer>
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 </body>
