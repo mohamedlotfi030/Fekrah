@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
     <link rel="stylesheet" href="style.css">
-    <!-- الخطوط العريضة والمميزة -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,7 +13,7 @@
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="logo.png.png" alt="فكرة للدعاية والإعلان" class="logo-img">
+                <img src="logo.png.png" alt="لوجو فكرة" class="logo-img">
             </a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
@@ -25,51 +24,79 @@
     </header>
 
     <main>
-        <!-- قسم الترحيب مع معالجة الخلفية -->
         <section class="hero" id="home">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>فكرة للدعاية والإعلان</h1>
                 <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
-                <a href="#services" class="cta-button">ابدأ مشروعك الآن</a>
+                <a href="#services" class="cta-button">اكتشف أعمالنا</a>
             </div>
         </section>
 
-        <!-- قسم الخدمات المتوهجة والقابلة للضغط -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا</h2></div>
             <div class="services-grid">
-                <a href="#contact" class="service-card">
-                    <i class="fas fa-paint-brush"></i>
-                    <h3>التصميم الجرافيكي</h3>
-                    <p>هوية بصرية مميزة تعبر عن عملك.</p>
-                </a>
-                <a href="#contact" class="service-card">
+                
+                <a href="#img-outdoor" class="service-card">
                     <i class="fas fa-store"></i>
                     <h3>اللافتات الخارجية</h3>
-                    <p>تنفيذ اللافتات باحترافية وأجود الخامات.</p>
+                    <p>تصنيع اللوحات المضيئة والكلادينج.</p>
                 </a>
-                <a href="#contact" class="service-card">
+
+                <a href="#img-rollup" class="service-card">
+                    <i class="fas fa-scroll"></i>
+                    <h3>رول أب وبوب أب</h3>
+                    <p>ستاندات عرض للمؤتمرات والمعارض.</p>
+                </a>
+
+                <a href="#img-gourmet" class="service-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>تجهيزات إعلانية</h3>
+                    <p>حلول متكاملة لواجهات المحلات الكبرى.</p>
+                </a>
+
+                <a href="#img-abd" class="service-card">
+                    <i class="fas fa-ad"></i>
+                    <h3>إعلانات الطرق</h3>
+                    <p>حملات إعلانية على نطاق واسع.</p>
+                </a>
+
+                <a href="#img-print" class="service-card">
                     <i class="fas fa-print"></i>
                     <h3>خدمات الطباعة</h3>
-                    <p>طباعة الكتالوجات والمطبوعات الورقية.</p>
+                    <p>بروشورات، منيو، وكروت شخصية.</p>
                 </a>
+
+                <a href="#img-flags" class="service-card">
+                    <i class="fas fa-flag"></i>
+                    <h3>أعلام دعائية</h3>
+                    <p>تنفيذ الأعلام بجميع المقاسات والألوان.</p>
+                </a>
+            </div>
+
+            <div id="portfolio-gallery">
+                <div id="img-outdoor" class="lightbox"><a href="#services" class="close">&times;</a><img src="لافتة خارجية .jpeg" alt="لافتة"></div>
+                <div id="img-rollup" class="lightbox"><a href="#services" class="close">&times;</a><img src="rollup.jpeg" alt="رول اب"></div>
+                <div id="img-gourmet" class="lightbox"><a href="#services" class="close">&times;</a><img src="جورميت.jpeg" alt="جورميت"></div>
+                <div id="img-abd" class="lightbox"><a href="#services" class="close">&times;</a><img src="العبد.jpeg" alt="العبد"></div>
+                <div id="img-print" class="lightbox"><a href="#services" class="close">&times;</a><img src="العبد.jpeg" alt="طباعة"></div> <div id="img-flags" class="lightbox"><a href="#services" class="close">&times;</a><img src="اعلام .jpeg" alt="أعلام"></div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-title"><h2>تواصل معنا</h2></div>
+            <div class="form-container">
+                <form id="contactForm" action="https://script.google.com/macros/s/AKfycbyxpFU_ycHRbKgPhqE1wknegHtLCQZdwHZ5fXqzBD7NROcs9oszbz_y7c1xF9Ein2yI/exec" method="POST">
+                    <input type="text" name="name" placeholder="اسم الشركة / العميل" required>
+                    <input type="tel" name="phone" placeholder="رقم الهاتف" required>
+                    <textarea name="message" rows="4" placeholder="ما هي تفاصيل مشروعك؟" required></textarea>
+                    <button type="submit" class="cta-button" style="width: 100%;">إرسال الطلب</button>
+                </form>
             </div>
         </section>
     </main>
 
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <script>
-        // سكربت بسيط لضمان سلاسة التنقل بين الأقسام
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
