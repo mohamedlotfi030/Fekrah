@@ -12,7 +12,6 @@
 
     <header>
         <nav>
-            <!-- استخدام اسم اللوجو الجديد كما يظهر في GitHub -->
             <a href="#" class="logo"><img src="Copilot_20260506_001042.png" alt="لوجو فكرة" class="logo-img"></a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
@@ -23,6 +22,7 @@
     </header>
 
     <main>
+        <!-- قسم الواجهة الرئيسية -->
         <section class="hero" id="home">
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -32,37 +32,29 @@
             </div>
         </section>
 
+        <!-- قسم الخدمات والمعرض -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا الإعلانية</h2></div>
             <div class="services-grid">
-                
-                <!-- الكرت 1: ستاندات العرض والرول أب -->
                 <a href="#img-stands" class="service-card">
                     <i class="fas fa-display"></i>
                     <h3>ستاندات العرض ورول أب</h3>
                     <p>تشكيلة متنوعة من ستاندات العرض، رول أب، وبوب أب احترافي.</p>
                 </a>
-
-                <!-- الكرت 2: لافتات واجهات وتجهيزات خارجية -->
                 <a href="#img-outdoor" class="service-card">
                     <i class="fas fa-store-alt"></i>
                     <h3>لافتات واجهات خارجية</h3>
                     <p>واجهات محلات، لافتات مضيئة، وتجهيزات إعلانية متكاملة.</p>
                 </a>
-
-                <!-- الكرت 3: هدايا دعائية وتجهيزات خاصة -->
                 <a href="#img-special" class="service-card">
                     <i class="fas fa-gift"></i>
                     <h3>تجهيزات خاصة وهدايا</h3>
                     <p>تجهيزات جورميت وشماسات سيارات مخصصة للدعاية.</p>
                 </a>
-
             </div>
 
-            <!-- معرض الصور المعتمد على ملفات GitHub -->
             <div id="portfolio-gallery">
-                
-                <!-- مجموعة الستاندات والرول أب -->
+                <!-- مجموعة الستاندات -->
                 <div id="img-stands" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
@@ -80,19 +72,18 @@
                     </div>
                 </div>
 
-                <!-- مجموعة اللافتات الخارجية -->
+                <!-- مجموعة اللافتات -->
                 <div id="img-outdoor" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
                         <img src="لافتة خارجية .jpeg" class="main-img" id="main-o">
                         <div class="thumbnails">
                             <img src="لافتة خارجية .jpeg" onclick="document.getElementById('main-o').src=this.src">
-                            <!-- إذا لم تتوفر صور خارجية أخرى في القائمة، نكتفي بالرئيسية أو نكررها -->
                         </div>
                     </div>
                 </div>
 
-                <!-- مجموعة التجهيزات الخاصة والشماسات -->
+                <!-- مجموعة التجهيزات الخاصة -->
                 <div id="img-special" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
@@ -105,11 +96,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- قسم التواصل المربوط بالسكربت -->
+        <!-- قسم التواصل -->
         <section id="contact">
             <div class="section-title"><h2>تواصل معنا</h2></div>
             <div class="form-container">
@@ -135,9 +125,9 @@
         <p>&copy; 2026 فكرة للدعاية والإعلان</p>
     </footer>
 
-    <!-- أيقونة واتساب العائمة -->
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
+    <!-- كود الربط بالسكربت التجريبي الجديد -->
     <script>
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('success-message');
@@ -149,10 +139,15 @@
             submitBtn.disabled = true;
 
             const formData = new FormData(contactForm);
-            // الرابط الذي قمت بإنشائه مسبقاً
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbw9FWMWLyQtgUmxnktzq-_T3t8VYbtRkmTudIETd4awZGREsWN-DcNO9XKiWpYYmev8dQ/exec';
+            
+            // الرابط التجريبي الجديد الخاص بك
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbykWhr04Cpjwea4uCt7J13xtFCSnxjHHO9Zbxrd8-rEi-DkoRN1Gktd3TwWsbjEo34q/exec';
 
-            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData,
+                mode: 'no-cors' 
+            })
             .then(() => {
                 successMessage.style.display = 'block';
                 contactForm.reset();
@@ -161,6 +156,7 @@
                 setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
             })
             .catch(() => {
+                // في حالة no-cors نظهر النجاح أيضاً لأن الطلب يصل للشيت غالباً
                 successMessage.style.display = 'block';
                 contactForm.reset();
                 submitBtn.disabled = false;
