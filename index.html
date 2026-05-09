@@ -12,7 +12,8 @@
 
     <header>
         <nav>
-            <a href="#" class="logo"><img src="logo.png.png" alt="لوجو فكرة" class="logo-img"></a>
+            <!-- استخدام اسم اللوجو الجديد كما يظهر في GitHub -->
+            <a href="#" class="logo"><img src="Copilot_20260506_001042.png" alt="لوجو فكرة" class="logo-img"></a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#services">خدماتنا</a></li>
@@ -32,72 +33,89 @@
         </section>
 
         <section id="services">
-            <div class="section-title"><h2>خدماتنا</h2></div>
+            <div class="section-title"><h2>خدماتنا الإعلانية</h2></div>
             <div class="services-grid">
-                <a href="#img-rollup" class="service-card">
-                    <i class="fas fa-scroll"></i>
-                    <h3>الرول أب والمطبوعات</h3>
-                    <p>تشكيلة واسعة من ستاندات العرض والمطبوعات.</p>
+                
+                <!-- الكرت 1: ستاندات العرض والرول أب -->
+                <a href="#img-stands" class="service-card">
+                    <i class="fas fa-display"></i>
+                    <h3>ستاندات العرض ورول أب</h3>
+                    <p>تشكيلة متنوعة من ستاندات العرض، رول أب، وبوب أب احترافي.</p>
                 </a>
+
+                <!-- الكرت 2: لافتات واجهات وتجهيزات خارجية -->
                 <a href="#img-outdoor" class="service-card">
-                    <i class="fas fa-store"></i>
-                    <h3>اللافتات الخارجية</h3>
-                    <p>لوحات إعلانية وتجهيزات واجهات المحلات.</p>
+                    <i class="fas fa-store-alt"></i>
+                    <h3>لافتات واجهات خارجية</h3>
+                    <p>واجهات محلات، لافتات مضيئة، وتجهيزات إعلانية متكاملة.</p>
                 </a>
-                <a href="#img-gourmet" class="service-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>تجهيزات إعلانية</h3>
-                    <p>حلول دعائية مبتكرة (جورميت وغيرها).</p>
+
+                <!-- الكرت 3: هدايا دعائية وتجهيزات خاصة -->
+                <a href="#img-special" class="service-card">
+                    <i class="fas fa-gift"></i>
+                    <h3>تجهيزات خاصة وهدايا</h3>
+                    <p>تجهيزات جورميت وشماسات سيارات مخصصة للدعاية.</p>
                 </a>
+
             </div>
 
+            <!-- معرض الصور المعتمد على ملفات GitHub -->
             <div id="portfolio-gallery">
-                <div id="img-rollup" class="lightbox">
+                
+                <!-- مجموعة الستاندات والرول أب -->
+                <div id="img-stands" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
-                        <img src="rollup.jpeg" class="main-img" id="main-rollup">
+                        <img src="rollup.jpeg" class="main-img" id="main-s">
                         <div class="thumbnails">
-                            <img src="rollup.jpeg" onclick="document.getElementById('main-rollup').src=this.src">
-                            <img src="rollup2.jpeg" onclick="document.getElementById('main-rollup').src=this.src">
-                            <img src="rollup3.jpeg" onclick="document.getElementById('main-rollup').src=this.src">
-                            <img src="rollup-mixed.jpg" onclick="document.getElementById('main-rollup').src=this.src">
+                            <img src="rollup.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="rollup2.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="rollup3.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="popup.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="stand.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="stand-2.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="stand-3.jpeg" onclick="document.getElementById('main-s').src=this.src">
+                            <img src="stand-4.jpeg" onclick="document.getElementById('main-s').src=this.src">
                         </div>
                     </div>
                 </div>
+
+                <!-- مجموعة اللافتات الخارجية -->
                 <div id="img-outdoor" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
-                        <img src="outdoor-sigma.jpg" class="main-img" id="main-outdoor">
+                        <img src="لافتة خارجية .jpeg" class="main-img" id="main-o">
                         <div class="thumbnails">
-                            <img src="outdoor-sigma.jpg" onclick="document.getElementById('main-outdoor').src=this.src">
-                            <img src="outdoor-universal.jpg" onclick="document.getElementById('main-outdoor').src=this.src">
-                            <img src="outdoor-gazprom.jpg" onclick="document.getElementById('main-outdoor').src=this.src">
-                            <img src="outdoor-etisalat.jpg" onclick="document.getElementById('main-outdoor').src=this.src">
+                            <img src="لافتة خارجية .jpeg" onclick="document.getElementById('main-o').src=this.src">
+                            <!-- إذا لم تتوفر صور خارجية أخرى في القائمة، نكتفي بالرئيسية أو نكررها -->
                         </div>
                     </div>
                 </div>
-                <div id="img-gourmet" class="lightbox">
+
+                <!-- مجموعة التجهيزات الخاصة والشماسات -->
+                <div id="img-special" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
-                        <img src="gurmet.jpeg" class="main-img" id="main-gurmet">
+                        <img src="جورميت.jpeg" class="main-img" id="main-sp">
                         <div class="thumbnails">
-                            <img src="gurmet.jpeg" onclick="document.getElementById('main-gurmet').src=this.src">
-                            <img src="giveaway-usb.jpg" onclick="document.getElementById('main-gurmet').src=this.src">
-                            <img src="popup-grey.jpg" onclick="document.getElementById('main-gurmet').src=this.src">
+                            <img src="جورميت.jpeg" onclick="document.getElementById('main-sp').src=this.src">
+                            <img src="gurmet.jpeg" onclick="document.getElementById('main-sp').src=this.src">
+                            <img src="Car Sunshad.jpeg" onclick="document.getElementById('main-sp').src=this.src">
+                            <img src="Car Sunshade-2.jpeg" onclick="document.getElementById('main-sp').src=this.src">
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
+        <!-- قسم التواصل المربوط بالسكربت -->
         <section id="contact">
             <div class="section-title"><h2>تواصل معنا</h2></div>
             <div class="form-container">
-                <!-- رسالة النجاح الخضراء -->
                 <div id="success-message" style="display: none; background: rgba(37, 211, 102, 0.2); border: 1px solid #25d366; color: #25d366; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; font-weight: bold;">
                     تم إرسال الطلب بنجاح، وسيتم التواصل معكم في أسرع وقت.
                 </div>
-
                 <form id="contactForm">
                     <input type="text" name="name" placeholder="اسم الشركة / العميل" required>
                     <input type="tel" name="phone" placeholder="رقم الهاتف" required>
@@ -109,21 +127,17 @@
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt"></i> 44 شارع محمود خاطر - حلوان</p>
-                <p><i class="fas fa-phone-alt"></i> 01275209778</p>
-                <p><i class="fas fa-envelope"></i> Fekrah_marketing@outlook.com</p>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 جميع الحقوق محفوظة لشركة فكرة للدعاية والإعلان</p>
-            </div>
+        <div class="footer-info">
+            <p><i class="fas fa-map-marker-alt"></i> 44 شارع محمود خاطر - حلوان</p>
+            <p><i class="fas fa-phone-alt"></i> 01275209778</p>
+            <p><i class="fas fa-envelope"></i> Fekrah_marketing@outlook.com</p>
         </div>
+        <p>&copy; 2026 فكرة للدعاية والإعلان</p>
     </footer>
 
+    <!-- أيقونة واتساب العائمة -->
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- كود الربط مع Google Apps Script -->
     <script>
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('success-message');
@@ -131,20 +145,14 @@
 
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault(); 
-            
             submitBtn.innerText = "جاري الإرسال...";
             submitBtn.disabled = true;
 
             const formData = new FormData(contactForm);
-            
-            // الرابط الجديد الخاص بك
+            // الرابط الذي قمت بإنشائه مسبقاً
             const scriptURL = 'https://script.google.com/macros/s/AKfycbw9FWMWLyQtgUmxnktzq-_T3t8VYbtRkmTudIETd4awZGREsWN-DcNO9XKiWpYYmev8dQ/exec';
 
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: formData,
-                mode: 'no-cors' 
-            })
+            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
             .then(() => {
                 successMessage.style.display = 'block';
                 contactForm.reset();
@@ -152,9 +160,7 @@
                 submitBtn.disabled = false;
                 setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
             })
-            .catch(error => {
-                console.error('Error!', error.message);
-                // نظهر الرسالة أيضاً لأن no-cors أحياناً لا يعيد استجابة صريحة بالنجاح رغم وصول البيانات
+            .catch(() => {
                 successMessage.style.display = 'block';
                 contactForm.reset();
                 submitBtn.disabled = false;
