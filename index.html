@@ -25,16 +25,17 @@
         header { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); position: sticky; top: 0; z-index: 1000; }
         .logo-img { height: 60px; }
 
-        /* --- القسم الرئيسي مع صورة الخلفية --- */
+        /* --- القسم الرئيسي مع صورة الخلفية الصحيحة --- */
         .hero { 
             position: relative;
             text-align: center; 
             padding: 150px 10%; 
-            background: url('rollup.jpeg') no-repeat center center/cover; /* صورة الخلفية */
+            background: url('Copilot_20260506_001042.png') no-repeat center center/cover; /* تم تحديث الخلفية هنا */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 60vh;
         }
 
         .hero-overlay {
@@ -128,7 +129,7 @@
             </a>
         </div>
 
-        <!-- معرض الصور (استعادة كافة الصور) -->
+        <!-- معرض الصور -->
         <div id="img-stands" class="lightbox">
             <div class="gallery-container">
                 <a href="#services" class="close-btn">&times;</a>
