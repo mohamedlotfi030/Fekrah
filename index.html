@@ -21,6 +21,33 @@
             scroll-behavior: smooth;
         }
 
+        /* --- الهيدر واللوجو --- */
+        header { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); position: sticky; top: 0; z-index: 1000; }
+        .logo-img { height: 60px; }
+
+        /* --- القسم الرئيسي مع صورة الخلفية --- */
+        .hero { 
+            position: relative;
+            text-align: center; 
+            padding: 150px 10%; 
+            background: url('rollup.jpeg') no-repeat center center/cover; /* صورة الخلفية */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; color: white; }
+        .hero p { font-size: 1.5rem; margin-bottom: 30px; }
+
         /* --- تأثير توهج المصباح للأزرار --- */
         .cta-button, .whatsapp-float {
             transition: all 0.4s ease-in-out;
@@ -31,101 +58,38 @@
             background-color: var(--main-cyan) !important;
             color: #000 !important;
             transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 0 20px var(--main-cyan), 
-                        0 0 40px var(--main-cyan); 
+            box-shadow: 0 0 20px var(--main-cyan), 0 0 40px var(--main-cyan); 
             filter: brightness(1.2);
         }
 
-        /* --- تنسيق قسم الخدمات والكروت --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 40px 10%;
-        }
+        .cta-button { background: var(--main-cyan); color: black; padding: 12px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; border: none; font-size: 1.2rem; }
 
-        .service-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            transition: 0.3s;
-            border: 1px solid #222;
-        }
+        /* --- تنسيق قسم الخدمات --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 60px 10%; }
+        .service-card { background: var(--card-bg); padding: 40px 20px; border-radius: 15px; text-align: center; text-decoration: none; color: white; border: 1px solid #222; transition: 0.3s; }
+        .service-card:hover { border-color: var(--main-cyan); transform: translateY(-10px); }
+        .service-card i { font-size: 3.5rem; color: var(--main-cyan); margin-bottom: 20px; text-shadow: 0 0 15px var(--main-cyan); }
 
-        .service-card i {
-            font-size: 3rem;
-            color: var(--main-cyan);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px var(--main-cyan);
-        }
-
-        /* --- نظام عرض الصور (Lightbox) --- */
-        .lightbox { 
-            display: none; 
-            position: fixed; 
-            z-index: 9999; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            background: rgba(0, 0, 0, 0.95); 
-            align-items: center; 
-            justify-content: center;
-        }
-
+        /* --- Lightbox (عرض الصور) --- */
+        .lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); align-items: center; justify-content: center; }
         .lightbox:target { display: flex; }
+        .gallery-container { position: relative; width: 90%; max-width: 900px; text-align: center; }
+        .main-img { max-width: 100%; max-height: 70vh; border: 2px solid var(--main-cyan); border-radius: 10px; }
+        .close-btn { position: absolute; top: -50px; right: 0; color: var(--main-cyan); font-size: 50px; text-decoration: none; }
+        .thumbnails { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+        .thumbnails img { width: 70px; height: 70px; object-fit: cover; border: 1px solid var(--main-cyan); cursor: pointer; opacity: 0.6; }
+        .thumbnails img:hover { opacity: 1; border-color: white; }
 
-        .gallery-container { 
-            position: relative; 
-            width: 90%; 
-            max-width: 800px; 
-            text-align: center;
-        }
+        /* --- التواصل والفوتر --- */
+        .form-container { max-width: 700px; margin: 0 auto; padding: 60px 20px; }
+        input, textarea { width: 100%; padding: 15px; margin-bottom: 20px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 10px; font-family: 'Tajawal'; font-size: 1rem; }
+        
+        footer { background: #050505; padding: 40px 10%; border-top: 1px solid #222; text-align: center; }
+        .footer-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 20px; }
+        .footer-info p { margin: 0; font-size: 1.1rem; color: #ccc; }
+        .footer-info i { color: var(--main-cyan); margin-left: 10px; }
 
-        .main-img { 
-            max-width: 100%; 
-            max-height: 70vh; 
-            border: 2px solid var(--main-cyan); 
-            border-radius: 10px; 
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); 
-        }
-
-        .close-btn { 
-            position: absolute; 
-            top: -50px; 
-            right: 0; 
-            color: var(--main-cyan); 
-            font-size: 40px; 
-            text-decoration: none; 
-        }
-
-        .thumbnails { 
-            display: flex; 
-            gap: 10px; 
-            justify-content: center; 
-            margin-top: 20px; 
-            flex-wrap: wrap; 
-        }
-
-        .thumbnails img { 
-            width: 65px; height: 65px; 
-            object-fit: cover; 
-            border: 1px solid var(--main-cyan); 
-            cursor: pointer; 
-            opacity: 0.6; 
-        }
-
-        .thumbnails img:hover { opacity: 1; }
-
-        /* --- الهيدر والفوتر والنموذج --- */
-        header { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; }
-        .logo-img { height: 60px; }
-        .hero { text-align: center; padding: 100px 10%; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)); }
-        .cta-button { background: var(--main-cyan); color: black; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; border: none; }
-        .whatsapp-float { position: fixed; bottom: 30px; left: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; text-decoration: none; }
-        .form-container { max-width: 600px; margin: 0 auto; padding: 40px; }
-        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; font-family: 'Tajawal'; }
+        .whatsapp-float { position: fixed; bottom: 30px; left: 30px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; z-index: 1000; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
@@ -137,9 +101,12 @@
     </header>
 
     <section class="hero" id="home">
-        <h1>فكرة للدعاية والإعلان</h1>
-        <p>تحويل رؤيتك إلى واقع ملموس</p>
-        <a href="#services" class="cta-button">اكتشف أعمالنا</a>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>فكرة للدعاية والإعلان</h1>
+            <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
+            <a href="#services" class="cta-button">اكتشف أعمالنا</a>
+        </div>
     </section>
 
     <section id="services">
@@ -147,29 +114,34 @@
             <a href="#img-stands" class="service-card">
                 <i class="fas fa-display"></i>
                 <h3>ستاندات العرض ورول أب</h3>
-                <p>حلول عرض مبتكرة للمؤتمرات والمعارض.</p>
+                <p>تشكيلة متنوعة من ستاندات العرض، رول أب، وبوب أب احترافي.</p>
             </a>
             <a href="#img-outdoor" class="service-card">
                 <i class="fas fa-store-alt"></i>
                 <h3>لافتات واجهات خارجية</h3>
-                <p>واجهات محلات وتجهيزات إعلانية ضخمة.</p>
+                <p>واجهات محلات، لافتات مضيئة، وتجهيزات إعلانية متكاملة.</p>
             </a>
             <a href="#img-special" class="service-card">
                 <i class="fas fa-gift"></i>
                 <h3>تجهيزات خاصة وهدايا</h3>
-                <p>هدايا دعائية وتجهيزات جورميت مخصصة.</p>
+                <p>تجهيزات جورميت وشماسات سيارات مخصصة للدعاية.</p>
             </a>
         </div>
 
-        <!-- معرض الصور (Lightboxes) -->
+        <!-- معرض الصور (استعادة كافة الصور) -->
         <div id="img-stands" class="lightbox">
             <div class="gallery-container">
                 <a href="#services" class="close-btn">&times;</a>
-                <img src="rollup.jpeg" class="main-img" id="m1">
+                <img src="rollup.jpeg" class="main-img" id="ms1">
                 <div class="thumbnails">
-                    <img src="rollup.jpeg" onclick="document.getElementById('m1').src=this.src">
-                    <img src="rollup2.jpeg" onclick="document.getElementById('m1').src=this.src">
-                    <img src="stand.jpeg" onclick="document.getElementById('m1').src=this.src">
+                    <img src="rollup.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="rollup2.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="rollup3.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="popup.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="stand.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="stand-2.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="stand-3.jpeg" onclick="document.getElementById('ms1').src=this.src">
+                    <img src="stand-4.jpeg" onclick="document.getElementById('ms1').src=this.src">
                 </div>
             </div>
         </div>
@@ -177,17 +149,19 @@
         <div id="img-outdoor" class="lightbox">
             <div class="gallery-container">
                 <a href="#services" class="close-btn">&times;</a>
-                <img src="لافتة خارجية .jpeg" class="main-img" id="m2">
+                <img src="لافتة خارجية .jpeg" class="main-img" id="ms2">
             </div>
         </div>
 
         <div id="img-special" class="lightbox">
             <div class="gallery-container">
                 <a href="#services" class="close-btn">&times;</a>
-                <img src="جورميت.jpeg" class="main-img" id="m3">
+                <img src="جورميت.jpeg" class="main-img" id="ms3">
                 <div class="thumbnails">
-                    <img src="جورميت.jpeg" onclick="document.getElementById('m3').src=this.src">
-                    <img src="Car Sunshad.jpeg" onclick="document.getElementById('m3').src=this.src">
+                    <img src="جورميت.jpeg" onclick="document.getElementById('ms3').src=this.src">
+                    <img src="gurmet.jpeg" onclick="document.getElementById('ms3').src=this.src">
+                    <img src="Car Sunshad.jpeg" onclick="document.getElementById('ms3').src=this.src">
+                    <img src="Car Sunshade-2.jpeg" onclick="document.getElementById('ms3').src=this.src">
                 </div>
             </div>
         </div>
@@ -195,25 +169,33 @@
 
     <section id="contact">
         <div class="form-container">
-            <h2 style="text-align: center; color: var(--main-cyan);">تواصل معنا</h2>
+            <h2 style="text-align: center; font-size: 2.5rem; color: var(--main-cyan); margin-bottom: 30px;">تواصل معنا</h2>
             <div id="success-message" style="display: none; background: rgba(37, 211, 102, 0.2); border: 1px solid #25d366; color: #25d366; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
-                تم إرسال طلبك بنجاح! سيتم التواصل معك عبر البريد أو الهاتف.
+                تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.
             </div>
             <form id="contactForm">
-                <input type="text" name="name" placeholder="الاسم الكامل" required>
+                <input type="text" name="name" placeholder="اسم الشركة / العميل" required>
                 <input type="tel" name="phone" placeholder="رقم الهاتف" required>
-                <textarea name="message" rows="4" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
+                <textarea name="message" rows="5" placeholder="ما هي تفاصيل مشروعك؟" required></textarea>
                 <button type="submit" id="submitBtn" class="cta-button" style="width: 100%;">إرسال الطلب</button>
             </form>
         </div>
     </section>
+
+    <footer>
+        <div class="footer-info">
+            <p><i class="fas fa-map-marker-alt"></i> 44 شارع محمود خاطر - حلوان</p>
+            <p><i class="fas fa-phone-alt"></i> 01275209778</p>
+            <p><i class="fas fa-envelope"></i> Fekrah_marketing@outlook.com</p>
+        </div>
+        <p style="color: #666;">&copy; 2026 فكرة للدعاية والإعلان. جميع الحقوق محفوظة.</p>
+    </footer>
 
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
-        // الرابط الجديد الخاص بـ Google Apps Script
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwklfZ-QO2cPZpk1eiPEED7-8fWm2JSDa9ltMJ6VYhU_yke5nx2utag1puwNMOY95PO8w/exec';
         const form = document.getElementById('contactForm');
         const btn = document.getElementById('submitBtn');
@@ -233,7 +215,6 @@
                 setTimeout(() => msg.style.display = 'none', 6000);
             })
             .catch(error => {
-                console.error('Error!', error.message);
                 btn.disabled = false;
                 btn.innerText = "إرسال الطلب";
                 alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
