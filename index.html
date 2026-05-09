@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* تأثير "المصباح" الموحد للأزرار التفاعلية */
+        /* --- تأثيرات الأزرار (المصباح اللبني) --- */
         .cta-button, .whatsapp-float {
             transition: all 0.4s ease-in-out;
         }
@@ -22,60 +22,66 @@
             border-color: #00e5ff !important;
         }
 
-        /* --- الأكواد المسؤولة عن إظهار الصور (Lightbox) --- */
+        /* --- حل مشكلة عدم ظهور الصور (Lightbox) --- */
         .lightbox { 
             display: none; 
             position: fixed; 
-            z-index: 2000; 
+            z-index: 9999; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.95); 
+            background: rgba(0, 0, 0, 0.9); 
             align-items: center; 
             justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        /* هذا السطر هو المسؤول عن إظهار النافذة عند الضغط على الكارت */
+        /* إظهار النافذة عند استهدافها بالرابط */
         .lightbox:target { 
             display: flex; 
+            opacity: 1;
         }
 
         .gallery-container { 
             position: relative; 
             width: 90%; 
-            max-width: 800px; 
-            text-align: center; 
+            max-width: 850px; 
+            text-align: center;
+            padding: 20px;
         }
 
         .main-img { 
             max-width: 100%; 
-            max-height: 70vh; 
-            border: 2px solid #00e5ff; 
-            border-radius: 10px; 
-            box-shadow: 0 0 20px #00e5ff; 
+            max-height: 75vh; 
+            border: 3px solid #00e5ff; 
+            border-radius: 12px; 
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5); 
         }
 
         .close { 
             position: absolute; 
-            top: -50px; 
-            right: 0; 
+            top: -40px; 
+            left: 0; /* في وضع RTL الإغلاق يفضل أن يكون واضحاً */
             color: #00e5ff; 
-            font-size: 50px; 
+            font-size: 45px; 
             text-decoration: none; 
+            font-weight: bold;
         }
 
         .thumbnails { 
             display: flex; 
-            gap: 10px; 
+            gap: 12px; 
             justify-content: center; 
-            margin-top: 20px; 
+            margin-top: 25px; 
             flex-wrap: wrap; 
         }
 
         .thumbnails img { 
-            width: 60px; 
-            height: 60px; 
+            width: 70px; 
+            height: 70px; 
             object-fit: cover; 
-            border: 1px solid #00e5ff; 
+            border: 2px solid #00e5ff; 
+            border-radius: 5px;
             cursor: pointer; 
             opacity: 0.6; 
             transition: 0.3s; 
@@ -83,6 +89,7 @@
 
         .thumbnails img:hover { 
             opacity: 1; 
+            transform: scale(1.1);
             border-color: #ff7f00; 
         }
     </style>
@@ -113,6 +120,7 @@
         <section id="services">
             <div class="section-title"><h2>خدماتنا الإعلانية</h2></div>
             <div class="services-grid">
+                <!-- الكروت مربوطة بالـ ID الخاص بكل Lightbox أدناه -->
                 <a href="#img-stands" class="service-card">
                     <i class="fas fa-display"></i>
                     <h3>ستاندات العرض ورول أب</h3>
@@ -130,11 +138,12 @@
                 </a>
             </div>
 
-            <!-- معرض الصور -->
-            <div id="portfolio-gallery">
+            <!-- مجمّع النوافذ المنبثقة (Portfolios) -->
+            <div id="portfolios">
+                <!-- نافذة ستاندات العرض -->
                 <div id="img-stands" class="lightbox">
-                    <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
+                        <a href="#services" class="close">&times;</a>
                         <img src="rollup.jpeg" class="main-img" id="main-s">
                         <div class="thumbnails">
                             <img src="rollup.jpeg" onclick="document.getElementById('main-s').src=this.src">
@@ -149,9 +158,10 @@
                     </div>
                 </div>
 
+                <!-- نافذة اللافتات الخارجية -->
                 <div id="img-outdoor" class="lightbox">
-                    <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
+                        <a href="#services" class="close">&times;</a>
                         <img src="لافتة خارجية .jpeg" class="main-img" id="main-o">
                         <div class="thumbnails">
                             <img src="لافتة خارجية .jpeg" onclick="document.getElementById('main-o').src=this.src">
@@ -159,9 +169,10 @@
                     </div>
                 </div>
 
+                <!-- نافذة التجهيزات الخاصة -->
                 <div id="img-special" class="lightbox">
-                    <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
+                        <a href="#services" class="close">&times;</a>
                         <img src="جورميت.jpeg" class="main-img" id="main-sp">
                         <div class="thumbnails">
                             <img src="جورميت.jpeg" onclick="document.getElementById('main-sp').src=this.src">
@@ -174,6 +185,7 @@
             </div>
         </section>
 
+        <!-- نموذج التواصل -->
         <section id="contact">
             <div class="section-title"><h2>تواصل معنا</h2></div>
             <div class="form-container">
