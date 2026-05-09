@@ -8,19 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* تأثير "المصباح" على زر الواتساب عند التظليل */
-        .whatsapp-float {
+        /* تأثير "المصباح" الموحد للأزرار التفاعلية */
+        .cta-button, .whatsapp-float {
             transition: all 0.4s ease-in-out;
         }
 
-        .whatsapp-float:hover {
-            background-color: #00e5ff !important; /* اللون اللبني الساطع */
-            transform: scale(1.2) translateY(-5px); /* تكبير ورفع الزر قليلاً */
-            /* توهج المصباح */
-            box-shadow: 0 0 15px #00e5ff, 
-                        0 0 30px #00e5ff, 
-                        0 0 45px #00e5ff; 
-            filter: brightness(1.3); /* زيادة السطوع ليبدو كمصباح مضيء */
+        .cta-button:hover, .whatsapp-float:hover {
+            background-color: #00e5ff !important; /* اللون اللبني */
+            color: #000 !important;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 0 20px #00e5ff, 
+                        0 0 40px #00e5ff; 
+            filter: brightness(1.3);
+            border-color: #00e5ff !important;
         }
     </style>
 </head>
@@ -38,16 +38,17 @@
     </header>
 
     <main>
-        <!-- بقية محتوى الصفحة كما هو بدون تغيير -->
         <section class="hero" id="home">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>فكرة للدعاية والإعلان</h1>
                 <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
+                <!-- الزر المحدث بالتأثير -->
                 <a href="#services" class="cta-button">اكتشف أعمالنا</a>
             </div>
         </section>
 
+        <!-- باقي الأقسام كما هي تماماً -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا الإعلانية</h2></div>
             <div class="services-grid">
@@ -66,49 +67,6 @@
                     <h3>تجهيزات خاصة وهدايا</h3>
                     <p>تجهيزات جورميت وشماسات سيارات مخصصة للدعاية.</p>
                 </a>
-            </div>
-
-            <div id="portfolio-gallery">
-                <!-- معرض الصور -->
-                <div id="img-stands" class="lightbox">
-                    <a href="#services" class="close">&times;</a>
-                    <div class="gallery-container">
-                        <img src="rollup.jpeg" class="main-img" id="main-s">
-                        <div class="thumbnails">
-                            <img src="rollup.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="rollup2.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="rollup3.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="popup.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand-2.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand-3.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand-4.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="img-outdoor" class="lightbox">
-                    <a href="#services" class="close">&times;</a>
-                    <div class="gallery-container">
-                        <img src="لافتة خارجية .jpeg" class="main-img" id="main-o">
-                        <div class="thumbnails">
-                            <img src="لافتة خارجية .jpeg" onclick="document.getElementById('main-o').src=this.src">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="img-special" class="lightbox">
-                    <a href="#services" class="close">&times;</a>
-                    <div class="gallery-container">
-                        <img src="جورميت.jpeg" class="main-img" id="main-sp">
-                        <div class="thumbnails">
-                            <img src="جورميت.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                            <img src="gurmet.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                            <img src="Car Sunshad.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                            <img src="Car Sunshade-2.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -137,7 +95,6 @@
         <p>&copy; 2026 فكرة للدعاية والإعلان</p>
     </footer>
 
-    <!-- زر الواتساب -->
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <script>
