@@ -4,245 +4,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | Fekrah Advertising</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- تأثيرات الأزرار (المصباح اللبني) --- */
+        :root {
+            --main-cyan: #00e5ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* --- تأثير توهج المصباح للأزرار --- */
         .cta-button, .whatsapp-float {
             transition: all 0.4s ease-in-out;
+            cursor: pointer;
         }
 
         .cta-button:hover, .whatsapp-float:hover {
-            background-color: #00e5ff !important; 
+            background-color: var(--main-cyan) !important;
             color: #000 !important;
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 0 20px #00e5ff, 0 0 40px #00e5ff; 
-            filter: brightness(1.3);
-            border-color: #00e5ff !important;
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 0 20px var(--main-cyan), 
+                        0 0 40px var(--main-cyan); 
+            filter: brightness(1.2);
         }
 
-        /* --- حل مشكلة عدم ظهور الصور (Lightbox) --- */
+        /* --- تنسيق قسم الخدمات والكروت --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 40px 10%;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            border: 1px solid #222;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--main-cyan);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px var(--main-cyan);
+        }
+
+        /* --- نظام عرض الصور (Lightbox) --- */
         .lightbox { 
             display: none; 
             position: fixed; 
             z-index: 9999; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
-            background: rgba(0, 0, 0, 0.9); 
+            background: rgba(0, 0, 0, 0.95); 
             align-items: center; 
             justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        /* إظهار النافذة عند استهدافها بالرابط */
-        .lightbox:target { 
-            display: flex; 
-            opacity: 1;
-        }
+        .lightbox:target { display: flex; }
 
         .gallery-container { 
             position: relative; 
             width: 90%; 
-            max-width: 850px; 
+            max-width: 800px; 
             text-align: center;
-            padding: 20px;
         }
 
         .main-img { 
             max-width: 100%; 
-            max-height: 75vh; 
-            border: 3px solid #00e5ff; 
-            border-radius: 12px; 
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5); 
+            max-height: 70vh; 
+            border: 2px solid var(--main-cyan); 
+            border-radius: 10px; 
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); 
         }
 
-        .close { 
+        .close-btn { 
             position: absolute; 
-            top: -40px; 
-            left: 0; /* في وضع RTL الإغلاق يفضل أن يكون واضحاً */
-            color: #00e5ff; 
-            font-size: 45px; 
+            top: -50px; 
+            right: 0; 
+            color: var(--main-cyan); 
+            font-size: 40px; 
             text-decoration: none; 
-            font-weight: bold;
         }
 
         .thumbnails { 
             display: flex; 
-            gap: 12px; 
+            gap: 10px; 
             justify-content: center; 
-            margin-top: 25px; 
+            margin-top: 20px; 
             flex-wrap: wrap; 
         }
 
         .thumbnails img { 
-            width: 70px; 
-            height: 70px; 
+            width: 65px; height: 65px; 
             object-fit: cover; 
-            border: 2px solid #00e5ff; 
-            border-radius: 5px;
+            border: 1px solid var(--main-cyan); 
             cursor: pointer; 
             opacity: 0.6; 
-            transition: 0.3s; 
         }
 
-        .thumbnails img:hover { 
-            opacity: 1; 
-            transform: scale(1.1);
-            border-color: #ff7f00; 
-        }
+        .thumbnails img:hover { opacity: 1; }
+
+        /* --- تنسيقات أخرى --- */
+        header { padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; }
+        .logo-img { height: 60px; }
+        .hero { text-align: center; padding: 100px 10%; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)); }
+        .cta-button { background: var(--main-cyan); color: black; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; border: none; }
+        .whatsapp-float { position: fixed; bottom: 30px; left: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; text-decoration: none; }
+        .form-container { max-width: 600px; margin: 0 auto; padding: 40px; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; }
     </style>
 </head>
 <body>
 
     <header>
-        <nav>
-            <a href="#" class="logo"><img src="Copilot_20260506_001042.png" alt="لوجو فكرة" class="logo-img"></a>
-            <ul class="nav-links">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#services">خدماتنا</a></li>
-                <li><a href="#contact">تواصل معنا</a></li>
-            </ul>
-        </nav>
+        <div class="logo"><img src="Copilot_20260506_001042.png" alt="لوجو فكرة" class="logo-img"></div>
     </header>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>فكرة للدعاية والإعلان</h1>
-                <p>من الخيال إلى الواقع.. خدمات إعلانية متكاملة</p>
-                <a href="#services" class="cta-button">اكتشف أعمالنا</a>
-            </div>
-        </section>
+    <section class="hero" id="home">
+        <h1>فكرة للدعاية والإعلان</h1>
+        <p>خدمات إعلانية احترافية تلبي طموحاتكم</p>
+        <a href="#services" class="cta-button">اكتشف أعمالنا</a>
+    </section>
 
-        <section id="services">
-            <div class="section-title"><h2>خدماتنا الإعلانية</h2></div>
-            <div class="services-grid">
-                <!-- الكروت مربوطة بالـ ID الخاص بكل Lightbox أدناه -->
-                <a href="#img-stands" class="service-card">
-                    <i class="fas fa-display"></i>
-                    <h3>ستاندات العرض ورول أب</h3>
-                    <p>تشكيلة متنوعة من ستاندات العرض، رول أب، وبوب أب احترافي.</p>
-                </a>
-                <a href="#img-outdoor" class="service-card">
-                    <i class="fas fa-store-alt"></i>
-                    <h3>لافتات واجهات خارجية</h3>
-                    <p>واجهات محلات، لافتات مضيئة، وتجهيزات إعلانية متكاملة.</p>
-                </a>
-                <a href="#img-special" class="service-card">
-                    <i class="fas fa-gift"></i>
-                    <h3>تجهيزات خاصة وهدايا</h3>
-                    <p>تجهيزات جورميت وشماسات سيارات مخصصة للدعاية.</p>
-                </a>
-            </div>
-
-            <!-- مجمّع النوافذ المنبثقة (Portfolios) -->
-            <div id="portfolios">
-                <!-- نافذة ستاندات العرض -->
-                <div id="img-stands" class="lightbox">
-                    <div class="gallery-container">
-                        <a href="#services" class="close">&times;</a>
-                        <img src="rollup.jpeg" class="main-img" id="main-s">
-                        <div class="thumbnails">
-                            <img src="rollup.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="rollup2.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="rollup3.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="popup.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand-2.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand-3.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                            <img src="stand-4.jpeg" onclick="document.getElementById('main-s').src=this.src">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- نافذة اللافتات الخارجية -->
-                <div id="img-outdoor" class="lightbox">
-                    <div class="gallery-container">
-                        <a href="#services" class="close">&times;</a>
-                        <img src="لافتة خارجية .jpeg" class="main-img" id="main-o">
-                        <div class="thumbnails">
-                            <img src="لافتة خارجية .jpeg" onclick="document.getElementById('main-o').src=this.src">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- نافذة التجهيزات الخاصة -->
-                <div id="img-special" class="lightbox">
-                    <div class="gallery-container">
-                        <a href="#services" class="close">&times;</a>
-                        <img src="جورميت.jpeg" class="main-img" id="main-sp">
-                        <div class="thumbnails">
-                            <img src="جورميت.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                            <img src="gurmet.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                            <img src="Car Sunshad.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                            <img src="Car Sunshade-2.jpeg" onclick="document.getElementById('main-sp').src=this.src">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- نموذج التواصل -->
-        <section id="contact">
-            <div class="section-title"><h2>تواصل معنا</h2></div>
-            <div class="form-container">
-                <div id="success-message" style="display: none; background: rgba(37, 211, 102, 0.2); border: 1px solid #25d366; color: #25d366; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; font-weight: bold;">
-                    تم إرسال الطلب بنجاح، وسيتم التواصل معكم في أسرع وقت.
-                </div>
-                <form id="contactForm">
-                    <input type="text" name="name" placeholder="اسم الشركة / العميل" required>
-                    <input type="tel" name="phone" placeholder="رقم الهاتف" required>
-                    <textarea name="message" rows="4" placeholder="ما هي تفاصيل مشروعك؟" required></textarea>
-                    <button type="submit" id="submitBtn" class="cta-button" style="width: 100%;">إرسال الطلب</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-info">
-            <p><i class="fas fa-map-marker-alt"></i> 44 شارع محمود خاطر - حلوان</p>
-            <p><i class="fas fa-phone-alt"></i> 01275209778</p>
-            <p><i class="fas fa-envelope"></i> Fekrah_marketing@outlook.com</p>
+    <section id="services">
+        <div class="services-grid">
+            <a href="#img-stands" class="service-card">
+                <i class="fas fa-display"></i>
+                <h3>ستاندات العرض ورول أب</h3>
+                <p>تشكيلة متنوعة من ستاندات العرض والبوب أب.</p>
+            </a>
+            <a href="#img-outdoor" class="service-card">
+                <i class="fas fa-store-alt"></i>
+                <h3>لافتات واجهات خارجية</h3>
+                <p>واجهات محلات ولافتات مضيئة متكاملة.</p>
+            </a>
+            <a href="#img-special" class="service-card">
+                <i class="fas fa-gift"></i>
+                <h3>تجهيزات خاصة وهدايا</h3>
+                <p>تجهيزات جورميت وهدايا دعائية مخصصة.</p>
+            </a>
         </div>
-        <p>&copy; 2026 فكرة للدعاية والإعلان</p>
-    </footer>
 
-    <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <!-- Lightboxes -->
+        <div id="img-stands" class="lightbox">
+            <div class="gallery-container">
+                <a href="#services" class="close-btn">&times;</a>
+                <img src="rollup.jpeg" class="main-img" id="m1">
+                <div class="thumbnails">
+                    <img src="rollup.jpeg" onclick="document.getElementById('m1').src=this.src">
+                    <img src="rollup2.jpeg" onclick="document.getElementById('m1').src=this.src">
+                    <img src="stand.jpeg" onclick="document.getElementById('m1').src=this.src">
+                </div>
+            </div>
+        </div>
+
+        <div id="img-outdoor" class="lightbox">
+            <div class="gallery-container">
+                <a href="#services" class="close-btn">&times;</a>
+                <img src="لافتة خارجية .jpeg" class="main-img" id="m2">
+            </div>
+        </div>
+
+        <div id="img-special" class="lightbox">
+            <div class="gallery-container">
+                <a href="#services" class="close-btn">&times;</a>
+                <img src="جورميت.jpeg" class="main-img" id="m3">
+                <div class="thumbnails">
+                    <img src="جورميت.jpeg" onclick="document.getElementById('m3').src=this.src">
+                    <img src="Car Sunshad.jpeg" onclick="document.getElementById('m3').src=this.src">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="form-container">
+            <h2 style="text-align: center;">تواصل معنا</h2>
+            <div id="success-message" style="display: none; background: rgba(37, 211, 102, 0.2); border: 1px solid #25d366; color: #25d366; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                تم إرسال الطلب بنجاح! سيصلك رد قريباً.
+            </div>
+            <form id="contactForm">
+                <input type="text" name="name" placeholder="الاسم" required>
+                <input type="tel" name="phone" placeholder="رقم الهاتف" required>
+                <textarea name="message" rows="4" placeholder="تفاصيل طلبك" required></textarea>
+                <button type="submit" id="submitBtn" class="cta-button" style="width: 100%;">إرسال الطلب</button>
+            </form>
+        </div>
+    </section>
+
+    <a href="https://wa.me/201111049778" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
 
     <script>
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('success-message');
-        const submitBtn = document.getElementById('submitBtn');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw3yPoJBoQCMiEpG5eyBezf5valOs5Qni-M-yjYZxZnk9tBT-0kUMOWW1PU6ssIZVt6Gg/exec';
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
+        const msg = document.getElementById('success-message');
 
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            submitBtn.innerText = "جاري الإرسال...";
-            submitBtn.disabled = true;
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerText = "جاري الإرسال...";
             
-            const formData = new FormData(contactForm);
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwrcWKVeW6nSsL_w2H6lPZwVZDZ9qulnW6dpS655hUd9mhJqU8H9zG91lsCa7waMXLU/exec';
-
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: formData,
-                mode: 'no-cors' 
-            })
+            fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors'})
             .then(() => {
-                successMessage.style.display = 'block';
-                contactForm.reset();
-                submitBtn.innerText = "إرسال الطلب";
-                submitBtn.disabled = false;
-                setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
+                msg.style.display = 'block';
+                form.reset();
+                btn.disabled = false;
+                btn.innerText = "إرسال الطلب";
+                setTimeout(() => msg.style.display = 'none', 5000);
             })
-            .catch(() => {
-                successMessage.style.display = 'block';
-                contactForm.reset();
-                submitBtn.disabled = false;
-                submitBtn.innerText = "إرسال الطلب";
+            .catch(error => {
+                console.error('Error!', error.message);
+                btn.disabled = false;
+                btn.innerText = "إرسال الطلب";
             });
         });
     </script>
