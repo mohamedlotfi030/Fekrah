@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* تأثير "المصباح" على زر الواتساب عند التظليل */
+        .whatsapp-float {
+            transition: all 0.4s ease-in-out;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #00e5ff !important; /* اللون اللبني الساطع */
+            transform: scale(1.2) translateY(-5px); /* تكبير ورفع الزر قليلاً */
+            /* توهج المصباح */
+            box-shadow: 0 0 15px #00e5ff, 
+                        0 0 30px #00e5ff, 
+                        0 0 45px #00e5ff; 
+            filter: brightness(1.3); /* زيادة السطوع ليبدو كمصباح مضيء */
+        }
+    </style>
 </head>
 <body>
 
@@ -22,7 +38,7 @@
     </header>
 
     <main>
-        <!-- قسم الواجهة الرئيسية -->
+        <!-- بقية محتوى الصفحة كما هو بدون تغيير -->
         <section class="hero" id="home">
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -32,7 +48,6 @@
             </div>
         </section>
 
-        <!-- قسم الخدمات والمعرض -->
         <section id="services">
             <div class="section-title"><h2>خدماتنا الإعلانية</h2></div>
             <div class="services-grid">
@@ -54,7 +69,7 @@
             </div>
 
             <div id="portfolio-gallery">
-                <!-- مجموعة الستاندات -->
+                <!-- معرض الصور -->
                 <div id="img-stands" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
@@ -72,7 +87,6 @@
                     </div>
                 </div>
 
-                <!-- مجموعة اللافتات -->
                 <div id="img-outdoor" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
@@ -83,7 +97,6 @@
                     </div>
                 </div>
 
-                <!-- مجموعة التجهيزات الخاصة -->
                 <div id="img-special" class="lightbox">
                     <a href="#services" class="close">&times;</a>
                     <div class="gallery-container">
@@ -99,7 +112,6 @@
             </div>
         </section>
 
-        <!-- قسم التواصل -->
         <section id="contact">
             <div class="section-title"><h2>تواصل معنا</h2></div>
             <div class="form-container">
@@ -125,9 +137,9 @@
         <p>&copy; 2026 فكرة للدعاية والإعلان</p>
     </footer>
 
+    <!-- زر الواتساب -->
     <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- كود الربط بالسكربت التجريبي الجديد -->
     <script>
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('success-message');
@@ -137,11 +149,9 @@
             e.preventDefault(); 
             submitBtn.innerText = "جاري الإرسال...";
             submitBtn.disabled = true;
-
-            const formData = new FormData(contactForm);
             
-            // الرابط التجريبي الجديد الخاص بك
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbykWhr04Cpjwea4uCt7J13xtFCSnxjHHO9Zbxrd8-rEi-DkoRN1Gktd3TwWsbjEo34q/exec';
+            const formData = new FormData(contactForm);
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwrcWKVeW6nSsL_w2H6lPZwVZDZ9qulnW6dpS655hUd9mhJqU8H9zG91lsCa7waMXLU/exec';
 
             fetch(scriptURL, { 
                 method: 'POST', 
@@ -156,7 +166,6 @@
                 setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
             })
             .catch(() => {
-                // في حالة no-cors نظهر النجاح أيضاً لأن الطلب يصل للشيت غالباً
                 successMessage.style.display = 'block';
                 contactForm.reset();
                 submitBtn.disabled = false;
