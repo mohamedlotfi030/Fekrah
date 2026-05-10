@@ -4,44 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج | فكرة</title>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <header class="header">
-        <div class="logo"><img src="logo.png" alt="فكرة"></div>
-        <nav class="nav-links"><a href="index.html">الرئيسية</a></nav>
-        <div class="cart-icon" onclick="toggleCart(true)">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="badge" id="cartBadge">0</span>
-        </div>
-    </header>
 
-    <div class="product-container">
-        <div class="gallery-box">
-            <img id="pImg" src="" alt="صورة المنتج">
-        </div>
-        <div class="details-box">
-            <h1 id="pTitle"></h1>
-            <div class="select-group">
-                <label>المقاس:</label>
-                <select id="pSize"></select>
-            </div>
-            <div class="select-group">
-                <label>الخامة:</label>
-                <select id="pOpt"></select>
-            </div>
-            <div class="select-group">
-                <label>ملاحظات التصميم:</label>
-                <textarea id="pNotes" placeholder="اكتب ملاحظاتك هنا..." style="width:100%; padding:12px; font-size:1rem; border-radius:10px;"></textarea>
-            </div>
-            <button onclick="addToCart()" class="btn">إضافة للسلة</button>
-        </div>
+<body>
+
+<header class="header">
+    <div class="logo">
+        <img src="logo.png" alt="فكرة للدعاية والإعلان">
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', loadProductDetails);
-    </script>
+    <nav class="nav-links">
+        <a href="index.html">الرئيسية</a>
+    </nav>
+
+    <div class="cart-icon" onclick="toggleCart(true)">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge" id="cartBadge">0</span>
+    </div>
+</header>
+
+<main class="product-container">
+
+    <!-- Gallery -->
+    <section class="gallery-box">
+        <img id="pImg" src="" alt="صورة المنتج" loading="lazy">
+    </section>
+
+    <!-- Details -->
+    <section class="details-box">
+
+        <h1 id="pTitle">...</h1>
+
+        <div class="select-group">
+            <label>المقاس</label>
+            <select id="pSize"></select>
+        </div>
+
+        <div class="select-group">
+            <label>الخامة</label>
+            <select id="pOpt"></select>
+        </div>
+
+        <div class="select-group">
+            <label>ملاحظات التصميم</label>
+            <textarea
+                id="pNotes"
+                placeholder="اكتب تفاصيل التصميم أو أي ملاحظات..."
+                rows="5"></textarea>
+        </div>
+
+        <button onclick="addToCart()" class="btn">
+            إضافة للسلة
+        </button>
+
+    </section>
+
+</main>
+
+<!-- Loader (اختياري لكن مهم UX) -->
+<div id="loading" class="loading">جاري تحميل المنتج...</div>
+
+<script src="script.js" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    loadProductDetails();
+
+    // hide loader بعد التحميل
+    const loader = document.getElementById('loading');
+    if (loader) loader.style.display = 'none';
+});
+</script>
+
 </body>
 </html>
