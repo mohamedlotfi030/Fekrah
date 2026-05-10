@@ -1,4 +1,4 @@
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwLyaQugELDH4CJZHHvFK4DxSrwApK4Z4H0-H5WafxNpPgQywRftdMzZxImL0vONa8e/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxinmklrPYvqyYQxf0zjnWalmXtyrlsA_c9JWqbHWJoJdRrohtLtcL1Geo208xG75aT/exec';
 
 let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
 
