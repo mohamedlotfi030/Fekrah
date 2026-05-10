@@ -100,66 +100,6 @@ body {
 
 .card-details { padding: 20px; }
 
-/* صفحة تفاصيل المنتج */
-.product-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    padding: 120px 8% 50px;
-}
-
-.gallery-box {
-    flex: 1;
-    min-width: 320px;
-    background: #fff;
-    border-radius: 20px;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #333;
-}
-
-#pImg {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-}
-
-.details-box {
-    flex: 1;
-    min-width: 320px;
-}
-
-/* المدخلات والملاحظات */
-.select-group {
-    margin-bottom: 20px;
-}
-
-.select-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--primary);
-    font-weight: bold;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: var(--text-color);
-    border-radius: 10px;
-    font-size: 1rem;
-    margin: 10px 0;
-    box-sizing: border-box;
-}
-
-textarea {
-    height: 100px;
-    resize: none;
-}
-
 /* الأزرار */
 .btn {
     display: inline-block;
@@ -192,6 +132,7 @@ textarea {
     padding: 25px;
     border-left: 2px solid var(--primary);
     box-sizing: border-box;
+    overflow-y: auto; /* دعم التمرير */
 }
 
 .cart-sidebar.open { right: 0; }
@@ -200,6 +141,57 @@ textarea {
     font-size: 2rem;
     cursor: pointer;
     color: var(--primary);
+}
+
+/* المدخلات والملاحظات */
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: var(--text-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* أزرار الطلب */
+.order-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-sheet {
+    flex: 1;
+    background: var(--primary);
+    color: black;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-wa {
+    flex: 1;
+    background: #25d366;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-wa:hover {
+    background: #20c65a;
+    transform: scale(1.05);
 }
 
 /* زر واتساب */
@@ -225,9 +217,4 @@ textarea {
     transform: scale(1.1);
 }
 
-/* للموبايل */
-@media (max-width: 768px) {
-    .product-container { padding: 100px 5% 20px; }
-    .gallery-box { height: 300px; }
-    .cart-sidebar { width: 100%; right: -100%; }
-}
+/
