@@ -1,129 +1,157 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxinmklrPYvqyYQxf0zjnWalmXtyrlsA_c9JWqbHWJoJdRrohtLtcL1Geo208xG75aT/exec';
 
-// قاعدة البيانات المحدثة
+// ================= CONFIG =================
 const config = {
-    'tshirt': {
+    tshirt: {
         name: 'تيشيرت قطن فاخر',
-        desc: 'تيشيرت قطني 100% عالي الجودة متوفر بجميع المقاسات والألوان مع طباعة DTF ثابتة.',
+        desc: 'تيشيرت قطني 100% عالي الجودة مع طباعة DTF ثابتة.',
         images: ['T-shirt.png', 'T-shirt-2.png', 'T-shirt-3.png'],
-        sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', 'مقاس أطفال'],
-        opts: ['طباعة DTF حراري', 'تطريز كمبيوتر', 'فينيل حراري', 'بدون طباعة']
+        sizes: ['S','M','L','XL','XXL','3XL','4XL','أطفال'],
+        opts: ['DTF', 'تطريز', 'فينيل', 'بدون طباعة']
     },
-    'rollup': {
-        name: 'رول أب ستاند (Roll Up)',
+
+    rollup: {
+        name: 'رول أب ستاند',
         images: ['roll-up.jpg', 'roll-up-2.jpg', 'roll-up-3.jpg'],
-        sizes: [
-            '80×200 سم بنر', '85×200 سم بنر', '100×200 سم بنر', '120×200 سم بنر',
-            '80×200 سم جلوسي + لامنيشن', '85×200 سم جلوسي + لامنيشن',
-            '100×200 سم جلوسي + لامنيشن', '120×200 سم جلوسي + لامنيشن'
-        ],
-        opts: ['ستاند مستورد عالي الجودة', 'ستاند ثقيل فاخر']
+        sizes: ['80×200', '85×200', '100×200', '120×200'],
+        opts: ['ستاند مستورد', 'ستاند ثقيل']
     },
-    'xbanr': {
-        name: 'إكس بانر ستاند (X-Banner)',
+
+    xbanr: {
+        name: 'X Banner',
         images: ['x-banr.jpg', 'x-banr2.jpg'],
-        sizes: ['60×160 سم', '80×180 سم'],
-        opts: ['طباعة بنر عالي الدقة', 'طباعة جلوسي مع لامنيشن']
+        sizes: ['60×160', '80×180'],
+        opts: ['بنر', 'جلوسي + لامنيشن']
     },
-    'bcard': {
-        name: 'كروت شخصية (Business Card)',
-        desc: 'كروت شخصية مطبوعة وجهين كوشيه 350 جرام مع طبقة حماية.',
+
+    bcard: {
+        name: 'كروت شخصية',
         images: ['B-card.jpg', 'B-card2.jpg'],
-        sizes: ['9×5 سم (عادي)', '8.5×5.5 سم (مودرن)', 'كارت مربع'],
-        opts: ['كوشيه مط', 'سلوفان لامع', 'يو في موضعي (Spot UV)', 'كارت شفاف']
+        sizes: ['9×5', '8.5×5.5', 'مربع'],
+        opts: ['مط', 'لامع', 'UV', 'شفاف']
     },
-    'mug': {
-        name: 'مج سيراميك حراري',
-        desc: 'أكواب سيراميك عالية الجودة تقبل الطباعة الحرارية بوضوح عالي.',
+
+    mug: {
+        name: 'مج سيراميك',
         images: ['mug.jpg', 'Mug-2.jpg', 'Mug-3.jpg'],
-        sizes: ['11 أونصة (عادي)', '15 أونصة (كبير)', 'فنجان قهوة'],
-        opts: ['مج أبيض سادة', 'مج سحري', 'مج يد ملونة', 'مج ذهبي/فضي']
+        sizes: ['11oz', '15oz'],
+        opts: ['أبيض', 'سحري', 'ملون', 'ذهبي']
     },
-    'carsunshade': {
-        name: 'شمسية سيارة مطبوعة',
-        desc: 'شمسية لحماية السيارة من الشمس مع إمكانية طباعة شعارك أو صورتك.',
+
+    carsunshade: {
+        name: 'شمسية سيارة',
         images: ['Car Sunshad.jpeg', 'Car Sunshade-2.jpeg'],
-        sizes: ['مقاس صالون ستاندرد', 'مقاس SUV كبير'],
-        opts: ['طباعة وجه واحد', 'طباعة وجهين']
+        sizes: ['Sedan', 'SUV'],
+        opts: ['وجه واحد', 'وجهين']
     },
-    'banar': {
+
+    banar: {
         name: 'بانر',
         images: ['banar.png'],
-        sizes: ['مقاس حر'],
-        opts: ['أوت دور']
+        sizes: ['حر'],
+        opts: ['Outdoor']
     },
-    'stand': {
+
+    stand: {
         name: 'ستاند عرض',
-        images: ['stand.jpeg', 'stand-2.jpeg'],
-        sizes: ['مقاس حر'],
-        opts: ['خامات عالية الجودة']
+        images: ['stand.jpeg'],
+        sizes: ['حر'],
+        opts: ['Premium']
     }
 };
 
+// ================= STATE =================
 let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
 let currentImgIndex = 0;
-let sliderInterval;
+let sliderInterval = null;
 
-// تحميل تفاصيل المنتج
+// ================= HELPERS =================
+const saveCart = () => {
+    localStorage.setItem('fekra_cart', JSON.stringify(cart));
+};
+
+const getProductFromURL = () => {
+    const params = new URLSearchParams(window.location.search);
+    return config[params.get('type')];
+};
+
+// ================= PRODUCT PAGE =================
 function loadProductDetails() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const type = urlParams.get('type');
-    const product = config[type];
-
-    if (product) {
-        document.getElementById('pTitle').innerText = product.name;
-        if (product.desc) document.getElementById('pDesc').innerText = product.desc;
-        document.getElementById('pImg').src = product.images[0];
-
-        // ملء المقاسات
-        const sizeSelect = document.getElementById('pSize');
-        sizeSelect.innerHTML = product.sizes.map(s => `<option value="${s}">${s}</option>`).join('');
-
-        // ملء الخيارات
-        const optSelect = document.getElementById('pOpt');
-        optSelect.innerHTML = product.opts.map(o => `<option value="${o}">${o}</option>`).join('');
-
-        // تشغيل سلايدر الصور التلقائي
-        startSlider(product.images);
-    }
-    updateBadge();
-}
-
-// سلايدر الصور التلقائي
-function startSlider(images) {
-    if (images.length < 2) return;
-    const imgElement = document.getElementById('pImg');
-
-    sliderInterval = setInterval(() => {
-        imgElement.style.opacity = '0';
-        setTimeout(() => {
-            currentImgIndex = (currentImgIndex + 1) % images.length;
-            imgElement.src = images[currentImgIndex];
-            imgElement.style.opacity = '1';
-        }, 600);
-    }, 4000);
-}
-
-// إضافة للسلة
-function addToCart() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const type = urlParams.get('type');
-    const product = config[type];
-
+    const product = getProductFromURL();
     if (!product) return;
 
-    const newItem = {
-        name: product.name,
-        size: document.getElementById('pSize').value,
-        option: document.getElementById('pOpt').value,
-        notes: document.getElementById('pNotes') ? document.getElementById('pNotes').value : '',
-        image: product.images[0]
+    const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el && value) el.innerText = value;
     };
 
-    cart.push(newItem);
-    localStorage.setItem('fekra_cart', JSON.stringify(cart));
+    const setImage = (id, src) => {
+        const el = document.getElementById(id);
+        if (el) el.src = src;
+    };
+
+    setText('pTitle', product.name);
+    setText('pDesc', product.desc);
+    setImage('pImg', product.images[0]);
+
+    fillSelect('pSize', product.sizes);
+    fillSelect('pOpt', product.opts);
+
+    startSlider(product.images);
     updateBadge();
-    alert('✅ تمت إضافة ' + product.name + ' للسلة');
+}
+
+// ================= SELECT FILL =================
+function fillSelect(id, items) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.innerHTML = items
+        .map(i => `<option value="${i}">${i}</option>`)
+        .join('');
+}
+
+// ================= SLIDER =================
+function startSlider(images) {
+    if (!images || images.length < 2) return;
+
+    const img = document.getElementById('pImg');
+    if (!img) return;
+
+    clearInterval(sliderInterval);
+    currentImgIndex = 0;
+
+    sliderInterval = setInterval(() => {
+        img.style.opacity = 0;
+
+        setTimeout(() => {
+            currentImgIndex = (currentImgIndex + 1) % images.length;
+            img.src = images[currentImgIndex];
+            img.style.opacity = 1;
+        }, 400);
+
+    }, 3500);
+}
+
+// ================= CART =================
+function addToCart() {
+    const product = getProductFromURL();
+    if (!product) return;
+
+    const item = {
+        name: product.name,
+        size: document.getElementById('pSize')?.value || '',
+        option: document.getElementById('pOpt')?.value || '',
+        notes: document.getElementById('pNotes')?.value || '',
+        image: product.images[0],
+        time: Date.now()
+    };
+
+    cart.push(item);
+    saveCart();
+    updateBadge();
+
+    alert(`تمت إضافة ${product.name} للسلة`);
 }
 
 function updateBadge() {
@@ -131,33 +159,61 @@ function updateBadge() {
     if (badge) badge.innerText = cart.length;
 }
 
-// إرسال البيانات إلى Google Sheets
-function submitToSheet() {
-    const name = document.getElementById('userName').value;
-    const phone = document.getElementById('userPhone').value;
-    const notes = document.getElementById('userNotes').value;
-
-    if (!name || !phone) return alert("يرجى إدخال الاسم ورقم الهاتف");
-
-    fetch(WEB_APP_URL, {
-        method: 'POST',
-        body: JSON.stringify({ name, phone, notes, details: cart })
-    }).then(() => {
-        alert("✅ تم استلام طلبك!");
-        clearCart();
-    });
-}
-
-// إرسال الطلب عبر واتساب
-function submitToWhatsApp() {
-    const name = document.getElementById('userName').value;
-    const phone = document.getElementById('userPhone').value;
-    let msg = `*طلب جديد من الموقع*%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0A%0A*المنتجات:*%0A`;
-    cart.forEach(i => msg += `- ${i.name} (${i.size} | ${i.option})%0Aملاحظات: ${i.notes}%0A`);
-    window.open(`https://wa.me/201111049778?text=${msg}`, '_blank');
-}
-
 function clearCart() {
-    localStorage.removeItem('fekra_cart');
-    location.reload();
+    cart = [];
+    saveCart();
+    updateBadge();
+}
+
+// ================= GOOGLE SHEETS =================
+async function submitToSheet() {
+    const name = document.getElementById('userName')?.value;
+    const phone = document.getElementById('userPhone')?.value;
+    const notes = document.getElementById('userNotes')?.value;
+
+    if (!name || !phone) {
+        alert("يرجى إدخال الاسم ورقم الهاتف");
+        return;
+    }
+
+    try {
+        await fetch(WEB_APP_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name,
+                phone,
+                notes,
+                items: cart
+            })
+        });
+
+        alert("تم إرسال الطلب بنجاح");
+        clearCart();
+    } catch (err) {
+        console.error(err);
+        alert("حدث خطأ أثناء الإرسال");
+    }
+}
+
+// ================= WHATSAPP =================
+function submitToWhatsApp() {
+    const name = document.getElementById('userName')?.value;
+    const phone = document.getElementById('userPhone')?.value;
+
+    if (!name || !phone) {
+        alert("يرجى إدخال الاسم ورقم الهاتف");
+        return;
+    }
+
+    let msg = `طلب جديد%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0A%0Aالطلبات:%0A`;
+
+    cart.forEach(i => {
+        msg += `- ${i.name} (${i.size} | ${i.option})%0A`;
+        if (i.notes) msg += `ملاحظات: ${i.notes}%0A`;
+    });
+
+    window.open(`https://wa.me/201111049778?text=${msg}`, '_blank');
 }
