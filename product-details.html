@@ -5,46 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج | فكرة</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
         <div class="logo"><img src="logo.png.png"></div>
         <nav class="nav-links"><a href="index.html">الرئيسية</a></nav>
-        <div class="cart-icon" onclick="window.location.href='index.html?openCart=true'">
+        <div class="cart-icon" onclick="window.location.href='index.html'">
             <i class="fas fa-shopping-cart"></i>
             <span class="badge" id="cartBadge">0</span>
         </div>
     </header>
 
     <div class="product-container">
-        <div class="gallery-box">
-            <img id="pImg" src="" alt="عرض المنتج">
-        </div>
-
+        <div class="gallery-box"><img id="pImg" src=""></div>
         <div class="details-box">
-            <h1 id="pTitle" style="color: var(--primary); margin-bottom: 10px;"></h1>
-            <p id="pDesc" style="color: #888; margin-bottom: 20px;"></p>
-            
+            <h1 id="pTitle"></h1>
             <div class="select-group">
-                <label>المقاس / الحجم:</label>
+                <label>المقاس:</label>
                 <select id="pSize"></select>
             </div>
-
             <div class="select-group">
-                <label>الخامة / نوع الطباعة:</label>
+                <label>الخامة:</label>
                 <select id="pOpt"></select>
             </div>
-
             <div class="select-group">
-                <label>ملاحظات خاصة بالتصميم:</label>
-                <textarea id="pNotes" placeholder="اكتب هنا أي تفاصيل تريد إضافتها للتصميم (مثلاً: اللون، النص، إلخ)" style="height: 100px;"></textarea>
+                <label>ملاحظات التصميم:</label>
+                <textarea id="pNotes" placeholder="اكتب ملاحظاتك هنا..."></textarea>
             </div>
-
-            <button onclick="addToCart()" class="btn" style="width: 100%; margin-top: 10px;">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
+            <button onclick="addToCart()" class="btn">إضافة للسلة</button>
         </div>
     </div>
-
     <script src="script.js"></script>
     <script>document.addEventListener('DOMContentLoaded', loadProductDetails);</script>
 </body>
