@@ -4,178 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | الرئيسية</title>
-
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-
-<header class="header">
-    <div class="logo">
-        <img src="logo.png" alt="فكرة للدعاية والإعلان" loading="lazy">
-    </div>
-
-    <nav class="nav-links">
-        <a href="index.html" class="active">الرئيسية</a>
-        <a href="#contact">تواصل معنا</a>
-    </nav>
-
-    <div class="cart-icon" onclick="toggleCart(true)">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="badge" id="cartBadge">0</span>
-    </div>
-</header>
-
-<main>
-
-<section class="grid">
-
-    <div class="card">
-        <div class="card-img-container">
-            <img src="T-shirt.png" alt="تيشيرتات" loading="lazy">
+    <header class="header">
+        <div class="logo"><img src="logo-main.png" alt="فكرة"></div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">الرئيسية</a>
+            <a href="#contact">تواصل معنا</a>
+        </nav>
+        <div class="cart-icon" onclick="toggleCart(true)">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge" id="cartBadge">0</span>
         </div>
-        <div class="card-details">
-            <h3>تيشيرتات</h3>
-            <a href="product-details.html?type=tshirt" class="btn">اطلب الآن</a>
-        </div>
-    </div>
+    </header>
 
-    <div class="card">
-        <div class="card-img-container">
-            <img src="B-card.jpg" alt="كروت شخصية" loading="lazy">
+    <section class="grid">
+        <div class="card">
+            <div class="card-img-container"><img src="tshirt-main.png"></div>
+            <div class="card-details">
+                <h3>تيشيرتات</h3>
+                <a href="product-details.html?type=tshirt" class="btn">اطلب الآن</a>
+            </div>
         </div>
-        <div class="card-details">
-            <h3>كروت شخصية</h3>
-            <a href="product-details.html?type=bcard" class="btn">اطلب الآن</a>
+        <div class="card">
+            <div class="card-img-container"><img src="rollup-1.jpg"></div>
+            <div class="card-details">
+                <h3>رول أب ستاند</h3>
+                <a href="product-details.html?type=rollup" class="btn">اطلب الآن</a>
+            </div>
         </div>
-    </div>
+        <div class="card">
+            <div class="card-img-container"><img src="x-banner-1.jpg"></div>
+            <div class="card-details">
+                <h3>إكس بانر</h3>
+                <a href="product-details.html?type=xbanr" class="btn">اطلب الآن</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img-container"><img src="business-card-1.jpg"></div>
+            <div class="card-details">
+                <h3>كروت شخصية</h3>
+                <a href="product-details.html?type=bcard" class="btn">اطلب الآن</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img-container"><img src="mug-main.jpg"></div>
+            <div class="card-details">
+                <h3>المج الحراري</h3>
+                <a href="product-details.html?type=mug" class="btn">اطلب الآن</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img-container"><img src="bloknote.jpg"></div>
+            <div class="card-details">
+                <h3>بلوك نوت</h3>
+                <a href="product-details.html?type=bloknote" class="btn">اطلب الآن</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-        <div class="card-img-container">
-            <img src="roll-up.jpg" alt="رول أب" loading="lazy">
+    <div id="sidebar" class="cart-sidebar">
+        <div class="sidebar-header">
+            <h3>سلة الطلبات</h3>
+            <span onclick="toggleCart(false)" class="close-btn">&times;</span>
         </div>
-        <div class="card-details">
-            <h3>رول أب</h3>
-            <a href="product-details.html?type=rollup" class="btn">اطلب الآن</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-img-container">
-            <img src="mug.jpg" alt="أكواب" loading="lazy">
-        </div>
-        <div class="card-details">
-            <h3>الأكواب</h3>
-            <a href="product-details.html?type=mug" class="btn">اطلب الآن</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-img-container">
-            <img src="x-banr.jpg" alt="X Banner" loading="lazy">
-        </div>
-        <div class="card-details">
-            <h3>اكس بانر</h3>
-            <a href="product-details.html?type=xbanner" class="btn">اطلب الآن</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-img-container">
-            <img src="banar.png" alt="بانر" loading="lazy">
-        </div>
-        <div class="card-details">
-            <h3>بانر</h3>
-            <a href="product-details.html?type=banar" class="btn">اطلب الآن</a>
+        <div id="cartItemsList"></div>
+        <div id="checkoutFormContainer" class="checkout-form" style="display:none;">
+            <input type="text" id="userName" placeholder="الاسم بالكامل">
+            <input type="tel" id="userPhone" placeholder="رقم الهاتف">
+            <textarea id="userNotes" placeholder="عنوان التوصيل أو ملاحظات عامة"></textarea>
+            <div class="order-btns">
+                <button onclick="submitToSheet()" id="sheetBtn" class="btn-sheet">إرسال الطلب</button>
+                <button onclick="submitToWhatsApp()" class="btn-wa"><i class="fab fa-whatsapp"></i> واتساب</button>
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-img-container">
-            <img src="Car Sunshad.jpeg" alt="شمسية سيارة" loading="lazy">
-        </div>
-        <div class="card-details">
-            <h3>شمسية سيارة</h3>
-            <a href="product-details.html?type=carsunshade" class="btn">اطلب الآن</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-img-container">
-            <img src="stand.jpeg" alt="ستاند عرض" loading="lazy">
-        </div>
-        <div class="card-details">
-            <h3>ستاند عرض</h3>
-            <a href="product-details.html?type=stand" class="btn">اطلب الآن</a>
-        </div>
-    </div>
-
-</section>
-
-<section id="contact" class="contact-sec">
-    <h2>تواصل معنا</h2>
-
-    <div class="contact-grid">
-
-        <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>المقر</h3>
-            <p>44 شارع محمود خاطر - حلوان - القاهرة</p>
-        </div>
-
-        <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <h3>الهاتف</h3>
-            <p dir="ltr">01275209778</p>
-        </div>
-
-        <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <h3>البريد</h3>
-            <p>Fekrah_marketing@outlook.com</p>
-        </div>
-
-    </div>
-</section>
-
-</main>
-
-<!-- Cart Sidebar -->
-<div id="sidebar" class="cart-sidebar">
-
-    <div class="sidebar-header">
-        <h3>سلة الطلبات</h3>
-        <span onclick="toggleCart(false)" class="close-btn">&times;</span>
-    </div>
-
-    <div id="cartItemsList"></div>
-
-    <div id="checkoutFormContainer" class="checkout-form" hidden>
-
-        <input type="text" id="userName" placeholder="الاسم بالكامل">
-        <input type="tel" id="userPhone" placeholder="رقم الهاتف">
-        <textarea id="userNotes" placeholder="ملاحظات إضافية"></textarea>
-
-        <div class="order-btns">
-            <button onclick="submitToSheet()" class="btn-sheet">إرسال الطلب</button>
-            <button onclick="submitToWhatsApp()" class="btn-wa">واتساب</button>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- WhatsApp -->
-<a href="https://wa.me/201111049778"
-   class="whatsapp-float"
-   target="_blank"
-   aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<script src="script.js" defer></script>
-
+    <script src="script.js"></script>
+    <script>
+        // فتح السلة تلقائياً إذا جاء المستخدم من صفحة المنتج
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('openCart')) toggleCart(true);
+            updateBadge();
+        };
+    </script>
 </body>
 </html>
