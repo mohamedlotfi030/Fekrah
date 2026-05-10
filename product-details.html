@@ -2,81 +2,86 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>طلب منتج | فكرة</title>
+    <title>تخصيص الطلب | فكرة</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="padding-top: 100px;">
+<body>
 
     <header class="main-header">
         <div class="logo"><img src="logo.png.png" alt="فكرة"></div>
         <nav class="nav-menu">
-            <ul>
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="gallery.html">المعرض</a></li>
-            </ul>
+            <ul><li><a href="index.html">العودة للرئيسية</a></li></ul>
         </nav>
     </header>
 
-    <main class="product-container" style="display: flex; gap: 50px; padding: 0 10%;">
-        <div style="flex: 1;">
-            <img id="mainImg" src="" style="width: 100%; border-radius: 20px; border: 1px solid #333;">
+    <main class="order-container">
+        <div style="flex: 1.2;">
+            <img id="mainImg" src="" style="width: 100%; border-radius: 20px; border: 1px solid #222;">
+            <div id="offerMsg" style="margin-top: 20px; color: var(--primary); font-weight: bold; text-align: center;"></div>
         </div>
 
-        <div style="flex: 1;">
-            <h1 id="pTitle" style="font-size: 2.5rem; margin-bottom: 10px;"></h1>
-            <p id="dynamic-offer" style="color: var(--primary); font-weight: bold;"></p>
+        <div class="order-box">
+            <h2 id="pTitle">اسم المنتج</h2>
+            <form id="orderForm">
+                <input type="hidden" name="product_name" id="hiddenTitle">
+                
+                <div class="form-group">
+                    <label>المقاس / النوع</label>
+                    <select id="sizeSelect" name="size"></select>
+                </div>
 
-            <div class="order-form-card">
-                <form id="orderForm">
-                    <label class="form-label">المقاس المطلوب</label>
-                    <select id="sizeSelect" name="size" class="custom-input"></select>
-
-                    <label class="form-label">نوع الطباعة</label>
-                    <select id="printType" name="print_type" class="custom-input">
-                        <option>DTF - طباعة حرارية</option>
+                <div class="form-group">
+                    <label>نوع الطباعة / التجهيز</label>
+                    <select name="print_type">
+                        <option>DTF حراري</option>
                         <option>تطريز كمبيوتر</option>
                         <option>سبليميشن</option>
+                        <option>سلوفان مط/لامع</option>
                     </select>
+                </div>
 
-                    <label class="form-label">الكمية</label>
-                    <input type="number" name="qty" value="1" class="custom-input">
+                <div class="form-group">
+                    <label>الكمية</label>
+                    <input type="number" name="quantity" value="1" min="1">
+                </div>
 
-                    <button type="submit" class="submit-btn">إرسال الطلب (Google Sheets)</button>
-                    <button type="button" onclick="toWhatsApp()" style="background: #25d366; color: white; margin-top: 10px;" class="submit-btn">طلب سريع عبر واتساب</button>
-                </form>
-            </div>
+                <button type="submit" style="width: 100%; padding: 15px; background: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">إرسال الطلب (جوجل شيت)</button>
+                <button type="button" onclick="toWA()" style="width: 100%; padding: 15px; background: #25d366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px;">استفسار عبر واتساب</button>
+            </form>
         </div>
     </main>
 
     <script>
-        const products = {
+        const data = {
             'tshirt': { title: 'تيشيرت مخصص', img: 'T-shirt.png', sizes: ['S','M','L','XL','XXL'] },
-            'bcard': { title: 'كروت شخصية', img: 'B-card.jpg', sizes: ['وجه واحد','وجهين'] },
-            'rollup': { title: 'رول أب', img: 'roll-up.jpg', sizes: ['80x200','100x200'] }
+            'bcard': { title: 'كروت شخصية', img: 'B-card.jpg', sizes: ['9x5 سم ستاندرد'] },
+            'rollup': { title: 'رول أب', img: 'roll-up.jpg', sizes: ['80x200','100x200'] },
+            'mug': { title: 'مج حراري', img: 'mug.jpg', sizes: ['عادي','سحري','يد قلب'] }
         };
 
-        function load() {
-            const type = new URLSearchParams(window.location.search).get('type') || 'tshirt';
-            const data = products[type];
-            document.getElementById('pTitle').innerText = data.title;
-            document.getElementById('mainImg').src = data.img;
-            document.getElementById('dynamic-offer').innerText = `عرض خاص على ${data.title} متاح الآن!`;
-            
-            const select = document.getElementById('sizeSelect');
-            data.sizes.forEach(s => select.innerHTML += `<option>${s}</option>`);
-        }
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type') || 'tshirt';
+        const p = data[type];
 
-        form.onsubmit = (e) => {
+        document.getElementById('pTitle').innerText = p.title;
+        document.getElementById('hiddenTitle').value = p.title;
+        document.getElementById('mainImg').src = p.img;
+        document.getElementById('offerMsg').innerText = `لمعرفة العروض المقدمة على ${p.title} يرجى التواصل معنا.`;
+        
+        const sel = document.getElementById('sizeSelect');
+        p.sizes.forEach(s => sel.innerHTML += `<option value="${s}">${s}</option>`);
+
+        // ربط جوجل شيت (ضع رابطك هنا)
+        document.getElementById('orderForm').onsubmit = function(e) {
             e.preventDefault();
-            // ضع هنا رابط الـ Apps Script الخاص بك
-            fetch('YOUR_GAS_URL', { method: 'POST', body: new FormData(form) })
-            .then(() => alert('تم تسجيل طلبك!'));
+            fetch('YOUR_GOOGLE_SCRIPT_URL', { method: 'POST', body: new FormData(this) })
+            .then(() => alert('تم استلام طلبك!'));
         };
 
-        function toWhatsApp() {
-            window.open(`https://wa.me/201000000000?text=أريد طلب ${document.getElementById('pTitle').innerText}`);
+        function toWA() {
+            window.open(`https://wa.me/201000000000?text=أريد الاستفسار عن ${p.title}`);
         }
-        window.onload = load;
     </script>
 </body>
 </html>
