@@ -1,79 +1,72 @@
-<div class="product-options">
-    <h1 id="productTitle">اسم المنتج</h1>
-    
-    <div id="dynamic-offer" class="offer-banner">
-        </div>
+<div class="product-container">
+    <div class="product-images">
+        <img id="mainProductImg" src="" alt="صورة المنتج">
+        <div id="imageThumbs" class="thumbnails"></div>
+    </div>
 
-    <div class="order-form-container">
-        <form id="googleOrderForm">
-            <div class="input-group">
-                <label>اختر المقاس</label>
-                <select id="sizeSelect" name="size">
-                    </select>
-            </div>
+    <div class="product-info">
+        <h1 id="productTitle"></h1>
+        
+        <div class="order-box">
+            <form id="orderForm">
+                <label>المقاس / النوع</label>
+                <select id="sizeSelect" name="size" class="input-field"></select>
 
-            <div class="input-group" id="printTypeGroup">
                 <label>نوع الطباعة</label>
-                <select id="printType" name="print_type">
-                    <option value="DTF">طباعة دي تي إف (DTF)</option>
-                    <option value="Sublimation">سبليميشن (Sublimation)</option>
-                    <option value="Vinyl">فينيل حراري</option>
+                <select id="printType" name="print_type" class="input-field">
+                    <option value="DTF">DTF - طباعة حرارية</option>
                     <option value="Embroidery">تطريز كمبيوتر</option>
+                    <option value="Sublimation">سبليميشن</option>
                 </select>
-            </div>
 
-            <div class="input-group">
-                <label>الكمية المطلوبة</label>
-                <input type="number" name="quantity" value="1" min="1">
-            </div>
+                <label>الكمية</label>
+                <input type="number" name="quantity" value="1" class="input-field">
 
-            <div class="btn-group">
-                <button type="button" class="whatsapp-order" onclick="sendWhatsApp()">
-                    <i class="fab fa-whatsapp"></i> استفسار سريع
-                </button>
-                <button type="submit" class="submit-order" style="background:var(--primary-color); color:black; padding:15px; border-radius:8px; border:none; font-weight:bold; cursor:pointer;">
-                    تأكيد طلبك الآن
-                </button>
-            </div>
-        </form>
+                <button type="submit" class="submit-btn">إرسال الطلب للمراجعة</button>
+                <button type="button" class="whatsapp-btn" onclick="sendWhatsApp()">طلب عبر واتساب</button>
+            </form>
+        </div>
     </div>
 </div>
 
 <script>
-    // ربط الفورم بجوجل ابس سكريبت (استبدل الرابط برابطك)
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
-    const form = document.getElementById('googleOrderForm');
+    // البيانات الفعلية بناءً على ملفات GitHub الخاصة بك
+    const products = {
+        'tshirt': {
+            title: 'تيشيرت مخصص',
+            images: ['T-shirt.png', 'T-shirt-1.png'],
+            sizes: ['S', 'M', 'L', 'XL', 'XXL']
+        },
+        'bcard': {
+            title: 'كروت شخصية',
+            images: ['B-card.jpg', 'B-card2.jpg'],
+            sizes: ['وجه واحد', 'وجهين - مطفي', 'وجهين - لامع']
+        }
+    };
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-          .then(response => alert('تم استلام طلبك بنجاح، سنتواصل معك قريباً!'))
-          .catch(error => console.error('Error!', error.message));
-    });
-
-    // تحديث خيارات المنتج بناءً على النوع
-    function loadProduct() {
-        const params = new URLSearchParams(window.location.search);
-        const type = params.get('type') || 'tshirt';
-        const data = productData[type];
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type') || 'tshirt';
+        const data = products[type];
 
         document.getElementById('productTitle').innerText = data.title;
-        
-        // إظهار/إخفاء نوع الطباعة (للكروت والمجات مثلاً تختلف الأنواع)
-        const printGroup = document.getElementById('printTypeGroup');
-        if (type === 'bcard') {
-            printGroup.innerHTML = '<label>نوع الورق</label><select name="print_type"><option>كوشيه 350 جرام</option><option>فبريانو</option></select>';
-        }
+        document.getElementById('mainProductImg').src = data.images[0];
 
-        // تحميل المقاسات
+        // تعبئة المقاسات
         const sizeSelect = document.getElementById('sizeSelect');
-        sizeSelect.innerHTML = '';
         data.sizes.forEach(s => {
-            const opt = document.createElement('option');
-            opt.value = s;
-            opt.innerText = s;
-            sizeSelect.appendChild(opt);
+            sizeSelect.innerHTML += `<option value="${s}">${s}</option>`;
         });
     }
-    window.onload = loadProduct;
+
+    // ربط الفورم بـ Google Apps Script
+    document.getElementById('orderForm').onsubmit = function(e) {
+        e.preventDefault();
+        const scriptURL = 'ضع_رابط_السكريبت_الخاص_بك_هنا';
+        fetch(scriptURL, { method: 'POST', body: new FormData(this)})
+            .then(res => alert('تم استلام طلبك بنجاح!'))
+            .catch(err => alert('حدث خطأ، حاول مرة أخرى'));
+    };
+
+    window.onload = init;
 </script>
