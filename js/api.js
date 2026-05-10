@@ -1,25 +1,35 @@
 const API = {
-    WHATSAPP_NUM: "201275209778",
+    WHATSAPP_NUM: "201275209778", // رقمك المحدث
 
-    async sendOrder(customerData) {
-        const order = {
-            customer: customerData,
-            items: Cart.items,
-            timestamp: new Date().toLocaleString()
-        };
+    async sendOrder(customerName, customerPhone) {
+        if (Cart.items.length === 0) {
+            alert("السلة فارغة!");
+            return;
+        }
 
-        // 1. WhatsApp Flow
-        let msg = `*طلب جديد من متجر فكرة*%0A`;
-        msg += `👤 *العميل:* ${order.customer.name}%0A`;
-        msg += `📞 *الهاتف:* ${order.customer.phone}%0A%0A`;
-        msg += `🛒 *المنتجات:*%0A`;
-        order.items.forEach((item, i) => {
-            msg += `${i+1}. ${item.name} (${item.size})%0A`;
+        // تجهيز نص الرسالة للواتساب
+        let message = `*طلب جديد من موقع فكرة*%0A`;
+        message += `--------------------------%0A`;
+        message += `👤 *العميل:* ${customerName}%0A`;
+        message += `📞 *الهاتف:* ${customerPhone}%0A`;
+        message += `🛒 *المنتجات:*%0A`;
+
+        Cart.items.forEach((item, index) => {
+            message += `${index + 1}. *${item.name}*%0A`;
+            message += `   - المقاس: ${item.size}%0A`;
+            message += `   - النوع: ${item.option}%0A`;
         });
 
-        window.open(`https://wa.me/${this.WHATSAPP_NUM}?text=${msg}`, '_blank');
+        message += `--------------------------%0A`;
+        message += `📌 إجمالي القطع: ${Cart.items.length}`;
 
-        // 2. Google Sheets Flow (Optional)
-        // await fetch(WEB_APP_URL, { method: 'POST', body: JSON.stringify(order) });
+        // رابط الواتساب المباشر
+        const waLink = `https://wa.me/${this.WHATSAPP_NUM}?text=${message}`;
+        
+        // فتح الواتساب في نافذة جديدة
+        window.open(waLink, '_blank');
+
+        // اختياري: تفريغ السلة بعد الطلب
+        // Cart.clear();
     }
 };
