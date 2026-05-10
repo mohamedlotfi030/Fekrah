@@ -5,36 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج | فكرة</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
-        <div class="logo"><img src="logo-main.png"></div>
-        <nav class="nav-links"><a href="index.html">الرئيسية</a></nav>
-        <div class="cart-icon" onclick="window.location.href='index.html?openCart=true'">
+        <div class="logo"><img src="logo-main.png" onclick="window.location.href='index.html'" style="cursor:pointer;"></div>
+        <div class="cart-icon" onclick="window.location.href='index.html?openCart=true'" style="cursor:pointer;">
             <i class="fas fa-shopping-cart"></i>
-            <span class="badge" id="cartBadge">0</span>
+            <span id="cartBadge" class="badge">0</span>
         </div>
     </header>
 
-    <div class="product-container">
-        <div class="gallery-box"><img id="pImg" src=""></div>
-        <div class="details-box">
-            <h1 id="pTitle" style="color:var(--primary)"></h1>
+    <div class="product-container" style="display:flex; flex-wrap:wrap; gap:40px; padding:120px 8% 50px;">
+        <div class="gallery-box" style="flex:1; min-width:300px; background:white; height:450px; border-radius:20px; display:flex; justify-content:center; align-items:center; border:1px solid #333;">
+            <img id="pImg" style="max-width:90%; max-height:90%; object-fit:contain;">
+        </div>
+        <div class="details-box" style="flex:1; min-width:300px;">
+            <h1 id="pTitle" style="color:var(--primary); margin-bottom:20px;"></h1>
             <div class="select-group">
-                <label>المقاس:</label>
+                <label>المقاس / الحجم:</label>
                 <select id="pSize"></select>
             </div>
             <div class="select-group">
-                <label>نوع الطباعة:</label>
+                <label>الخامة / نوع الطباعة:</label>
                 <select id="pOpt"></select>
             </div>
             <div class="select-group">
                 <label>ملاحظات التصميم:</label>
-                <textarea id="pNotes" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+                <textarea id="pNotes" placeholder="اكتب ملاحظاتك (مثل اللون، النص المراد طباعته...)"></textarea>
             </div>
-            <button onclick="addToCart()" class="btn" style="width:100%">إضافة للسلة</button>
+            <button onclick="addToCart()" class="btn">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
         </div>
     </div>
+
     <script src="script.js"></script>
     <script>document.addEventListener('DOMContentLoaded', loadProductDetails);</script>
 </body>
