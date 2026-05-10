@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج | فكرة</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* تنسيقات إضافية خاصة بصفحة المنتج المخصصة */
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 50px 5%;
+            gap: 40px;
+        }
+        .product-gallery {
+            flex: 1;
+            min-width: 350px;
+        }
+        .main-img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+        }
+        .thumb-nails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .thumb-nails img {
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid transparent;
+        }
+        .thumb-nails img:hover { border-color: var(--primary-color); }
+        
+        .product-options {
+            flex: 1;
+            min-width: 350px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 15px;
+        }
+        .option-group { margin-bottom: 20px; }
+        .option-group label { display: block; margin-bottom: 10px; color: #ccc; }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+        }
+        .offer-banner {
+            background: rgba(0, 188, 212, 0.1);
+            border-right: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        .whatsapp-order {
+            flex: 2;
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .back-btn {
+            flex: 1;
+            background: transparent;
+            border: 1px solid #555;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo"><img src="logo.png" alt="Logo"></div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">العودة للمتجر</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="product-container">
+        <div class="product-gallery">
+            <img src="" id="mainProductImg" class="main-img" alt="Product Image">
+            <div class="thumb-nails" id="imageThumbs">
+                </div>
+        </div>
+
+        <div class="product-options">
+            <h1 id="productTitle">اسم المنتج</h1>
+            
+            <div id="dynamic-offer" class="offer-banner">
+                يرجى الانتظار...
+            </div>
+
+            <form id="orderForm">
+                <div class="option-group" id="sizeGroup">
+                    <label>المقاس</label>
+                    <select id="sizeSelect"></select>
+                </div>
+
+                <div id="customSizeInputs" style="display:none;">
+                    <div class="option-group">
+                        <label>العرض (سم)</label>
+                        <input type="number" id="customWidth" placeholder="مثال: 100">
+                    </div>
+                    <div class="option-group">
+                        <label>الطول (سم)</label>
+                        <input type="number" id="customHeight" placeholder="مثال: 200">
+                    </div>
+                </div>
+
+                <div class="option-group" id="extraOptions">
+                    </div>
+
+                <div class="btn-group">
+                    <button type="button" class="whatsapp-order" onclick="sendWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> اطلب عبر واتساب
+                    </button>
+                    <a href="index.html" class="back-btn">رجوع</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // قاعدة البيانات التي جمعناها لكل منتج
+        const productData = {
+            'tshirt': {
+                title: 'تيشيرت مخصص',
+                offerName: 'التيشيرتات',
+                images: ['T-shirt.png', 'T-shirt-1.png', 'T-shirt-2.png'],
+                sizes: ['دائري', 'سبعة', 'بولو']
+            },
+            'bcard': {
+                title: 'كروت شخصية',
+                offerName: 'الكروت الشخصية',
+                images: ['B-card.png', 'B-card2.png', 'B-card3.png'],
+                sizes: ['وجه واحد', 'وجهين']
+            },
+            'rollup': {
+                title: 'رول أب إعلاني',
+                offerName: 'الرول أب',
+                images: ['roll-up.png', 'Roll-up-2.png', 'Roll-up-3.png'],
+                sizes: ['80x200 سم', '85x200 سم', '100x200 سم', '120x200 سم']
+            },
+            'banar': {
+                title: 'بانر مطبوع',
+                offerName: 'البانر',
+                images: ['banar.png'],
+                sizes: ['مقاس حر']
+            }
+        };
+
+        // دالة تحميل بيانات المنتج بناءً على الرابط
+        function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type') || 'tshirt';
+            const data = productData[type];
+
+            document.getElementById('productTitle').innerText = data.title;
+            document.getElementById('dynamic-offer').innerText = `لمعرفة العروض المقدمة على ${data.offerName}، يرجى التواصل عبر الواتساب.`;
+            
+            // تحميل الصور
+            document.getElementById('mainProductImg').src = data.images[0];
+            const thumbs = document.getElementById('imageThumbs');
+            data.images.forEach(img => {
+                const imgTag = document.createElement('img');
+                imgTag.src = img;
+                imgTag.onclick = () => document.getElementById('mainProductImg').src = img;
+                thumbs.appendChild(imgTag);
+            });
+
+            // تحميل المقاسات
+            const select = document.getElementById('sizeSelect');
+            data.sizes.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.innerText = s;
+                select.appendChild(opt);
+            });
+
+            // إظهار حقول البانر إذا كان المنتج مقاس حر
+            if(data.sizes[0] === 'مقاس حر') {
+                document.getElementById('sizeGroup').style.display = 'none';
+                document.getElementById('customSizeInputs').style.display = 'block';
+            }
+        }
+
+        function sendWhatsApp() {
+            const title = document.getElementById('productTitle').innerText;
+            const size = document.getElementById('sizeSelect').value;
+            const msg = `أهلاً فكرة، أريد الاستفسار عن ${title} - مقاس: ${size}`;
+            window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`);
+        }
+
+        window.onload = loadProduct;
+    </script>
+</body>
+</html>
