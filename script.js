@@ -1,28 +1,17 @@
-// نظام العروض الديناميكي حسب نوع المنتج
-function updateOfferMessage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productType = urlParams.get('type');
-    const offerElement = document.getElementById('dynamic-offer');
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbwGlYFY7fOGWTUK7dxy10ZNgSoWFNI8Ft0D4BDopR9lm7WgeasSznO5R4XGmaUUHTxr5A/exec';
 
-    if (offerElement) {
-        let productName = "";
-        switch(productType) {
-            case 'tshirt': productName = "التيشيرتات المخصصة"; break;
-            case 'bcard': productName = "الكروت الشخصية"; break;
-            case 'rollup': productName = "الرول أب الإعلاني"; break;
-            default: productName = "منتجاتنا";
-        }
-        offerElement.innerText = `لمعرفة العروض المقدمة على ${productName}، يرجى التواصل عبر الواتساب.`;
-    }
+function submitOrder(orderData) {
+    fetch(webAppUrl, {
+        method: 'POST',
+        mode: 'no-cors', // مهم جداً لتجنب مشاكل الـ CORS
+        cache: 'no-cache',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        alert('تم إرسال طلبك بنجاح لشركة فكرة! سنتواصل معك قريباً.');
+        localStorage.removeItem('fekra_cart');
+        window.location.reload();
+    })
+    .catch(error => console.error('Error:', error));
 }
-
-// تنفيذ الوظائف عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-    updateOfferMessage();
-    
-    // برمجة زر طلب عاجل لفتح الواتساب مباشرة
-    const urgentBtn = document.querySelector('.urgent-btn');
-    urgentBtn.addEventListener('click', () => {
-        window.open('https://wa.me/201000000000?text=أريد طلب عاجل', '_blank');
-    });
-});
