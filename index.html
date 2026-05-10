@@ -3,80 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فكرة للدعاية والإعلان | Rhythm Express</title>
+    <title>فكرة للدعاية والإعلان</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="top-bar">
-        <p>أهلاً بك في فكرة للدعاية والإعلان - جودة تليق بك</p>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-    </div>
-
     <header class="main-header">
         <div class="logo">
-            <img src="logo.png" alt="Logo"> </div>
+            <img src="logo.png.png" alt="فكرة" onerror="this.src='https://via.placeholder.com/150x50?text=Fekrah'">
+        </div>
         <nav class="nav-menu">
             <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#products">المنتجات</a></li>
-                <li><a href="#gallery">المعرض</a></li>
+                <li><a href="index.html" class="active">الرئيسية</a></li>
+                <li><a href="gallery.html">المعرض</a></li>
                 <li><a href="#contact">تواصل معنا</a></li>
             </ul>
         </nav>
         <div class="header-actions">
-            <button class="urgent-btn">طلب عاجل</button>
-            <i class="fas fa-search"></i>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
-            </div>
+            <button class="urgent-btn" onclick="window.open('https://wa.me/201000000000')">طلب عاجل</button>
+            <div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></div>
         </div>
     </header>
 
-    <section id="products" class="products-grid">
-        <div class="product-card" style="background-image: url('T-shirt.png');">
-            <div class="overlay">
-                <h3>تيشيرت مخصص</h3>
-                <p>طباعة DTF وتطريز عالي الجودة</p>
-                <a href="product-details.html?type=tshirt" class="order-btn">اطلب الآن</a>
+    <section id="products" class="products-section">
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="T-shirt.png" class="card-img" alt="تيشيرت">
+                <div class="overlay">
+                    <h3>تيشيرت مخصص</h3>
+                    <a href="product-details.html?type=tshirt" class="order-btn">اطلب الآن</a>
+                </div>
             </div>
-        </div>
-        
-        <div class="product-card" style="background-image: url('B-card.png');">
-            <div class="overlay">
-                <h3>كروت شخصية</h3>
-                <p>خامات فبريانو وكريستال فاخرة</p>
-                <a href="product-details.html?type=bcard" class="order-btn">اطلب الآن</a>
+            
+            <div class="product-card">
+                <img src="B-card.jpg" class="card-img" alt="كروت">
+                <div class="overlay">
+                    <h3>كروت شخصية</h3>
+                    <a href="product-details.html?type=bcard" class="order-btn">اطلب الآن</a>
+                </div>
             </div>
-        </div>
 
-        </section>
-
-    <section id="gallery" class="gallery-section">
-        <h2>من أعمالنا السابقة</h2>
-        <div class="gallery-filters">
-            <button class="filter-btn active" data-filter="all">الكل</button>
-            <button class="filter-btn" data-filter="tshirt">تيشيرتات</button>
-            <button class="filter-btn" data-filter="cards">كروت</button>
-        </div>
-        <div class="gallery-grid">
+            <div class="product-card">
+                <img src="roll-up.jpg" class="card-img" alt="رول اب">
+                <div class="overlay">
+                    <h3>رول أب إعلاني</h3>
+                    <a href="product-details.html?type=rollup" class="order-btn">اطلب الآن</a>
+                </div>
             </div>
+            
+            <div class="product-card">
+                <img src="mug.jpg" class="card-img" alt="مج">
+                <div class="overlay">
+                    <h3>مج حراري</h3>
+                    <a href="product-details.html?type=mug" class="order-btn">اطلب الآن</a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer id="contact" class="contact-footer">
         <div class="contact-info">
-            <a href="tel:+201000000000"><i class="fas fa-phone"></i> +20 100 000 0000</a>
-            <a href="mailto:info@fekra.com"><i class="fas fa-envelope"></i> info@fekra.com</a>
-            <a href="https://maps.google.com" target="_blank"><i class="fas fa-map-marker-alt"></i> القاهرة، مصر</a>
+            <a href="tel:+201000000000"><i class="fas fa-phone"></i> اتصل بنا</a>
+            <a href="mailto:info@fekra.com"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
         </div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
