@@ -24,6 +24,7 @@
     </header>
 
     <section class="grid">
+        <!-- المنتجات -->
         <div class="card">
             <div class="card-img-container"><img src="T-shirt.png"></div>
             <div class="card-details">
@@ -31,23 +32,6 @@
                 <a href="product-details.html?type=tshirt" class="btn">اطلب الآن</a>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-img-container"><img src="roll-up.jpg"></div>
-            <div class="card-details">
-                <h3>رول أب ستاند</h3>
-                <a href="product-details.html?type=rollup" class="btn">اطلب الآن</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-img-container"><img src="x-banr.jpg"></div>
-            <div class="card-details">
-                <h3>إكس بانر</h3>
-                <a href="product-details.html?type=xbanr" class="btn">اطلب الآن</a>
-            </div>
-        </div>
-
         <div class="card">
             <div class="card-img-container"><img src="B-card.jpg"></div>
             <div class="card-details">
@@ -55,15 +39,34 @@
                 <a href="product-details.html?type=bcard" class="btn">اطلب الآن</a>
             </div>
         </div>
-
+        <div class="card">
+            <div class="card-img-container"><img src="roll-up.jpg"></div>
+            <div class="card-details">
+                <h3>رول أب</h3>
+                <a href="product-details.html?type=rollup" class="btn">اطلب الآن</a>
+            </div>
+        </div>
         <div class="card">
             <div class="card-img-container"><img src="mug.jpg"></div>
             <div class="card-details">
-                <h3>المج الحراري</h3>
+                <h3>المج (الكوب)</h3>
                 <a href="product-details.html?type=mug" class="btn">اطلب الآن</a>
             </div>
         </div>
-
+        <div class="card">
+            <div class="card-img-container"><img src="x-banr.jpg"></div>
+            <div class="card-details">
+                <h3>اكس بانر</h3>
+                <a href="product-details.html?type=xbanr" class="btn">اطلب الآن</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img-container"><img src="banar.png"></div>
+            <div class="card-details">
+                <h3>بانر</h3>
+                <a href="product-details.html?type=banar" class="btn">اطلب الآن</a>
+            </div>
+        </div>
         <div class="card">
             <div class="card-img-container"><img src="Car Sunshad.jpeg"></div>
             <div class="card-details">
@@ -71,20 +74,32 @@
                 <a href="product-details.html?type=carsunshade" class="btn">اطلب الآن</a>
             </div>
         </div>
+        <div class="card">
+            <div class="card-img-container"><img src="stand.jpeg"></div>
+            <div class="card-details">
+                <h3>ستاند عرض</h3>
+                <a href="product-details.html?type=stand" class="btn">اطلب الآن</a>
+            </div>
+        </div>
     </section>
 
     <section id="contact" class="contact-sec">
-        <h2>تواصل معنا</h2>
+        <h2 style="text-align: center; color: var(--primary); margin-bottom: 40px;">تواصل معنا</h2>
         <div class="contact-grid">
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
-                <h3>العنوان</h3>
+                <h3>مقرنا</h3>
                 <p>44 شارع محمود خاطر - حلوان - القاهرة</p>
             </div>
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <h3>الهاتف</h3>
+                <h3>اتصال مباشر</h3>
                 <p dir="ltr">01275209778</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <h3>البريد الرسمي</h3>
+                <p>Fekrah_marketing@outlook.com</p>
             </div>
         </div>
     </section>
@@ -95,14 +110,13 @@
             <span onclick="toggleCart(false)" class="close-btn">&times;</span>
         </div>
         <div id="cartItemsList"></div>
-        
         <div id="checkoutFormContainer" class="checkout-form" style="display:none;">
             <input type="text" id="userName" placeholder="الاسم بالكامل" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;">
             <input type="tel" id="userPhone" placeholder="رقم الهاتف" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;">
-            <textarea id="userNotes" placeholder="أي ملاحظات إضافية" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;"></textarea>
+            <textarea id="userNotes" placeholder="ملاحظات إضافية" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;"></textarea>
             <div class="order-btns">
-                <button onclick="submitToSheet()" id="sheetBtn" class="btn">إرسال عبر الموقع</button>
-                <button onclick="submitToWhatsApp()" class="btn" style="background:#25d366; color:white;">إرسال عبر واتساب</button>
+                <button onclick="submitToSheet()" id="sheetBtn" class="btn-sheet">إرسال عبر الموقع</button>
+                <button onclick="submitToWhatsApp()" class="btn-wa">إرسال عبر واتساب</button>
             </div>
         </div>
     </div>
