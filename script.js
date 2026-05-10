@@ -9,24 +9,24 @@ const config = {
     },
     'rollup': {
         name: 'رول أب ستاند',
-        images: ['rollup.png'], // تأكد من وجود صورة بهذا الاسم في مجلدك
+        images: ['roll-up.jpg'],
         sizes: [
-            '80 سم × 200 سم بنر', '85 سم × 200 سم بنر', '100 سم × 200 سم بنر', '120 سم × 200 سم بنر',
-            '80 سم × 200 سم جلوسي + لامنيشن', '85 سم × 200 سم جلوسي + لامنيشن', 
-            '100 سم × 200 سم جلوسي + لامنيشن', '120 سم × 200 سم جلوسي + لامنيشن'
+            '80×200 سم بنر', '85×200 سم بنر', '100×200 سم بنر', '120×200 سم بنر',
+            '80×200 سم جلوسي + لامنيشن', '85×200 سم جلوسي + لامنيشن', 
+            '100×200 سم جلوسي + لامنيشن', '120×200 سم جلوسي + لامنيشن'
         ],
         opts: ['ستاند مستورد عالي الجودة', 'ستاند ثقيل فاخر']
     },
     'xbanr': {
         name: 'إكس بانر',
         images: ['x-banr.jpg'],
-        sizes: ['60 سم × 160 سم', '80 سم × 180 سم'],
+        sizes: ['60×160 سم', '80×180 سم'],
         opts: ['طباعة بنر', 'طباعة جلوسي']
     },
     'bcard': {
         name: 'كروت شخصية',
         images: ['B-card.jpg'],
-        sizes: ['9x5 سم', 'كارت مربع'],
+        sizes: ['9×5 سم', 'كارت مربع'],
         opts: ['كوشيه مط', 'سلوفان لامع']
     },
     'mug': {
@@ -34,6 +34,36 @@ const config = {
         images: ['mug.jpg'],
         sizes: ['11 أونصة', '15 أونصة'],
         opts: ['مج أبيض سادة', 'مج سحري']
+    },
+    'bloknote': {
+        name: 'بلوك نوت',
+        images: ['bloknote.jpg'],
+        sizes: ['A4','A5','A6'],
+        opts: ['تجليد علوي','تجليد جانبي']
+    },
+    'popup': {
+        name: 'بوب أب كونتر',
+        images: ['pop-up-counter.png'],
+        sizes: ['80 سم'],
+        opts: ['هيكل ألمنيوم + لمنيشن']
+    },
+    'banar': {
+        name: 'بانر',
+        images: ['banar.png'],
+        sizes: ['مقاس حر'],
+        opts: ['أوت دور']
+    },
+    'stand': {
+        name: 'ستاند عرض',
+        images: ['stand.jpeg'],
+        sizes: ['مقاس حر'],
+        opts: ['خامات عالية الجودة']
+    },
+    'carsunshade': {
+        name: 'شمسية سيارة',
+        images: ['Car Sunshad.jpeg'],
+        sizes: ['مقاس حر'],
+        opts: ['طباعة حرارية']
     }
 };
 
@@ -67,16 +97,15 @@ function addToCart() {
         name: product.name,
         size: document.getElementById('pSize').value,
         option: document.getElementById('pOpt').value,
-        notes: document.getElementById('pNotes').value // سحب الملاحظات من الصندوق
+        notes: document.getElementById('pNotes').value
     };
 
     cart.push(newItem);
     localStorage.setItem('fekra_cart', JSON.stringify(cart));
     updateBadge();
-    alert('تم إضافة ' + product.name + ' إلى السلة');
+    alert('✅ تم إضافة ' + product.name + ' إلى السلة');
 }
 
-// دالة إرسال البيانات لجدول البيانات (Google Sheets)
 function submitToSheet() {
     const name = document.getElementById('userName').value;
     const phone = document.getElementById('userPhone').value;
@@ -84,20 +113,18 @@ function submitToSheet() {
 
     if (!name || !phone) return alert("يرجى إدخال الاسم ورقم الهاتف");
 
-    // تحويل عناصر السلة لنص واحد ليدخل في خانة Items
     const itemsText = cart.map(i => `${i.name} (${i.size} | ${i.option}) - ملاحظات: ${i.notes}`).join(' / ');
 
     fetch(WEB_APP_URL, {
         method: 'POST',
-        mode: 'no-cors',
         body: JSON.stringify({
             name: name,
             phone: phone,
             notes: notes,
-            details: cart // سيتم معالجتها في Apps Script لملء خانة Items
+            items: itemsText
         })
     }).then(() => {
-        alert("تم إرسال طلبك بنجاح!");
+        alert("✅ تم إرسال طلبك بنجاح!");
         localStorage.removeItem('fekra_cart');
         location.reload();
     });
