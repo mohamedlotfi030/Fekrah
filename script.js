@@ -3,12 +3,12 @@ const SECURITY_TOKEN = 'FEKRA_2026_SECURE';
 
 const config = {
     'tshirt': { name: 'تيشيرتات قطنية', images: ['tshirt-main.png', 'tshirt-1.png'], sizes: ['S', 'M', 'L', 'XL', 'XXL'], opts: ['طباعة DTF', 'تطريز'] },
-    'rollup': { name: 'رول أب ستاند', images: ['rollup-1.jpg', 'rollup-2.jpg'], sizes: ['80×200 سم بنر', '100×200 سم بنر'], opts: ['ستاند مستورد', 'ستاند ثقيل'] },
-    'xbanr': { name: 'إكس بانر ستاند', images: ['x-banner-1.jpg', 'x-banner-2.jpg'], sizes: ['60×160 سم', '80×180 سم'], opts: ['طباعة بنر', 'جلوسي لامنيشن'] },
-    'bcard': { name: 'كروت شخصية', images: ['business-card-1.jpg', 'business-card-2.jpg'], sizes: ['9x5 سم', 'كارت مربع'], opts: ['كوشيه مط', 'سلوفان لامع'] },
+    'rollup': { name: 'رول أب ستاند', images: ['rollup-1.jpg', 'rollup-2.jpg'], sizes: ['80×200 سم', '100×200 سم'], opts: ['مستورد', 'فاخر ثقيل'] },
+    'xbanr': { name: 'إكس بانر ستاند', images: ['x-banner-1.jpg', 'x-banner-2.jpg'], sizes: ['60×160 سم', '80×180 سم'], opts: ['طباعة بنر', 'جلوسي'] },
+    'bcard': { name: 'كروت شخصية', images: ['business-card-1.jpg', 'business-card-2.jpg'], sizes: ['9x5 سم', 'مربع'], opts: ['كوشيه مط', 'سلوفان لامع'] },
     'mug': { name: 'المج الحراري', images: ['mug-main.jpg', 'mug-1.jpg'], sizes: ['11 أونصة', '15 أونصة'], opts: ['مج أبيض', 'مج سحري'] },
-    'bloknote': { name: 'بلوك نوت', images: ['bloknote.jpg', 'bloknote-2.jpg'], sizes: ['A5', 'A6'], opts: ['سلك لولبي', 'تجليد حراري'] },
-    'popup': { name: 'بوب أب كاونتر', images: ['pop-up-counter.png', 'pop-up-counter-2.png'], sizes: ['ستاندرد'], opts: ['جلوسي لامنيشن'] }
+    'bloknote': { name: 'بلوك نوت', images: ['bloknote.jpg', 'bloknote-2.jpg'], sizes: ['A5', 'A6'], opts: ['سلك لولبي'] },
+    'popup': { name: 'بوب أب كاونتر', images: ['pop-up-counter.png', 'pop-up-counter-2.png'], sizes: ['قياسي'], opts: ['جلوسي لامنيشن'] }
 };
 
 let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
@@ -33,16 +33,16 @@ function renderCart() {
     if (!list) return;
 
     if (cart.length === 0) {
-        list.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">السلة فارغة</div>';
+        list.innerHTML = '<div style="text-align:center; padding:30px; color:#666;"><i class="fas fa-shopping-basket" style="display:block; font-size:2rem; margin-bottom:10px;"></i>السلة فارغة</div>';
         if (form) form.style.display = 'none';
         return;
     }
 
     if (form) form.style.display = 'block';
     list.innerHTML = cart.map((item, index) => `
-        <div class="cart-item" style="background:#1a1a1a; padding:12px; border-radius:10px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #333;">
-            <div><strong style="color:var(--primary);">${item.name}</strong><br><small>${item.size} | ${item.option}</small></div>
-            <i class="fas fa-trash-alt" onclick="removeItem(${index})" style="color:#ff4d4d; cursor:pointer;"></i>
+        <div class="cart-item" style="background:#1a1a1a; padding:15px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #333;">
+            <div><strong style="color:var(--primary); font-size:1.1rem;">${item.name}</strong><br><small style="color:#aaa;">${item.size} | ${item.option}</small></div>
+            <i class="fas fa-trash-alt" onclick="removeItem(${index})" style="color:#ff4d4d; cursor:pointer; font-size:1.2rem;"></i>
         </div>
     `).join('');
 }
@@ -62,7 +62,7 @@ function addToCart() {
     });
 
     syncCart();
-    showToast(`تم إضافة ${product.name} للسلة`);
+    showToast(`✅ تم إضافة ${product.name}`);
 }
 
 function removeItem(index) {
@@ -84,6 +84,37 @@ function showToast(msg) {
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 500); }, 3000);
 }
 
+// دالة الإرسال لواتساب
+function sendToWhatsApp() {
+    const name = document.getElementById('userName').value;
+    if (!name) return showToast("⚠️ يرجى إدخال الاسم أولاً");
+    if (cart.length === 0) return showToast("السلة فارغة");
+
+    let msg = `*طلب جديد من موقع فكرة*%0A👤 *الاسم:* ${name}%0A🛒 *المنتجات:*%0A`;
+    cart.forEach((item, i) => {
+        msg += `${i+1}. *${item.name}* (مقاس: ${item.size} | خامة: ${item.option})%0A`;
+        if(item.notes) msg += `📝 ملاحظة: ${item.notes}%0A`;
+    });
+    
+    window.open(`https://wa.me/201111049778?text=${msg}`, '_blank');
+}
+
+async function submitToSheet() {
+    const btn = document.getElementById('sheetBtn');
+    const name = document.getElementById('userName').value;
+    if (!name) return showToast("⚠️ يرجى إدخال الاسم");
+    btn.disabled = true; btn.innerText = "جارٍ الإرسال...";
+    try {
+        await fetch(WEB_APP_URL, {
+            method: 'POST', mode: 'no-cors',
+            body: JSON.stringify({ token: SECURITY_TOKEN, name: name, phone: document.getElementById('userPhone').value, details: cart })
+        });
+        showToast("✅ تم الإرسال للمطبعة بنجاح");
+        cart = []; syncCart(); toggleCart(false);
+    } catch (e) { showToast("❌ خطأ في الاتصال"); }
+    finally { btn.disabled = false; btn.innerText = "إرسال للمطبعة"; }
+}
+
 function loadProductDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const type = urlParams.get('type');
@@ -95,22 +126,4 @@ function loadProductDetails() {
         document.getElementById('pOpt').innerHTML = product.opts.map(o => `<option value="${o}">${o}</option>`).join('');
     }
     updateBadge();
-}
-
-async function submitToSheet() {
-    const btn = document.getElementById('sheetBtn');
-    const name = document.getElementById('userName').value;
-    if (!name) return showToast("يرجى إدخال البيانات");
-    btn.disabled = true;
-    btn.innerText = "جارٍ الإرسال...";
-    try {
-        await fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify({ token: SECURITY_TOKEN, name: name, phone: document.getElementById('userPhone').value, details: cart })
-        });
-        showToast("✅ تم الإرسال بنجاح");
-        cart = []; syncCart(); toggleCart(false);
-    } catch (e) { showToast("❌ خطأ في الإرسال"); }
-    finally { btn.disabled = false; btn.innerText = "إرسال الطلب"; }
 }
