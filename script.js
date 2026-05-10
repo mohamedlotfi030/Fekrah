@@ -1,22 +1,16 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwGlYFY7fOGWTUK7dxy10ZNgSoWFNI8Ft0D4BDopR9lm7WgeasSznO5R4XGmaUUHTxr5A/exec';
 
-const config = {
-    'tshirt': { name: 'التيشيرتات', img: 'T-shirt.png', sizes: ['S','M','L','XL','XXL'], opts: ['DTF حراري','تطريز'] },
-    'bcard': { name: 'الكروت الشخصية', img: 'B-card.jpg', sizes: ['9x5 سم'], opts: ['كوشيه مط','سلوفان'] },
-    'mug': { name: 'المج الحراري', img: 'mug.jpg', sizes: ['ستاندرد'], opts: ['سحري','يد قلب'] },
-    'carsunshade': { name: 'شمسية سيارة', img: 'Car Sunshad.jpeg', sizes: ['مقاس حر'], opts: ['طباعة كاملة'] }
-};
-
 let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
 
-function updateBadge() {
-    const badge = document.getElementById('cartBadge');
-    if(badge) badge.innerText = cart.length;
+function toggleCart(show) {
+    const sidebar = document.getElementById('sidebar');
+    if(show) sidebar.classList.add('open');
+    else sidebar.classList.remove('open');
+    renderCart();
 }
 
-function toggleCart(show) {
-    document.getElementById('sidebar').classList.toggle('open', show);
-    if(show) renderCart();
+function updateBadge() {
+    document.getElementById('cartBadge').innerText = cart.length;
 }
 
 function renderCart() {
@@ -24,13 +18,13 @@ function renderCart() {
     const form = document.getElementById('checkoutFormContainer');
     
     if(cart.length === 0) {
-        list.innerHTML = '<p style="text-align:center;">السلة فارغة</p>';
+        list.innerHTML = '<p style="text-align:center; margin-top:20px;">السلة فارغة</p>';
         form.style.display = 'none';
     } else {
         list.innerHTML = cart.map((item, index) => `
-            <div class="cart-item">
+            <div style="background:#1a1a1a; padding:15px; border-radius:10px; margin-bottom:10px; display:flex; justify-content:space-between;">
                 <div><strong>${item.name}</strong><br><small>${item.size} | ${item.option}</small></div>
-                <span onclick="removeItem(${index})" style="color:red; cursor:pointer;">&times;</span>
+                <span onclick="removeItem(${index})" style="color:red; cursor:pointer; font-size:1.5rem;">&times;</span>
             </div>
         `).join('');
         form.style.display = 'block';
@@ -44,35 +38,32 @@ function removeItem(index) {
     renderCart();
 }
 
-// إرسال لجوجل شيت
 function submitToSheet() {
     const name = document.getElementById('userName').value;
     const phone = document.getElementById('userPhone').value;
-    if(!name || !phone) return alert("أدخل بياناتك");
+    if(!name || !phone) return alert("يرجى إكمال البيانات");
 
-    const btn = document.getElementById('sheetBtn');
-    btn.disabled = true; btn.innerText = "جاري الحفظ...";
-
+    document.getElementById('sheetBtn').innerText = "جاري الإرسال...";
+    
     fetch(WEB_APP_URL, {
         method: 'POST',
         mode: 'no-cors',
         body: JSON.stringify({ name, phone, notes: document.getElementById('userNotes').value, details: cart })
     }).then(() => {
-        alert("تم استلام طلبك بنجاح!");
+        alert("تم استلام طلبك بنجاح عبر الموقع!");
         clearCart();
     });
 }
 
-// إرسال للواتساب
 function submitToWhatsApp() {
     const name = document.getElementById('userName').value;
     const phone = document.getElementById('userPhone').value;
-    if(!name || !phone) return alert("أدخل بياناتك");
+    if(!name || !phone) return alert("يرجى إكمال البيانات");
 
     let msg = `*طلب جديد من الموقع*%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0A%0A*المنتجات:*%0A`;
     cart.forEach(i => msg += `- ${i.name} (${i.size} | ${i.option})%0A`);
 
-    window.open(`https://wa.me/201111049778?text=${msg}`, '_blank');
+    window.open(`https://wa.me/201111049778?text=${encodeURIComponent(msg)}`, '_blank');
     clearCart();
 }
 
@@ -81,4 +72,5 @@ function clearCart() {
     location.reload();
 }
 
+// تحديث العداد عند التحميل
 document.addEventListener('DOMContentLoaded', updateBadge);
