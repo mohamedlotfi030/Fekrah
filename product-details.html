@@ -1,71 +1,79 @@
-<script>
-    const productData = {
-        'tshirt': {
-            title: 'تيشيرت مخصص',
-            offerName: 'التيشيرتات',
-            images: ['T-shirt.png', 'T-shirt-1.png', 'T-shirt-2.png', 'T-shirt-3.png'],
-            sizes: ['سبعة', 'دائري', 'بولو']
-        },
-        'bcard': {
-            title: 'كروت شخصية',
-            offerName: 'الكروت الشخصية',
-            // تم تعديلها لتصبح .jpg و .png حسب ملفاتك في GitHub
-            images: ['B-card.jpg', 'B-card2.jpg', 'B-card3.png'],
-            sizes: ['وجه واحد', 'وجهين']
-        },
-        'rollup': {
-            title: 'رول أب إعلاني',
-            offerName: 'الرول أب',
-            images: ['roll-up.jpg', 'Roll-up-2.jpg', 'Roll-up-3.jpg'],
-            sizes: ['80x200 سم', '100x200 سم']
-        },
-        'mug': {
-            title: 'مج حراري',
-            offerName: 'المجات',
-            images: ['mug.jpg', 'Mug-2.jpg', 'Mug-3.jpg'],
-            sizes: ['عادي', 'يد قلب']
-        }
-    };
+<div class="product-options">
+    <h1 id="productTitle">اسم المنتج</h1>
+    
+    <div id="dynamic-offer" class="offer-banner">
+        </div>
 
+    <div class="order-form-container">
+        <form id="googleOrderForm">
+            <div class="input-group">
+                <label>اختر المقاس</label>
+                <select id="sizeSelect" name="size">
+                    </select>
+            </div>
+
+            <div class="input-group" id="printTypeGroup">
+                <label>نوع الطباعة</label>
+                <select id="printType" name="print_type">
+                    <option value="DTF">طباعة دي تي إف (DTF)</option>
+                    <option value="Sublimation">سبليميشن (Sublimation)</option>
+                    <option value="Vinyl">فينيل حراري</option>
+                    <option value="Embroidery">تطريز كمبيوتر</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>الكمية المطلوبة</label>
+                <input type="number" name="quantity" value="1" min="1">
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="whatsapp-order" onclick="sendWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> استفسار سريع
+                </button>
+                <button type="submit" class="submit-order" style="background:var(--primary-color); color:black; padding:15px; border-radius:8px; border:none; font-weight:bold; cursor:pointer;">
+                    تأكيد طلبك الآن
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // ربط الفورم بجوجل ابس سكريبت (استبدل الرابط برابطك)
+    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+    const form = document.getElementById('googleOrderForm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => alert('تم استلام طلبك بنجاح، سنتواصل معك قريباً!'))
+          .catch(error => console.error('Error!', error.message));
+    });
+
+    // تحديث خيارات المنتج بناءً على النوع
     function loadProduct() {
         const params = new URLSearchParams(window.location.search);
         const type = params.get('type') || 'tshirt';
         const data = productData[type];
 
-        if(!data) return;
-
         document.getElementById('productTitle').innerText = data.title;
-        document.getElementById('dynamic-offer').innerText = `لمعرفة العروض المقدمة على ${data.offerName}، يرجى التواصل عبر الواتساب.`;
         
-        // تحميل الصور
-        const mainImg = document.getElementById('mainProductImg');
-        mainImg.src = data.images[0];
-        
-        const thumbs = document.getElementById('imageThumbs');
-        thumbs.innerHTML = ''; // تنظيف الصور القديمة
-        data.images.forEach(img => {
-            const imgTag = document.createElement('img');
-            imgTag.src = img;
-            imgTag.onclick = () => mainImg.src = img;
-            thumbs.appendChild(imgTag);
-        });
+        // إظهار/إخفاء نوع الطباعة (للكروت والمجات مثلاً تختلف الأنواع)
+        const printGroup = document.getElementById('printTypeGroup');
+        if (type === 'bcard') {
+            printGroup.innerHTML = '<label>نوع الورق</label><select name="print_type"><option>كوشيه 350 جرام</option><option>فبريانو</option></select>';
+        }
 
         // تحميل المقاسات
-        const select = document.getElementById('sizeSelect');
-        select.innerHTML = '';
+        const sizeSelect = document.getElementById('sizeSelect');
+        sizeSelect.innerHTML = '';
         data.sizes.forEach(s => {
             const opt = document.createElement('option');
-            opt.value = s; opt.innerText = s;
-            select.appendChild(opt);
+            opt.value = s;
+            opt.innerText = s;
+            sizeSelect.appendChild(opt);
         });
     }
-
-    function sendWhatsApp() {
-        const title = document.getElementById('productTitle').innerText;
-        const size = document.getElementById('sizeSelect').value;
-        const msg = `أهلاً فكرة، أريد الاستفسار عن عروض ${title} مقاس ${size}`;
-        window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`);
-    }
-
     window.onload = loadProduct;
 </script>
