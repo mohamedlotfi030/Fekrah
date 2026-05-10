@@ -11,7 +11,7 @@
 
     <header class="header">
         <div class="logo">
-            <img src="logo.png.png" alt="فكرة">
+            <img src="logo.png" alt="فكرة">
         </div>
         <nav class="nav-links">
             <a href="index.html" class="active">الرئيسية</a>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="card">
-            <div class="card-img-container"><img src="rollup-1.jpg"></div>
+            <div class="card-img-container"><img src="roll-up.jpg"></div>
             <div class="card-details">
                 <h3>رول أب ستاند</h3>
                 <a href="product-details.html?type=rollup" class="btn">اطلب الآن</a>
@@ -97,12 +97,12 @@
         <div id="cartItemsList"></div>
         
         <div id="checkoutFormContainer" class="checkout-form" style="display:none;">
-            <input type="text" id="userName" placeholder="الاسم بالكامل">
-            <input type="tel" id="userPhone" placeholder="رقم الهاتف">
-            <textarea id="userNotes" placeholder="أي ملاحظات إضافية"></textarea>
+            <input type="text" id="userName" placeholder="الاسم بالكامل" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;">
+            <input type="tel" id="userPhone" placeholder="رقم الهاتف" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;">
+            <textarea id="userNotes" placeholder="أي ملاحظات إضافية" style="width:100%; padding:12px; font-size:1rem; margin:10px 0;"></textarea>
             <div class="order-btns">
-                <button onclick="submitToSheet()" id="sheetBtn" class="btn-sheet">عبر الموقع</button>
-                <button onclick="submitToWhatsApp()" class="btn-wa">عبر واتساب</button>
+                <button onclick="submitToSheet()" id="sheetBtn" class="btn">إرسال عبر الموقع</button>
+                <button onclick="submitToWhatsApp()" class="btn" style="background:#25d366; color:white;">إرسال عبر واتساب</button>
             </div>
         </div>
     </div>
