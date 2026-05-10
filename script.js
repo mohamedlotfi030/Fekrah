@@ -1,42 +1,45 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxinmklrPYvqyYQxf0zjnWalmXtyrlsA_c9JWqbHWJoJdRrohtLtcL1Geo208xG75aT/exec';
 
-// قاعدة البيانات المحدثة
 const config = {
     'tshirt': {
         name: 'تيشيرت قطن فاخر',
-        desc: 'تيشيرت قطني 100% عالي الجودة متوفر بجميع المقاسات والألوان مع طباعة DTF ثابتة.',
-        images: ['T-shirt.png', 'T-shirt-2.png', 'T-shirt-3.png'], // استبدلها بأسماء صورك المرفوعة
+        images: ['T-shirt.png', 'T-shirt-2.png', 'T-shirt-3.png'],
         sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', 'مقاس أطفال'],
-        opts: ['طباعة DTF حراري', 'تطريز كمبيوتر', 'فينيل حراري', 'بدون طباعة']
+        opts: ['طباعة DTF حراري', 'تطريز كمبيوتر', 'فينيل حراري']
+    },
+    'rollup': {
+        name: 'رول أب ستاند (Roll Up)',
+        images: ['rollup-1.jpg', 'rollup-2.jpg', 'rollup-3.jpg'],
+        sizes: [
+            '80 سم × 200 سم بنر', '85 سم × 200 سم بنر', '100 سم × 200 سم بنر', '120 سم × 200 سم بنر',
+            '80 سم × 200 سم جلوسي + لامنيشن', '85 سم × 200 سم جلوسي + لامنيشن', '100 سم × 200 سم جلوسي + لامنيشن', '120 سم × 200 سم جلوسي + لامنيشن'
+        ],
+        opts: ['ستاند مستورد عالي الجودة', 'ستاند ثقيل فاخر']
+    },
+    'xbanr': {
+        name: 'إكس بانر ستاند (X-Banner)',
+        images: ['x-banr.jpg', 'x-banr-2.jpg'],
+        sizes: ['60 سم × 160 سم', '80 سم × 180 سم'],
+        opts: ['طباعة بنر عالي الدقة', 'طباعة جلوسي مع لامنيشن']
     },
     'bcard': {
-        name: 'كروت شخصية (Business Card)',
-        desc: 'كروت شخصية مطبوعة وجهين كوشيه 350 جرام مع طبقة حماية.',
+        name: 'كروت شخصية',
         images: ['B-card.jpg', 'B-card-2.jpg'],
         sizes: ['9x5 سم (عادي)', '8.5x5.5 سم (مودرن)', 'كارت مربع'],
-        opts: ['كوشيه مط', 'سلوفان لامع', 'يو في موضعي (Spot UV)', 'كارت شفاف']
+        opts: ['كوشيه مط', 'سلوفان لامع', 'يو في موضعي (Spot UV)']
     },
     'mug': {
-        name: 'مج سيراميك حراري',
-        desc: 'أكواب سيراميك عالية الجودة تقبل الطباعة الحرارية بوضوح عالي.',
-        images: ['mug.jpg', 'mug-inner.jpg', 'mug-box.jpg'],
-        sizes: ['11 أونصة (عادي)', '15 أونصة (كبير)', 'فنجان قهوة'],
-        opts: ['مج أبيض سادة', 'مج سحري (يظهر عند الحرارة)', 'مج يد ملونة', 'مج ذهبي/فضي']
-    },
-    'carsunshade': {
-        name: 'شمسية سيارة مطبوعة',
-        desc: 'شمسية لحماية السيارة من الشمس مع إمكانية طباعة شعارك أو صورتك.',
-        images: ['Car Sunshad.jpeg', 'sunshade-2.jpg'],
-        sizes: ['مقاس صالون ستاندرد', 'مقاس SUV كبير'],
-        opts: ['طباعة وجه واحد', 'طباعة وجهين']
+        name: 'مج سيراميك',
+        images: ['mug.jpg', 'mug-2.jpg'],
+        sizes: ['11 أونصة (عادي)', '15 أونصة (كبير)'],
+        opts: ['مج أبيض سادة', 'مج سحري', 'يد قلب']
     }
-    // أضف باقي المنتجات (rollup, xbanr, banar, stand) بنفس الطريقة
 };
 
 let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
 let currentImgIndex = 0;
-let sliderInterval;
 
+// تحميل تفاصيل المنتج
 function loadProductDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const type = urlParams.get('type');
@@ -44,53 +47,51 @@ function loadProductDetails() {
 
     if (product) {
         document.getElementById('pTitle').innerText = product.name;
-        document.getElementById('pDesc').innerText = product.desc;
         document.getElementById('pImg').src = product.images[0];
-
-        // ملء المقاسات
+        
         const sizeSelect = document.getElementById('pSize');
         sizeSelect.innerHTML = product.sizes.map(s => `<option value="${s}">${s}</option>`).join('');
-
-        // ملء الخيارات
+        
         const optSelect = document.getElementById('pOpt');
         optSelect.innerHTML = product.opts.map(o => `<option value="${o}">${o}</option>`).join('');
 
-        // تشغيل سلايدر الصور التلقائي كل 4 ثوانٍ
         startSlider(product.images);
     }
     updateBadge();
 }
 
+// سلايدر الصور التلقائي
 function startSlider(images) {
     if (images.length < 2) return;
-    const imgElement = document.getElementById('pImg');
-    
-    sliderInterval = setInterval(() => {
-        imgElement.style.opacity = '0'; // تأثير التلاشي
+    setInterval(() => {
+        const imgElement = document.getElementById('pImg');
+        imgElement.style.opacity = '0';
         setTimeout(() => {
             currentImgIndex = (currentImgIndex + 1) % images.length;
             imgElement.src = images[currentImgIndex];
             imgElement.style.opacity = '1';
-        }, 600);
+        }, 500);
     }, 4000);
 }
 
+// إضافة للسلة
 function addToCart() {
     const urlParams = new URLSearchParams(window.location.search);
     const type = urlParams.get('type');
     const product = config[type];
 
+    if (!product) return;
+
     const newItem = {
         name: product.name,
         size: document.getElementById('pSize').value,
-        option: document.getElementById('pOpt').value,
-        image: product.images[0]
+        option: document.getElementById('pOpt').value
     };
 
     cart.push(newItem);
     localStorage.setItem('fekra_cart', JSON.stringify(cart));
-    alert('تمت إضافة المنتج للسلة بنجاح!');
     updateBadge();
+    alert('تمت إضافة ' + product.name + ' للسلة');
 }
 
 function updateBadge() {
@@ -98,4 +99,31 @@ function updateBadge() {
     if (badge) badge.innerText = cart.length;
 }
 
-// دمج دوال السلة (الواتساب والشيت) التي قمنا بها سابقاً في هذا الملف أيضاً ليعمل كل شيء
+// إرسال البيانات (الشيت والواتساب)
+function submitToSheet() {
+    const name = document.getElementById('userName').value;
+    const phone = document.getElementById('userPhone').value;
+    if(!name || !phone) return alert("يرجى إكمال البيانات");
+
+    fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ name, phone, notes: document.getElementById('userNotes').value, details: cart })
+    }).then(() => {
+        alert("تم استلام طلبك!");
+        clearCart();
+    });
+}
+
+function submitToWhatsApp() {
+    const name = document.getElementById('userName').value;
+    const phone = document.getElementById('userPhone').value;
+    let msg = `*طلب جديد من الموقع*%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0A%0A*المنتجات:*%0A`;
+    cart.forEach(i => msg += `- ${i.name} (${i.size})%0A`);
+    window.open(`https://wa.me/201111049778?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function clearCart() {
+    localStorage.removeItem('fekra_cart');
+    location.reload();
+}
