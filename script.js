@@ -31,8 +31,4 @@ function changeImage(option) {
 }
 
 // إضافة المنتج للسلة
-function add() {
-    let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
-    cart.push({
-        name: config[type].name,
-        size: document.get
+function add()
