@@ -1,128 +1,75 @@
 :root {
-    --neon-blue: #00d8ff;
-    --dark-bg: #000000;
-    --card-bg: #0f0f0f;
-    --transition: all 0.3s ease;
+    --primary-color: #00bcd4; /* لون لبني */
+    --dark-bg: #121212;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 body {
     background-color: var(--dark-bg);
-    font-family: 'Tajawal', sans-serif;
     color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    overflow-x: hidden;
 }
 
-header {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
+/* الهيدر الثابت */
+.main-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(18, 18, 18, 0.95);
+    z-index: 1000;
+    border-bottom: 1px solid #333;
 }
 
-nav {
-    max-width: 1300px; margin: 0 auto; padding: 0.8rem 2rem;
-    display: flex; justify-content: space-between; align-items: center;
+/* الكروت الغامرة */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px 5%;
 }
 
-.logo-img { height: 65px; mix-blend-mode: screen; filter: brightness(1.2); }
-
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a { color: white; text-decoration: none; font-weight: 700; transition: var(--transition); }
-.nav-links a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-
-.hero {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    background: url('Copilot_20260506_001042.png') no-repeat center center;
-    background-size: cover; background-attachment: fixed;
+.product-card {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-.hero-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+.product-card:hover {
+    transform: scale(1.03);
 }
 
-.hero-content { position: relative; z-index: 2; }
-.hero h1 { font-size: 3.8rem; font-weight: 900; text-shadow: 0 0 20px rgba(0,216,255,0.4); }
-
-.cta-button {
-    display: inline-block; padding: 1.2rem 3rem; border-radius: 50px;
-    background: linear-gradient(135deg, #0277bd, var(--neon-blue));
-    color: white; font-weight: 900; text-decoration: none; transition: var(--transition);
-    border: none; cursor: pointer;
+.overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    text-align: center;
 }
 
-.section-title { text-align: center; margin: 60px 0; }
-.section-title h2 { font-size: 2.8rem; font-weight: 900; position: relative; padding-top: 20px; }
-.section-title h2::before {
-    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 100px; height: 5px; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
+.order-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-top: 15px;
 }
 
-.services-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px;
+/* أزرار التواصل */
+.contact-footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 1.1rem;
 }
-
-.service-card {
-    background: var(--card-bg); border-radius: 20px; padding: 45px 25px;
-    text-align: center; text-decoration: none; color: white;
-    border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition);
-}
-
-.service-card:hover {
-    transform: translateY(-10px); border-color: var(--neon-blue);
-    box-shadow: 0 10px 40px rgba(0, 216, 255, 0.2); background: #151515;
-}
-
-.service-card i {
-    font-size: 3.5rem; color: var(--neon-blue); margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px var(--neon-blue));
-}
-
-/* تنسيق المعرض المطور */
-.lightbox {
-    display: none; position: fixed; z-index: 9999; top: 0; left: 0;
-    width: 100%; height: 100%; background: rgba(0,0,0,0.95);
-    align-items: center; justify-content: center;
-}
-.lightbox:target { display: flex; }
-
-.gallery-container {
-    display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 90%;
-}
-
-.main-img {
-    max-height: 70vh; border: 2px solid var(--neon-blue);
-    box-shadow: 0 0 30px rgba(0, 216, 255, 0.4); border-radius: 10px;
-}
-
-.thumbnails { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.thumbnails img {
-    width: 80px; height: 60px; object-fit: cover; border-radius: 5px;
-    cursor: pointer; border: 1px solid #444; transition: 0.3s;
-}
-.thumbnails img:hover { border-color: var(--neon-blue); transform: scale(1.1); box-shadow: 0 0 10px var(--neon-blue); }
-
-.lightbox .close { position: absolute; top: 30px; right: 50px; color: var(--neon-blue); font-size: 60px; text-decoration: none; }
-
-.form-container { max-width: 650px; margin: 0 auto 100px; background: #0f0f0f; padding: 3rem; border-radius: 25px; border: 1px solid #222; }
-.form-container input, .form-container textarea {
-    width: 100%; margin-bottom: 1.5rem; padding: 15px; background: #000;
-    border: 1px solid #333; color: white; border-radius: 10px; font-family: 'Tajawal';
-}
-
-footer { background-color: #050505; padding: 40px 20px 20px; border-top: 2px solid var(--neon-blue); text-align: center; }
-.footer-info { margin-bottom: 30px; }
-.footer-info p { color: #fff; font-size: 1.1rem; margin: 15px 0; display: flex; align-items: center; justify-content: center; gap: 15px; }
-.footer-info i { color: var(--neon-blue); font-size: 1.3rem; filter: drop-shadow(0 0 5px var(--neon-blue)); }
-.footer-bottom { border-top: 1px solid #222; padding-top: 20px; color: #666; font-size: 0.9rem; }
-
-.whatsapp-float {
-    position: fixed; bottom: 30px; left: 30px; background: #25d366;
-    width: 70px; height: 70px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; font-size: 35px; color: white;
-    text-decoration: none; z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-}
-
-@media (max-width: 992px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
