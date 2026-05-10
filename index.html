@@ -2,159 +2,55 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فكرة للدعاية والإعلان | الرئيسية</title>
+    <title>فكرة للدعاية والإعلان</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header class="header">
-        <div class="logo">
-            <img src="logo.png.png" alt="فكرة">
-        </div>
+        <div class="logo"><img src="logo.png.png"></div>
         <nav class="nav-links">
-            <a href="index.html" class="active">الرئيسية</a>
-            <a href="gallery.html">المعرض</a>
+            <a href="index.html">الرئيسية</a>
             <a href="#contact">تواصل معنا</a>
         </nav>
-        <div class="cart-icon" onclick="toggleCart(true)">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="badge" id="cartBadge">0</span>
+        <div class="cart-icon" onclick="toggleCart(true)" style="cursor:pointer;">
+            <i class="fas fa-shopping-cart"></i> <span id="cartBadge">0</span>
         </div>
     </header>
 
-    <section class="grid">
-        <div class="card"><img src="T-shirt.png"><h3>التيشيرتات</h3><a href="product-details.html?type=tshirt" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="B-card.jpg"><h3>الكروت الشخصية</h3><a href="product-details.html?type=bcard" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="roll-up.jpg"><h3>الرول أب</h3><a href="product-details.html?type=rollup" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="X-banr.png"><h3>اكس بانر</h3><a href="product-details.html?type=xbanr" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="mug.jpg"><h3>المج (الكوب)</h3><a href="product-details.html?type=mug" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="bloknote.png"><h3>البلوك نوت</h3><a href="product-details.html?type=bloknote" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="pop-up-counter.png"><h3>البوب أب كونتر</h3><a href="product-details.html?type=popup" class="btn">اطلب الآن</a></div>
-        <div class="card"><img src="banar.png"><h3>البانر</h3><a href="product-details.html?type=banar" class="btn">اطلب الآن</a></div>
-    </section>
+    <section class="grid" id="mainGrid">
+        </section>
 
     <section id="contact" class="contact-sec">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h2 style="color: var(--primary); font-size: 2.5rem;">تواصل معنا</h2>
-            <p style="color: #888;">وكالة فكرة للدعاية والإعلان - حلوان</p>
-        </div>
-        
+        <h2 style="text-align:center; color:var(--primary);">تواصل معنا</h2>
         <div class="contact-grid">
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>العنوان</h3>
-                <p>44 شارع محمود خاطر - حلوان - القاهرة</p>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <h3>رقم التواصل</h3>
-                <p dir="ltr">01275209778</p>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <h3>البريد الإلكتروني</h3>
-                <p>Fekrah_marketing@outlook.com</p>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="https://wa.me/201111049778" class="btn" style="background:#25d366; color:white; font-size: 1.2rem; padding: 15px 40px;">
-                <i class="fab fa-whatsapp"></i> تواصل عبر واتساب مباشر
-            </a>
+            <div class="contact-item"><h3>العنوان</h3><p>44 شارع محمود خاطر - حلوان</p></div>
+            <div class="contact-item"><h3>الهاتف</h3><p>01275209778</p></div>
         </div>
     </section>
 
     <div id="sidebar" class="cart-sidebar">
-        <div class="cart-sidebar-header">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <h3>سلة الطلبات</h3>
-            <span onclick="toggleCart(false)" style="cursor:pointer; font-size:1.5rem;">&times;</span>
+            <span onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem;">&times;</span>
         </div>
-        <div id="cartItemsList" class="cart-items-container">
+        <div id="cartItemsList"></div>
+        
+        <div id="checkoutFormContainer" style="display:none; margin-top:20px; border-top:1px solid #333; pt:20px;">
+            <input type="text" id="userName" placeholder="الاسم بالكامل">
+            <input type="tel" id="userPhone" placeholder="رقم الهاتف">
+            <textarea id="userNotes" placeholder="ملاحظات الطلب"></textarea>
+            
+            <div style="display:flex; gap:10px;">
+                <button onclick="submitToSheet()" id="sheetBtn" class="btn-order" style="background:var(--primary); color:black;">عبر الموقع</button>
+                <button onclick="submitToWhatsApp()" class="btn-order" style="background:#25d366; color:white;">عبر واتساب</button>
             </div>
-        <div id="checkoutFormContainer" class="checkout-form">
-            <h4 style="margin-top:20px; color:var(--primary);">بيانات الشحن والتواصل</h4>
-            <form id="finalOrderForm">
-                <input type="text" id="userName" placeholder="الاسم بالكامل" required>
-                <input type="tel" id="userPhone" placeholder="رقم الهاتف" required>
-                <textarea id="userNotes" placeholder="ملاحظات الطلب"></textarea>
-                <button type="submit" id="submitBtn" class="btn-order">إرسال الطلب الآن</button>
-            </form>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 30px; border-top: 1px solid #222; color: #666;">
-        <p>&copy; 2026 فكرة للدعاية والإعلان. جميع الحقوق محفوظة.</p>
-    </footer>
+    <a href="https://wa.me/201111049778" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
 
     <script src="script.js"></script>
-    <script>
-        // رابط الـ Web App الخاص بك
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwGlYFY7fOGWTUK7dxy10ZNgSoWFNI8Ft0D4BDopR9lm7WgeasSznO5R4XGmaUUHTxr5A/exec';
-
-        // وظائف السلة
-        function toggleCart(show) {
-            document.getElementById('sidebar').classList.toggle('open', show);
-            if(show) renderCart();
-        }
-
-        function renderCart() {
-            let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
-            const list = document.getElementById('cartItemsList');
-            const form = document.getElementById('checkoutFormContainer');
-            
-            if(cart.length === 0) {
-                list.innerHTML = '<p style="text-align:center; padding:20px;">السلة فارغة</p>';
-                form.style.display = 'none';
-            } else {
-                list.innerHTML = cart.map((item, index) => `
-                    <div class="cart-item">
-                        <div style="display:flex; justify-content:space-between;">
-                            <strong>${item.name}</strong>
-                            <span onclick="removeItem(${index})" style="color:red; cursor:pointer;">&times;</span>
-                        </div>
-                        <small>مقاس: ${item.size} | نوع: ${item.opt || item.option}</small>
-                    </div>
-                `).join('');
-                form.style.display = 'block';
-            }
-            document.getElementById('cartBadge').innerText = cart.length;
-        }
-
-        function removeItem(index) {
-            let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
-            cart.splice(index, 1);
-            localStorage.setItem('fekra_cart', JSON.stringify(cart));
-            renderCart();
-        }
-
-        // إرسال الطلب
-        document.getElementById('finalOrderForm').onsubmit = function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true; btn.innerText = "جاري الإرسال...";
-
-            const orderData = {
-                name: document.getElementById('userName').value,
-                phone: document.getElementById('userPhone').value,
-                notes: document.getElementById('userNotes').value,
-                details: JSON.parse(localStorage.getItem('fekra_cart'))
-            };
-
-            fetch(WEB_APP_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(orderData)
-            }).then(() => {
-                alert('تم استلام طلبك بنجاح! شكراً لتعاملك مع فكرة.');
-                localStorage.removeItem('fekra_cart');
-                location.reload();
-            });
-        };
-
-        // تحديث العداد عند الفتح
-        renderCart();
-    </script>
 </body>
 </html>
