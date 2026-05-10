@@ -1,125 +1,17 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمال فكرة | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* تنسيقات خاصة بصفحة المعرض */
-        .gallery-header {
-            text-align: center;
-            padding: 60px 5%;
-            background: linear-gradient(to bottom, #1a1a1a, #121212);
-        }
-
-        .gallery-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 0 5% 50px 5%;
-        }
-
-        .gallery-item {
-            background: #1e1e1e;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid #333;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-color);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-bottom: 1px solid #333;
-        }
-
-        .gallery-info {
-            padding: 20px;
-        }
-
-        .gallery-info h4 {
-            margin: 0;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .gallery-info p {
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        /* زر العودة للرئيسية */
-        .back-home {
-            display: inline-block;
-            margin-top: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-    <header class="main-header">
-        <div class="logo">
-            <img src="logo.png.png" alt="فكرة" style="max-height: 50px;">
+<section class="gallery-section">
+    <h2 class="section-title">معرض أعمال فكرة</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="T-shirt.png" alt="تيشيرت منفذ">
+            <div class="item-desc">طباعة دي تي إف احترافية</div>
         </div>
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="gallery.html" class="active">المعرض</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="gallery-header">
-        <h1>معرض أعمالنا</h1>
-        <p>شاهد جودة تنفيذ "فكرة" على أرض الواقع</p>
-        <a href="index.html" class="back-home"><i class="fas fa-arrow-right"></i> العودة للمتجر</a>
+        <div class="gallery-item">
+            <img src="B-card.jpg" alt="كروت شخصية">
+            <div class="item-desc">كروت شخصية خامات فاخرة</div>
+        </div>
+        <div class="gallery-item">
+            <img src="roll-up.jpg" alt="رول أب">
+            <div class="item-desc">رول أب إعلاني للمعارض</div>
+        </div>
     </div>
-
-    <section class="gallery-grid">
-        
-        <div class="gallery-item">
-            <img src="T-shirt.png" alt="Rhythm Express T-shirt">
-            <div class="gallery-info">
-                <h4>تيشيرت Rhythm Express</h4>
-                <p>طباعة DTF احترافية - تنفيذ فكرة</p>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="B-card.jpg" alt="Business Cards Design">
-            <div class="gallery-info">
-                <h4>هوية كروت شخصية</h4>
-                <p>ورق فبريانو فاخر - مطبوعات ورقية</p>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="roll-up.jpg" alt="Rollup Display">
-            <div class="gallery-info">
-                <h4>رول أب إعلاني</h4>
-                <p>ستاند ألومنيوم - تجهيز معارض</p>
-            </div>
-        </div>
-
-        </section>
-
-</body>
-</html>
+</section>
