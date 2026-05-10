@@ -59,4 +59,96 @@ body {
     padding: 14px 35px; 
     background: var(--primary);
     color: black; 
-    text-decoration
+    text-decoration: none; 
+    border-radius: 50px;
+    font-weight: bold; 
+    margin: 15px 0; 
+    border: none; 
+    cursor: pointer;
+    font-size: 1rem; 
+    transition: 0.3s ease;
+}
+.btn:hover {
+    background: #00a0b8; 
+    transform: scale(1.05);
+}
+
+/* تأثيرات الصور */
+#pImg { 
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    cursor: zoom-in; width: 100%; border-radius: 15px; 
+}
+#pImg:hover { transform: scale(1.05); }
+#pImg.fade { opacity: 0; }
+
+/* الشريط الجانبي للسلة (Sidebar) */
+.cart-sidebar {
+    position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
+    background: #161616; z-index: 3000; transition: 0.4s; padding: 25px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5); border-left: 1px solid var(--primary);
+}
+.cart-sidebar.open { right: 0; }
+.cart-item { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 0; border-bottom: 1px solid #333; 
+}
+.cart-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+
+/* التنبيه الصغير (Toast) */
+.toast {
+    position: fixed; bottom: 20px; right: 20px; background: var(--primary);
+    color: black; padding: 12px 25px; border-radius: 8px; font-weight: bold;
+    display: none; z-index: 4000; animation: fadeInUp 0.5s;
+}
+.toast::before {
+    content: "🛒 "; 
+    margin-left: 5px;
+}
+
+@keyframes fadeInUp { 
+    from { opacity: 0; transform: translateY(20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* قسم تواصل معنا */
+.contact-sec { 
+    padding: 60px 10%; 
+    background: #000; 
+    border-top: 1px solid #222; 
+}
+.contact-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 30px; 
+    text-align: right; 
+}
+.contact-item { 
+    padding: 15px; 
+    background: #111; 
+    border-radius: 10px; 
+}
+.contact-item h3 { color: var(--primary); margin-bottom: 10px; }
+.contact-item p { margin: 0; }
+
+/* رسائل الإرسال */
+.status-msg {
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    display: none;
+}
+.status-msg.sending { background: #ffc107; color: #000; }
+.status-msg.success { background: #28a745; color: #fff; }
+
+/* زر واتساب عائم */
+.whatsapp-float { 
+    position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; 
+    width: 60px; height: 60px; border-radius: 50%; display: flex; 
+    justify-content: center; align-items: center; font-size: 30px; z-index: 1000; 
+    transition: 0.3s ease;
+}
+.whatsapp-float:hover { 
+    transform: scale(1.1); 
+    background: #20c65a; 
+}
