@@ -3,53 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فكرة للدعاية والإعلان</title>
-    <link rel="stylesheet" href="style.css">
+    <title>فكرة للدعاية والإعلان | حلوان</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
     <header class="header">
-        <div class="logo"><img src="logo-main.png" onclick="location.href='index.html'"></div>
+        <div class="logo">
+            <img src="assets/images/logo-main.png" alt="فكرة" style="height: 45px; cursor: pointer;" onclick="location.reload()">
+        </div>
         
-        <nav class="nav-links">
-            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-            <a href="tel:01275209778"><i class="fas fa-headset"></i> اتصل بنا</a>
-            <div onclick="toggleCart(true)" style="cursor:pointer; position:relative;">
-                <i class="fas fa-shopping-cart" style="font-size:1.4rem; color:var(--primary);"></i>
-                <span id="cartBadge" style="position:absolute; top:-10px; right:-10px; background:white; color:black; border-radius:50%; padding:2px 6px; font-size:0.7rem; font-weight:bold; display:none;">0</span>
+        <nav class="nav-group">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
+            <a href="tel:01275209778" class="nav-link"><i class="fas fa-phone-alt"></i> <span>اتصل بنا</span></a>
+            
+            <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
             </div>
         </nav>
     </header>
 
-    <section class="grid">
-        <div class="card"><div class="card-img-container"><img src="tshirt-main.png"></div><h3>تيشيرتات قطنية</h3><a href="product-details.html?type=tshirt" class="btn">اطلب الآن</a></div>
-        <div class="card"><div class="card-img-container"><img src="rollup-1.jpg"></div><h3>رول أب ستاند</h3><a href="product-details.html?type=rollup" class="btn">اطلب الآن</a></div>
-        <div class="card"><div class="card-img-container"><img src="business-card-1.jpg"></div><h3>كروت شخصية</h3><a href="product-details.html?type=bcard" class="btn">اطلب الآن</a></div>
-        <div class="card"><div class="card-img-container"><img src="x-banner-1.jpg"></div><h3>إكس بانر</h3><a href="product-details.html?type=xbanr" class="btn">اطلب الآن</a></div>
-        <div class="card"><div class="card-img-container"><img src="mug-main.jpg"></div><h3>المج الحراري</h3><a href="product-details.html?type=mug" class="btn">اطلب الآن</a></div>
-        <div class="card"><div class="card-img-container"><img src="bloknote.jpg"></div><h3>بلوك نوت</h3><a href="product-details.html?type=bloknote" class="btn">اطلب الآن</a></div>
-        <div class="card"><div class="card-img-container"><img src="pop-up-counter.png"></div><h3>بوب أب كاونتر</h3><a href="product-details.html?type=popup" class="btn">اطلب الآن</a></div>
-    </section>
+    <main id="productsGrid" class="grid">
+        </main>
 
     <footer class="fixed-footer">
         <a href="tel:01275209778" class="footer-item"><i class="fas fa-phone-alt"></i><span>اتصال</span></a>
         <a href="https://wa.me/201275209778" class="footer-item"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
         <a href="mailto:fekra.adv.eg@gmail.com" class="footer-item"><i class="fas fa-envelope"></i><span>الإيميل</span></a>
-        <a href="https://maps.app.goo.gl/YourGoogleMapsLink" class="footer-item"><i class="fas fa-map-marker-alt"></i><span>الموقع</span></a>
+        <a href="https://maps.google.com/?q=Helwan" target="_blank" class="footer-item"><i class="fas fa-map-marker-alt"></i><span>حلوان</span></a>
     </footer>
 
-    <div id="sidebar" class="cart-sidebar">
-        <div style="display:flex; justify-content:space-between; align-items:center;"><h3>السلة</h3><span onclick="toggleCart(false)" style="font-size:2rem; cursor:pointer;">×</span></div>
-        <div id="cartItemsList"></div>
-        <div id="checkoutFormContainer" style="display:none;">
-            <input type="text" id="userName" placeholder="الاسم">
-            <input type="tel" id="userPhone" placeholder="الهاتف">
-            <button id="sheetBtn" onclick="submitToSheet()" class="btn">إرسال للمطبعة</button>
-            <button onclick="sendToWhatsApp()" class="btn" style="background:#25d366; color:white;">اطلب عبر واتساب</button>
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h3><i class="fas fa-shopping-basket"></i> سلة الطلبات</h3>
+            <span onclick="UI.toggleCart(false)" style="font-size: 2rem; cursor: pointer;">&times;</span>
+        </div>
+        
+        <div id="cartItemsList" class="drawer-body">
+            </div>
+
+        <div class="drawer-footer">
+            <button onclick="window.location.href='cart.html'" class="btn-main" style="width: 100%;">إتمام الطلب</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
-    <script>window.onload = () => { syncCart(); };</script>
+    <script src="js/products.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/api.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. تهيئة السلة
+            Cart.init();
+
+            // 2. رندرة المنتجات من قاعدة البيانات
+            const grid = document.getElementById('productsGrid');
+            Object.keys(Products).forEach(key => {
+                const p = Products[key];
+                grid.innerHTML += `
+                    <div class="card">
+                        <div class="card-img-container">
+                            <img src="${p.images[0]}" alt="${p.name}">
+                        </div>
+                        <h3>${p.name}</h3>
+                        <a href="product.html?type=${key}" class="btn-main">اطلب الآن</a>
+                    </div>
+                `;
+            });
+        });
+    </script>
 </body>
 </html>
