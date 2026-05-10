@@ -3,93 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فكرة للدعاية والإعلان | الرئيسية</title>
+    <title>فكرة للدعاية والإعلان</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
-        <div class="logo"><img src="logo-main.png" alt="فكرة"></div>
-        <nav class="nav-links">
-            <a href="index.html" class="active">الرئيسية</a>
-            <a href="#contact">تواصل معنا</a>
-        </nav>
-        <div class="cart-icon" onclick="toggleCart(true)">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="badge" id="cartBadge">0</span>
+        <div class="logo"><img src="logo-main.png"></div>
+        <div class="cart-icon" onclick="toggleCart(true)" style="cursor:pointer; position:relative;">
+            <i class="fas fa-shopping-cart" style="font-size:1.5rem;"></i>
+            <span id="cartBadge" class="badge" style="position:absolute; top:-10px; right:-10px; background:var(--primary); color:black; border-radius:50%; padding:2px 7px; font-size:0.8rem; font-weight:bold; display:none;">0</span>
         </div>
     </header>
 
     <section class="grid">
         <div class="card">
             <div class="card-img-container"><img src="tshirt-main.png"></div>
-            <div class="card-details">
+            <div class="card-details" style="padding:20px; text-align:center;">
                 <h3>تيشيرتات</h3>
-                <a href="product-details.html?type=tshirt" class="btn">اطلب الآن</a>
+                <a href="product-details.html?type=tshirt" class="btn" style="text-decoration:none; display:block;">اطلب الآن</a>
             </div>
         </div>
         <div class="card">
             <div class="card-img-container"><img src="rollup-1.jpg"></div>
-            <div class="card-details">
-                <h3>رول أب ستاند</h3>
-                <a href="product-details.html?type=rollup" class="btn">اطلب الآن</a>
+            <div class="card-details" style="padding:20px; text-align:center;">
+                <h3>رول أب</h3>
+                <a href="product-details.html?type=rollup" class="btn" style="text-decoration:none; display:block;">اطلب الآن</a>
             </div>
         </div>
-        <div class="card">
-            <div class="card-img-container"><img src="x-banner-1.jpg"></div>
-            <div class="card-details">
-                <h3>إكس بانر</h3>
-                <a href="product-details.html?type=xbanr" class="btn">اطلب الآن</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img-container"><img src="business-card-1.jpg"></div>
-            <div class="card-details">
-                <h3>كروت شخصية</h3>
-                <a href="product-details.html?type=bcard" class="btn">اطلب الآن</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img-container"><img src="mug-main.jpg"></div>
-            <div class="card-details">
-                <h3>المج الحراري</h3>
-                <a href="product-details.html?type=mug" class="btn">اطلب الآن</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img-container"><img src="bloknote.jpg"></div>
-            <div class="card-details">
-                <h3>بلوك نوت</h3>
-                <a href="product-details.html?type=bloknote" class="btn">اطلب الآن</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <div id="sidebar" class="cart-sidebar">
-        <div class="sidebar-header">
-            <h3>سلة الطلبات</h3>
-            <span onclick="toggleCart(false)" class="close-btn">&times;</span>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>سلة الطلبات</h2>
+            <span onclick="toggleCart(false)" style="cursor:pointer; font-size:2rem;">&times;</span>
         </div>
         <div id="cartItemsList"></div>
-        <div id="checkoutFormContainer" class="checkout-form" style="display:none;">
-            <input type="text" id="userName" placeholder="الاسم بالكامل">
+        <div id="checkoutFormContainer" style="display:none;">
+            <input type="text" id="userName" placeholder="الاسم الكامل">
             <input type="tel" id="userPhone" placeholder="رقم الهاتف">
-            <textarea id="userNotes" placeholder="عنوان التوصيل أو ملاحظات عامة"></textarea>
-            <div class="order-btns">
-                <button onclick="submitToSheet()" id="sheetBtn" class="btn-sheet">إرسال الطلب</button>
-                <button onclick="submitToWhatsApp()" class="btn-wa"><i class="fab fa-whatsapp"></i> واتساب</button>
-            </div>
+            <textarea id="userNotes" placeholder="عنوانك أو ملاحظات إضافية"></textarea>
+            <button id="sheetBtn" onclick="submitToSheet()" class="btn">إرسال الطلب</button>
+            <button onclick="submitToWhatsApp()" class="btn" style="background:#25d366; margin-top:10px;"><i class="fab fa-whatsapp"></i> واتساب</button>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        // فتح السلة تلقائياً إذا جاء المستخدم من صفحة المنتج
-        window.onload = () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('openCart')) toggleCart(true);
-            updateBadge();
-        };
-    </script>
+    <script>window.onload = updateBadge;</script>
 </body>
 </html>
