@@ -2,8 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فكرة للدعاية والإعلان | الرئيسية</title>
+    <title>فكرة للدعاية والإعلان - المتجر</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -12,56 +11,111 @@
     <header class="main-header">
         <div class="logo"><img src="logo.png.png" alt="فكرة"></div>
         <nav class="nav-menu">
-            <ul>
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="gallery.html">المعرض</a></li>
-                <li><a href="#contact">تواصل معنا</a></li>
+            <ul style="display: flex; gap: 20px; list-style: none;">
+                <li><a href="index.html" style="color:var(--primary); text-decoration:none;">الرئيسية</a></li>
+                <li><a href="gallery.html" style="color:white; text-decoration:none;">المعرض</a></li>
             </ul>
         </nav>
-        <div class="header-actions">
-            <a href="tel:+201000000000" style="background:var(--primary); color:black; padding:8px 15px; border-radius:20px; text-decoration:none; font-weight:bold; font-size:0.8rem;">اتصل بنا</a>
+        <div class="cart-icon" onclick="toggleCart(true)">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cartCount">0</span>
         </div>
     </header>
 
     <section class="products-grid">
         <div class="product-card">
-            <img src="T-shirt.png" alt="تيشيرت">
-            <div class="card-content">
-                <h3>تيشيرت مخصص</h3>
-                <a href="product-details.html?type=tshirt" class="order-btn">اطلب الآن</a>
-            </div>
+            <img src="T-shirt.png"><h3>تيشيرتات مخصصة</h3>
+            <a href="product-details.html?type=tshirt" class="btn-order">تخصيص الطلب</a>
         </div>
         <div class="product-card">
-            <img src="B-card.jpg" alt="كروت">
-            <div class="card-content">
-                <h3>كروت شخصية</h3>
-                <a href="product-details.html?type=bcard" class="order-btn">اطلب الآن</a>
-            </div>
+            <img src="B-card.jpg"><h3>كروت شخصية</h3>
+            <a href="product-details.html?type=bcard" class="btn-order">تخصيص الطلب</a>
         </div>
         <div class="product-card">
-            <img src="roll-up.jpg" alt="رول اب">
-            <div class="card-content">
-                <h3>رول أب إعلاني</h3>
-                <a href="product-details.html?type=rollup" class="order-btn">اطلب الآن</a>
-            </div>
+            <img src="roll-up.jpg"><h3>رول أب إعلاني</h3>
+            <a href="product-details.html?type=rollup" class="btn-order">تخصيص الطلب</a>
         </div>
         <div class="product-card">
-            <img src="mug.jpg" alt="مج">
-            <div class="card-content">
-                <h3>مج حراري</h3>
-                <a href="product-details.html?type=mug" class="order-btn">اطلب الآن</a>
-            </div>
+            <img src="X-banr.png"><h3>اكس بانر</h3>
+            <a href="product-details.html?type=xbanr" class="btn-order">تخصيص الطلب</a>
+        </div>
+        <div class="product-card">
+            <img src="mug.jpg"><h3>مج (كوب)</h3>
+            <a href="product-details.html?type=mug" class="btn-order">تخصيص الطلب</a>
+        </div>
+        <div class="product-card">
+            <img src="bloknote.png"><h3>بلوك نوت</h3>
+            <a href="product-details.html?type=bloknote" class="btn-order">تخصيص الطلب</a>
+        </div>
+        <div class="product-card">
+            <img src="pop-up-counter.png"><h3>بوب أب كونتر</h3>
+            <a href="product-details.html?type=popup" class="btn-order">تخصيص الطلب</a>
+        </div>
+        <div class="product-card">
+            <img src="banar.png"><h3>بانر (مقاس حر)</h3>
+            <a href="product-details.html?type=banar" class="btn-order">تخصيص الطلب</a>
         </div>
     </section>
 
-    <footer id="contact" class="contact-section">
-        <h2>تواصل معنا</h2>
-        <div class="contact-links">
-            <a href="tel:+201000000000"><i class="fas fa-phone"></i>اتصال</a>
-            <a href="https://wa.me/201000000000"><i class="fab fa-whatsapp"></i>واتساب</a>
-            <a href="mailto:info@fekra.com"><i class="fas fa-envelope"></i>إيميل</a>
+    <div id="cartModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="text-align: center; color: var(--primary);">سلة طلباتك</h2>
+            <div id="cartList"></div>
+            <hr style="border: 0.5px solid #333; margin: 20px 0;">
+            <h3>بيانات العميل</h3>
+            <p style="font-size: 0.8rem; color: #888;">يرجى إدخال البيانات التالية وسيتم التواصل معك في أسرع وقت</p>
+            <form id="checkoutForm">
+                <input type="text" id="userName" placeholder="الاسم بالكامل" required>
+                <input type="tel" id="userPhone" placeholder="رقم الهاتف للتواصل" required>
+                <textarea id="userNotes" placeholder="ملاحظات إضافية بخصوص التصميم أو التنفيذ"></textarea>
+                <button type="submit" class="btn-order" style="width: 100%; background: white; color: black;">إرسال الطلب الآن</button>
+                <button type="button" onclick="toggleCart(false)" style="background:none; color:white; border:none; width:100%; cursor:pointer;">العودة للتسوق</button>
+            </form>
         </div>
-    </footer>
+    </div>
 
+    <script>
+        let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
+        updateUI();
+
+        function toggleCart(show) { document.getElementById('cartModal').style.display = show ? 'flex' : 'none'; if(show) renderCart(); }
+
+        function renderCart() {
+            const list = document.getElementById('cartList');
+            if(cart.length === 0) { list.innerHTML = "<p style='text-align:center;'>السلة فارغة حالياً</p>"; return; }
+            list.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <small>${item.size} - ${item.option}</small>
+                    </div>
+                    <button onclick="removeItem(${index})" style="background:none; border:none; color:#ff3b30; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function removeItem(i) { cart.splice(i, 1); updateUI(); renderCart(); }
+
+        function updateUI() {
+            localStorage.setItem('fekra_cart', JSON.stringify(cart));
+            document.getElementById('cartCount').innerText = cart.length;
+        }
+
+        document.getElementById('checkoutForm').onsubmit = function(e) {
+            e.preventDefault();
+            const orderData = {
+                customer: document.getElementById('userName').value,
+                phone: document.getElementById('userPhone').value,
+                notes: document.getElementById('userNotes').value,
+                items: cart
+            };
+            // استبدل بالرابط الخاص بك من Google Apps Script
+            fetch('YOUR_GOOGLE_SCRIPT_URL', { method: 'POST', body: JSON.stringify(orderData) })
+            .then(() => {
+                alert('تم استلام طلبك بنجاح، سيقوم فريق فكرة بالتواصل معك قريباً.');
+                cart = []; updateUI(); toggleCart(false);
+            });
+        };
+    </script>
 </body>
 </html>
