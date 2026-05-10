@@ -1,37 +1,39 @@
 :root { --primary: #00bcd4; --dark: #000; --accent: #25d366; }
-body { background: var(--dark); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; direction: rtl; overflow-x: hidden; }
+body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; direction: rtl; overflow-x: hidden; }
 
-/* Header */
-.header { position: fixed; top: 0; width: 100%; height: 75px; background: rgba(0,0,0,0.95); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; border-bottom: 2px solid #1a1a1a; box-sizing: border-box; }
-.logo img { height: 45px; cursor: pointer; }
+/* Header المطور */
+.header { position: fixed; top: 0; width: 100%; height: 75px; background: rgba(0,0,0,0.95); display: flex; justify-content: space-between; align-items: center; padding: 0 4%; z-index: 1000; border-bottom: 2px solid #1a1a1a; box-sizing: border-box; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { color: white; text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
 
-/* Product Grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; padding: 120px 8% 150px; }
-.card { background: #111; border-radius: 25px; overflow: hidden; border: 1px solid #222; text-align: center; transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-.card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0, 188, 212, 0.2); }
-.card-img-container { background: white; height: 250px; display: flex; justify-content: center; align-items: center; padding: 20px; }
-.card-img-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.card h3 { margin: 20px 0; font-size: 1.3rem; font-weight: bold; }
+/* Grid Cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 110px 6% 180px; }
+.card { background: #111; border-radius: 20px; overflow: hidden; border: 1px solid #222; text-align: center; }
+.card-img-container { background: white; height: 220px; display: flex; justify-content: center; align-items: center; padding: 15px; }
+.card-img-container img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-/* تحسين الأزرار */
-.btn { background: var(--primary); color: black; border: none; padding: 15px 30px; border-radius: 15px; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-decoration: none; display: block; width: 85%; margin: 0 auto 20px; transition: 0.3s; }
-.btn:hover { filter: brightness(1.2); transform: scale(1.02); }
-.whatsapp-btn { background: var(--accent); color: white; margin-top: 10px; }
+/* زر اطلب الآن الكبير */
+.btn { background: var(--primary); color: black; border: none; padding: 15px; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-decoration: none; display: block; width: 85%; margin: 0 auto 15px; text-align: center; }
 
-/* Product Details Page */
-.product-layout { display: flex; flex-wrap: wrap; gap: 40px; padding: 130px 8% 50px; align-items: center; }
-.product-gallery { flex: 1; min-width: 320px; background: white; padding: 30px; border-radius: 30px; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(255,255,255,0.1); }
-.product-gallery img { max-width: 100%; max-height: 400px; }
-.product-options { flex: 1; min-width: 320px; background: #0a0a0a; padding: 40px; border-radius: 30px; border: 1px solid #222; }
-.product-options h1 { color: var(--primary); font-size: 2.2rem; margin-bottom: 25px; }
+/* شريط التواصل السفلي المثبت */
+.fixed-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95); display: flex; justify-content: space-around; align-items: center; padding: 12px 0; z-index: 3000; border-top: 1px solid var(--primary); backdrop-filter: blur(10px); }
+.footer-item { color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.75rem; flex: 1; }
+.footer-item i { color: var(--primary); font-size: 1.3rem; }
 
-/* Sidebar & Forms */
-.cart-sidebar { position: fixed; top: 0; right: -100%; width: 400px; height: 100%; background: #050505; z-index: 2000; transition: 0.4s; padding: 30px; display: flex; flex-direction: column; border-left: 3px solid var(--primary); }
+/* استجابة الموبايل */
+@media (max-width: 600px) {
+    .nav-links { gap: 12px; }
+    .nav-links a { font-size: 0.8rem; }
+    .logo img { height: 35px; }
+    .grid { padding-bottom: 200px; }
+}
+
+/* Sidebar */
+.cart-sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100%; background: #050505; z-index: 4000; transition: 0.4s; padding: 25px; border-left: 2px solid var(--primary); box-sizing: border-box; }
 .cart-sidebar.open { right: 0; }
-input, select, textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #151515; border: 1px solid #333; color: white; border-radius: 12px; font-size: 1rem; }
+input { width: 100%; padding: 12px; margin-bottom: 10px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; }
 
-/* Floating Footer */
-.contact-footer { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 3000; width: 95%; justify-content: center; }
-.contact-card { background: rgba(20, 20, 20, 0.9); border: 1px solid var(--primary); padding: 12px 20px; border-radius: 50px; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-
-@media (max-width: 768px) { .cart-sidebar { width: 100%; } .grid { padding: 100px 5% 150px; } .product-layout { padding-top: 100px; } }
+/* Toast */
+.toast-msg { position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%); background: var(--primary); color: black; padding: 12px 30px; border-radius: 50px; font-weight: bold; transition: 0.5s; z-index: 5000; }
+.toast-msg.show { bottom: 90px; }
