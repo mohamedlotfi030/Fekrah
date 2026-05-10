@@ -2,64 +2,143 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تخصيص المنتج | فكرة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تخصيص المنتج | فكرة للدعاية والإعلان</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body style="padding-top: 100px;">
-    <header class="main-header">
-        <div class="logo"><img src="logo.png.png"></div>
-        <nav><a href="index.html" style="color:white; text-decoration:none;">العودة للمتجر</a></nav>
+
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="logo.png.png" alt="فكرة"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="gallery.html">المعرض</a>
+        </nav>
+        <div class="cart-icon" onclick="toggleCart(true)">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge" id="cartBadge">0</span>
+        </div>
     </header>
 
-    <div style="display: flex; gap: 40px; padding: 0 10%; flex-wrap: wrap;">
-        <div style="flex: 1;"><img id="mainImg" src="" style="width: 100%; border-radius: 20px; border: 1px solid #333;"></div>
-        <div style="flex: 1;">
-            <h1 id="pTitle" style="color: var(--primary);"></h1>
-            <div style="background: #161616; padding: 25px; border-radius: 20px; border: 1px solid #333;">
-                <label>المقاس المعتمد</label>
-                <select id="sizeSelect"></select>
-                
-                <label>خيارات التنفيذ والطباعة</label>
-                <select id="optionSelect"></select>
-                
-                <button onclick="addToCart()" class="btn-order" style="width: 100%; margin-top: 20px;">إضافة للسلة</button>
+    <main style="display: flex; gap: 40px; padding: 0 8%; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px; overflow: hidden; border-radius: 15px;">
+            <img id="pImg" src="" alt="معاينة المنتج" onerror="this.src='placeholder.png'">
+        </div>
+
+        <div style="flex: 1; min-width: 300px;">
+            <h1 id="pTitle" style="color:var(--primary); margin:0; font-size: 2rem;"></h1>
+            <p id="pDesc" style="color:#aaa; margin: 15px 0; line-height: 1.6;">
+                يمكنك تخصيص هذا المنتج حسب المقاسات المعتمدة وخيارات الطباعة المتاحة. تنفيذ بدقة عالية وخامات متميزة.
+            </p>
+            <h2 style="color:white; margin-bottom:30px;">السعر: <span id="pPrice" style="color: var(--primary);">يحدد حسب الطلب</span></h2>
+
+            <div style="background:var(--card); padding:25px; border-radius:15px; border:1px solid #333;">
+                <div class="option-group">
+                    <label style="display:block; margin-bottom:10px;">المقاس المعتمد:</label>
+                    <select id="sizeSelect" onchange="animateImg()"></select>
+                </div>
+
+                <div class="option-group" style="margin-top:20px;">
+                    <label style="display:block; margin-bottom:10px;">خيار الطباعة / التجهيز:</label>
+                    <select id="optSelect" onchange="animateImg()"></select>
+                </div>
+
+                <button onclick="addToCart()" class="btn" style="width:100%; margin-top:30px; font-size:1.1rem;">
+                    إضافة إلى السلة <i class="fas fa-cart-plus" style="margin-right:10px;"></i>
+                </button>
             </div>
+        </div>
+    </main>
+
+    <div id="sidebar" class="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h3><i class="fas fa-shopping-basket"></i> سلة الطلبات</h3>
+            <span onclick="toggleCart(false)" style="cursor:pointer; font-size:1.5rem;">&times;</span>
+        </div>
+
+        <div id="cartItemsList" class="cart-items-container">
+            </div>
+
+        <div id="checkoutFormContainer" class="checkout-form">
+            <h4 style="margin-top:20px; color:var(--primary); border-top:1px solid #333; pt:15px;">بيانات العميل</h4>
+            <form id="finalOrderForm">
+                <input type="text" id="userName" placeholder="الاسم بالكامل" required>
+                <input type="tel" id="userPhone" placeholder="رقم الهاتف (واتساب)" required>
+                <textarea id="userNotes" placeholder="أي ملاحظات إضافية بخصوص التصميم أو العنوان" rows="3"></textarea>
+                <button type="submit" id="submitBtn" class="btn-order">تأكيد وتقديم الطلب</button>
+            </form>
         </div>
     </div>
 
+    <div id="toast">تمت إضافة المنتج بنجاح!</div>
+
+    <a href="https://wa.me/201111049778" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
     <script>
-        const config = {
-            'tshirt': { title: 'التيشيرتات', img: 'T-shirt.png', sizes: ['S','M','L','XL','XXL','XXXL'], options: ['طباعة DTF', 'تطريز مخصص'] },
-            'bcard': { title: 'الكروت الشخصية', img: 'B-card.jpg', sizes: ['9x5 سم ستاندرد'], options: ['كوشيه - وجه واحد', 'كوشيه - وجهين', 'فيرانو فاخر', 'كريستال', 'سلوفان مط', 'سلوفان لامع', 'قص زوايا كريف'] },
-            'rollup': { title: 'الرول أب', img: 'roll-up.jpg', sizes: ['80x200','85x200','100x200','120x200'], options: ['طباعة إن دور عالية الجودة', 'جالوسي + لامينشن مط', 'جالوسي + لامينشن لامع'] },
-            'xbanr': { title: 'اكس بانر', img: 'X-banr.png', sizes: ['60x160 سم', '80x180 سم'], options: ['طباعة بانر خامات مستوردة'] },
-            'mug': { title: 'المج (الكوب)', img: 'mug.jpg', sizes: ['11 أونصة ستاندرد'], options: ['سحري', 'يد قلب', 'ملون من الداخل أحمر', 'ملون من الداخل ألوان أخرى'] },
-            'bloknote': { title: 'البلوك نوت', img: 'bloknote.png', sizes: ['A4','A5','A6'], options: ['تجليد علوي - ألوان', 'تجليد جانبي - ألوان', 'تجليد جانبي - أسود'] },
-            'popup': { title: 'البوب أب كونتر', img: 'pop-up-counter.png', sizes: ['طاولة 80 سم'], options: ['جرافيك مخصص + لمنيشن حماية'] },
-            'banar': { title: 'البانر', img: 'banar.png', sizes: ['مقاس حر (يحدد في الملاحظات)'], options: ['بنر مط أوت دور'] }
+        // تعريف رابط الـ Web App الخاص بك
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwGlYFY7fOGWTUK7dxy10ZNgSoWFNI8Ft0D4BDopR9lm7WgeasSznO5R4XGmaUUHTxr5A/exec';
+
+        // إعدادات المنتجات بناءً على بياناتك السابقة
+        const productConfig = {
+            'tshirt': { name: 'التيشيرتات', img: 'T-shirt.png', sizes: ['S','M','L','XL','XXL','XXXL'], opts: ['DTF حراري','تطريز كمبيوتر'] },
+            'bcard': { name: 'الكروت الشخصية', img: 'B-card.jpg', sizes: ['9x5 سم ستاندرد'], opts: ['كوشيه - وجه واحد','كوشيه - وجهين','فيرانو','سلوفان مط','سلوفان لامع'] },
+            'rollup': { name: 'الرول أب', img: 'roll-up.jpg', sizes: ['80x200','85x200','100x200'], opts: ['طباعة إن دور','لامينشن مط','لامينشن لامع'] },
+            'mug': { name: 'المج (الكوب)', img: 'mug.jpg', sizes: ['11 أونصة'], opts: ['سحري','يد قلب','ملون من الداخل'] }
         };
 
-        const type = new URLSearchParams(window.location.search).get('type');
-        const p = config[type];
+        const params = new URLSearchParams(window.location.search);
+        const productType = params.get('type') || 'tshirt';
+        const currentProduct = productConfig[productType];
 
-        if(p) {
-            document.getElementById('pTitle').innerText = p.title;
-            document.getElementById('mainImg').src = p.img;
-            p.sizes.forEach(s => document.getElementById('sizeSelect').innerHTML += `<option>${s}</option>`);
-            p.options.forEach(o => document.getElementById('optionSelect').innerHTML += `<option>${o}</option>`);
+        if(currentProduct) {
+            document.getElementById('pTitle').innerText = currentProduct.name;
+            document.getElementById('pImg').src = currentProduct.img;
+            currentProduct.sizes.forEach(s => document.getElementById('sizeSelect').innerHTML += `<option value="${s}">${s}</option>`);
+            currentProduct.opts.forEach(o => document.getElementById('optSelect').innerHTML += `<option value="${o}">${o}</option>`);
         }
 
-        function addToCart() {
-            let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
-            cart.push({
-                name: p.title,
-                size: document.getElementById('sizeSelect').value,
-                option: document.getElementById('optionSelect').value
+        // دالة تحريك الصورة عند التغيير
+        function animateImg() {
+            const img = document.getElementById('pImg');
+            img.style.opacity = '0.4';
+            setTimeout(() => img.style.opacity = '1', 300);
+        }
+
+        // معالجة إرسال النموذج النهائي لجوجل شيت
+        document.getElementById('finalOrderForm').onsubmit = function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري الإرسال...";
+
+            const orderData = {
+                name: document.getElementById('userName').value,
+                phone: document.getElementById('userPhone').value,
+                notes: document.getElementById('userNotes').value,
+                details: JSON.parse(localStorage.getItem('fekra_cart')) || []
+            };
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(orderData)
+            }).then(() => {
+                alert('تم استلام طلبك بنجاح! فريق فكرة سيتواصل معك عبر الواتساب قريباً.');
+                localStorage.removeItem('fekra_cart');
+                window.location.href = 'index.html';
+            }).catch(err => {
+                console.error(err);
+                alert('حدث خطأ، يرجى المحاولة لاحقاً');
+                submitBtn.disabled = false;
+                submitBtn.innerText = "تأكيد وتقديم الطلب";
             });
-            localStorage.setItem('fekra_cart', JSON.stringify(cart));
-            alert('تمت إضافة ' + p.title + ' إلى السلة');
-            window.location.href = 'index.html';
-        }
+        };
     </script>
 </body>
 </html>
