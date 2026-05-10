@@ -2,85 +2,63 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تخصيص الطلب | فكرة</title>
+    <title>تخصيص المنتج | فكرة</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-
+<body style="padding-top: 100px;">
     <header class="main-header">
-        <div class="logo"><img src="logo.png.png" alt="فكرة"></div>
-        <nav class="nav-menu">
-            <ul><li><a href="index.html">العودة للرئيسية</a></li></ul>
-        </nav>
+        <div class="logo"><img src="logo.png.png"></div>
+        <nav><a href="index.html" style="color:white; text-decoration:none;">العودة للمتجر</a></nav>
     </header>
 
-    <main class="order-container">
-        <div style="flex: 1.2;">
-            <img id="mainImg" src="" style="width: 100%; border-radius: 20px; border: 1px solid #222;">
-            <div id="offerMsg" style="margin-top: 20px; color: var(--primary); font-weight: bold; text-align: center;"></div>
-        </div>
-
-        <div class="order-box">
-            <h2 id="pTitle">اسم المنتج</h2>
-            <form id="orderForm">
-                <input type="hidden" name="product_name" id="hiddenTitle">
+    <div style="display: flex; gap: 40px; padding: 0 10%; flex-wrap: wrap;">
+        <div style="flex: 1;"><img id="mainImg" src="" style="width: 100%; border-radius: 20px; border: 1px solid #333;"></div>
+        <div style="flex: 1;">
+            <h1 id="pTitle" style="color: var(--primary);"></h1>
+            <div style="background: #161616; padding: 25px; border-radius: 20px; border: 1px solid #333;">
+                <label>المقاس المعتمد</label>
+                <select id="sizeSelect"></select>
                 
-                <div class="form-group">
-                    <label>المقاس / النوع</label>
-                    <select id="sizeSelect" name="size"></select>
-                </div>
-
-                <div class="form-group">
-                    <label>نوع الطباعة / التجهيز</label>
-                    <select name="print_type">
-                        <option>DTF حراري</option>
-                        <option>تطريز كمبيوتر</option>
-                        <option>سبليميشن</option>
-                        <option>سلوفان مط/لامع</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>الكمية</label>
-                    <input type="number" name="quantity" value="1" min="1">
-                </div>
-
-                <button type="submit" style="width: 100%; padding: 15px; background: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">إرسال الطلب (جوجل شيت)</button>
-                <button type="button" onclick="toWA()" style="width: 100%; padding: 15px; background: #25d366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px;">استفسار عبر واتساب</button>
-            </form>
+                <label>خيارات التنفيذ والطباعة</label>
+                <select id="optionSelect"></select>
+                
+                <button onclick="addToCart()" class="btn-order" style="width: 100%; margin-top: 20px;">إضافة للسلة</button>
+            </div>
         </div>
-    </main>
+    </div>
 
     <script>
-        const data = {
-            'tshirt': { title: 'تيشيرت مخصص', img: 'T-shirt.png', sizes: ['S','M','L','XL','XXL'] },
-            'bcard': { title: 'كروت شخصية', img: 'B-card.jpg', sizes: ['9x5 سم ستاندرد'] },
-            'rollup': { title: 'رول أب', img: 'roll-up.jpg', sizes: ['80x200','100x200'] },
-            'mug': { title: 'مج حراري', img: 'mug.jpg', sizes: ['عادي','سحري','يد قلب'] }
+        const config = {
+            'tshirt': { title: 'التيشيرتات', img: 'T-shirt.png', sizes: ['S','M','L','XL','XXL','XXXL'], options: ['طباعة DTF', 'تطريز مخصص'] },
+            'bcard': { title: 'الكروت الشخصية', img: 'B-card.jpg', sizes: ['9x5 سم ستاندرد'], options: ['كوشيه - وجه واحد', 'كوشيه - وجهين', 'فيرانو فاخر', 'كريستال', 'سلوفان مط', 'سلوفان لامع', 'قص زوايا كريف'] },
+            'rollup': { title: 'الرول أب', img: 'roll-up.jpg', sizes: ['80x200','85x200','100x200','120x200'], options: ['طباعة إن دور عالية الجودة', 'جالوسي + لامينشن مط', 'جالوسي + لامينشن لامع'] },
+            'xbanr': { title: 'اكس بانر', img: 'X-banr.png', sizes: ['60x160 سم', '80x180 سم'], options: ['طباعة بانر خامات مستوردة'] },
+            'mug': { title: 'المج (الكوب)', img: 'mug.jpg', sizes: ['11 أونصة ستاندرد'], options: ['سحري', 'يد قلب', 'ملون من الداخل أحمر', 'ملون من الداخل ألوان أخرى'] },
+            'bloknote': { title: 'البلوك نوت', img: 'bloknote.png', sizes: ['A4','A5','A6'], options: ['تجليد علوي - ألوان', 'تجليد جانبي - ألوان', 'تجليد جانبي - أسود'] },
+            'popup': { title: 'البوب أب كونتر', img: 'pop-up-counter.png', sizes: ['طاولة 80 سم'], options: ['جرافيك مخصص + لمنيشن حماية'] },
+            'banar': { title: 'البانر', img: 'banar.png', sizes: ['مقاس حر (يحدد في الملاحظات)'], options: ['بنر مط أوت دور'] }
         };
 
-        const params = new URLSearchParams(window.location.search);
-        const type = params.get('type') || 'tshirt';
-        const p = data[type];
+        const type = new URLSearchParams(window.location.search).get('type');
+        const p = config[type];
 
-        document.getElementById('pTitle').innerText = p.title;
-        document.getElementById('hiddenTitle').value = p.title;
-        document.getElementById('mainImg').src = p.img;
-        document.getElementById('offerMsg').innerText = `لمعرفة العروض المقدمة على ${p.title} يرجى التواصل معنا.`;
-        
-        const sel = document.getElementById('sizeSelect');
-        p.sizes.forEach(s => sel.innerHTML += `<option value="${s}">${s}</option>`);
+        if(p) {
+            document.getElementById('pTitle').innerText = p.title;
+            document.getElementById('mainImg').src = p.img;
+            p.sizes.forEach(s => document.getElementById('sizeSelect').innerHTML += `<option>${s}</option>`);
+            p.options.forEach(o => document.getElementById('optionSelect').innerHTML += `<option>${o}</option>`);
+        }
 
-        // ربط جوجل شيت (ضع رابطك هنا)
-        document.getElementById('orderForm').onsubmit = function(e) {
-            e.preventDefault();
-            fetch('YOUR_GOOGLE_SCRIPT_URL', { method: 'POST', body: new FormData(this) })
-            .then(() => alert('تم استلام طلبك!'));
-        };
-
-        function toWA() {
-            window.open(`https://wa.me/201000000000?text=أريد الاستفسار عن ${p.title}`);
+        function addToCart() {
+            let cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
+            cart.push({
+                name: p.title,
+                size: document.getElementById('sizeSelect').value,
+                option: document.getElementById('optionSelect').value
+            });
+            localStorage.setItem('fekra_cart', JSON.stringify(cart));
+            alert('تمت إضافة ' + p.title + ' إلى السلة');
+            window.location.href = 'index.html';
         }
     </script>
 </body>
