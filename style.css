@@ -2,20 +2,18 @@
     --primary: #00bcd4;
     --dark-bg: #0b0b0b;
     --card-bg: #161616;
-    --text-white: #ffffff;
-    --text-gray: #a0a0a0;
+    --white: #ffffff;
 }
 
 body {
     background-color: var(--dark-bg);
-    color: var(--text-white);
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: var(--white);
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    line-height: 1.6;
     direction: rtl;
 }
 
-/* الهيدر المحاكي لـ Rhythm Express */
+/* الهيدر المحسن */
 .main-header {
     position: fixed; top: 0; width: 100%; height: 70px;
     display: flex; justify-content: space-between; align-items: center;
@@ -26,52 +24,49 @@ body {
 
 .logo img { max-height: 50px; width: auto; }
 
-.nav-menu ul { display: flex; gap: 25px; list-style: none; margin: 0; }
-.nav-menu a { color: var(--text-white); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
-.nav-menu a:hover { color: var(--primary); }
+.cart-icon { position: relative; cursor: pointer; font-size: 1.4rem; color: var(--primary); }
+.cart-badge {
+    position: absolute; top: -10px; right: -12px;
+    background: #ff3b30; color: white; font-size: 11px;
+    padding: 2px 7px; border-radius: 50%; font-weight: bold;
+}
 
 /* شبكة المنتجات */
 .products-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px; padding: 120px 5% 50px 5%;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px; padding: 120px 5% 50px;
 }
 
 .product-card {
-    background: var(--card-bg); border-radius: 20px; overflow: hidden;
-    border: 1px solid #222; transition: 0.4s; position: relative;
+    background: var(--card-bg); border-radius: 15px; overflow: hidden;
+    border: 1px solid #222; text-align: center; transition: 0.3s;
 }
+.product-card:hover { transform: translateY(-8px); border-color: var(--primary); }
+.product-card img { width: 100%; height: 300px; object-fit: cover; }
+.product-card h3 { font-size: 1.2rem; margin: 15px 0; }
 
-.product-card:hover { transform: translateY(-10px); border-color: var(--primary); }
-
-.product-card img { width: 100%; height: 350px; object-fit: cover; }
-
-.card-content { padding: 20px; text-align: center; }
-.card-content h3 { margin: 0 0 10px 0; font-size: 1.3rem; }
-
-.order-btn {
+.btn-order {
     display: inline-block; padding: 10px 30px; background: var(--primary);
-    color: black; text-decoration: none; border-radius: 50px;
-    font-weight: bold; font-size: 0.9rem; transition: 0.3s;
+    color: black; text-decoration: none; border-radius: 50px; font-weight: bold;
+    margin-bottom: 20px; border: none; cursor: pointer;
 }
 
-.order-btn:hover { background: white; }
-
-/* بوكس الطلبات في صفحة التفاصيل */
-.order-container { display: flex; gap: 40px; padding: 120px 8%; flex-wrap: wrap; }
-.order-box {
-    flex: 1; min-width: 300px; background: var(--card-bg);
-    padding: 30px; border-radius: 20px; border: 1px solid #333;
+/* المودال (نافذة السلة) */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: none; z-index: 2000;
+    justify-content: center; align-items: center;
+}
+.modal-content {
+    background: #1a1a1a; padding: 25px; border-radius: 20px;
+    width: 90%; max-width: 500px; border: 1px solid #333; max-height: 80vh; overflow-y: auto;
+}
+.cart-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px; border-bottom: 1px solid #333; margin-bottom: 10px;
 }
 
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; color: var(--primary); font-size: 0.85rem; }
-.form-group select, .form-group input {
-    width: 100%; padding: 12px; background: #000; border: 1px solid #444;
-    color: white; border-radius: 10px; box-sizing: border-box;
+input, select, textarea {
+    width: 100%; padding: 12px; margin: 10px 0;
+    background: #000; border: 1px solid #444; color: white; border-radius: 10px;
 }
-
-/* قسم تواصل معنا */
-.contact-section { padding: 80px 5%; background: #000; text-align: center; border-top: 1px solid #222; }
-.contact-links { display: flex; justify-content: center; gap: 40px; margin-top: 30px; }
-.contact-links a { color: white; text-decoration: none; font-size: 1.2rem; }
-.contact-links i { color: var(--primary); margin-left: 10px; }
