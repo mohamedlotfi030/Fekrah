@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج | فكرة</title>
+    
+    <link rel="icon" type="image/png" href="logo-main.png">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/style.css">
 </head>
@@ -38,16 +41,16 @@
             
             <div class="selection-group">
                 <label style="display:block; margin-bottom:10px; color:#aaa;">المقاس / الحجم:</label>
-                <select id="pSize" class="input-field" style="margin-bottom:20px;"></select>
+                <select id="pSize" class="input-field" style="margin-bottom:20px; width: 100%;"></select>
 
                 <label style="display:block; margin-bottom:10px; color:#aaa;">نوع الخامة / الطباعة:</label>
-                <select id="pOpt" class="input-field" style="margin-bottom:20px;"></select>
+                <select id="pOpt" class="input-field" style="margin-bottom:20px; width: 100%;"></select>
 
                 <label style="display:block; margin-bottom:10px; color:#aaa;">ملاحظاتك (اختياري):</label>
-                <textarea id="pNotes" placeholder="أضف أي تفاصيل أخرى تريدها هنا..." class="input-field" style="height:100px; resize:none;"></textarea>
+                <textarea id="pNotes" placeholder="أضف أي تفاصيل أخرى تريدها هنا..." class="input-field" style="height:100px; resize:none; width: 100%;"></textarea>
             </div>
 
-            <button id="addBtn" class="btn-main" style="width:100%; margin: 30px 0 10px; padding:18px; font-size:1.1rem;">إضافة إلى السلة</button>
+            <button id="addBtn" class="btn-main" style="width:100%; margin: 30px 0 10px; padding:18px; font-size:1.1rem; border:none; cursor:pointer;">إضافة إلى السلة</button>
             <button onclick="location.href='index.html'" style="width:100%; background:transparent; color:#888; border:1px solid #333; padding:12px; border-radius:8px; cursor:pointer; transition:0.3s;">العودة للمتجر</button>
         </div>
     </div>
@@ -59,7 +62,7 @@
         </div>
         <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;"></div>
         <div style="padding: 20px; border-top: 1px solid #333;">
-            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0;">إتمام الطلب</button>
+            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0; border:none; cursor:pointer;">إتمام الطلب</button>
         </div>
     </div>
 
@@ -69,10 +72,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // تهيئة السلة
             if(typeof Cart !== 'undefined') Cart.init();
             
-            // جلب نوع المنتج من الرابط
             const urlParams = new URLSearchParams(window.location.search);
             const productType = urlParams.get('type');
             const product = Products[productType];
@@ -81,25 +82,21 @@
                 document.getElementById('pName').innerText = product.name;
                 document.getElementById('mainPImg').src = product.images[0];
                 
-                // ملء المقاسات
                 const sizeSelect = document.getElementById('pSize');
                 product.options.sizes.forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
 
-                // ملء الأنواع
                 const optSelect = document.getElementById('pOpt');
                 product.options.types.forEach(t => optSelect.innerHTML += `<option value="${t}">${t}</option>`);
 
-                // تشغيل حركة الصور التلقائية
                 if(typeof UI !== 'undefined' && UI.startProductSlideshow) {
                     UI.startProductSlideshow(productType);
                 }
 
-                // زر الإضافة للسلة
                 document.getElementById('addBtn').onclick = () => {
                     const size = document.getElementById('pSize').value;
                     const opt = document.getElementById('pOpt').value;
                     Cart.add(productType, size, opt);
-                    UI.toggleCart(true); // فتح السلة تلقائياً عند الإضافة
+                    UI.toggleCart(true); 
                 };
             } else {
                 document.getElementById('productView').innerHTML = '<h2 style="text-align:center; width:100%; margin-top:100px;">المنتج غير موجود</h2>';
