@@ -6,6 +6,24 @@
     <title>فكرة للدعاية والإعلان | حلوان</title>
     <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* إضافة تأثير انتقالي للصور لضمان سلاسة التحريك */
+        .slideshow-img {
+            transition: opacity 0.5s ease-in-out;
+            max-height: 100%;
+            max-width: 90%;
+            object-fit: contain;
+        }
+        .card-img-container {
+            background: white;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,10 +33,10 @@
         </div>
         <nav class="nav-group">
             <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
-            <a href="tel:01275209778" class="nav-link"><i class="fas fa-phone-alt"></i> <span>اتصل بنا</span></a>
+            <a href="tel:01111049778" class="nav-link"><i class="fas fa-phone-alt"></i> <span>اتصل بنا</span></a>
             <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
                 <i class="fas fa-shopping-cart"></i>
-                <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                <span id="cartBadge" class="cart-badge" style="display:none; position:absolute; top:-10px; right:-10px; background:white; color:black; border-radius:50%; padding:2px 6px; font-size:0.7rem; font-weight:bold;">0</span>
             </div>
         </nav>
     </header>
@@ -27,19 +45,21 @@
         </main>
 
     <footer class="fixed-footer">
-        <a href="tel:01275209778" class="footer-item"><i class="fas fa-phone-alt"></i><span>اتصال</span></a>
-        <a href="https://wa.me/201275209778" class="footer-item"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
-        <a href="mailto:fekra.adv.eg@gmail.com" class="footer-item"><i class="fas fa-envelope"></i><span>الإيميل</span></a>
+        <a href="tel:01111049778" class="footer-item"><i class="fas fa-phone-alt"></i><span>اتصال</span></a>
+        <a href="https://wa.me/201111049778" class="footer-item"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
+        <a href="mailto:mohamedlotfi030@gmail.com" class="footer-item"><i class="fas fa-envelope"></i><span>الإيميل</span></a>
+        <a href="https://maps.google.com/?q=Helwan" target="_blank" class="footer-item"><i class="fas fa-map-marker-alt"></i><span>حلوان</span></a>
     </footer>
 
     <div id="cartDrawer" class="cart-drawer">
         <div class="drawer-header">
-            <h3>سلة الطلبات</h3>
-            <span onclick="UI.toggleCart(false)" style="cursor:pointer; font-size: 2rem;">×</span>
+            <h3><i class="fas fa-shopping-basket"></i> سلة الطلبات</h3>
+            <span onclick="UI.toggleCart(false)" style="font-size: 2.5rem; cursor: pointer;">×</span>
         </div>
-        <div id="cartItemsList" class="drawer-body"></div>
+        <div id="cartItemsList" class="drawer-body">
+            </div>
         <div class="drawer-footer">
-            <button onclick="window.location.href='product-details.html'" class="btn-main" style="width: 100%;">استكمال الطلب</button>
+            <button onclick="window.location.href='product-details.html'" class="btn-main" style="width: 100%;">إتمام الطلب ومراجعة السلة</button>
         </div>
     </div>
 
@@ -50,22 +70,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if(typeof Cart !== 'undefined') Cart.init();
-            
+            // تشغيل نظام السلة
+            if (typeof Cart !== 'undefined') Cart.init();
+
             const grid = document.getElementById('productsGrid');
-            if(grid && typeof Products !== 'undefined') {
+            if (grid && typeof Products !== 'undefined') {
+                // رسم كروت المنتجات
                 Object.keys(Products).forEach(key => {
                     const p = Products[key];
                     grid.innerHTML += `
-                        <div class="card">
-                            <div class="card-img-container" style="background:white; height:220px; display:flex; align-items:center; justify-content:center;">
-                                <img src="${p.images[0]}" alt="${p.name}" style="max-height:100%; max-width:90%;">
+                        <div class="card" data-id="${key}">
+                            <div class="card-img-container">
+                                <img src="${p.images[0]}" class="slideshow-img" alt="${p.name}">
                             </div>
-                            <h3>${p.name}</h3>
-                            <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
+                            <div style="padding:15px;">
+                                <h3 style="margin-bottom:15px;">${p.name}</h3>
+                                <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
+                            </div>
                         </div>
                     `;
                 });
+
+                // تفعيل خاصية تبديل الصور كل 3 ثوانٍ
+                if (typeof UI !== 'undefined' && UI.initSlideshow) {
+                    UI.initSlideshow();
+                }
             }
         });
     </script>
