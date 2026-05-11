@@ -4,41 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج | فكرة</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body style="background: #000;">
+
     <header class="header">
-        <div class="logo"><img src="logo-main.png" onclick="window.location.href='index.html'" style="cursor:pointer;"></div>
-        <div class="cart-icon" onclick="window.location.href='index.html?openCart=true'" style="cursor:pointer;">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cartBadge" class="badge">0</span>
-        </div>
+        <div class="logo"><img src="logo-main.png" alt="فكرة" style="height:40px; cursor:pointer;" onclick="location.href='index.html'"></div>
+        <div onclick="UI.toggleCart(true)" style="cursor:pointer; color:white;"><i class="fas fa-shopping-cart"></i> <span id="cartBadge">0</span></div>
     </header>
 
-    <div class="product-container" style="display:flex; flex-wrap:wrap; gap:40px; padding:120px 8% 50px;">
-        <div class="gallery-box" style="flex:1; min-width:300px; background:white; height:450px; border-radius:20px; display:flex; justify-content:center; align-items:center; border:1px solid #333;">
-            <img id="pImg" style="max-width:90%; max-height:90%; object-fit:contain;">
+    <div class="product-container" id="productView" style="display:flex; flex-wrap:wrap; gap:30px; padding:100px 5% 50px; color:white;">
+        <div style="flex:1; min-width:300px; background:white; border-radius:15px; padding:20px; display:flex; justify-content:center;">
+            <img id="mainPImg" src="" style="max-width:100%; max-height:400px; object-fit:contain;">
         </div>
-        <div class="details-box" style="flex:1; min-width:300px;">
-            <h1 id="pTitle" style="color:var(--primary); margin-bottom:20px;"></h1>
-            <div class="select-group">
+
+        <div style="flex:1; min-width:300px;">
+            <h1 id="pName" style="color:var(--primary); margin-bottom:20px;">تحميل...</h1>
+            
+            <div class="selection-group">
                 <label>المقاس / الحجم:</label>
-                <select id="pSize"></select>
+                <select id="pSize" class="input-field" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;"></select>
+
+                <label>نوع الخامة / الطباعة:</label>
+                <select id="pOpt" class="input-field" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;"></select>
+
+                <label>ملاحظات إضافية:</label>
+                <textarea id="pNotes" placeholder="مثلاً: اللون المطلوب أو النص المراد كتابته" style="width:100%; height:100px; background:#111; color:white; padding:10px; border:1px solid #333; margin-top:10px;"></textarea>
             </div>
-            <div class="select-group">
-                <label>الخامة / نوع الطباعة:</label>
-                <select id="pOpt"></select>
-            </div>
-            <div class="select-group">
-                <label>ملاحظات التصميم:</label>
-                <textarea id="pNotes" placeholder="اكتب ملاحظاتك (مثل اللون، النص المراد طباعته...)"></textarea>
-            </div>
-            <button onclick="addToCart()" class="btn">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
+
+            <button id="addBtn" class="btn-main" style="width:100%; margin-top:30px; padding:18px;">إضافة للسلة</button>
+            <button onclick="location.href='index.html'" style="width:100%; margin-top:10px; background:transparent; color:white; border:none; cursor:pointer;">العودة للرئيسية</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', loadProductDetails);</script>
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="drawer-header"><h3>سلة الطلبات</h3><span onclick="UI.toggleCart(false)" style="cursor:pointer;">×</span></div>
+        <div id="cartItemsList" class="drawer-body"></div>
+        <div class="drawer-footer">
+            <input type="text" id="custName" placeholder="اسمك الكريم" style="width:90%; padding:10px; margin-bottom:10px;">
+            <input type="tel" id="custPhone" placeholder="رقم الموبايل" style="width:90%; padding:10px; margin-bottom:10px;">
+            <button onclick="handleCheckout()" class="btn-main" style="width:100%;">تأكيد الطلب عبر واتساب</button>
+        </div>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/api.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Cart.init();
+            const urlParams = new URLSearchParams(window.location.search);
+            const productType = urlParams.get('type') || 'tshirt';
+            const product = Products[productType];
+
+            if (product) {
+                document.getElementById('pName').innerText = product.name;
+                document.getElementById('mainPImg').src = product.images[0];
+                
+                // ملء المقاسات
+                const sizeSelect = document.getElementById('pSize');
+                product.options.sizes.forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
+
+                // ملء الأنواع
+                const optSelect = document.getElementById('pOpt');
+                product.options.types.forEach(t => optSelect.innerHTML += `<option value="${t}">${t}</option>`);
+
+                // تفعيل زر الإضافة
+                document.getElementById('addBtn').onclick = () => {
+                    Cart.add(productType);
+                };
+            }
+        });
+
+        function handleCheckout() {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            if(!name || !phone) { alert("برجاء إدخال البيانات المطلوبة"); return; }
+            API.sendOrder(name, phone);
+        }
+    </script>
 </body>
 </html>
