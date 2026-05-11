@@ -4,59 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج | فكرة</title>
-    <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
 </head>
-<body style="background: #000; color:white; padding-bottom: 80px;">
+<body style="background: #000; color:white; padding-bottom: 50px;">
+
+    <div id="cartOverlay" class="cart-overlay" onclick="UI.toggleCart(false)"></div>
 
     <header class="header">
-        <div class="logo"><img src="logo-main.png" alt="فكرة" style="height:40px; cursor:pointer;" onclick="location.href='index.html'"></div>
-        <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative; color:white;">
-            <i class="fas fa-shopping-cart"></i> 
-            <span id="cartBadge" class="cart-badge" style="display:none; position:absolute; top:-10px; right:-10px; background:red; color:white; border-radius:50%; padding:2px 6px; font-size:0.7rem;">0</span>
+        <div class="logo">
+            <img src="logo-main.png" alt="فكرة" style="height:40px; cursor:pointer;" onclick="location.href='index.html'">
         </div>
+        <nav class="nav-group">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>الرئيسية</span>
+            </a>
+            <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                <span>السلة</span>
+            </div>
+        </nav>
     </header>
 
-    <div class="product-container" id="productView" style="display:flex; flex-wrap:wrap; gap:30px; padding:100px 5% 50px;">
-        <div style="flex:1; min-width:300px; background:white; border-radius:15px; padding:20px; display:flex; justify-content:center; align-items:center; overflow:hidden; height:400px;">
+    <div class="product-container" id="productView" style="display:flex; flex-wrap:wrap; gap:30px; padding:40px 5%;">
+        <div style="flex:1; min-width:300px; background:white; border-radius:15px; padding:20px; display:flex; justify-content:center; align-items:center; overflow:hidden; height:400px; border: 1px solid #333;">
             <img id="mainPImg" src="" style="max-width:100%; max-height:100%; object-fit:contain; transition: opacity 0.4s ease-in-out;">
         </div>
 
         <div style="flex:1; min-width:300px;">
-            <h1 id="pName" style="color:#00bcd4; margin-bottom:20px;">تحميل...</h1>
+            <h1 id="pName" style="color:#00bcd4; margin-bottom:20px; font-size: 2rem;">تحميل...</h1>
             
             <div class="selection-group">
-                <label>المقاس / الحجم:</label>
-                <select id="pSize" class="input-field" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333; border-radius:8px;"></select>
+                <label style="display:block; margin-bottom:10px; color:#aaa;">المقاس / الحجم:</label>
+                <select id="pSize" class="input-field" style="margin-bottom:20px;"></select>
 
-                <label>نوع الخامة / الطباعة:</label>
-                <select id="pOpt" class="input-field" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333; border-radius:8px;"></select>
+                <label style="display:block; margin-bottom:10px; color:#aaa;">نوع الخامة / الطباعة:</label>
+                <select id="pOpt" class="input-field" style="margin-bottom:20px;"></select>
 
-                <label>ملاحظات إضافية:</label>
-                <textarea id="pNotes" placeholder="مثلاً: اللون المطلوب أو النص المراد كتابته" style="width:100%; height:100px; background:#111; color:white; padding:10px; border:1px solid #333; margin-top:10px; border-radius:8px;"></textarea>
+                <label style="display:block; margin-bottom:10px; color:#aaa;">ملاحظاتك (اختياري):</label>
+                <textarea id="pNotes" placeholder="أضف أي تفاصيل أخرى تريدها هنا..." class="input-field" style="height:100px; resize:none;"></textarea>
             </div>
 
-            <button id="addBtn" class="btn-main" style="width:100%; margin-top:30px; padding:18px; background:#00bcd4; color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">إضافة للسلة</button>
-            <button onclick="location.href='index.html'" style="width:100%; margin-top:15px; background:transparent; color:#aaa; border:none; cursor:pointer; text-align:center;">العودة للرئيسية</button>
+            <button id="addBtn" class="btn-main" style="width:100%; margin: 30px 0 10px; padding:18px; font-size:1.1rem;">إضافة إلى السلة</button>
+            <button onclick="location.href='index.html'" style="width:100%; background:transparent; color:#888; border:1px solid #333; padding:12px; border-radius:8px; cursor:pointer; transition:0.3s;">العودة للمتجر</button>
         </div>
     </div>
 
-    <div id="cartDrawer" class="cart-drawer" style="position:fixed; right:-100%; top:0; width:300px; height:100%; background:#1a1a1a; transition:0.3s; z-index:2000; border-left:1px solid #333;">
-        <div class="drawer-header" style="padding:20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333;">
-            <h3 style="margin:0;">سلة الطلبات</h3>
-            <span onclick="UI.toggleCart(false)" style="cursor:pointer; font-size:2rem;">×</span>
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h3 style="margin:0; color:#fff;">سلة الطلبات</h3>
+            <span onclick="UI.toggleCart(false)" style="cursor:pointer; color:#fff; font-size: 2.5rem;">×</span>
         </div>
-        <div id="cartItemsList" style="padding:20px; height:calc(100% - 150px); overflow-y:auto;"></div>
-        <div style="padding:20px;">
-            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width:100%; margin:0; background:#00bcd4; color:#000; padding:12px; border:none; border-radius:8px; font-weight:bold;">إتمام الطلب</button>
+        <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;"></div>
+        <div style="padding: 20px; border-top: 1px solid #333;">
+            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0;">إتمام الطلب</button>
         </div>
     </div>
-
-    <footer class="fixed-footer" style="position:fixed; bottom:0; left:0; right:0; background:#111; display:flex; justify-content:space-around; padding:12px 0; border-top:1px solid #333; z-index:1000;">
-        <a href="tel:01111049778" style="color:white; text-decoration:none; text-align:center; font-size:0.75rem;"><i class="fas fa-phone-alt" style="color:#00bcd4; font-size:1.2rem; margin-bottom:5px;"></i><br>اتصال</a>
-        <a href="https://wa.me/201111049778" style="color:white; text-decoration:none; text-align:center; font-size:0.75rem;"><i class="fab fa-whatsapp" style="color:#00bcd4; font-size:1.2rem; margin-bottom:5px;"></i><br>واتساب</a>
-        <a href="mailto:mohamedlotfi030@gmail.com" style="color:white; text-decoration:none; text-align:center; font-size:0.75rem;"><i class="fas fa-envelope" style="color:#00bcd4; font-size:1.2rem; margin-bottom:5px;"></i><br>الإيميل</a>
-    </footer>
 
     <script src="js/products.js"></script>
     <script src="js/ui.js"></script>
@@ -64,37 +69,40 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // تهيئة السلة
             if(typeof Cart !== 'undefined') Cart.init();
             
+            // جلب نوع المنتج من الرابط
             const urlParams = new URLSearchParams(window.location.search);
             const productType = urlParams.get('type');
             const product = Products[productType];
 
             if (product) {
                 document.getElementById('pName').innerText = product.name;
-                // تعيين الصورة الأولى كصورة مبدئية
                 document.getElementById('mainPImg').src = product.images[0];
                 
-                // ملء خيارات المقاسات
+                // ملء المقاسات
                 const sizeSelect = document.getElementById('pSize');
                 product.options.sizes.forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
 
-                // ملء خيارات الأنواع
+                // ملء الأنواع
                 const optSelect = document.getElementById('pOpt');
                 product.options.types.forEach(t => optSelect.innerHTML += `<option value="${t}">${t}</option>`);
 
-                // --- تفعيل تحريك الصور لهذا المنتج ---
+                // تشغيل حركة الصور التلقائية
                 if(typeof UI !== 'undefined' && UI.startProductSlideshow) {
                     UI.startProductSlideshow(productType);
                 }
 
-                // تفعيل زر الإضافة للسلة
+                // زر الإضافة للسلة
                 document.getElementById('addBtn').onclick = () => {
-                    if(typeof Cart !== 'undefined') Cart.add(productType);
+                    const size = document.getElementById('pSize').value;
+                    const opt = document.getElementById('pOpt').value;
+                    Cart.add(productType, size, opt);
+                    UI.toggleCart(true); // فتح السلة تلقائياً عند الإضافة
                 };
             } else {
-                // إذا لم يتم العثور على المنتج
-                document.getElementById('productView').innerHTML = '<h2 style="text-align:center; width:100%;">المنتج غير موجود</h2>';
+                document.getElementById('productView').innerHTML = '<h2 style="text-align:center; width:100%; margin-top:100px;">المنتج غير موجود</h2>';
             }
         });
     </script>
