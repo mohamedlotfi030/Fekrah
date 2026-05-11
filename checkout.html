@@ -4,39 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إتمام الطلب | فكرة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/style.css">
     <style>
-        .checkout-container { max-width: 500px; margin: 40px auto; background: #111; padding: 30px; border-radius: 15px; border: 1px solid #333; }
-        .btn-wa { background: #25d366 !important; color: #fff !important; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
-        .btn-sheet { background: #00bcd4 !important; color: #000 !important; width: 100%; }
-        .back-home { display: block; text-align: center; margin-top: 25px; color: #888; text-decoration: none; transition: 0.3s; }
-        .back-home:hover { color: #00bcd4; }
+        .checkout-container { 
+            max-width: 500px; 
+            margin: 60px auto; 
+            background: #111; 
+            padding: 40px 30px; 
+            border-radius: 15px; 
+            border: 1px solid #333; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .btn-wa { 
+            background: #25d366 !important; 
+            color: #fff !important; 
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            width: 100%; 
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+        .btn-sheet { 
+            background: #00bcd4 !important; 
+            color: #000 !important; 
+            width: 100%; 
+            border: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.95rem;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+        .back-link:hover {
+            color: #00bcd4;
+        }
+        .loading-overlay { display:none; text-align:center; padding:20px; color:#00bcd4; }
     </style>
 </head>
 <body style="background:#000; color:#fff; padding: 20px;">
 
     <div class="checkout-container">
-        <h2 style="text-align:center; margin-bottom:25px; color: #00bcd4;">تأكيد الطلب</h2>
+        <h2 style="text-align:center; margin-bottom:30px; color: #00bcd4;">تأكيد الطلب</h2>
         
         <div id="formSection">
-            <input type="text" id="custName" placeholder="الاسم بالكامل" class="input-field" style="margin-bottom:15px;">
-            <input type="tel" id="custPhone" placeholder="رقم الموبايل (واتساب)" class="input-field" style="margin-bottom:25px;">
+            <input type="text" id="custName" placeholder="الاسم بالكامل" class="input-field" style="margin-bottom:15px; width:100%;">
+            <input type="tel" id="custPhone" placeholder="رقم الموبايل (واتساب)" class="input-field" style="margin-bottom:25px; width:100%;">
 
             <button onclick="handleOrder('whatsapp')" class="btn-main btn-wa">
-                 طلب عبر واتساب
+                <i class="fab fa-whatsapp"></i> طلب عبر واتساب
             </button>
 
             <button onclick="handleOrder('sheet')" class="btn-main btn-sheet">
-                تقديم الطلب (رسمي)
+                <i class="fas fa-paper-plane"></i> تقديم الطلب (بريد إلكتروني)
             </button>
 
-            <a href="index.html" class="back-home">
-                 العودة للصفحة الرئيسية
+            <a href="index.html" class="back-link">
+                <i class="fas fa-chevron-right" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                العودة للصفحة الرئيسية (المتجر)
             </a>
         </div>
 
-        <div id="loading" style="display:none; text-align:center; padding:20px; color:#00bcd4;">
-            جاري معالجة طلبك...
+        <div id="loading" class="loading-overlay">
+            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <p>جاري معالجة طلبك...</p>
         </div>
     </div>
 
@@ -48,7 +95,7 @@
             const phone = document.getElementById('custPhone').value;
 
             if(!name || !phone) {
-                alert("يرجى إدخال الاسم ورقم الهاتف");
+                alert("يرجى إدخال الاسم ورقم الهاتف لإكمال الطلب");
                 return;
             }
 
@@ -60,11 +107,11 @@
             } else {
                 const success = await API.submitToSheet(name, phone);
                 if(success) {
-                    alert("تم استلام طلبك بنجاح، وسنتواصل معك قريباً.");
+                    alert("تم استلام طلبك بنجاح! سنتواصل معك قريباً.");
                     localStorage.removeItem('fekra_cart');
                     window.location.href = 'index.html';
                 } else {
-                    alert("حدث خطأ، يرجى المحاولة لاحقاً.");
+                    alert("عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.");
                     document.getElementById('formSection').style.display = 'block';
                     document.getElementById('loading').style.display = 'none';
                 }
