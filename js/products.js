@@ -2,10 +2,10 @@ const Products = {
     'tshirt': {
         id: "tshirt",
         name: "تيشيرت قطن فاخر",
-        images: ["tshirt-main.png"], // بما أنها في المسار الرئيسي الآن
+        images: ["tshirt-main.png"],
         options: {
             sizes: ["S", "M", "L", "XL", "XXL"],
-            types: ["طباعة DTF", "تطريز"]
+            types: ["طباعة DTF", "تطريز كمبيوتر"]
         }
     },
     'rollup': {
@@ -14,7 +14,7 @@ const Products = {
         images: ["rollup-1.jpg"],
         options: {
             sizes: ["80×200 سم", "100×200 سم"],
-            types: ["مستورد ثقيل", "فاخر"]
+            types: ["مستورد ثقيل", "محلي"]
         }
     },
     'bcard': {
@@ -22,9 +22,26 @@ const Products = {
         name: "كروت شخصية",
         images: ["business-card-1.jpg"],
         options: {
-            sizes: ["9x5 سم"],
-            types: ["كوشيه مط", "سلوفان"]
+            sizes: ["9×5 سم"],
+            types: ["كوشيه سلوفان مط", "كوشيه لامع"]
+        }
+    },
+    'mug': {
+        id: "mug",
+        name: "المج الحراري",
+        images: ["mug-main.jpg"],
+        options: {
+            sizes: ["قياسي"],
+            types: ["سيراميك أبيض", "سحري"]
+        }
+    },
+    'xbanner': {
+        id: "xbanner",
+        name: "إكس بانر ستاند",
+        images: ["x-banner-1.jpg"],
+        options: {
+            sizes: ["60×160 سم", "80×180 سم"],
+            types: ["هيكل كربون", "هيكل حديد"]
         }
     }
-    // يمكنك إضافة باقي المنتجات بنفس الطريقة
 };
