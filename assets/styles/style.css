@@ -1,226 +1,214 @@
-/* المتغيرات الأساسية */
-:root {
-    --primary: #00bcd4;
-    --dark: #000000;
-    --gray-bg: #111111;
-    --text-white: #ffffff;
-    --accent-green: #25d366;
-    --drawer-width: 380px;
+/* الأساسيات */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--dark);
-    color: var(--text-white);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    direction: rtl;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Header المطور بمسافات احترافية */
+/* الهيدر */
 .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 75px;
-    background: rgba(0, 0, 0, 0.95);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    z-index: 2000;
-    border-bottom: 1px solid #222;
-    box-sizing: border-box;
+    padding: 15px 5%;
+    background: #111;
+    position: sticky;
+    top: 0;
+    z-index: 5000; /* تحت السلة مباشرة */
+    border-bottom: 1px solid #333;
+}
+
+.logo img {
+    height: 45px;
 }
 
 .nav-group {
     display: flex;
+    gap: 20px;
     align-items: center;
-    gap: 25px; /* المسافة المطلوبة بين الروابط */
 }
 
 .nav-link {
-    color: var(--text-white);
+    color: #fff;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    transition: 0.3s ease;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .nav-link i {
-    color: var(--primary);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+    color: #00bcd4;
 }
 
 .nav-link:hover {
-    color: var(--primary);
+    color: #00bcd4;
 }
 
-/* شارة السلة (Badge) */
-.cart-badge {
-    background: white;
-    color: black;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-}
-
-/* شبكة المنتجات (Grid) */
+/* شبكة المنتجات والكروت */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
-    padding: 110px 5% 150px; /* بادينج سفلي لترك مساحة للفوتر */
+    padding: 30px 5%;
 }
 
 .card {
-    background: var(--gray-bg);
-    border-radius: 20px;
-    border: 1px solid #222;
+    background: #1a1a1a;
+    border-radius: 12px;
     overflow: hidden;
     text-align: center;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #333;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary);
+    transform: translateY(-5px);
+    border-color: #00bcd4;
 }
 
 .card-img-container {
-    background: white;
+    background: #fff;
     height: 220px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 15px;
+    justify-content: center;
+    padding: 10px;
 }
 
 .card-img-container img {
-    max-width: 100%;
     max-height: 100%;
+    max-width: 100%;
     object-fit: contain;
+    transition: opacity 0.4s ease-in-out;
 }
 
 .card h3 {
-    margin: 20px 0;
-    font-size: 1.2rem;
+    padding: 15px;
+    margin: 0;
+    font-size: 1.1rem;
+    color: #fff;
 }
 
-/* زر اطلب الآن المطور */
+/* الأزرار */
 .btn-main {
-    background: var(--primary);
-    color: black;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    font-weight: 800;
-    font-size: 1rem;
-    cursor: pointer;
+    display: inline-block;
+    background: #00bcd4;
+    color: #000;
     text-decoration: none;
-    display: block;
-    width: 85%;
-    margin: 0 auto 20px;
+    padding: 12px 25px;
+    margin: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
     transition: 0.3s;
 }
 
 .btn-main:hover {
-    filter: brightness(1.1);
-    transform: scale(1.02);
+    background: #fff;
+    transform: scale(1.05);
 }
 
-/* شريط التواصل السفلي المثبت (Fixed Footer) */
-.fixed-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #0a0a0a;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 3000;
-    border-top: 1px solid var(--primary);
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
-}
-
-.footer-item {
-    color: var(--text-white);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.75rem;
-    flex: 1;
-}
-
-.footer-item i {
-    color: var(--primary);
-    font-size: 1.4rem;
-}
-
-/* نظام السلة الجانبي (Shopify Drawer) */
+/* --- السلة الجانبية (الإصلاح الحرج) --- */
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: var(--drawer-width);
-    height: 100%;
-    background: #050505;
-    z-index: 4000;
+    right: -350px; /* مخفية لليمين */
+    width: 320px;
+    height: 100vh;
+    background: #111;
+    z-index: 10000 !important; /* أعلى من كل شيء في الصفحة */
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+    border-left: 1px solid #333;
     display: flex;
     flex-direction: column;
+    box-shadow: -10px 0 20px rgba(0,0,0,0.8);
 }
 
 .cart-drawer.active {
-    right: 0;
+    right: 0; /* تظهر عند إضافة كلاس active بالجافا سكريبت */
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999; /* تحت السلة مباشرة وفوق المحتوى */
+    display: none;
+}
+
+.cart-overlay.active {
+    display: block;
 }
 
 .drawer-header {
     padding: 20px;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #333;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.drawer-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.drawer-footer {
-    padding: 20px;
-    border-top: 1px solid #222;
-}
-
-/* تنسيق عناصر السلة داخل الدرج */
-.cart-item-drawer {
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
     display: flex;
-    gap: 15px;
-    background: #111;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    justify-content: center;
     align-items: center;
+    min-width: 18px;
 }
 
-/* تعديلات الموبايل */
+/* المدخلات (Inputs) */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: #00bcd4;
+}
+
+/* الفوتر القديم (تم إلغاؤه واستبداله بكروت التواصل) */
+.fixed-footer {
+    display: none !important;
+}
+
+/* الاستجابة للهواتف */
 @media (max-width: 600px) {
-    .nav-link span { display: none; } /* إخفاء النص والاكتفاء بالأيقونات */
-    .cart-drawer { width: 100%; }
-    .grid { padding: 90px 4% 180px; }
-    .nav-group { gap: 15px; }
+    .cart-drawer {
+        width: 100%; /* السلة تأخذ الشاشة كاملة في الموبايل */
+        right: -100%;
+    }
+    .grid {
+        padding: 15px;
+        gap: 15px;
+    }
 }
