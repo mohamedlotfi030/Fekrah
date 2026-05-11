@@ -4,33 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فكرة للدعاية والإعلان | حلوان</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .cart-badge {
-            background: #fff; color: #000; border-radius: 50%;
-            padding: 2px 6px; font-size: 0.7rem; font-weight: bold;
-            position: absolute; top: -10px; right: -10px;
-            display: none; align-items: center; justify-content: center;
-            min-width: 15px; height: 15px; border: 1px solid var(--primary);
-        }
-        /* لضمان ظهور الصور بشكل سليم */
-        .card-img-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    </style>
 </head>
 <body>
 
     <header class="header">
         <div class="logo">
-            <img src="logo-main.png" alt="فكرة" style="height: 45px; cursor: pointer;" onclick="location.reload()">
+            <img src="logo-main.png" alt="فكرة" style="height: 45px; cursor: pointer;" onclick="location.href='index.html'">
         </div>
-        
         <nav class="nav-group">
             <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
             <a href="tel:01275209778" class="nav-link"><i class="fas fa-phone-alt"></i> <span>اتصل بنا</span></a>
             <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
                 <i class="fas fa-shopping-cart"></i>
-                <span id="cartBadge" class="cart-badge">0</span>
+                <span id="cartBadge" class="cart-badge" style="display:none; background:white; color:black; border-radius:50%; padding:2px 6px; font-size:0.7rem; position:absolute; top:-10px; right:-10px;">0</span>
             </div>
         </nav>
     </header>
@@ -42,13 +30,13 @@
         <a href="tel:01275209778" class="footer-item"><i class="fas fa-phone-alt"></i><span>اتصال</span></a>
         <a href="https://wa.me/201275209778" class="footer-item"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
         <a href="mailto:fekra.adv.eg@gmail.com" class="footer-item"><i class="fas fa-envelope"></i><span>الإيميل</span></a>
-        <a href="https://maps.google.com/?q=Helwan" target="_blank" class="footer-item"><i class="fas fa-map-marker-alt"></i><span>حلوان</span></a>
+        <a href="https://maps.app.goo.gl/YourLocation" target="_blank" class="footer-item"><i class="fas fa-map-marker-alt"></i><span>حلوان</span></a>
     </footer>
 
     <div id="cartDrawer" class="cart-drawer">
         <div class="drawer-header">
-            <h3><i class="fas fa-shopping-basket"></i> سلة الطلبات</h3>
-            <span onclick="UI.toggleCart(false)" style="font-size: 2.5rem; cursor: pointer;">×</span>
+            <h3>سلة الطلبات</h3>
+            <span onclick="UI.toggleCart(false)" style="font-size: 2rem; cursor: pointer;">×</span>
         </div>
         <div id="cartItemsList" class="drawer-body"></div>
         <div class="drawer-footer">
@@ -64,21 +52,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof Cart !== 'undefined') Cart.init();
-
             const grid = document.getElementById('productsGrid');
             if (grid && typeof Products !== 'undefined') {
                 Object.keys(Products).forEach(key => {
                     const p = Products[key];
-                    // ملاحظة: الصور أيضاً تقرأ من الروت بناءً على مستودع GitHub الخاص بك
                     grid.innerHTML += `
                         <div class="card">
-                            <div class="card-img-container" style="background:#fff; height:200px; display:flex; align-items:center; justify-content:center; padding:10px;">
-                                <img src="${p.images[0]}" alt="${p.name}">
+                            <div class="card-img-container" style="background:white; height:200px; display:flex; align-items:center; justify-content:center;">
+                                <img src="${p.images[0]}" alt="${p.name}" style="max-height:180px; max-width:90%;">
                             </div>
-                            <div style="padding:15px;">
-                                <h3 style="margin-bottom:15px;">${p.name}</h3>
-                                <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
-                            </div>
+                            <h3>${p.name}</h3>
+                            <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
                         </div>
                     `;
                 });
