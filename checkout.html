@@ -5,27 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إتمام الطلب | فكرة</title>
     <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        .checkout-container { max-width: 500px; margin: 40px auto; background: #111; padding: 30px; border-radius: 15px; border: 1px solid #333; }
+        .btn-wa { background: #25d366 !important; color: #fff !important; margin-bottom: 10px; }
+        .btn-sheet { background: #00bcd4 !important; color: #000 !important; }
+        .loading-overlay { display:none; text-align:center; padding:20px; color:#00bcd4; }
+    </style>
 </head>
-<body style="background:#000; color:#fff; padding:40px 5%;">
-    <div style="max-width:500px; margin:0 auto; background:#111; padding:30px; border-radius:15px; border:1px solid #333;">
-        <h2 style="color:#00bcd4; text-align:center;">بيانات العميل</h2>
-        <p style="text-align:center; color:#888;">برجاء إدخال الاسم ورقم الهاتف لإرسال الطلب</p>
+<body style="background:#000; color:#fff; padding: 20px;">
+
+    <div class="checkout-container">
+        <h2 style="text-align:center; margin-bottom:25px;">تأكيد الطلب</h2>
         
-        <input type="text" id="name" placeholder="الاسم بالكامل" class="input-field" style="width:100%; margin:20px 0 10px; padding:15px; background:#000; color:#fff; border:1px solid #333; border-radius:8px;">
-        <input type="tel" id="phone" placeholder="رقم الواتساب" class="input-field" style="width:100%; margin-bottom:30px; padding:15px; background:#000; color:#fff; border:1px solid #333; border-radius:8px;">
-        
-        <button onclick="confirmOrder()" class="btn-main" style="width:100%; padding:15px; font-size:1.1rem;">تأكيد الطلب عبر واتساب</button>
-        <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:#888; text-decoration:none;">العودة للمتجر</a>
+        <div id="formSection">
+            <input type="text" id="custName" placeholder="الاسم بالكامل" class="input-field" style="margin-bottom:15px;">
+            <input type="tel" id="custPhone" placeholder="رقم الموبايل" class="input-field" style="margin-bottom:25px;">
+
+            <button onclick="handleOrder('whatsapp')" class="btn-main btn-wa" style="width:100%;">
+                <i class="fab fa-whatsapp"></i> طلب عبر واتساب
+            </button>
+
+            <button onclick="handleOrder('sheet')" class="btn-main btn-sheet" style="width:100%;">
+                <i class="fas fa-file-export"></i> تقديم الطلب (بريد إلكتروني)
+            </button>
+        </div>
+
+        <div id="loading" class="loading-overlay">
+            <i class="fas fa-spinner fa-spin"></i> جاري معالجة طلبك...
+        </div>
     </div>
 
     <script src="js/cart.js"></script>
     <script src="js/api.js"></script>
     <script>
-        function confirmOrder() {
-            const n = document.getElementById('name').value;
-            const p = document.getElementById('phone').value;
-            if(!n || !p) return alert("برجاء ملء البيانات أولاً");
-            API.sendOrder(n, p);
+        async function handleOrder(method) {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+
+            if(!name || !phone) {
+                alert("يرجى إدخال الاسم ورقم الهاتف");
+                return;
+            }
+
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            if(method === 'whatsapp') {
+                API.sendOrderWhatsApp(name, phone);
+            } else {
+                const success = await API.submitToSheet(name, phone);
+                if(success) {
+                    alert("تم استلام طلبك بنجاح، وسنتواصل معك قريباً عبر البريد أو الهاتف.");
+                    localStorage.removeItem('fekra_cart');
+                    window.location.href = 'index.html';
+                } else {
+                    alert("عذراً، حدث خطأ أثناء الإرسال.");
+                    document.getElementById('formSection').style.display = 'block';
+                    document.getElementById('loading').style.display = 'none';
+                }
+            }
         }
     </script>
 </body>
