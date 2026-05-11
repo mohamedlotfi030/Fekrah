@@ -10,12 +10,12 @@ const UI = {
 
         container.innerHTML = Cart.items.map((item, i) => `
             <div class="cart-item-drawer" style="display:flex; gap:10px; padding:10px; border-bottom:1px solid #222; align-items:center;">
-                <img src="${item.image}" width="40">
+                <img src="${item.image}" width="40" style="background:white; border-radius:5px;">
                 <div style="flex:1">
-                    <h4 style="margin:0; font-size:0.9rem;">${item.name}</h4>
-                    <small>${item.size}</small>
+                    <h4 style="margin:0; font-size:0.85rem; color:white;">${item.name}</h4>
+                    <small style="color:#888;">${item.size} | ${item.option}</small>
                 </div>
-                <button onclick="Cart.remove(${i})" style="background:none; border:none; color:red; cursor:pointer;">✕</button>
+                <button onclick="Cart.remove(${i})" style="background:none; border:none; color:#ff4444; cursor:pointer; font-size:1.2rem;">✕</button>
             </div>
         `).join('');
     },
