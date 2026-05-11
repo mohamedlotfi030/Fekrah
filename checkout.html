@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إتمام الطلب - فكرة</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
+<body style="background:#000; color:#fff; padding:20px;">
+    <h2>إتمام الطلب</h2>
+    <div id="orderSummary" style="margin-bottom:20px; border:1px solid #333; padding:15px;"></div>
+    
+    <input type="text" id="cName" placeholder="الاسم بالكامل" class="input-field" style="width:100%; margin-bottom:10px;">
+    <input type="tel" id="cPhone" placeholder="رقم الموبايل" class="input-field" style="width:100%; margin-bottom:20px;">
+    
+    <button onclick="confirm()" class="btn-main" style="width:100%;">تأكيد وإرسال الطلب</button>
+
+    <script src="js/cart.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        const sum = document.getElementById('orderSummary');
+        const cart = JSON.parse(localStorage.getItem('fekra_cart')) || [];
+        sum.innerHTML = cart.map(item => `<p>• ${item.name} (${item.size})</p>`).join('');
+
+        function confirm() {
+            const name = document.getElementById('cName').value;
+            const phone = document.getElementById('cPhone').value;
+            if(!name || !phone) return alert("برجاء إدخال البيانات");
+            API.sendOrder(name, phone);
+        }
+    </script>
+</body>
+</html>
