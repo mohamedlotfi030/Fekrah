@@ -1,35 +1,24 @@
 const API = {
-    WHATSAPP_NUM: "201275209778", // رقمك المحدث
+    WHATSAPP_NUM: "201275209778",
 
-    async sendOrder(customerName, customerPhone) {
+    sendOrder(customerName, customerPhone) {
         if (Cart.items.length === 0) {
-            alert("السلة فارغة!");
+            alert("السلة فارغة حالياً!");
             return;
         }
 
-        // تجهيز نص الرسالة للواتساب
-        let message = `*طلب جديد من موقع فكرة*%0A`;
-        message += `--------------------------%0A`;
-        message += `👤 *العميل:* ${customerName}%0A`;
-        message += `📞 *الهاتف:* ${customerPhone}%0A`;
-        message += `🛒 *المنتجات:*%0A`;
+        let msg = `*طلب جديد من موقع فكرة للدعاية*%0A`;
+        msg += `👤 *العميل:* ${customerName}%0A`;
+        msg += `📞 *الهاتف:* ${customerPhone}%0A`;
+        msg += `--------------------------%0A`;
 
         Cart.items.forEach((item, index) => {
-            message += `${index + 1}. *${item.name}*%0A`;
-            message += `   - المقاس: ${item.size}%0A`;
-            message += `   - النوع: ${item.option}%0A`;
+            msg += `*${index + 1}. ${item.name}*%0A`;
+            msg += `المقاس: ${item.size} | النوع: ${item.option}%0A%0A`;
         });
 
-        message += `--------------------------%0A`;
-        message += `📌 إجمالي القطع: ${Cart.items.length}`;
-
-        // رابط الواتساب المباشر
-        const waLink = `https://wa.me/${this.WHATSAPP_NUM}?text=${message}`;
+        msg += `--------------------------`;
         
-        // فتح الواتساب في نافذة جديدة
-        window.open(waLink, '_blank');
-
-        // اختياري: تفريغ السلة بعد الطلب
-        // Cart.clear();
+        window.open(`https://wa.me/${this.WHATSAPP_NUM}?text=${msg}`, '_blank');
     }
 };
