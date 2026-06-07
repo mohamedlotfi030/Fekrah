@@ -22,7 +22,7 @@ body {
     background: #111;
     position: sticky;
     top: 0;
-    z-index: 5000;
+    z-index: 5000; /* تحت السلة مباشرة */
     border-bottom: 1px solid #333;
 }
 
@@ -122,15 +122,15 @@ body {
     transform: scale(1.05);
 }
 
-/* --- السلة الجانبية --- */
+/* --- السلة الجانبية (الإصلاح الحرج) --- */
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -350px;
+    right: -350px; /* مخفية لليمين */
     width: 320px;
     height: 100vh;
     background: #111;
-    z-index: 10000 !important;
+    z-index: 10000 !important; /* أعلى من كل شيء في الصفحة */
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-left: 1px solid #333;
     display: flex;
@@ -139,7 +139,7 @@ body {
 }
 
 .cart-drawer.active {
-    right: 0;
+    right: 0; /* تظهر عند إضافة كلاس active بالجافا سكريبت */
 }
 
 .cart-overlay {
@@ -149,7 +149,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.85);
-    z-index: 9999;
+    z-index: 9999; /* تحت السلة مباشرة وفوق المحتوى */
     display: none;
 }
 
@@ -181,7 +181,7 @@ body {
     min-width: 18px;
 }
 
-/* المدخلات */
+/* المدخلات (Inputs) */
 .input-field {
     width: 100%;
     padding: 12px;
@@ -196,20 +196,9 @@ body {
     border-color: #00bcd4;
 }
 
-/* الفوتر القديم */
+/* الفوتر القديم (تم إلغاؤه واستبداله بكروت التواصل) */
 .fixed-footer {
     display: none !important;
-}
-
-/* قسم أعمالنا */
-.work-card img {
-    width: 100%;
-    border-radius: 8px;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-.work-card img:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
 }
 
 /* قسم عملاؤنا */
@@ -217,36 +206,43 @@ body {
     overflow: hidden;
     position: relative;
 }
+
 .slide-track {
     display: flex;
-    width: calc(250px * 10); /* عدد اللوجوهات × حجمها */
+    width: calc(250px * 5); /* عدد اللوجوهات × حجمها (5 صور حالياً) */
     animation: scroll 20s linear infinite;
 }
+
 .client-logo {
     width: 250px;
     margin: 0 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, border 0.3s ease;
 }
+
 .client-logo img {
     width: 100%;
     height: auto;
+    border-radius: 6px;
+    border: 2px solid transparent;
 }
+
+/* عند الضغط على الصورة يتم تحديدها */
+.client-logo.selected img {
+    border: 2px solid #00bcd4;
+    transform: scale(1.05);
+}
+
+/* الحركة المستمرة */
 @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* الفوتر الجديد */
-footer {
-    padding: 20px;
-    text-align: center;
-    background: #000;
-    color: #888;
-}
-
 /* الاستجابة للهواتف */
 @media (max-width: 600px) {
     .cart-drawer {
-        width: 100%;
+        width: 100%; /* السلة تأخذ الشاشة كاملة في الموبايل */
         right: -100%;
     }
     .grid {
@@ -258,6 +254,6 @@ footer {
         margin: 0 10px;
     }
     .slide-track {
-        width: calc(150px * 10);
+        width: calc(150px * 5); /* عدد اللوجوهات × حجمها في الموبايل */
     }
 }
