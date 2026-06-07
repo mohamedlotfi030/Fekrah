@@ -201,6 +201,7 @@ body {
     display: none !important;
 }
 
+/* قسم عملاؤنا */
 .clients-slider {
     overflow: hidden;
     position: relative;
@@ -209,7 +210,6 @@ body {
 
 .slide-track {
     display: flex;
-    width: calc(100% * 2); /* لأننا كررنا القائمة مرتين */
     animation: scroll 30s linear infinite;
 }
 
@@ -237,12 +237,20 @@ body {
 
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* يتحرك نصف الطول لأن القائمة مكررة */
+    100% { transform: translateX(-100%); } /* يتحرك نصف الطول لأن القائمة مكررة */
 }
 
+/* الاستجابة للهواتف */
 @media (max-width: 600px) {
+    .cart-drawer {
+        width: 100%;
+        right: -100%;
+    }
+    .grid {
+        padding: 15px;
+        gap: 15px;
+    }
     .client-logo {
         flex: 0 0 50%; /* في الموبايل يظهر شعارين فقط */
     }
 }
-
