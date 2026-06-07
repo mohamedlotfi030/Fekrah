@@ -17,7 +17,7 @@ const Products = {
         id: "rollup",
         name: "رول أب ستاند",
         images: [
-            "assets/images/rollup-1.jpg", "assets/images/rollup-2.jpg", 
+            "assets/images/rollup-1.png", "assets/images/rollup-2.jpg", 
             "assets/images/rollup-3.jpg", "assets/images/rollup-4.jpg"
         ],
         options: {
@@ -28,13 +28,13 @@ const Products = {
     'xbanner': {
         id: "xbanner",
         name: "إكس بانر ستاند",
-        images: ["assets/images/x-banner-1.jpg", "assets/images/x-banner-2.jpg", "assets/images/x-banner-3.jpg"],
+        images: ["assets/images/x-banner-1.jpg", "assets/images/x-banner-2.jpg", "assets/images/x-banner-3.jpg", "assets/images/x-banner-4.jpg"],
         options: { sizes: ["60×160 سم", "80×180 سم"], types: ["هيكل كربون", "هيكل حديد"] }
     },
     'bcard': {
         id: "bcard",
         name: "كروت شخصية",
-        images: ["assets/images/business-card-1.jpg", "assets/images/business-card-2.jpg", "assets/images/business-card-3.png"],
+        images: ["assets/images/business-card-1.png", "assets/images/business-card-3.png"],
         options: { sizes: ["9×5 سم"], types: ["سلوفان مط", "سلوفان لامع", "يو في بارز"] }
     },
     'mug': {
