@@ -205,23 +205,26 @@ body {
 .clients-slider {
     overflow: hidden;
     position: relative;
+    width: 100%;
 }
 
 .slide-track {
     display: flex;
-    width: calc(250px * 5); /* عدد اللوجوهات × حجمها (5 صور حالياً) */
-    animation: scroll 20s linear infinite;
+    animation: scroll 30s linear infinite;
 }
 
 .client-logo {
-    width: 250px;
-    margin: 0 15px;
+    flex: 0 0 calc(100% / 3); /* عرض 3 صور فقط في كل مرة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, border 0.3s ease;
 }
 
 .client-logo img {
-    width: 100%;
+    max-width: 80%;
     height: auto;
     border-radius: 6px;
     border: 2px solid transparent;
@@ -236,7 +239,7 @@ body {
 /* الحركة المستمرة */
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(-100%); }
 }
 
 /* الاستجابة للهواتف */
@@ -250,10 +253,6 @@ body {
         gap: 15px;
     }
     .client-logo {
-        width: 150px;
-        margin: 0 10px;
-    }
-    .slide-track {
-        width: calc(150px * 5); /* عدد اللوجوهات × حجمها في الموبايل */
+        flex: 0 0 calc(100% / 2); /* في الموبايل يظهر شعارين فقط */
     }
 }
