@@ -22,7 +22,7 @@ body {
     background: #111;
     position: sticky;
     top: 0;
-    z-index: 5000; /* تحت السلة مباشرة */
+    z-index: 5000;
     border-bottom: 1px solid #333;
 }
 
@@ -122,15 +122,15 @@ body {
     transform: scale(1.05);
 }
 
-/* --- السلة الجانبية (الإصلاح الحرج) --- */
+/* --- السلة الجانبية --- */
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -350px; /* مخفية لليمين */
+    right: -350px;
     width: 320px;
     height: 100vh;
     background: #111;
-    z-index: 10000 !important; /* أعلى من كل شيء في الصفحة */
+    z-index: 10000 !important;
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-left: 1px solid #333;
     display: flex;
@@ -139,7 +139,7 @@ body {
 }
 
 .cart-drawer.active {
-    right: 0; /* تظهر عند إضافة كلاس active بالجافا سكريبت */
+    right: 0;
 }
 
 .cart-overlay {
@@ -149,7 +149,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.85);
-    z-index: 9999; /* تحت السلة مباشرة وفوق المحتوى */
+    z-index: 9999;
     display: none;
 }
 
@@ -181,7 +181,7 @@ body {
     min-width: 18px;
 }
 
-/* المدخلات (Inputs) */
+/* المدخلات */
 .input-field {
     width: 100%;
     padding: 12px;
@@ -196,7 +196,7 @@ body {
     border-color: #00bcd4;
 }
 
-/* الفوتر القديم (تم إلغاؤه واستبداله بكروت التواصل) */
+/* الفوتر القديم */
 .fixed-footer {
     display: none !important;
 }
@@ -210,11 +210,12 @@ body {
 
 .slide-track {
     display: flex;
+    width: calc(250px * 16); /* إذا لديك 8 شعارات وكررتهم مرتين = 16 */
     animation: scroll 30s linear infinite;
 }
 
 .client-logo {
-    flex: 0 0 calc(100% / 3); /* عرض 3 صور فقط في كل مرة */
+    flex: 0 0 33.3333%; /* يظهر 3 شعارات في العرض */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,22 +231,20 @@ body {
     border: 2px solid transparent;
 }
 
-/* عند الضغط على الصورة يتم تحديدها */
 .client-logo.selected img {
     border: 2px solid #00bcd4;
     transform: scale(1.05);
 }
 
-/* الحركة المستمرة */
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+    100% { transform: translateX(-50%); } /* يتحرك نصف الطول لأن القائمة مكررة */
 }
 
 /* الاستجابة للهواتف */
 @media (max-width: 600px) {
     .cart-drawer {
-        width: 100%; /* السلة تأخذ الشاشة كاملة في الموبايل */
+        width: 100%;
         right: -100%;
     }
     .grid {
@@ -253,6 +252,6 @@ body {
         gap: 15px;
     }
     .client-logo {
-        flex: 0 0 calc(100% / 2); /* في الموبايل يظهر شعارين فقط */
+        flex: 0 0 50%; /* في الموبايل يظهر شعارين فقط */
     }
 }
