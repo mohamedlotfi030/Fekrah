@@ -12,6 +12,14 @@ const UI = {
         }
     },
 
+    // فتح السلة مؤقتًا عند إضافة منتج
+    showCartTemporary() {
+        this.toggleCart(true);
+        setTimeout(() => {
+            this.toggleCart(false);
+        }, 3000); // تغلق بعد 3 ثواني
+    },
+
     renderCart() {
         const container = document.getElementById("cartItemsList");
         if (!container) return;
@@ -54,5 +62,21 @@ const UI = {
         }
     },
 
-    updateCart() { this.renderCart(); this.updateCartBadge(); }
+    updateCart() { this.renderCart(); this.updateCartBadge(); },
+
+    // ✅ بوب أب عند اختيار الطلب عبر البريد
+    showPhonePopup() {
+        const popup = document.getElementById("phonePopup");
+        if (popup) popup.style.display = "flex";
+    },
+
+    confirmPhone() {
+        const phone = document.getElementById("extraPhone").value;
+        if (!phone || phone.length < 10) {
+            alert("من فضلك أدخل رقم صحيح للتواصل");
+            return;
+        }
+        document.getElementById("phonePopup").style.display = "none";
+        // أكمل عملية الطلب هنا
+    }
 };
