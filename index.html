@@ -25,38 +25,6 @@
             width: auto;
             display: block;
         }
-        /* أنيميشن قسم أعمالنا */
-        .work-card img {
-            width: 100%;
-            border-radius: 8px;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        .work-card img:hover {
-            transform: scale(1.05);
-            opacity: 0.9;
-        }
-        /* شريط العملاء */
-        .clients-slider {
-            overflow: hidden;
-            position: relative;
-        }
-        .slide-track {
-            display: flex;
-            width: calc(250px * 10); /* عدد اللوجوهات × حجمها */
-            animation: scroll 20s linear infinite;
-        }
-        .client-logo {
-            width: 250px;
-            margin: 0 15px;
-        }
-        .client-logo img {
-            width: 100%;
-            height: auto;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
     </style>
 </head>
 <body>
@@ -87,16 +55,6 @@
     <main id="productsGrid" class="grid">
     </main>
 
-    <!-- قسم أعمالنا -->
-    <section id="our-work" style="padding:60px 5%; background:#111; color:#fff;">
-      <h2 style="text-align:center; color:#00bcd4; margin-bottom:40px;">أعمالنا</h2>
-      <div class="grid">
-        <div class="work-card"><img src="assets/images/business-card-1.png" alt="كارت شخصي"></div>
-        <div class="work-card"><img src="assets/images/rollup-1.png" alt="رول أب ستاند"></div>
-        <div class="work-card"><img src="assets/images/x-banner-1.jpg" alt="إكس بانر"></div>
-      </div>
-    </section>
-
     <!-- قسم عملاؤنا -->
     <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff;">
       <h2 style="text-align:center; color:#00bcd4; margin-bottom:40px;">بعض عملائنا</h2>
@@ -105,7 +63,7 @@
           <div class="client-logo"><img src="assets/images/client1.png" alt="عميل 1"></div>
           <div class="client-logo"><img src="assets/images/client2.png" alt="عميل 2"></div>
           <div class="client-logo"><img src="assets/images/client3.png" alt="عميل 3"></div>
-          <!-- أضف المزيد حسب الحاجة -->
+          <!-- أضف المزيد من اللوجوهات حسب الحاجة -->
         </div>
       </div>
     </section>
@@ -146,7 +104,6 @@
         </div>
     </div>
 
-    <!-- الفوتر -->
     <footer style="padding:20px; text-align:center; background:#000; color:#888;">
       © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
@@ -176,6 +133,15 @@
                         </div>`;
                 });
             }
+
+            // تحديد الصور في قسم عملاؤنا
+            const logos = document.querySelectorAll('.client-logo');
+            logos.forEach(logo => {
+              logo.addEventListener('click', () => {
+                logos.forEach(l => l.classList.remove('selected'));
+                logo.classList.add('selected');
+              });
+            });
         });
     </script>
 </body>
