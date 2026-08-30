@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فكرة | لوحة التحكم</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        .admin-container { max-width: 500px; margin: 50px auto; padding: 30px; background: #111; border-radius: 12px; border: 1px solid #333; }
+        .hidden { display: none; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #00bcd4; }
+        .admin-btn { width: 100%; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- قسم تسجيل الدخول -->
+    <div id="login-section" class="admin-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">تسجيل الدخول للإدارة</h2>
+        <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <input type="email" id="admin-email" class="input-field" placeholder="أدخل بريدك">
+        </div>
+        <div class="form-group">
+            <label>كلمة المرور</label>
+            <input type="password" id="admin-password" class="input-field" placeholder="أدخل كلمة المرور">
+        </div>
+        <button id="login-btn" class="btn-main admin-btn">دخول</button>
+        <p id="login-error" style="color: red; text-align: center; margin-top: 10px;"></p>
+    </div>
+
+    <!-- قسم إدارة المنتجات (يظهر بعد تسجيل الدخول) -->
+    <div id="dashboard-section" class="admin-container hidden">
+        <h2 style="text-align: center; margin-bottom: 20px; color: #4CAF50;">تم تسجيل الدخول بنجاح</h2>
+        <button id="logout-btn" class="btn-main" style="background: #ff4444; width: 100%; margin-bottom: 30px;">تسجيل الخروج</button>
+
+        <h3 style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">إضافة منتج جديد</h3>
+        
+        <div class="form-group">
+            <label>اسم المنتج (مثال: كارت شخصي)</label>
+            <input type="text" id="prod-name" class="input-field">
+        </div>
+        <div class="form-group">
+            <label>السعر (بالجنيه)</label>
+            <input type="number" id="prod-price" class="input-field">
+        </div>
+        <div class="form-group">
+            <label>رابط الصورة (مثال: assets/images/card.png)</label>
+            <input type="text" id="prod-image" class="input-field">
+        </div>
+        <div class="form-group">
+            <label>القسم (مثال: مطبوعات)</label>
+            <input type="text" id="prod-category" class="input-field">
+        </div>
+        
+        <button id="add-product-btn" class="btn-main admin-btn">حفظ ورفع المنتج</button>
+        <p id="add-msg" style="text-align: center; margin-top: 10px;"></p>
+    </div>
+
+    <!-- استدعاء ملف الجافا سكريبت الخاص باللوحة كـ Module -->
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
