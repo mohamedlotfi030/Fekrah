@@ -1,47 +1,248 @@
-<script type="module">
-    import { db } from './js/firebase-config.js';
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج | فكرة للدعاية والإعلان</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        .product-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .product-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+        .product-media img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid #333;
+        }
+        .product-details-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .product-title {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #ffffff;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            color: #00bcd4;
+            font-weight: bold;
+        }
+        .product-desc {
+            line-height: 1.6;
+            color: #ccc;
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .option-group label {
+            font-weight: bold;
+            color: #ddd;
+        }
+        .custom-select {
+            width: 100%;
+            padding: 12px;
+            background: #2a2a2a;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .btn-submit-order {
+            background: #25d366;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn-submit-order:hover {
+            background: #1eb954;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #00bcd4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .loading-text {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
 
-    document.addEventListener('DOMContentLoaded', async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
+    <div class="container">
+        <a href="index.html" class="btn-back">← العودة للرئيسية</a>
 
-        if (productId) {
+        <div id="loading-state" class="loading-text">جاري تحميل تفاصيل المنتج...</div>
+
+        <div id="product-content" class="product-wrapper" style="display: none;">
+            <!-- صورة المنتج -->
+            <div class="product-media">
+                <img id="product-image" src="" alt="صورة المنتج">
+            </div>
+
+            <!-- تفاصيل المنتج -->
+            <div class="product-details-info">
+                <h1 id="product-title" class="product-title">--</h1>
+                <div id="product-price" class="product-price">-- ج.م</div>
+                
+                <div class="product-desc">
+                    <strong>الوصف والمواصفات:</strong>
+                    <p id="product-desc" style="margin-top: 8px; margin-bottom: 0;">--</p>
+                </div>
+
+                <!-- القائمة المنسدلة للخيارات المخصصة -->
+                <div id="options-container" class="option-group" style="display: none;">
+                    <label for="product-options-select">اختر المواصفات/الحجم:</label>
+                    <select id="product-options-select" class="custom-select">
+                        <!-- يتم تعبئة الخيارات ديناميكياً -->
+                    </select>
+                </div>
+
+                <!-- زر الإرسال عبر الواتساب -->
+                <button id="whatsapp-order-btn" class="btn-submit-order">
+                    تأكيد الطلب عبر الواتساب 💬
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- كود الجافاسكربت لجلب بيانات المنتج من Firebase -->
+    <script type="module">
+        // ملاحظة: تأكد من صحة مسار firebase-config.js وفقاً لمجلدات مشروعك (مثلاً ./firebase-config.js أو ./js/firebase-config.js)
+        import { db } from './js/firebase-config.js'; 
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadingElem = document.getElementById('loading-state');
+            const contentElem = document.getElementById('product-content');
+
+            // قراءة id المنتج من الرابط
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId || productId === 'undefined') {
+                loadingElem.innerHTML = `
+                    <h2 style="color:#ff4444;">عفواً، لم يتم تحديد المنتج بشكل صحيح!</h2>
+                    <a href="index.html" style="color:#00bcd4;">اضغط هنا للعودة للصفحة الرئيسية</a>
+                `;
+                return;
+            }
+
             try {
+                // جلب بيانات المنتج من Firestore
                 const docRef = doc(db, "products", productId);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
                     const product = docSnap.data();
 
-                    // تحديث عناصر الصفحة بالبيانات الديناميكية
-                    if(document.getElementById('product-title')) 
-                        document.getElementById('product-title').innerText = product.name;
-                    
-                    if(document.getElementById('product-price')) 
-                        document.getElementById('product-price').innerText = product.price + " ج.م";
+                    // 1. تعبئة البيانات الأساسية
+                    document.getElementById('product-title').innerText = product.name || 'بدون اسم';
+                    document.getElementById('product-price').innerText = (product.price || 0) + " ج.م";
+                    document.getElementById('product-image').src = product.image || 'assets/images/Baner.png';
+                    document.getElementById('product-desc').innerText = product.description || 'لا يوجد وصف تفصيلي متاح لهذا المنتج.';
 
-                    if(document.getElementById('product-image')) 
-                        document.getElementById('product-image').src = product.image;
+                    // 2. معالجة القائمة المنسدلة للخيارات
+                    const optionsContainer = document.getElementById('options-container');
+                    const optionsSelect = document.getElementById('product-options-select');
 
-                    if(document.getElementById('product-desc')) 
-                        document.getElementById('product-desc').innerText = product.description || 'لا يوجد وصف إضافي.';
-
-                    // إنشاء القائمة المنسدلة للخيارات إن وجدت
-                    const optionsContainer = document.getElementById('product-options-select');
-                    if (optionsContainer && product.options && product.options.length > 0) {
-                        optionsContainer.innerHTML = '';
+                    if (product.options && Array.isArray(product.options) && product.options.length > 0) {
+                        optionsSelect.innerHTML = '';
                         product.options.forEach(opt => {
                             const option = document.createElement('option');
                             option.value = opt;
                             option.innerText = opt;
-                            optionsContainer.appendChild(option);
+                            optionsSelect.appendChild(option);
                         });
+                        optionsContainer.style.display = 'flex';
+                    } else {
+                        optionsContainer.style.display = 'none';
                     }
+
+                    // 3. إعداد زر الطلب على الواتساب
+                    document.getElementById('whatsapp-order-btn').addEventListener('click', () => {
+                        const selectedOption = optionsContainer.style.display !== 'none' ? optionsSelect.value : '';
+                        
+                        let message = `مرحباً، أريد طلب المنتج التالي:\n`;
+                        message += `• *الاسم:* ${product.name}\n`;
+                        message += `• *السعر:* ${product.price} ج.م\n`;
+                        if (selectedOption) {
+                            message += `• *الخيار المحدد:* ${selectedOption}\n`;
+                        }
+
+                        // ضع رقم الهاتف الخاص بك هنا بدلاً من الرقم الافتراضي
+                        const phoneNumber = "201000000000";
+                        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                        
+                        window.open(whatsappUrl, '_blank');
+                    });
+
+                    // إخفاء رسالة التحميل وإظهار المحتوى
+                    loadingElem.style.display = 'none';
+                    contentElem.style.display = 'grid';
+
+                } else {
+                    loadingElem.innerHTML = `
+                        <h2 style="color:#ff4444;">هذا المنتج غير موجود أو تم حذفه!</h2>
+                        <a href="index.html" style="color:#00bcd4;">العودة للصفحة الرئيسية</a>
+                    `;
                 }
             } catch (error) {
-                console.error("خطأ في تحميل تفاصيل المنتج:", error);
+                console.error("خطأ أثناء جلب المنتج:", error);
+                loadingElem.innerHTML = `
+                    <h2 style="color:#ff4444;">حدث خطأ أثناء تحميل البيانات.</h2>
+                    <p style="color:#aaa;">تأكد من الاتصال بالإنترنت أو مراجعة إعدادات قاعدة البيانات.</p>
+                `;
             }
-        }
-    });
-</script>
+        });
+    </script>
+</body>
+</html>
