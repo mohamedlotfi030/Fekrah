@@ -56,7 +56,6 @@
     </main>
 
    <!-- قسم عملاؤنا -->
-<!-- قسم عملاؤنا -->
 <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff;">
   <h2 style="text-align:center; color:#00bcd4; margin-bottom:40px;">بعض عملائنا</h2>
   <div class="clients-slider">
@@ -140,29 +139,27 @@
 
             const grid = document.getElementById('productsGrid');
             if(grid) {
-                grid.innerHTML = '<p style="text-align:center; color:#fff; grid-column: 1/-1;">جاري تحميل الخدمات...</p>';
+                grid.innerHTML = '';
+
+                // 1. عرض المنتجات القديمة الثابتة أولاً
+                if(typeof Products !== 'undefined') {
+                    Object.keys(Products).forEach(key => {
+                        const p = Products[key];
+                        grid.innerHTML += `
+                            <div class="card">
+                                <div class="card-img-container">
+                                    <img src="${p.images[0]}" alt="${p.name}">
+                                </div>
+                                <h3>${p.name}</h3>
+                                <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
+                            </div>`;
+                    });
+                }
+
+                // 2. جلب وعرض المنتجات الديناميكية الجديدة من Firestore
                 try {
                     const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
                     const querySnapshot = await getDocs(q);
-                    
-                    grid.innerHTML = '';
-
-                    if (querySnapshot.empty) {
-                        if(typeof Products !== 'undefined') {
-                            Object.keys(Products).forEach(key => {
-                                const p = Products[key];
-                                grid.innerHTML += `
-                                    <div class="card">
-                                        <div class="card-img-container">
-                                            <img src="${p.images[0]}" alt="${p.name}">
-                                        </div>
-                                        <h3>${p.name}</h3>
-                                        <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
-                                    </div>`;
-                            });
-                        }
-                        return;
-                    }
 
                     querySnapshot.forEach((doc) => {
                         const p = doc.data();
@@ -175,13 +172,11 @@
                                     <img src="${productImage}" alt="${productName}">
                                 </div>
                                 <h3>${productName}</h3>
-                                <p style="color: #00bcd4; font-weight: bold; margin: 5px 0;">${p.price ? p.price + ' ج.م' : ''}</p>
-                                <a href="https://wa.me/201111049778?text=${encodeURIComponent('أريد طلب خدمة: ' + productName)}" target="_blank" class="btn-main">طلب الخدمة</a>
+                                <a href="product-details.html?id=${doc.id}" class="btn-main">اطلب الآن</a>
                             </div>`;
                     });
                 } catch (error) {
-                    console.error("خطأ في جلب المنتجات:", error);
-                    grid.innerHTML = '<p style="text-align:center; color:red; grid-column: 1/-1;">حدث خطأ أثناء تحميل المنتجات.</p>';
+                    console.error("خطأ في جلب المنتجات الديناميكية:", error);
                 }
             }
 
