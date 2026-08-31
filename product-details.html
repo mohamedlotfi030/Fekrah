@@ -1,159 +1,85 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تفاصيل المنتج | فكرة</title>
-  <link rel="stylesheet" href="assets/styles/style.css">
-  <style>
-    /* احتفظ بالأنماط التي لديك أو ألصق الأنماط السابقة */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج | فكرة</title>
+    
+    <link rel="icon" type="image/png" href="logo-main.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
 </head>
-<body>
-  <!-- شريط التنقل -->
-  <nav class="navbar">
-    <a href="index.html" class="btn-back">➔ العودة للرئيسية</a>
-    <div class="cart-icon-container" id="cart-icon">🛒 <span class="cart-badge" id="cart-count">0</span></div>
-  </nav>
+@@ -38,16 +41,16 @@
 
-  <div class="container">
-    <div id="loading-state" class="loading-msg">جاري تحميل بيانات المنتج... ⏳</div>
+            <div class="selection-group">
+                <label style="display:block; margin-bottom:10px; color:#aaa;">المقاس / الحجم:</label>
+                <select id="pSize" class="input-field" style="margin-bottom:20px;"></select>
+                <select id="pSize" class="input-field" style="margin-bottom:20px; width: 100%;"></select>
 
-    <div id="product-content" class="product-wrapper" style="display: none;">
-      <div class="product-media">
-        <img id="product-image" src="" alt="صورة المنتج">
-      </div>
+                <label style="display:block; margin-bottom:10px; color:#aaa;">نوع الخامة / الطباعة:</label>
+                <select id="pOpt" class="input-field" style="margin-bottom:20px;"></select>
+                <select id="pOpt" class="input-field" style="margin-bottom:20px; width: 100%;"></select>
 
-      <div class="product-info">
-        <h1 id="product-title">--</h1>
-        <div id="product-price" class="product-price">-- ج.م</div>
-        <p id="product-desc" style="color: #bbb; line-height: 1.6;">--</p>
+                <label style="display:block; margin-bottom:10px; color:#aaa;">ملاحظاتك (اختياري):</label>
+                <textarea id="pNotes" placeholder="أضف أي تفاصيل أخرى تريدها هنا..." class="input-field" style="height:100px; resize:none;"></textarea>
+                <textarea id="pNotes" placeholder="أضف أي تفاصيل أخرى تريدها هنا..." class="input-field" style="height:100px; resize:none; width: 100%;"></textarea>
+            </div>
 
-        <div id="options-container" style="display: none; margin: 15px 0;">
-          <label style="display:block; margin-bottom:8px;">المقاس / المواصفات:</label>
-          <select id="product-size" style="width: 100%; padding: 12px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 8px; font-size:1rem;"></select>
-          <select id="product-options" style="width: 100%; padding: 12px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 8px; font-size:1rem; margin-top:10px;"></select>
+            <button id="addBtn" class="btn-main" style="width:100%; margin: 30px 0 10px; padding:18px; font-size:1.1rem;">إضافة إلى السلة</button>
+            <button id="addBtn" class="btn-main" style="width:100%; margin: 30px 0 10px; padding:18px; font-size:1.1rem; border:none; cursor:pointer;">إضافة إلى السلة</button>
+            <button onclick="location.href='index.html'" style="width:100%; background:transparent; color:#888; border:1px solid #333; padding:12px; border-radius:8px; cursor:pointer; transition:0.3s;">العودة للمتجر</button>
         </div>
-
-        <div class="action-buttons">
-          <button id="btn-add-cart" class="btn btn-cart">إضافة إلى السلة 🛒</button>
-          <button id="btn-whatsapp" class="btn btn-whatsapp">إتمام الطلب عبر الواتساب 💬</button>
-          <button id="btn-email" class="btn btn-email">إتمام الطلب عبر الإيميل ✉️</button>
-        </div>
-      </div>
     </div>
-  </div>
+@@ -59,7 +62,7 @@
+        </div>
+        <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;"></div>
+        <div style="padding: 20px; border-top: 1px solid #333;">
+            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0;">إتمام الطلب</button>
+            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0; border:none; cursor:pointer;">إتمام الطلب</button>
+        </div>
+    </div>
 
-  <script type="module">
-    import { db } from './js/firebase-config.js';
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-    import { addToCart } from './js/cart.js';
+@@ -69,10 +72,8 @@
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      const loadingElem = document.getElementById('loading-state');
-      const contentElem = document.getElementById('product-content');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // تهيئة السلة
+            if(typeof Cart !== 'undefined') Cart.init();
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');
+            // جلب نوع المنتج من الرابط
+            const urlParams = new URLSearchParams(window.location.search);
+            const productType = urlParams.get('type');
+            const product = Products[productType];
+@@ -81,30 +82,26 @@
+                document.getElementById('pName').innerText = product.name;
+                document.getElementById('mainPImg').src = product.images[0];
 
-      if (!productId || productId === 'undefined') {
-        loadingElem.innerHTML = `<h3 style="color:#ff4757;">عذراً، المنتج غير موجود أو الرابط غير صحيح.</h3>`;
-        return;
-      }
+                // ملء المقاسات
+                const sizeSelect = document.getElementById('pSize');
+                product.options.sizes.forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
 
-      try {
-        const docRef = doc(db, "products", productId);
-        const docSnap = await getDoc(docRef);
+                // ملء الأنواع
+                const optSelect = document.getElementById('pOpt');
+                product.options.types.forEach(t => optSelect.innerHTML += `<option value="${t}">${t}</option>`);
 
-        if (docSnap.exists()) {
-          const product = docSnap.data();
+                // تشغيل حركة الصور التلقائية
+                if(typeof UI !== 'undefined' && UI.startProductSlideshow) {
+                    UI.startProductSlideshow(productType);
+                }
 
-          document.getElementById('product-title').innerText = product.name || '--';
-          document.getElementById('product-price').innerText = (product.price !== undefined ? product.price : '--') + " ج.م";
-          document.getElementById('product-image').src = product.image || 'assets/images/Baner.png';
-          document.getElementById('product-desc').innerText = product.description || 'لا يوجد وصف متاح لهذا المنتج.';
-
-          // تهيئة القوائم إن وُجدت
-          const optionsContainer = document.getElementById('options-container');
-          const sizeSelect = document.getElementById('product-size');
-          const optionsSelect = document.getElementById('product-options');
-
-          // مساحات افتراضية إن لم توجد
-          sizeSelect.innerHTML = '';
-          optionsSelect.innerHTML = '';
-
-          if (product.sizes && Array.isArray(product.sizes) && product.sizes.length > 0) {
-            product.sizes.forEach(s => {
-              const opt = document.createElement('option');
-              opt.value = s; opt.innerText = s;
-              sizeSelect.appendChild(opt);
-            });
-            optionsContainer.style.display = 'block';
-          } else {
-            // إخفاء select المقاسات إذا لم توجد
-            sizeSelect.style.display = 'none';
-          }
-
-          if (product.options && Array.isArray(product.options) && product.options.length > 0) {
-            product.options.forEach(o => {
-              const opt = document.createElement('option');
-              opt.value = o; opt.innerText = o;
-              optionsSelect.appendChild(opt);
-            });
-            optionsContainer.style.display = 'block';
-          } else {
-            optionsSelect.style.display = 'none';
-          }
-
-          const getSelectedText = () => {
-            const sizeText = (sizeSelect && sizeSelect.style.display !== 'none') ? `\n• المقاس: ${sizeSelect.value}` : '';
-            const optText = (optionsSelect && optionsSelect.style.display !== 'none') ? `\n• المواصفات: ${optionsSelect.value}` : '';
-            return sizeText + optText;
-          };
-
-          // واتساب
-          document.getElementById('btn-whatsapp').addEventListener('click', () => {
-            const msg = `مرحباً، أريد طلب:\n• المنتج: ${product.name}\n• السعر: ${product.price} ج.م${getSelectedText()}`;
-            window.open(`https://wa.me/201111049778?text=${encodeURIComponent(msg)}`, '_blank');
-          });
-
-          // ايميل
-          document.getElementById('btn-email').addEventListener('click', () => {
-            const msg = `مرحباً،\nأريد طلب:\n• المنتج: ${product.name}\n• السعر: ${product.price} ج.م${getSelectedText()}\n\nبرجاء التواصل معي.`;
-            window.location.href = `mailto:admin@example.com?subject=طلب منتج: ${encodeURIComponent(product.name)}&body=${encodeURIComponent(msg)}`;
-          });
-
-          // إضافة للسلة
-          document.getElementById('btn-add-cart').addEventListener('click', async () => {
-            const size = (document.getElementById('product-size') && document.getElementById('product-size').style.display !== 'none') ? document.getElementById('product-size').value : 'قياسي';
-            const option = (document.getElementById('product-options') && document.getElementById('product-options').style.display !== 'none') ? document.getElementById('product-options').value : 'عادي';
-
-            const productObj = {
-              id: productId,
-              name: product.name,
-              price: product.price,
-              image: product.image || 'assets/images/Baner.png',
-              size,
-              option,
-              qty: 1
-            };
-
-            const added = await addToCart(productObj);
-            if (added) {
-              alert('تمت إضافة المنتج إلى السلة بنجاح!');
+                // زر الإضافة للسلة
+                document.getElementById('addBtn').onclick = () => {
+                    const size = document.getElementById('pSize').value;
+                    const opt = document.getElementById('pOpt').value;
+                    Cart.add(productType, size, opt);
+                    UI.toggleCart(true); // فتح السلة تلقائياً عند الإضافة
+                    UI.toggleCart(true); 
+                };
+            } else {
+                document.getElementById('productView').innerHTML = '<h2 style="text-align:center; width:100%; margin-top:100px;">المنتج غير موجود</h2>';
             }
-          });
-
-          loadingElem.style.display = 'none';
-          contentElem.style.display = 'grid';
-        } else {
-          loadingElem.innerHTML = `<h3 style="color:#ff4757;">المنتج غير موجود في قاعدة البيانات! تأكد من أنك لم تقم بحذفه.</h3>`;
-        }
-      } catch (error) {
-        console.error("خطأ في جلب بيانات المنتج: ", error);
-        loadingElem.innerHTML = `<h3 style="color:#ff4757;">حدث خطأ أثناء الاتصال بقاعدة البيانات.</h3>`;
-      }
-    });
-  </script>
+        });
+    </script>
 </body>
 </html>
