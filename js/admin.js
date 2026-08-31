@@ -2,6 +2,8 @@ import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+console.log("Admin JS loaded successfully.");
+
 const loginSection = document.getElementById('login-section');
 const dashboardSection = document.getElementById('dashboard-section');
 const loginBtn = document.getElementById('login-btn');
@@ -12,9 +14,11 @@ const addMsg = document.getElementById('add-msg');
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        console.log("User is logged in:", user.email);
         loginSection.classList.add('hidden');
         dashboardSection.classList.remove('hidden');
     } else {
+        console.log("User is logged out.");
         loginSection.classList.remove('hidden');
         dashboardSection.classList.add('hidden');
     }
@@ -35,8 +39,8 @@ loginBtn.addEventListener('click', async () => {
         await signInWithEmailAndPassword(auth, email, password);
         loginError.innerText = "";
     } catch (error) {
-        console.error(error);
-        loginError.innerText = "بيانات الدخول غير صحيحة!";
+        console.error("Login Error:", error);
+        loginError.innerText = "بيانات الدخول غير صحيحة: " + error.message;
     } finally {
         loginBtn.innerText = "دخول";
         loginBtn.disabled = false;
@@ -48,6 +52,7 @@ logoutBtn.addEventListener('click', () => {
 });
 
 addProductBtn.addEventListener('click', async () => {
+    console.log("Add product button clicked.");
     const name = document.getElementById('prod-name').value.trim();
     const price = document.getElementById('prod-price').value.trim();
     const category = document.getElementById('prod-category').value.trim();
@@ -67,7 +72,8 @@ addProductBtn.addEventListener('click', async () => {
         addProductBtn.innerText = "جاري الحفظ...";
         addProductBtn.disabled = true;
 
-        await addDoc(collection(db, "products"), {
+        console.log("Attempting to write to Firestore...");
+        const docRef = await addDoc(collection(db, "products"), {
             name: name,
             price: Number(price),
             category: category || "خدمات إعلانية",
@@ -75,7 +81,8 @@ addProductBtn.addEventListener('click', async () => {
             createdAt: new Date()
         });
 
-        addMsg.innerText = "تمت إضافة المنتج بنجاح!";
+        console.log("Document written with ID: ", docRef.id);
+        addMsg.innerText = "تمت إضافة المنتج بنجاح برقم: " + docRef.id;
         addMsg.style.color = "#4CAF50";
 
         document.getElementById('prod-name').value = '';
@@ -84,8 +91,8 @@ addProductBtn.addEventListener('click', async () => {
         document.getElementById('prod-image').value = '';
 
     } catch (error) {
-        console.error("Error adding document: ", error);
-        addMsg.innerText = "حدث خطأ أثناء الحفظ (تأكد من قواعد Firestore)";
+        console.error("Firestore Add Error Details:", error);
+        addMsg.innerText = "خطأ الحفظ: " + error.message;
         addMsg.style.color = "red";
     } finally {
         addProductBtn.innerText = "حفظ ورفع المنتج";
