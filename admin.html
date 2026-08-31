@@ -3,69 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - وكالة فكرة</title>
+    <title>فكرة | لوحة التحكم</title>
     <link rel="stylesheet" href="assets/styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background: #f4f6f9; padding: 20px; }
-        .admin-card { max-width: 500px; margin: 30px auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 15px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .input-field { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .btn-submit { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .btn-submit:hover { background: #219150; }
-        .btn-logout { background: #e74c3c; margin-top: 15px; }
-        .hidden { display: none !important; }
-        .msg { text-align: center; margin-top: 10px; font-weight: bold; }
+        .admin-container { max-width: 500px; margin: 50px auto; padding: 30px; background: #111; border-radius: 12px; border: 1px solid #333; }
+        .hidden { display: none; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #00bcd4; }
+        .admin-btn { width: 100%; text-align: center; }
     </style>
 </head>
 <body>
 
     <!-- قسم تسجيل الدخول -->
-    <div id="login-section" class="admin-card">
-        <h2 style="text-align:center;">تسجيل دخول الأدمن</h2>
+    <div id="login-section" class="admin-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">تسجيل الدخول للإدارة</h2>
         <div class="form-group">
             <label>البريد الإلكتروني</label>
-            <input type="email" id="admin-email" class="input-field" placeholder="admin@fekrah.com">
+            <input type="email" id="admin-email" class="input-field" placeholder="أدخل بريدك">
         </div>
         <div class="form-group">
             <label>كلمة المرور</label>
-            <input type="password" id="admin-password" class="input-field">
+            <input type="password" id="admin-password" class="input-field" placeholder="أدخل كلمة المرور">
         </div>
-        <button id="login-btn" class="btn-submit">دخول</button>
-        <div id="login-error" class="msg" style="color:red;"></div>
+        <button id="login-btn" class="btn-main admin-btn">دخول</button>
+        <p id="login-error" style="color: red; text-align: center; margin-top: 10px;"></p>
     </div>
 
     <!-- قسم إدارة المنتجات (يظهر بعد تسجيل الدخول) -->
-    <div id="dashboard-section" class="admin-card hidden">
-        <h2 style="text-align:center;">إضافة خدمة / منتج جديد</h2>
+    <div id="dashboard-section" class="admin-container hidden">
+        <h2 style="text-align: center; margin-bottom: 20px; color: #4CAF50;">تم تسجيل الدخول بنجاح</h2>
+        <button id="logout-btn" class="btn-main" style="background: #ff4444; width: 100%; margin-bottom: 30px;">تسجيل الخروج</button>
+
+        <h3 style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">إضافة منتج جديد</h3>
         
         <div class="form-group">
-            <label>اسم الخدمة</label>
-            <input type="text" id="prod-name" class="input-field" placeholder="مثال: رول أب ستاند">
+            <label>اسم المنتج (مثال: كارت شخصي)</label>
+            <input type="text" id="prod-name" class="input-field">
         </div>
-
         <div class="form-group">
             <label>السعر (بالجنيه)</label>
-            <input type="number" id="prod-price" class="input-field" placeholder="مثال: 350">
+            <input type="number" id="prod-price" class="input-field">
         </div>
-
         <div class="form-group">
-            <label>القسم / التصنيف</label>
-            <input type="text" id="prod-category" class="input-field" placeholder="مثال: مطبوعات أو هدايا">
+            <label>رابط الصورة (مثال: assets/images/card.png)</label>
+            <input type="text" id="prod-image" class="input-field">
         </div>
-
         <div class="form-group">
-            <label>مسار الصورة على الاستضافة</label>
-            <input type="text" id="prod-image" class="input-field" placeholder="مثال: assets/images/Baner.png">
+            <label>القسم (مثال: مطبوعات)</label>
+            <input type="text" id="prod-category" class="input-field">
         </div>
-
-        <button id="add-product-btn" class="btn-submit">حفظ ورفع المنتج</button>
-        <div id="add-msg" class="msg"></div>
-
-        <button id="logout-btn" class="btn-submit btn-logout">تسجيل الخروج</button>
+        
+        <button id="add-product-btn" class="btn-main admin-btn">حفظ ورفع المنتج</button>
+        <p id="add-msg" style="text-align: center; margin-top: 10px;"></p>
     </div>
 
+    <!-- استدعاء ملف الجافا سكريبت الخاص باللوحة كـ Module -->
     <script type="module" src="js/admin.js"></script>
 </body>
 </html>
