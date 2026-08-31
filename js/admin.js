@@ -2,83 +2,93 @@ import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// تعريف العناصر
 const loginSection = document.getElementById('login-section');
 const dashboardSection = document.getElementById('dashboard-section');
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const addProductBtn = document.getElementById('add-product-btn');
+const loginError = document.getElementById('login-error');
+const addMsg = document.getElementById('add-msg');
 
-// 1. مراقبة حالة الدخول (هل المدير مسجل دخوله أم لا؟)
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // إذا كان مسجلاً، أخفِ تسجيل الدخول وأظهر اللوحة
         loginSection.classList.add('hidden');
         dashboardSection.classList.remove('hidden');
     } else {
-        // إذا لم يكن مسجلاً، أظهر تسجيل الدخول
         loginSection.classList.remove('hidden');
         dashboardSection.classList.add('hidden');
     }
 });
 
-// 2. تسجيل الدخول
 loginBtn.addEventListener('click', async () => {
-    const email = document.getElementById('admin-email').value;
+    const email = document.getElementById('admin-email').value.trim();
     const password = document.getElementById('admin-password').value;
-    const errorMsg = document.getElementById('login-error');
     
-    try {
-        loginBtn.innerText = "جاري الدخول...";
-        await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-        errorMsg.innerText = "خطأ في البريد أو كلمة المرور!";
-        loginBtn.innerText = "دخول";
-    }
-});
-
-// 3. تسجيل الخروج
-logoutBtn.addEventListener('click', () => {
-    signOut(auth);
-});
-
-// 4. إضافة منتج إلى قاعدة البيانات
-addProductBtn.addEventListener('click', async () => {
-    const name = document.getElementById('prod-name').value;
-    const price = document.getElementById('prod-price').value;
-    const image = document.getElementById('prod-image').value;
-    const category = document.getElementById('prod-category').value;
-    const msg = document.getElementById('add-msg');
-
-    if (!name || !price || !image) {
-        msg.innerText = "يرجى ملء جميع الحقول الأساسية!";
-        msg.style.color = "red";
+    if (!email || !password) {
+        loginError.innerText = "يرجى كتابة البريد وكلمة المرور!";
         return;
     }
 
     try {
-        addProductBtn.innerText = "جاري الرفع...";
-        // إضافة البيانات إلى مجموعة (collection) باسم "products"
+        loginBtn.innerText = "جاري الدخول...";
+        loginBtn.disabled = true;
+        await signInWithEmailAndPassword(auth, email, password);
+        loginError.innerText = "";
+    } catch (error) {
+        console.error(error);
+        loginError.innerText = "بيانات الدخول غير صحيحة!";
+    } finally {
+        loginBtn.innerText = "دخول";
+        loginBtn.disabled = false;
+    }
+});
+
+logoutBtn.addEventListener('click', () => {
+    signOut(auth);
+});
+
+addProductBtn.addEventListener('click', async () => {
+    const name = document.getElementById('prod-name').value.trim();
+    const price = document.getElementById('prod-price').value.trim();
+    const category = document.getElementById('prod-category').value.trim();
+    let imageInput = document.getElementById('prod-image').value.trim();
+
+    if (!name || !price || !imageInput) {
+        addMsg.innerText = "يرجى ملء الحقول الأساسية (الاسم، السعر، الصورة)!";
+        addMsg.style.color = "red";
+        return;
+    }
+
+    if (!imageInput.startsWith('http') && !imageInput.startsWith('/') && !imageInput.startsWith('assets/')) {
+        imageInput = `assets/images/${imageInput}`;
+    }
+
+    try {
+        addProductBtn.innerText = "جاري الحفظ...";
+        addProductBtn.disabled = true;
+
         await addDoc(collection(db, "products"), {
             name: name,
             price: Number(price),
-            image: image,
-            category: category,
+            category: category || "خدمات إعلانية",
+            image: imageInput,
             createdAt: new Date()
         });
-        
-        msg.innerText = "تمت إضافة المنتج بنجاح!";
-        msg.style.color = "#4CAF50";
-        addProductBtn.innerText = "حفظ ورفع المنتج";
-        
-        // تفريغ الحقول بعد الإضافة
+
+        addMsg.innerText = "تمت إضافة المنتج بنجاح!";
+        addMsg.style.color = "#4CAF50";
+
         document.getElementById('prod-name').value = '';
         document.getElementById('prod-price').value = '';
+        document.getElementById('prod-category').value = '';
         document.getElementById('prod-image').value = '';
+
     } catch (error) {
         console.error("Error adding document: ", error);
-        msg.innerText = "حدث خطأ أثناء الإضافة!";
-        msg.style.color = "red";
+        addMsg.innerText = "حدث خطأ أثناء الحفظ (تأكد من قواعد Firestore)";
+        addMsg.style.color = "red";
+    } finally {
         addProductBtn.innerText = "حفظ ورفع المنتج";
+        addProductBtn.disabled = false;
     }
 });
