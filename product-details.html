@@ -1,166 +1,159 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل المنتج | فكرة</title>
-    <!-- استدعاء ملف التنسيقات الخاص بك -->
-    <link rel="stylesheet" href="assets/styles/style.css">
-    
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background-color: #121212; color: #fff; margin: 0; }
-        
-        /* شريط التنقل (الناف بار) */
-        .navbar { display: flex; justify-content: space-between; align-items: center; background: #1e1e1e; padding: 15px 30px; border-bottom: 2px solid #333; position: sticky; top: 0; z-index: 100; }
-        .btn-back { color: #00bcd4; text-decoration: none; font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .btn-back:hover { color: #fff; }
-        .cart-icon-container { position: relative; font-size: 1.5rem; cursor: pointer; }
-        .cart-badge { position: absolute; top: -8px; right: -12px; background: #ff4757; color: #fff; border-radius: 50%; padding: 2px 7px; font-size: 0.9rem; font-weight: bold; }
-
-        /* الحاوية وتفاصيل المنتج */
-        .container { max-width: 1000px; margin: 40px auto; padding: 20px; background: #1e1e1e; border-radius: 12px; }
-        .product-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        @media (max-width: 768px) { .product-wrapper { grid-template-columns: 1fr; } }
-        .product-media img { width: 100%; border-radius: 12px; object-fit: cover; border: 1px solid #333; }
-        .product-info h1 { margin-top: 0; color: #fff; }
-        .product-price { font-size: 1.8rem; color: #00bcd4; font-weight: bold; margin: 15px 0; }
-        
-        /* الأزرار */
-        .action-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
-        .btn { padding: 15px; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; color: #fff; text-align: center; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s; }
-        .btn-cart { background: #f39c12; } .btn-cart:hover { background: #d68910; }
-        .btn-whatsapp { background: #25d366; } .btn-whatsapp:hover { background: #128c7e; }
-        .btn-email { background: #d44638; } .btn-email:hover { background: #c0392b; }
-        
-        .loading-msg { text-align: center; padding: 50px; font-size: 1.3rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل المنتج | فكرة</title>
+  <link rel="stylesheet" href="assets/styles/style.css">
+  <style>
+    /* احتفظ بالأنماط التي لديك أو ألصق الأنماط السابقة */
+  </style>
 </head>
 <body>
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <a href="index.html" class="btn-back">➔ العودة للرئيسية</a>
+    <div class="cart-icon-container" id="cart-icon">🛒 <span class="cart-badge" id="cart-count">0</span></div>
+  </nav>
 
-    <!-- شريط التنقل (يحتوي على زر الرئيسية والسلة) -->
-    <nav class="navbar">
-        <a href="index.html" class="btn-back">➔ العودة للرئيسية</a>
-        
-        <!-- أيقونة السلة -->
-        <div class="cart-icon-container" id="cart-icon">
-            🛒 <span class="cart-badge" id="cart-count">0</span>
+  <div class="container">
+    <div id="loading-state" class="loading-msg">جاري تحميل بيانات المنتج... ⏳</div>
+
+    <div id="product-content" class="product-wrapper" style="display: none;">
+      <div class="product-media">
+        <img id="product-image" src="" alt="صورة المنتج">
+      </div>
+
+      <div class="product-info">
+        <h1 id="product-title">--</h1>
+        <div id="product-price" class="product-price">-- ج.م</div>
+        <p id="product-desc" style="color: #bbb; line-height: 1.6;">--</p>
+
+        <div id="options-container" style="display: none; margin: 15px 0;">
+          <label style="display:block; margin-bottom:8px;">المقاس / المواصفات:</label>
+          <select id="product-size" style="width: 100%; padding: 12px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 8px; font-size:1rem;"></select>
+          <select id="product-options" style="width: 100%; padding: 12px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 8px; font-size:1rem; margin-top:10px;"></select>
         </div>
-    </nav>
 
-    <!-- محتوى الصفحة -->
-    <div class="container">
-        <div id="loading-state" class="loading-msg">جاري تحميل بيانات المنتج... ⏳</div>
-
-        <div id="product-content" class="product-wrapper" style="display: none;">
-            <div class="product-media">
-                <img id="product-image" src="" alt="صورة المنتج">
-            </div>
-
-            <div class="product-info">
-                <h1 id="product-title">--</h1>
-                <div id="product-price" class="product-price">-- ج.م</div>
-                <p id="product-desc" style="color: #bbb; line-height: 1.6;">--</p>
-
-                <!-- الخيارات -->
-                <div id="options-container" style="display: none; margin: 15px 0;">
-                    <label style="display:block; margin-bottom:8px;">المقاس / المواصفات:</label>
-                    <select id="product-options" style="width: 100%; padding: 12px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 8px; font-size:1rem;"></select>
-                </div>
-
-                <!-- خيارات الطلب -->
-                <div class="action-buttons">
-                    <button id="btn-add-cart" class="btn btn-cart">إضافة إلى السلة 🛒</button>
-                    <button id="btn-whatsapp" class="btn btn-whatsapp">إتمام الطلب عبر الواتساب 💬</button>
-                    <button id="btn-email" class="btn btn-email">إتمام الطلب عبر الإيميل ✉️</button>
-                </div>
-            </div>
+        <div class="action-buttons">
+          <button id="btn-add-cart" class="btn btn-cart">إضافة إلى السلة 🛒</button>
+          <button id="btn-whatsapp" class="btn btn-whatsapp">إتمام الطلب عبر الواتساب 💬</button>
+          <button id="btn-email" class="btn btn-email">إتمام الطلب عبر الإيميل ✉️</button>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- استدعاء ملف السلة الخاص بك لكي تعمل وظيفة السلة في هذه الصفحة أيضاً -->
-    <script src="js/cart.js" defer></script> 
+  <script type="module">
+    import { db } from './js/firebase-config.js';
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { addToCart } from './js/cart.js';
 
-    <!-- سكربت جلب البيانات والتحكم بالأزرار -->
-    <script type="module">
-        import { db } from './js/firebase-config.js'; // إذا كان الملف في مجلد رئيسي اجعله './firebase-config.js'
-        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    document.addEventListener('DOMContentLoaded', async () => {
+      const loadingElem = document.getElementById('loading-state');
+      const contentElem = document.getElementById('product-content');
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            const loadingElem = document.getElementById('loading-state');
-            const contentElem = document.getElementById('product-content');
-            
-            // قراءة الـ ID من الرابط
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
 
-            if (!productId || productId === 'undefined') {
-                loadingElem.innerHTML = `<h3 style="color:#ff4757;">عذراً، المنتج غير موجود أو الرابط غير صحيح.</h3>`;
-                return;
+      if (!productId || productId === 'undefined') {
+        loadingElem.innerHTML = `<h3 style="color:#ff4757;">عذراً، المنتج غير موجود أو الرابط غير صحيح.</h3>`;
+        return;
+      }
+
+      try {
+        const docRef = doc(db, "products", productId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const product = docSnap.data();
+
+          document.getElementById('product-title').innerText = product.name || '--';
+          document.getElementById('product-price').innerText = (product.price !== undefined ? product.price : '--') + " ج.م";
+          document.getElementById('product-image').src = product.image || 'assets/images/Baner.png';
+          document.getElementById('product-desc').innerText = product.description || 'لا يوجد وصف متاح لهذا المنتج.';
+
+          // تهيئة القوائم إن وُجدت
+          const optionsContainer = document.getElementById('options-container');
+          const sizeSelect = document.getElementById('product-size');
+          const optionsSelect = document.getElementById('product-options');
+
+          // مساحات افتراضية إن لم توجد
+          sizeSelect.innerHTML = '';
+          optionsSelect.innerHTML = '';
+
+          if (product.sizes && Array.isArray(product.sizes) && product.sizes.length > 0) {
+            product.sizes.forEach(s => {
+              const opt = document.createElement('option');
+              opt.value = s; opt.innerText = s;
+              sizeSelect.appendChild(opt);
+            });
+            optionsContainer.style.display = 'block';
+          } else {
+            // إخفاء select المقاسات إذا لم توجد
+            sizeSelect.style.display = 'none';
+          }
+
+          if (product.options && Array.isArray(product.options) && product.options.length > 0) {
+            product.options.forEach(o => {
+              const opt = document.createElement('option');
+              opt.value = o; opt.innerText = o;
+              optionsSelect.appendChild(opt);
+            });
+            optionsContainer.style.display = 'block';
+          } else {
+            optionsSelect.style.display = 'none';
+          }
+
+          const getSelectedText = () => {
+            const sizeText = (sizeSelect && sizeSelect.style.display !== 'none') ? `\n• المقاس: ${sizeSelect.value}` : '';
+            const optText = (optionsSelect && optionsSelect.style.display !== 'none') ? `\n• المواصفات: ${optionsSelect.value}` : '';
+            return sizeText + optText;
+          };
+
+          // واتساب
+          document.getElementById('btn-whatsapp').addEventListener('click', () => {
+            const msg = `مرحباً، أريد طلب:\n• المنتج: ${product.name}\n• السعر: ${product.price} ج.م${getSelectedText()}`;
+            window.open(`https://wa.me/201111049778?text=${encodeURIComponent(msg)}`, '_blank');
+          });
+
+          // ايميل
+          document.getElementById('btn-email').addEventListener('click', () => {
+            const msg = `مرحباً،\nأريد طلب:\n• المنتج: ${product.name}\n• السعر: ${product.price} ج.م${getSelectedText()}\n\nبرجاء التواصل معي.`;
+            window.location.href = `mailto:admin@example.com?subject=طلب منتج: ${encodeURIComponent(product.name)}&body=${encodeURIComponent(msg)}`;
+          });
+
+          // إضافة للسلة
+          document.getElementById('btn-add-cart').addEventListener('click', async () => {
+            const size = (document.getElementById('product-size') && document.getElementById('product-size').style.display !== 'none') ? document.getElementById('product-size').value : 'قياسي';
+            const option = (document.getElementById('product-options') && document.getElementById('product-options').style.display !== 'none') ? document.getElementById('product-options').value : 'عادي';
+
+            const productObj = {
+              id: productId,
+              name: product.name,
+              price: product.price,
+              image: product.image || 'assets/images/Baner.png',
+              size,
+              option,
+              qty: 1
+            };
+
+            const added = await addToCart(productObj);
+            if (added) {
+              alert('تمت إضافة المنتج إلى السلة بنجاح!');
             }
+          });
 
-            try {
-                const docRef = doc(db, "products", productId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const product = docSnap.data();
-
-                    // تعبئة البيانات في الصفحة
-                    document.getElementById('product-title').innerText = product.name;
-                    document.getElementById('product-price').innerText = product.price + " ج.م";
-                    document.getElementById('product-image').src = product.image || 'assets/images/Baner.png';
-                    document.getElementById('product-desc').innerText = product.description || 'لا يوجد وصف متاح لهذا المنتج.';
-
-                    // تعبئة الخيارات (إذا أضفتها من لوحة التحكم)
-                    const optionsContainer = document.getElementById('options-container');
-                    const optionsSelect = document.getElementById('product-options');
-                    if (product.options && Array.isArray(product.options) && product.options.length > 0) {
-                        product.options.forEach(opt => {
-                            let option = document.createElement('option');
-                            option.value = opt; option.innerText = opt;
-                            optionsSelect.appendChild(option);
-                        });
-                        optionsContainer.style.display = 'block';
-                    }
-
-                    const getSelectedText = () => optionsContainer.style.display === 'block' ? `\n• المواصفات: ${optionsSelect.value}` : '';
-
-                    // 1. برمجة زر الواتساب بالرقم الجديد الخاص بك
-                    document.getElementById('btn-whatsapp').addEventListener('click', () => {
-                        const msg = `مرحباً، أريد طلب:\n• المنتج: ${product.name}\n• السعر: ${product.price} ج.م${getSelectedText()}`;
-                        // تم وضع رقمك 01111049778 بالصيغة الدولية 201111049778
-                        window.open(`https://wa.me/201111049778?text=${encodeURIComponent(msg)}`, '_blank'); 
-                    });
-
-                    // 2. برمجة زر الإيميل
-                    document.getElementById('btn-email').addEventListener('click', () => {
-                        const msg = `مرحباً،\nأريد طلب:\n• المنتج: ${product.name}\n• السعر: ${product.price} ج.م${getSelectedText()}\n\nبرجاء التواصل معي.`;
-                        // يمكنك تغيير admin@example.com إلى بريدك الإلكتروني الحقيقي
-                        window.location.href = `mailto:admin@example.com?subject=طلب منتج: ${product.name}&body=${encodeURIComponent(msg)}`;
-                    });
-
-                    // 3. برمجة زر الإضافة للسلة
-                    document.getElementById('btn-add-cart').addEventListener('click', () => {
-                        // يتم استدعاء دالة addToCart الموجودة في ملف cart.js
-                        if(typeof addToCart === 'function') {
-                            addToCart({ id: productId, name: product.name, price: product.price, image: product.image });
-                            alert('تمت إضافة المنتج إلى السلة بنجاح!');
-                        } else {
-                            alert('تأكد من وجود ملف cart.js لكي تعمل وظيفة السلة.');
-                        }
-                    });
-
-                    // إخفاء رسالة التحميل وإظهار المنتج
-                    loadingElem.style.display = 'none';
-                    contentElem.style.display = 'grid';
-                } else {
-                    loadingElem.innerHTML = `<h3 style="color:#ff4757;">المنتج غير موجود في قاعدة البيانات! تأكد من أنك لم تقم بحذفه.</h3>`;
-                }
-            } catch (error) {
-                console.error("خطأ في جلب بيانات المنتج: ", error);
-                loadingElem.innerHTML = `<h3 style="color:#ff4757;">حدث خطأ أثناء الاتصال بقاعدة البيانات.</h3>`;
-            }
-        });
-    </script>
+          loadingElem.style.display = 'none';
+          contentElem.style.display = 'grid';
+        } else {
+          loadingElem.innerHTML = `<h3 style="color:#ff4757;">المنتج غير موجود في قاعدة البيانات! تأكد من أنك لم تقم بحذفه.</h3>`;
+        }
+      } catch (error) {
+        console.error("خطأ في جلب بيانات المنتج: ", error);
+        loadingElem.innerHTML = `<h3 style="color:#ff4757;">حدث خطأ أثناء الاتصال بقاعدة البيانات.</h3>`;
+      }
+    });
+  </script>
 </body>
 </html>
