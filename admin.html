@@ -6,11 +6,12 @@
     <title>فكرة | لوحة التحكم</title>
     <link rel="stylesheet" href="assets/styles/style.css">
     <style>
-        .admin-container { max-width: 500px; margin: 50px auto; padding: 30px; background: #111; border-radius: 12px; border: 1px solid #333; }
-        .hidden { display: none; }
+        .admin-container { max-width: 500px; margin: 50px auto; padding: 30px; background: #111; border-radius: 12px; border: 1px solid #333; color: #fff; }
+        .hidden { display: none !important; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; color: #00bcd4; }
-        .admin-btn { width: 100%; text-align: center; }
+        .input-field { width: 100%; padding: 10px; border: 1px solid #333; background: #222; color: #fff; border-radius: 6px; box-sizing: border-box; }
+        .admin-btn { width: 100%; text-align: center; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -33,25 +34,25 @@
     <!-- قسم إدارة المنتجات (يظهر بعد تسجيل الدخول) -->
     <div id="dashboard-section" class="admin-container hidden">
         <h2 style="text-align: center; margin-bottom: 20px; color: #4CAF50;">تم تسجيل الدخول بنجاح</h2>
-        <button id="logout-btn" class="btn-main" style="background: #ff4444; width: 100%; margin-bottom: 30px;">تسجيل الخروج</button>
+        <button id="logout-btn" class="btn-main" style="background: #ff4444; width: 100%; margin-bottom: 30px; cursor: pointer;">تسجيل الخروج</button>
 
         <h3 style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">إضافة منتج جديد</h3>
         
         <div class="form-group">
             <label>اسم المنتج (مثال: كارت شخصي)</label>
-            <input type="text" id="prod-name" class="input-field">
+            <input type="text" id="prod-name" class="input-field" placeholder="أدخل اسم المنتج">
         </div>
         <div class="form-group">
             <label>السعر (بالجنيه)</label>
-            <input type="number" id="prod-price" class="input-field">
+            <input type="number" id="prod-price" class="input-field" placeholder="أدخل السعر">
         </div>
         <div class="form-group">
-            <label>رابط الصورة (مثال: assets/images/card.png)</label>
-            <input type="text" id="prod-image" class="input-field">
+            <label>رابط الصورة (مثال: Baner.png أو assets/images/Baner.png)</label>
+            <input type="text" id="prod-image" class="input-field" placeholder="أدخل اسم أو مسار الصورة">
         </div>
         <div class="form-group">
             <label>القسم (مثال: مطبوعات)</label>
-            <input type="text" id="prod-category" class="input-field">
+            <input type="text" id="prod-category" class="input-field" placeholder="أدخل القسم">
         </div>
         
         <button id="add-product-btn" class="btn-main admin-btn">حفظ ورفع المنتج</button>
