@@ -122,7 +122,7 @@
     </div>
 
     <footer style="padding:20px; text-align:center; background:#000; color:#888;">
-      © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
+        © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
 
     <script src="js/products.js"></script>
@@ -130,34 +130,68 @@
     <script src="js/cart.js"></script>
     <script src="js/api.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        document.addEventListener('DOMContentLoaded', async () => {
             // تشغيل نظام السلة
             if(typeof Cart !== 'undefined') Cart.init();
 
             const grid = document.getElementById('productsGrid');
-            if(grid && typeof Products !== 'undefined') {
-                // عرض المنتجات في الرئيسية بصور ثابتة
-                Object.keys(Products).forEach(key => {
-                    const p = Products[key];
-                    grid.innerHTML += `
-                        <div class="card">
-                            <div class="card-img-container">
-                                <img src="${p.images[0]}" alt="${p.name}">
-                            </div>
-                            <h3>${p.name}</h3>
-                            <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
-                        </div>`;
-                });
+            if(grid) {
+                grid.innerHTML = '<p style="text-align:center; color:#fff; grid-column: 1/-1;">جاري تحميل الخدمات...</p>';
+                try {
+                    const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+                    const querySnapshot = await getDocs(q);
+                    
+                    grid.innerHTML = '';
+
+                    if (querySnapshot.empty) {
+                        if(typeof Products !== 'undefined') {
+                            Object.keys(Products).forEach(key => {
+                                const p = Products[key];
+                                grid.innerHTML += `
+                                    <div class="card">
+                                        <div class="card-img-container">
+                                            <img src="${p.images[0]}" alt="${p.name}">
+                                        </div>
+                                        <h3>${p.name}</h3>
+                                        <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
+                                    </div>`;
+                            });
+                        }
+                        return;
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const p = doc.data();
+                        const productName = p.name || 'خدمة إعلانية';
+                        const productImage = p.image || 'assets/images/Baner.png';
+                        
+                        grid.innerHTML += `
+                            <div class="card">
+                                <div class="card-img-container">
+                                    <img src="${productImage}" alt="${productName}">
+                                </div>
+                                <h3>${productName}</h3>
+                                <p style="color: #00bcd4; font-weight: bold; margin: 5px 0;">${p.price ? p.price + ' ج.م' : ''}</p>
+                                <a href="https://wa.me/201111049778?text=${encodeURIComponent('أريد طلب خدمة: ' + productName)}" target="_blank" class="btn-main">طلب الخدمة</a>
+                            </div>`;
+                    });
+                } catch (error) {
+                    console.error("خطأ في جلب المنتجات:", error);
+                    grid.innerHTML = '<p style="text-align:center; color:red; grid-column: 1/-1;">حدث خطأ أثناء تحميل المنتجات.</p>';
+                }
             }
 
             // تحديد الصور في قسم عملاؤنا
             const logos = document.querySelectorAll('.client-logo');
             logos.forEach(logo => {
-              logo.addEventListener('click', () => {
-                logos.forEach(l => l.classList.remove('selected'));
-                logo.classList.add('selected');
-              });
+               logo.addEventListener('click', () => {
+                 logos.forEach(l => l.classList.remove('selected'));
+                 logo.classList.add('selected');
+               });
             });
         });
     </script>
