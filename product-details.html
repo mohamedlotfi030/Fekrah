@@ -3,167 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="تفاصيل الخدمة أو المنتج - فكرة للدعاية والإعلان.">
-    <title>تفاصيل المنتج | فكرة للدعاية والإعلان</title>
+    <title>تفاصيل المنتج | فكرة</title>
     
     <link rel="icon" type="image/png" href="logo-main.png">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/style.css">
-    
     <style>
-        /* تنسيقات الهيدر */
-        .logo img { height: 45px; width: auto; display: block; }
-        
-        /* التنسيق الداكن والفخم لصفحة التفاصيل */
-        body {
-            background-color: #050505;
+        /* إصلاح عرض الموبايل ومنع خروج السلة الجانبية */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
         }
-        .product-details {
-            padding: 50px 5%;
-            background: #0a0a0a;
-            color: #fff;
+        .cart-drawer {
+            right: -100% !important;
+            width: 320px;
+            max-width: 85vw;
         }
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #111;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            border: 1px solid #222;
+        .cart-drawer.active {
+            right: 0 !important;
         }
-        .product-images {
-            flex: 1;
-            min-width: 300px;
-        }
-        #mainImage {
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid #333;
-            margin-bottom: 15px;
-        }
-        .thumbnails {
-            display: flex;
-            gap: 10px;
-        }
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.3s;
-            opacity: 0.7;
-        }
-        .thumbnail:hover, .thumbnail.active {
-            border-color: #00bcd4;
-            opacity: 1;
-        }
-        
-        .product-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        .product-info h1 {
-            color: #00bcd4;
-            margin-bottom: 15px;
-            font-size: 2rem;
-        }
-        .product-desc {
-            color: #aaa;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-        .order-form {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #ddd;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            background: #222;
-            color: #fff;
-            border: 1px solid #444;
-            border-radius: 5px;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #00bcd4;
-        }
-        .btn-add-cart {
-            width: 100%;
-            padding: 12px;
-            background: #00bcd4;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-        .btn-add-cart:hover {
-            background: #008ba3;
-            color: #fff;
+        @media (max-width: 600px) {
+            .header {
+                padding: 10px 3%;
+            }
+            .logo img {
+                height: 32px !important;
+            }
+            .nav-group {
+                gap: 10px !important;
+            }
+            .nav-link {
+                font-size: 0.65rem !important;
+            }
+            .nav-link i {
+                font-size: 1rem !important;
+            }
         }
 
-        /* =========================================
-           كود تغيير اللون من الأسود إلى الأبيض
-        ========================================= */
-        body.white-mode, 
-        body.white-mode section, 
-        body.white-mode header, 
-        body.white-mode footer, 
-        body.white-mode .product-details,
-        body.white-mode .product-container,
-        body.white-mode .order-form,
+        /* كود تغيير اللون من الأسود إلى الأبيض */
+        body.white-mode,
+        body.white-mode header,
         body.white-mode .cart-drawer {
             background-color: #ffffff !important;
             color: #000000 !important;
             border-color: #dddddd !important;
         }
-        body.white-mode .product-desc,
-        body.white-mode .product-desc p,
-        body.white-mode .product-desc li,
         body.white-mode label,
-        body.white-mode span, 
+        body.white-mode span,
         body.white-mode .nav-link,
-        body.white-mode .drawer-header h3 {
+        body.white-mode .drawer-header h3,
+        body.white-mode .drawer-header span {
             color: #000000 !important;
         }
-        body.white-mode .form-group input,
-        body.white-mode .form-group select {
+        body.white-mode .input-field {
             background-color: #f9f9f9 !important;
             color: #000000 !important;
             border-color: #cccccc !important;
         }
+        body.white-mode #cartItemsList div {
+            color: #000000 !important;
+            border-bottom-color: #eeeeee !important;
+        }
     </style>
 </head>
-<body>
+<body style="background: #000; color:white; padding-bottom: 50px;">
 
     <div id="cartOverlay" class="cart-overlay" onclick="UI.toggleCart(false)"></div>
 
     <header class="header">
         <div class="logo">
-            <a href="index.html">
-                <img src="logo-main.png" alt="فكرة للدعاية والإعلان">
-            </a>
+            <img src="logo-main.png" alt="فكرة" style="height:40px; cursor:pointer;" onclick="location.href='index.html'">
         </div>
         <nav class="nav-group">
             <a href="index.html" class="nav-link">
@@ -178,7 +88,6 @@
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
             </a>
-            <!-- زر تغيير اللون -->
             <a onclick="toggleColor()" class="nav-link" style="cursor:pointer; color: #00bcd4;">
                 <i class="fas fa-adjust"></i>
                 <span>تغيير اللون</span>
@@ -191,41 +100,49 @@
         </nav>
     </header>
 
-    <section class="product-details">
-        <div class="product-container" id="productContainer">
-            <!-- سيتم حقن المحتوى هنا بواسطة JS -->
+    <div class="product-container" id="productView" style="display:flex; flex-wrap:wrap; gap:30px; padding:40px 5%;">
+        <div style="flex:1; min-width:280px; background:white; border-radius:15px; padding:20px; display:flex; justify-content:center; align-items:center; overflow:hidden; height:360px; border: 1px solid #333;">
+            <img id="mainPImg" src="" style="max-width:100%; max-height:100%; object-fit:contain; transition: opacity 0.4s ease-in-out;">
         </div>
-    </section>
+
+        <div style="flex:1; min-width:280px;">
+            <h1 id="pName" style="color:#00bcd4; margin-bottom:20px; font-size: 2rem;">تحميل...</h1>
+            
+            <div class="selection-group">
+                <label style="display:block; margin-bottom:10px; color:#aaa;">المقاس / الحجم:</label>
+                <select id="pSize" class="input-field" style="margin-bottom:20px; width: 100%;"></select>
+
+                <label style="display:block; margin-bottom:10px; color:#aaa;">نوع الخامة / الطباعة:</label>
+                <select id="pOpt" class="input-field" style="margin-bottom:20px; width: 100%;"></select>
+
+                <label style="display:block; margin-bottom:10px; color:#aaa;">ملاحظاتك (اختياري):</label>
+                <textarea id="pNotes" placeholder="أضف أي تفاصيل أخرى تريدها هنا..." class="input-field" style="height:100px; resize:none; width: 100%;"></textarea>
+            </div>
+
+            <button id="addBtn" class="btn-main" style="width:100%; margin: 30px 0 10px; padding:18px; font-size:1.1rem; border:none; cursor:pointer;">إضافة إلى السلة</button>
+            <button onclick="location.href='index.html'" style="width:100%; background:transparent; color:#888; border:1px solid #333; padding:12px; border-radius:8px; cursor:pointer; transition:0.3s;">العودة للمتجر</button>
+        </div>
+    </div>
 
     <div id="cartDrawer" class="cart-drawer">
         <div class="drawer-header">
             <h3 style="margin:0; color:#fff;">سلة الطلبات</h3>
             <span onclick="UI.toggleCart(false)" style="cursor:pointer; color:#fff; font-size: 2.5rem;">×</span>
         </div>
-        <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;">
-        </div>
+        <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;"></div>
         <div style="padding: 20px; border-top: 1px solid #333;">
-            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0;">إتمام الطلب</button>
+            <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0; border:none; cursor:pointer;">إتمام الطلب</button>
         </div>
     </div>
-
-    <footer style="padding:20px; text-align:center; background:#0a0a0a; color:#888; border-top: 1px solid #222;">
-      © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
-    </footer>
 
     <script src="js/products.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/cart.js"></script>
-    <script src="js/api.js"></script>
 
     <script>
         function toggleColor() {
             document.body.classList.toggle('white-mode');
-            if (document.body.classList.contains('white-mode')) {
-                localStorage.setItem('siteColor', 'white');
-            } else {
-                localStorage.setItem('siteColor', 'black');
-            }
+            localStorage.setItem('siteColor', document.body.classList.contains('white-mode') ? 'white' : 'black');
         }
 
         if (localStorage.getItem('siteColor') === 'white') {
@@ -234,69 +151,32 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             if(typeof Cart !== 'undefined') Cart.init();
-
+            
             const urlParams = new URLSearchParams(window.location.search);
             const productType = urlParams.get('type');
-            const container = document.getElementById('productContainer');
+            const product = Products[productType];
 
-            if (productType && typeof Products !== 'undefined' && Products[productType]) {
-                const product = Products[productType];
+            if (product) {
+                document.getElementById('pName').innerText = product.name;
+                document.getElementById('mainPImg').src = product.images[0];
                 
-                let thumbnailsHTML = '';
-                product.images.forEach((img, index) => {
-                    thumbnailsHTML += `<img src="${img}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage(this, '${img}')">`;
-                });
+                const sizeSelect = document.getElementById('pSize');
+                product.options.sizes.forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
 
-                container.innerHTML = `
-                    <div class="product-images">
-                        <img id="mainImage" src="${product.images[0]}" alt="${product.name}">
-                        <div class="thumbnails">
-                            ${thumbnailsHTML}
-                        </div>
-                    </div>
-                    
-                    <div class="product-info">
-                        <h1>${product.name}</h1>
-                        <div class="product-desc">
-                            <p>${product.description || 'نقدم لكم أعلى معايير الجودة في الطباعة والتنفيذ لضمان أفضل نتيجة لعلامتكم التجارية.'}</p>
-                            <ul style="padding-right: 20px; margin-top: 10px;">
-                                <li>جودة تنفيذ عالية بخامات ممتازة</li>
-                                <li>أسعار تنافسية تناسب ميزانيتك</li>
-                                <li>التزام تام بمواعيد التسليم</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="order-form">
-                            <div class="form-group">
-                                <label>الكمية المطلوبة:</label>
-                                <input type="number" id="qty" value="1" min="1">
-                            </div>
-                            <button class="btn-add-cart" onclick="addToCartAndNotify('${productType}')">
-                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
-                            </button>
-                        </div>
-                    </div>
-                `;
+                const optSelect = document.getElementById('pOpt');
+                product.options.types.forEach(t => optSelect.innerHTML += `<option value="${t}">${t}</option>`);
+
+                if(typeof UI !== 'undefined' && UI.startProductSlideshow) {
+                    UI.startProductSlideshow(productType);
+                }
+
+                document.getElementById('addBtn').onclick = () => {
+                    Cart.add(productType);
+                };
             } else {
-                container.innerHTML = `<h2 style="text-align:center; width:100%; color:#ff4444;">عذراً، المنتج غير موجود.</h2>`;
+                document.getElementById('productView').innerHTML = '<h2 style="text-align:center; width:100%; margin-top:100px;">المنتج غير موجود</h2>';
             }
         });
-
-        function changeMainImage(element, src) {
-            document.getElementById('mainImage').src = src;
-            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function addToCartAndNotify(type) {
-            const qty = parseInt(document.getElementById('qty').value) || 1;
-            if(typeof Cart !== 'undefined') {
-                Cart.addItem(type, qty);
-                UI.toggleCart(true); 
-            } else {
-                alert('حدث خطأ في السلة، يرجى المحاولة لاحقاً.');
-            }
-        }
     </script>
 </body>
 </html>
