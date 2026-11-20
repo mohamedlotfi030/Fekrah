@@ -11,14 +11,17 @@
     <link rel="stylesheet" href="assets/styles/style.css">
     
     <style>
-        /* تنسيقات الهيدر لضمان التوحيد */
+        /* تنسيقات الهيدر */
         .logo img { height: 45px; width: auto; display: block; }
         
-        /* تنسيق صفحة تفاصيل المنتج */
+        /* التنسيق الداكن والفخم لصفحة التفاصيل */
+        body {
+            background-color: #050505;
+        }
         .product-details {
             padding: 50px 5%;
-            background: #f9f9f9; /* خلفية فاتحة تبرز تفاصيل المنتج */
-            color: #333;
+            background: #0a0a0a;
+            color: #fff;
         }
         .product-container {
             display: flex;
@@ -26,10 +29,11 @@
             gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
-            background: #fff;
+            background: #111; /* خلفية داكنة للحاوية */
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid #222;
         }
         .product-images {
             flex: 1;
@@ -38,7 +42,7 @@
         #mainImage {
             width: 100%;
             border-radius: 8px;
-            border: 1px solid #eee;
+            border: 1px solid #333;
             margin-bottom: 15px;
         }
         .thumbnails {
@@ -53,9 +57,11 @@
             cursor: pointer;
             border: 2px solid transparent;
             transition: 0.3s;
+            opacity: 0.7;
         }
         .thumbnail:hover, .thumbnail.active {
             border-color: #00bcd4;
+            opacity: 1;
         }
         
         .product-info {
@@ -63,19 +69,20 @@
             min-width: 300px;
         }
         .product-info h1 {
-            color: #0a0a0a;
+            color: #00bcd4;
             margin-bottom: 15px;
             font-size: 2rem;
         }
         .product-desc {
-            color: #666;
+            color: #aaa;
             line-height: 1.8;
             margin-bottom: 25px;
         }
         .order-form {
-            background: #f1f1f1;
+            background: #1a1a1a;
             padding: 20px;
             border-radius: 8px;
+            border: 1px solid #333;
         }
         .form-group {
             margin-bottom: 15px;
@@ -84,19 +91,25 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #333;
+            color: #ddd;
         }
         .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
             border-radius: 5px;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #00bcd4;
         }
         .btn-add-cart {
             width: 100%;
             padding: 12px;
             background: #00bcd4;
-            color: #fff;
+            color: #000;
             border: none;
             border-radius: 5px;
             font-size: 1.1rem;
@@ -107,6 +120,7 @@
         }
         .btn-add-cart:hover {
             background: #008ba3;
+            color: #fff;
         }
     </style>
 </head>
@@ -114,7 +128,6 @@
 
     <div id="cartOverlay" class="cart-overlay" onclick="UI.toggleCart(false)"></div>
 
-    <!-- الهيدر الموحد -->
     <header class="header">
         <div class="logo">
             <a href="index.html">
@@ -142,14 +155,12 @@
         </nav>
     </header>
 
-    <!-- تفاصيل المنتج (يتم تعبئتها بواسطة الجافاسكريبت) -->
     <section class="product-details">
         <div class="product-container" id="productContainer">
             <!-- سيتم حقن المحتوى هنا بواسطة JS -->
         </div>
     </section>
 
-    <!-- سلة الطلبات (الدرج الجانبي) -->
     <div id="cartDrawer" class="cart-drawer">
         <div class="drawer-header">
             <h3 style="margin:0; color:#fff;">سلة الطلبات</h3>
@@ -162,24 +173,19 @@
         </div>
     </div>
 
-    <!-- الفوتر الموحد -->
     <footer style="padding:20px; text-align:center; background:#0a0a0a; color:#888; border-top: 1px solid #222;">
       © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
 
-    <!-- ملفات الجافاسكريبت الأساسية لعمل الموقع -->
     <script src="js/products.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/api.js"></script>
 
-    <!-- سكربت استدعاء وعرض المنتج الحالي -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // تشغيل السلة
             if(typeof Cart !== 'undefined') Cart.init();
 
-            // استخراج نوع المنتج من الرابط (URL Parameters)
             const urlParams = new URLSearchParams(window.location.search);
             const productType = urlParams.get('type');
             const container = document.getElementById('productContainer');
@@ -187,13 +193,11 @@
             if (productType && typeof Products !== 'undefined' && Products[productType]) {
                 const product = Products[productType];
                 
-                // تجهيز صور المعرض المصغر
                 let thumbnailsHTML = '';
                 product.images.forEach((img, index) => {
                     thumbnailsHTML += `<img src="${img}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage(this, '${img}')">`;
                 });
 
-                // بناء واجهة المنتج
                 container.innerHTML = `
                     <div class="product-images">
                         <img id="mainImage" src="${product.images[0]}" alt="${product.name}">
@@ -206,10 +210,10 @@
                         <h1>${product.name}</h1>
                         <div class="product-desc">
                             <p>${product.description || 'نقدم لكم أعلى معايير الجودة في الطباعة والتنفيذ لضمان أفضل نتيجة لعلامتكم التجارية.'}</p>
-                            <ul>
-                                <li>جودة تنفيذ عالية</li>
-                                <li>أسعار تنافسية</li>
-                                <li>التزام بمواعيد التسليم</li>
+                            <ul style="padding-right: 20px; margin-top: 10px;">
+                                <li>جودة تنفيذ عالية بخامات ممتازة</li>
+                                <li>أسعار تنافسية تناسب ميزانيتك</li>
+                                <li>التزام تام بمواعيد التسليم</li>
                             </ul>
                         </div>
                         
@@ -225,24 +229,21 @@
                     </div>
                 `;
             } else {
-                // في حالة الدخول لرابط خاطئ
                 container.innerHTML = `<h2 style="text-align:center; width:100%; color:#ff4444;">عذراً، المنتج غير موجود.</h2>`;
             }
         });
 
-        // دالة تغيير الصورة الرئيسية عند الضغط على الصور المصغرة
         function changeMainImage(element, src) {
             document.getElementById('mainImage').src = src;
             document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
             element.classList.add('active');
         }
 
-        // دالة إضافة المنتج للسلة وتحديث الواجهة
         function addToCartAndNotify(type) {
             const qty = parseInt(document.getElementById('qty').value) || 1;
             if(typeof Cart !== 'undefined') {
                 Cart.addItem(type, qty);
-                UI.toggleCart(true); // فتح السلة مباشرة بعد الإضافة لتأكيد العملية للعميل
+                UI.toggleCart(true); 
             } else {
                 alert('حدث خطأ في السلة، يرجى المحاولة لاحقاً.');
             }
