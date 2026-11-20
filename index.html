@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="فكرة للدعاية والإعلان - حلول متكاملة للافتات الخارجية، الداخلية، المطبوعات والهدايا الترويجية في حلوان.">
     <title>فكرة للدعاية والإعلان | حلوان</title>
     
     <link rel="icon" type="image/png" href="logo-main.png">
@@ -24,6 +25,52 @@
             height: 45px;
             width: auto;
             display: block;
+        }
+        /* تنسيقات قسم الخدمات الكبرى */
+        .core-services {
+            padding: 50px 5%;
+            background: #0a0a0a;
+            color: #fff;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+        .core-services h2 {
+            color: #00bcd4;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        .core-services .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .service-box {
+            background: #111;
+            padding: 30px 20px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            width: 300px;
+            transition: 0.3s;
+        }
+        .service-box:hover {
+            border-color: #00bcd4;
+            transform: translateY(-5px);
+        }
+        .service-box h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        .service-box p {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .service-box i {
+            font-size: 2.5rem;
+            color: #00bcd4;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -52,38 +99,63 @@
         </nav>
     </header>
 
-    <main id="productsGrid" class="grid">
+    <!-- إضافة قسم الخدمات الإعلانية الكبرى لإبراز قوة الوكالة -->
+    <section class="core-services">
+        <h2>حلول الدعاية والإعلان المتكاملة</h2>
+        <p style="color: #888; margin-bottom: 30px;">من الخيال إلى أرض الواقع.. نصنع هويتك البصرية بأعلى معايير الجودة والتنفيذ</p>
+        <div class="services-container">
+            <div class="service-box">
+                <i class="fas fa-building"></i>
+                <h3>اللافتات الخارجية (Outdoor)</h3>
+                <p>تصنيع وتجهيز واجهات الكلادينج والحروف البارزة المضيئة للفروع والشركات بخامات تقاوم العوامل الجوية.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-store"></i>
+                <h3>اللافتات الداخلية (Indoor)</h3>
+                <p>ديكورات الأكريليك المضيئة واللافتات الجدارية التي تعكس احترافية وفخامة مقرك من الداخل.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-print"></i>
+                <h3>تجهيز المعارض والمطبوعات</h3>
+                <p>تصميم وتنفيذ أجنحة العرض، الرول أب، والبوب أب كاونتر للفعاليات الكبرى، وكافة المطبوعات الورقية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات والهدايا الترويجية (كما هو) -->
+    <main id="productsGrid" class="grid" style="padding-top: 40px;">
     </main>
 
-<!-- قسم عملاؤنا -->
-<section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff;">
-  <h2 style="text-align:center; color:#00bcd4; margin-bottom:40px;">بعض عملائنا</h2>
-  <div class="clients-slider">
-    <div class="slide-track">
-      <!-- القائمة الأولى -->
-      <div class="client-logo"><img src="assets/images/client1.png" alt="عميل 1"></div>
-      <div class="client-logo"><img src="assets/images/client2.png" alt="عميل 2"></div>
-      <div class="client-logo"><img src="assets/images/client3.png" alt="عميل 3"></div>
-      <div class="client-logo"><img src="assets/images/client4.png" alt="عميل 4"></div>
-      <div class="client-logo"><img src="assets/images/client5.png" alt="عميل 5"></div>
-      <div class="client-logo"><img src="assets/images/client6.png" alt="عميل 6"></div>
-      <div class="client-logo"><img src="assets/images/client7.png" alt="عميل 7"></div>
-      <div class="client-logo"><img src="assets/images/client8.png" alt="عميل 8"></div>
+    <!-- قسم عملاؤنا (مُعدل بالأسماء الحقيقية لتقوية الـ SEO والمصداقية) -->
+    <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff; border-top: 1px solid #222;">
+      <h2 style="text-align:center; color:#00bcd4; margin-bottom:10px;">شركاء النجاح</h2>
+      <p style="text-align:center; color:#888; margin-bottom:40px;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
+      <div class="clients-slider">
+        <div class="slide-track">
+          <!-- القائمة الأولى -->
+          <div class="client-logo"><img src="assets/images/client1.png" alt="يونيون اير - Unionaire" title="يونيون اير"></div>
+          <div class="client-logo"><img src="assets/images/client2.png" alt="كاريير - Carrier" title="كاريير"></div>
+          <div class="client-logo"><img src="assets/images/client3.png" alt="مجموعة غبور - Ghabbour Auto" title="مجموعة غبور"></div>
+          <div class="client-logo"><img src="assets/images/client4.png" alt="أمان للتحصيل - Aman" title="أمان للتحصيل"></div>
+          <div class="client-logo"><img src="assets/images/client5.png" alt="وزارة التضامن الاجتماعي" title="وزارة التضامن الاجتماعي"></div>
+          <div class="client-logo"><img src="assets/images/client6.png" alt="شركاء فكرة" title="شركاء فكرة"></div>
+          <div class="client-logo"><img src="assets/images/client7.png" alt="عملاء فكرة" title="عملاء فكرة"></div>
+          <div class="client-logo"><img src="assets/images/client8.png" alt="فكرة للدعاية والإعلان" title="فكرة"></div>
 
-      <!-- إعادة نفس القائمة مرة ثانية لضمان الاستمرارية -->
-      <div class="client-logo"><img src="assets/images/client1.png" alt="عميل 1"></div>
-      <div class="client-logo"><img src="assets/images/client2.png" alt="عميل 2"></div>
-      <div class="client-logo"><img src="assets/images/client3.png" alt="عميل 3"></div>
-      <div class="client-logo"><img src="assets/images/client4.png" alt="عميل 4"></div>
-      <div class="client-logo"><img src="assets/images/client5.png" alt="عميل 5"></div>
-      <div class="client-logo"><img src="assets/images/client6.png" alt="عميل 6"></div>
-      <div class="client-logo"><img src="assets/images/client7.png" alt="عميل 7"></div>
-      <div class="client-logo"><img src="assets/images/client8.png" alt="عميل 8"></div>
-    </div>
-  </div>
-</section>
+          <!-- إعادة نفس القائمة مرة ثانية لضمان الاستمرارية في الحركة -->
+          <div class="client-logo"><img src="assets/images/client1.png" alt="يونيون اير - Unionaire" title="يونيون اير"></div>
+          <div class="client-logo"><img src="assets/images/client2.png" alt="كاريير - Carrier" title="كاريير"></div>
+          <div class="client-logo"><img src="assets/images/client3.png" alt="مجموعة غبور - Ghabbour Auto" title="مجموعة غبور"></div>
+          <div class="client-logo"><img src="assets/images/client4.png" alt="أمان للتحصيل - Aman" title="أمان للتحصيل"></div>
+          <div class="client-logo"><img src="assets/images/client5.png" alt="وزارة التضامن الاجتماعي" title="وزارة التضامن الاجتماعي"></div>
+          <div class="client-logo"><img src="assets/images/client6.png" alt="شركاء فكرة" title="شركاء فكرة"></div>
+          <div class="client-logo"><img src="assets/images/client7.png" alt="عملاء فكرة" title="عملاء فكرة"></div>
+          <div class="client-logo"><img src="assets/images/client8.png" alt="فكرة للدعاية والإعلان" title="فكرة"></div>
+        </div>
+      </div>
+    </section>
 
-    
+    <!-- قسم طرق التواصل (كما هو) -->
     <section id="contact-section" style="padding: 60px 5%; background: #0a0a0a; border-top: 1px solid #222;">
         <h2 style="text-align: center; color: #00bcd4; margin-bottom: 40px; font-size: 2rem;">طرق التواصل</h2>
         <div class="grid">
