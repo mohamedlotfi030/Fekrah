@@ -87,26 +87,12 @@
                 <i class="fas fa-home"></i>
                 <span>الرئيسية</span>
             </a>
-            <!-- هذا هو الزر الذي تمت إضافته -->
+            <!-- زر سابقة الأعمال -->
             <a href="gallery.html" class="nav-link">
                 <i class="fas fa-camera"></i>
                 <span>سابقة الأعمال</span>
             </a>
             <a href="index.html#contact-section" class="nav-link">
-                <i class="fas fa-address-book"></i>
-                <span>تواصل معنا</span>
-            </a>
-            <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
-                <span>السلة</span>
-            </div>
-        </nav>
-            <a href="index.html" class="nav-link">
-                <i class="fas fa-home"></i>
-                <span>الرئيسية</span>
-            </a>
-            <a href="#contact-section" class="nav-link">
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
             </a>
@@ -145,7 +131,7 @@
     <main id="productsGrid" class="grid" style="padding-top: 40px;">
     </main>
 
-    <!-- قسم عملاؤنا (مُعدل بالأسماء الحقيقية لتقوية الـ SEO والمصداقية) -->
+    <!-- قسم عملاؤنا -->
     <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff; border-top: 1px solid #222;">
       <h2 style="text-align:center; color:#00bcd4; margin-bottom:10px;">شركاء النجاح</h2>
       <p style="text-align:center; color:#888; margin-bottom:40px;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
@@ -161,7 +147,7 @@
           <div class="client-logo"><img src="assets/images/client7.png" alt="عملاء فكرة" title="عملاء فكرة"></div>
           <div class="client-logo"><img src="assets/images/client8.png" alt="فكرة للدعاية والإعلان" title="فكرة"></div>
 
-          <!-- إعادة نفس القائمة مرة ثانية لضمان الاستمرارية في الحركة -->
+          <!-- إعادة نفس القائمة مرة ثانية -->
           <div class="client-logo"><img src="assets/images/client1.png" alt="يونيون اير - Unionaire" title="يونيون اير"></div>
           <div class="client-logo"><img src="assets/images/client2.png" alt="كاريير - Carrier" title="كاريير"></div>
           <div class="client-logo"><img src="assets/images/client3.png" alt="مجموعة غبور - Ghabbour Auto" title="مجموعة غبور"></div>
@@ -174,7 +160,7 @@
       </div>
     </section>
 
-    <!-- قسم طرق التواصل (كما هو) -->
+    <!-- قسم طرق التواصل -->
     <section id="contact-section" style="padding: 60px 5%; background: #0a0a0a; border-top: 1px solid #222;">
         <h2 style="text-align: center; color: #00bcd4; margin-bottom: 40px; font-size: 2rem;">طرق التواصل</h2>
         <div class="grid">
@@ -222,12 +208,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // تشغيل نظام السلة
             if(typeof Cart !== 'undefined') Cart.init();
             
             const grid = document.getElementById('productsGrid');
             if(grid && typeof Products !== 'undefined') {
-                // عرض المنتجات في الرئيسية بصور ثابتة
                 Object.keys(Products).forEach(key => {
                     const p = Products[key];
                     grid.innerHTML += `
@@ -241,7 +225,6 @@
                 });
             }
 
-            // تحديد الصور في قسم عملاؤنا
             const logos = document.querySelectorAll('.client-logo');
             logos.forEach(logo => {
               logo.addEventListener('click', () => {
