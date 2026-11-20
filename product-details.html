@@ -29,7 +29,7 @@
             gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
-            background: #111; /* خلفية داكنة للحاوية */
+            background: #111;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
@@ -122,6 +122,37 @@
             background: #008ba3;
             color: #fff;
         }
+
+        /* =========================================
+           كود تغيير اللون من الأسود إلى الأبيض
+        ========================================= */
+        body.white-mode, 
+        body.white-mode section, 
+        body.white-mode header, 
+        body.white-mode footer, 
+        body.white-mode .product-details,
+        body.white-mode .product-container,
+        body.white-mode .order-form,
+        body.white-mode .cart-drawer {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border-color: #dddddd !important;
+        }
+        body.white-mode .product-desc,
+        body.white-mode .product-desc p,
+        body.white-mode .product-desc li,
+        body.white-mode label,
+        body.white-mode span, 
+        body.white-mode .nav-link,
+        body.white-mode .drawer-header h3 {
+            color: #000000 !important;
+        }
+        body.white-mode .form-group input,
+        body.white-mode .form-group select {
+            background-color: #f9f9f9 !important;
+            color: #000000 !important;
+            border-color: #cccccc !important;
+        }
     </style>
 </head>
 <body>
@@ -146,6 +177,11 @@
             <a href="index.html#contact-section" class="nav-link">
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
+            </a>
+            <!-- زر تغيير اللون -->
+            <a onclick="toggleColor()" class="nav-link" style="cursor:pointer; color: #00bcd4;">
+                <i class="fas fa-adjust"></i>
+                <span>تغيير اللون</span>
             </a>
             <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
                 <i class="fas fa-shopping-cart"></i>
@@ -183,6 +219,19 @@
     <script src="js/api.js"></script>
 
     <script>
+        function toggleColor() {
+            document.body.classList.toggle('white-mode');
+            if (document.body.classList.contains('white-mode')) {
+                localStorage.setItem('siteColor', 'white');
+            } else {
+                localStorage.setItem('siteColor', 'black');
+            }
+        }
+
+        if (localStorage.getItem('siteColor') === 'white') {
+            document.body.classList.add('white-mode');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if(typeof Cart !== 'undefined') Cart.init();
 
