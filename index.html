@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/style.css">
     <style>
-
         /* سلاسة التمرير عند الضغط على تواصل معنا */
         html {
             scroll-behavior: smooth;
@@ -68,6 +67,28 @@
             color: #00bcd4;
             margin-bottom: 15px;
         }
+
+        /* =========================================
+           كود تغيير اللون من الأسود إلى الأبيض
+        ========================================= */
+        body.white-mode, 
+        body.white-mode section, 
+        body.white-mode header, 
+        body.white-mode footer, 
+        body.white-mode .core-services,
+        body.white-mode .card,
+        body.white-mode .service-box,
+        body.white-mode .cart-drawer {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border-color: #dddddd !important;
+        }
+        body.white-mode h3, 
+        body.white-mode p, 
+        body.white-mode span, 
+        body.white-mode .nav-link {
+            color: #000000 !important;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +104,6 @@
                 <i class="fas fa-home"></i>
                 <span>الرئيسية</span>
             </a>
-            <!-- زر سابقة الأعمال -->
             <a href="gallery.html" class="nav-link">
                 <i class="fas fa-camera"></i>
                 <span>سابقة الأعمال</span>
@@ -91,6 +111,11 @@
             <a href="index.html#contact-section" class="nav-link">
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
+            </a>
+            <!-- زر تغيير اللون -->
+            <a onclick="toggleColor()" class="nav-link" style="cursor:pointer; color: #00bcd4;">
+                <i class="fas fa-adjust"></i>
+                <span>تغيير اللون</span>
             </a>
             <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
                 <i class="fas fa-shopping-cart"></i>
@@ -100,7 +125,7 @@
         </nav>
     </header>
 
-    <!-- إضافة قسم الخدمات الإعلانية الكبرى لإبراز قوة الوكالة -->
+    <!-- قسم الخدمات الإعلانية الكبرى -->
     <section class="core-services">
         <h2>حلول الدعاية والإعلان المتكاملة</h2>
         <p style="color: #888; margin-bottom: 30px;">من الخيال إلى أرض الواقع.. نصنع هويتك البصرية بأعلى معايير الجودة والتنفيذ</p>
@@ -123,7 +148,7 @@
         </div>
     </section>
 
-    <!-- قسم المنتجات والهدايا الترويجية (كما هو) -->
+    <!-- قسم المنتجات والهدايا الترويجية -->
     <main id="productsGrid" class="grid" style="padding-top: 40px;">
     </main>
 
@@ -203,6 +228,21 @@
     <script src="js/api.js"></script>
 
     <script>
+        // دالة تغيير اللون وحفظه في المتصفح ليعمل في باقي الصفحات
+        function toggleColor() {
+            document.body.classList.toggle('white-mode');
+            if (document.body.classList.contains('white-mode')) {
+                localStorage.setItem('siteColor', 'white');
+            } else {
+                localStorage.setItem('siteColor', 'black');
+            }
+        }
+
+        // تطبيق اللون المحفوظ عند فتح الصفحة
+        if (localStorage.getItem('siteColor') === 'white') {
+            document.body.classList.add('white-mode');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if(typeof Cart !== 'undefined') Cart.init();
             
