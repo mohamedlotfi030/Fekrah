@@ -106,6 +106,38 @@
             margin: 0; 
             font-size: 1rem; 
         }
+
+        /* =========================================
+           كود تغيير اللون من الأسود إلى الأبيض
+        ========================================= */
+        body.white-mode, 
+        body.white-mode section, 
+        body.white-mode header, 
+        body.white-mode footer, 
+        body.white-mode .gallery-header,
+        body.white-mode .portfolio-grid {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border-color: #dddddd !important;
+        }
+        body.white-mode .gallery-header p,
+        body.white-mode span, 
+        body.white-mode .nav-link,
+        body.white-mode .filter-btn {
+            color: #000000 !important;
+        }
+        body.white-mode .filter-btn.active {
+            color: #ffffff !important;
+        }
+        body.white-mode .portfolio-item {
+            border-color: #dddddd !important;
+        }
+        body.white-mode .portfolio-info {
+            background: rgba(255, 255, 255, 0.95) !important;
+        }
+        body.white-mode .portfolio-info h3 {
+            color: #000000 !important;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +162,11 @@
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
             </a>
+            <!-- زر تغيير اللون -->
+            <a onclick="toggleColor()" class="nav-link" style="cursor:pointer; color: #00bcd4;">
+                <i class="fas fa-adjust"></i>
+                <span>تغيير اللون</span>
+            </a>
         </nav>
     </header>
 
@@ -139,10 +176,10 @@
         <p>تصفح أحدث المشاريع والتجهيزات التي قمنا بتنفيذها لشركاء نجاحنا</p>
         
         <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterGallery('all')">الكل</button>
-            <button class="filter-btn" onclick="filterGallery('outdoor')">واجهات ولافتات خارجية</button>
-            <button class="filter-btn" onclick="filterGallery('indoor')">لافتات وديكورات داخلية</button>
-            <button class="filter-btn" onclick="filterGallery('printing')">مطبوعات وتجهيزات</button>
+            <button class="filter-btn active" onclick="filterGallery('all', this)">الكل</button>
+            <button class="filter-btn" onclick="filterGallery('outdoor', this)">واجهات ولافتات خارجية</button>
+            <button class="filter-btn" onclick="filterGallery('indoor', this)">لافتات وديكورات داخلية</button>
+            <button class="filter-btn" onclick="filterGallery('printing', this)">مطبوعات وتجهيزات</button>
         </div>
     </section>
 
@@ -192,21 +229,31 @@
       © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
 
-    <!-- سكربت فلترة الأعمال الديناميكي -->
+    <!-- سكربت تغيير اللون وفلترة الأعمال -->
     <script>
-        function filterGallery(category) {
+        function toggleColor() {
+            document.body.classList.toggle('white-mode');
+            if (document.body.classList.contains('white-mode')) {
+                localStorage.setItem('siteColor', 'white');
+            } else {
+                localStorage.setItem('siteColor', 'black');
+            }
+        }
+
+        if (localStorage.getItem('siteColor') === 'white') {
+            document.body.classList.add('white-mode');
+        }
+
+        function filterGallery(category, btnElement) {
             const items = document.querySelectorAll('.portfolio-item');
             const buttons = document.querySelectorAll('.filter-btn');
             
-            // إزالة التفعيل من كل الأزرار وإضافته للزر المضغوط
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (btnElement) btnElement.classList.add('active');
 
-            // إظهار وإخفاء الصور حسب التصنيف (Class)
             items.forEach(item => {
                 if(category === 'all' || item.classList.contains(category)) {
                     item.style.display = 'block';
-                    // حركة انسيابية للظهور
                     item.animate([{opacity: 0, transform: 'scale(0.9)'}, {opacity: 1, transform: 'scale(1)'}], {duration: 400, fill: 'forwards'});
                 } else {
                     item.style.display = 'none';
