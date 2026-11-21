@@ -190,37 +190,12 @@
     <main id="productsGrid" class="grid" style="padding-top: 40px;">
     </main>
 
-    <!-- قسم عملاؤنا (11 شريك نجاح) -->
+    <!-- قسم عملاؤنا (11 شريك نجاح بتحميل تلقائي لجميع الصيغ) -->
     <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff; border-top: 1px solid #222;">
       <h2 style="text-align:center; color:#00bcd4; margin-bottom:10px;">شركاء النجاح</h2>
       <p style="text-align:center; color:#888; margin-bottom:40px;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
       <div class="clients-slider">
-        <div class="slide-track">
-          <!-- القائمة الأولى (11 شركة) -->
-          <div class="client-logo"><img src="assets/images/client1.png" alt="يونيون اير - Unionaire" title="يونيون اير"></div>
-          <div class="client-logo"><img src="assets/images/client2.png" alt="كاريير - Carrier" title="كاريير"></div>
-          <div class="client-logo"><img src="assets/images/client3.png" alt="مجموعة غبور - Ghabbour Auto" title="مجموعة غبور"></div>
-          <div class="client-logo"><img src="assets/images/client4.png" alt="أمان للتحصيل - Aman" title="أمان للتحصيل"></div>
-          <div class="client-logo"><img src="assets/images/client5.png" alt="وزارة التضامن الاجتماعي" title="وزارة التضامن الاجتماعي"></div>
-          <div class="client-logo"><img src="assets/images/client6.png" alt="راية - Raya" title="راية"></div>
-          <div class="client-logo"><img src="assets/images/client7.png" alt="بي تك - B.TECH" title="بي تك"></div>
-          <div class="client-logo"><img src="assets/images/client8.png" alt="البنك التجاري الدولي - CIB" title="البنك التجاري الدولي"></div>
-          <div class="client-logo"><img src="assets/images/client9.png" alt="مجموعة العربي - El Araby" title="مجموعة العربي"></div>
-          <div class="client-logo"><img src="assets/images/client10.png" alt="أولاد رجب - Ragab Sons" title="أولاد رجب"></div>
-          <div class="client-logo"><img src="assets/images/client11.png" alt="شركاء فكرة" title="شركاء فكرة"></div>
-
-          <!-- إعادة نفس القائمة مرة ثانية لضمان استمرارية الحركة بدون انقطاع -->
-          <div class="client-logo"><img src="assets/images/client1.png" alt="يونيون اير - Unionaire" title="يونيون اير"></div>
-          <div class="client-logo"><img src="assets/images/client2.png" alt="كاريير - Carrier" title="كاريير"></div>
-          <div class="client-logo"><img src="assets/images/client3.png" alt="مجموعة غبور - Ghabbour Auto" title="مجموعة غبور"></div>
-          <div class="client-logo"><img src="assets/images/client4.png" alt="أمان للتحصيل - Aman" title="أمان للتحصيل"></div>
-          <div class="client-logo"><img src="assets/images/client5.png" alt="وزارة التضامن الاجتماعي" title="وزارة التضامن الاجتماعي"></div>
-          <div class="client-logo"><img src="assets/images/client6.png" alt="راية - Raya" title="راية"></div>
-          <div class="client-logo"><img src="assets/images/client7.png" alt="بي تك - B.TECH" title="بي تك"></div>
-          <div class="client-logo"><img src="assets/images/client8.png" alt="البنك التجاري الدولي - CIB" title="البنك التجاري الدولي"></div>
-          <div class="client-logo"><img src="assets/images/client9.png" alt="مجموعة العربي - El Araby" title="مجموعة العربي"></div>
-          <div class="client-logo"><img src="assets/images/client10.png" alt="أولاد رجب - Ragab Sons" title="أولاد رجب"></div>
-          <div class="client-logo"><img src="assets/images/client11.png" alt="شركاء فكرة" title="شركاء فكرة"></div>
+        <div class="slide-track" id="clientsTrack">
         </div>
       </div>
     </section>
@@ -299,13 +274,31 @@
                 });
             }
 
-            const logos = document.querySelectorAll('.client-logo');
-            logos.forEach(logo => {
-              logo.addEventListener('click', () => {
-                logos.forEach(l => l.classList.remove('selected'));
-                logo.classList.add('selected');
-              });
-            });
+            // تحميل شعارات العملاء الـ 11 تلقائياً مهما كانت صيغة الصورة
+            const track = document.getElementById('clientsTrack');
+            if (track) {
+                const totalClients = 11;
+                let logosHTML = '';
+                for (let i = 1; i <= totalClients; i++) {
+                    logosHTML += `
+                        <div class="client-logo">
+                            <img src="assets/images/client${i}.png" 
+                                 onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='assets/images/client${i}.jpg';}else if(!this.dataset.triedJpeg){this.dataset.triedJpeg=1;this.src='assets/images/client${i}.jpeg';}else if(!this.dataset.triedWebp){this.dataset.triedWebp=1;this.src='assets/images/client${i}.webp';}else{this.parentElement.style.display='none';}" 
+                                 alt="شريك نجاح ${i}">
+                        </div>`;
+                }
+                // تكرار القائمة مرتين لضمان استمرارية الحركة الدائرية
+                track.innerHTML = logosHTML + logosHTML;
+
+                // تفعيل التحديد عند الضغط على أي شعار
+                const logos = track.querySelectorAll('.client-logo');
+                logos.forEach(logo => {
+                    logo.addEventListener('click', () => {
+                        logos.forEach(l => l.classList.remove('selected'));
+                        logo.classList.add('selected');
+                    });
+                });
+            }
         });
     </script>
 </body>
