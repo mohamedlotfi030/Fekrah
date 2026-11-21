@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/style.css">
     <style>
-        /* سلاسة التمرير عند الضغط على تواصل معنا */
+        /* سلاسة التمرير ومنع الانزياح الأفقي */
         html {
             scroll-behavior: smooth;
             max-width: 100%;
@@ -21,6 +21,7 @@
             max-width: 100%;
             overflow-x: hidden;
         }
+
         /* إصلاح عرض السلة الجانبية والهيدر على الموبايل */
         .cart-drawer {
             right: -100% !important;
@@ -47,12 +48,14 @@
                 font-size: 1rem !important;
             }
         }
-        /* تنسيق إضافي لضمان ظهور اللوجو بشكل جيد في الهيدر */
+
+        /* تنسيق اللوجو في الهيدر */
         .logo img {
             height: 45px;
             width: auto;
             display: block;
         }
+
         /* تنسيقات قسم الخدمات الكبرى */
         .core-services {
             padding: 50px 5%;
@@ -98,6 +101,20 @@
             font-size: 2.5rem;
             color: #00bcd4;
             margin-bottom: 15px;
+        }
+
+        /* ضبط حركة شريط شركاء النجاح */
+        @keyframes marqueeClients {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.3333%); }
+        }
+        #clientsTrack {
+            display: flex;
+            width: max-content;
+            animation: marqueeClients 25s linear infinite;
+        }
+        #clientsTrack:hover {
+            animation-play-state: paused;
         }
 
         /* =========================================
@@ -150,7 +167,6 @@
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
             </a>
-            <!-- زر تغيير اللون -->
             <a onclick="toggleColor()" class="nav-link" style="cursor:pointer; color: #00bcd4;">
                 <i class="fas fa-adjust"></i>
                 <span>تغيير اللون</span>
@@ -190,12 +206,12 @@
     <main id="productsGrid" class="grid" style="padding-top: 40px;">
     </main>
 
-    <!-- قسم عملاؤنا (11 شريك نجاح بتحميل تلقائي لجميع الصيغ) -->
-    <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff; border-top: 1px solid #222;">
-      <h2 style="text-align:center; color:#00bcd4; margin-bottom:10px;">شركاء النجاح</h2>
-      <p style="text-align:center; color:#888; margin-bottom:40px;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
-      <div class="clients-slider">
-        <div class="slide-track" id="clientsTrack">
+    <!-- قسم شركاء النجاح -->
+    <section id="clients" style="padding:60px 5%; background:#0a0a0a; color:#fff; border-top: 1px solid #222; direction: ltr;">
+      <h2 style="text-align:center; color:#00bcd4; margin-bottom:10px; direction: rtl;">شركاء النجاح</h2>
+      <p style="text-align:center; color:#888; margin-bottom:40px; direction: rtl;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
+      <div class="clients-slider" style="overflow: hidden; width: 100%;">
+        <div id="clientsTrack">
         </div>
       </div>
     </section>
@@ -274,30 +290,23 @@
                 });
             }
 
-            // تحميل شعارات العملاء الـ 11 تلقائياً مهما كانت صيغة الصورة
             const track = document.getElementById('clientsTrack');
             if (track) {
-                const totalClients = 11;
+                const clientFiles = [
+                    'client2.png', 'client3.png', 'client4.png', 
+                    'client5.png', 'client6.png', 'client10.png', 'client11.png'
+                ];
                 let logosHTML = '';
-                for (let i = 1; i <= totalClients; i++) {
+                clientFiles.forEach(file => {
                     logosHTML += `
-                        <div class="client-logo">
-                            <img src="assets/images/client${i}.png" 
-                                 onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='assets/images/client${i}.jpg';}else if(!this.dataset.triedJpeg){this.dataset.triedJpeg=1;this.src='assets/images/client${i}.jpeg';}else if(!this.dataset.triedWebp){this.dataset.triedWebp=1;this.src='assets/images/client${i}.webp';}else{this.parentElement.style.display='none';}" 
-                                 alt="شريك نجاح ${i}">
+                        <div class="client-logo" style="flex: 0 0 auto; width: 180px; padding: 15px; display: flex; align-items: center; justify-content: center;">
+                            <img src="assets/images/${file}" 
+                                 onerror="if(!this.dataset.root){this.dataset.root=1;this.src='${file}';}else{this.parentElement.style.display='none';}" 
+                                 style="max-width: 140px; max-height: 90px; object-fit: contain; background: #fff; padding: 10px; border-radius: 8px;"
+                                 alt="شريك نجاح">
                         </div>`;
-                }
-                // تكرار القائمة مرتين لضمان استمرارية الحركة الدائرية
-                track.innerHTML = logosHTML + logosHTML;
-
-                // تفعيل التحديد عند الضغط على أي شعار
-                const logos = track.querySelectorAll('.client-logo');
-                logos.forEach(logo => {
-                    logo.addEventListener('click', () => {
-                        logos.forEach(l => l.classList.remove('selected'));
-                        logo.classList.add('selected');
-                    });
                 });
+                track.innerHTML = logosHTML + logosHTML + logosHTML;
             }
         });
     </script>
