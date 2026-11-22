@@ -127,6 +127,20 @@
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3) !important;
         }
 
+        /* حركة شريط شركاء النجاح */
+        @keyframes marqueeClients {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.3333%); }
+        }
+        #clientsTrack {
+            display: flex;
+            width: max-content;
+            animation: marqueeClients 25s linear infinite;
+        }
+        #clientsTrack:hover {
+            animation-play-state: paused;
+        }
+
         /* =========================================
            الوضع النهاري (White Mode)
         ========================================= */
@@ -309,7 +323,10 @@
                     ظهور مشرف لشركتك في كل فعالية؛ نوفر كافة ستاندات العرض (رول أب، بوب أب، إكس بانر) بالإضافة إلى طباعة التيشيرتات والكابات الموحدة لفريق العمل.
                 </p>
             </div>
-<!-- تنويه هام باللون الأحمر العميق -->
+
+        </div>
+
+        <!-- تنويه هام باللون الأحمر العميق -->
         <div style="max-width: 900px; margin: 50px auto 0; padding: 25px; background: linear-gradient(135deg, rgba(127, 29, 29, 0.3), rgba(69, 10, 10, 0.5)); border: 1px solid #991b1b; border-right: 5px solid #dc2626; border-radius: 10px; text-align: center; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.1);">
             <h4 style="color: #ef4444; font-size: 1.3rem; margin-bottom: 12px; font-weight: bold;">
                 <i class="fas fa-exclamation-circle" style="margin-left: 8px;"></i> تنويه هام لعملائنا
@@ -317,7 +334,7 @@
             <p style="color: #fee2e2; font-size: 1.1rem; line-height: 1.7; margin: 0;">
                 المعروض في هذا الموقع يمثل <strong>جزءاً بسيطاً</strong> من إمكانياتنا، ونعمل حالياً على تحديث الموقع باستمرار لإضافة المزيد من أعمالنا.<br>
                 إذا كان لديك أي طلب خاص أو فكرة إعلانية لم تجدها هنا، 
-                <a href="#contact-section" style="color: #d49b27; text-decoration: none; border-bottom: 1px dashed #d49b27; font-weight: bold; transition: 0.3s;">يُرجى التواصل معنا مباشرة</a> 
+                <a href="#contact-section" style="color: var(--gold-main); text-decoration: none; border-bottom: 1px dashed var(--gold-main); font-weight: bold; transition: 0.3s;">يُرجى التواصل معنا مباشرة</a> 
                 وسنقوم بتنفيذها لك بأعلى جودة!
             </p>
         </div>
@@ -332,7 +349,7 @@
       <h2 style="text-align:center; color: var(--gold-main); margin-bottom:10px; direction: rtl;">شركاء النجاح</h2>
       <p style="text-align:center; color: var(--text-muted); margin-bottom:40px; direction: rtl;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
       <div class="clients-slider" style="overflow: hidden; width: 100%;">
-        <div id="clientsTrack" style="display: flex; width: max-content; animation: marqueeClients 25s linear infinite;">
+        <div id="clientsTrack">
         </div>
       </div>
     </section>
@@ -406,7 +423,7 @@
                 Object.keys(Products).forEach(key => {
                     const p = Products[key];
                     grid.innerHTML += `
-                        <div class="card" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center;">
+                        <div class="card" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center; transition: all 0.3s ease;">
                             <div class="card-img-container" style="margin-bottom: 15px;">
                                 <img src="${p.images[0]}" alt="${p.name}" style="max-width: 100%; border-radius: 8px;">
                             </div>
@@ -416,7 +433,7 @@
                 });
             }
 
-            // تهيئة شريط عملاء وشركاء النجاح
+            // تهيئة شريط عملاء وشركاء النجاح مع الحركة
             const track = document.getElementById('clientsTrack');
             if (track) {
                 const clientFiles = [
