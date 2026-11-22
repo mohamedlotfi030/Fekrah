@@ -12,14 +12,16 @@
     <link rel="stylesheet" href="assets/styles/style.css">
     <style>
         :root {
-            --bg-primary: #08121e;      /* كحلي ليلي فخم للخلفية الأساسية */
-            --bg-card: #0d1e32;         /* أزرق ملكي داكن للبطاقات والأقسام */
-            --border-color: #1a3350;    /* حدود كحلية متناسقة */
-            --gold-main: #ffb300;       /* الذهبي العنبري للعناوين والأزرار */
-            --gold-hover: #e09e00;      /* ذهبي أغمق عند التمرير */
-            --teal-muted: #2b9eb3;      /* تركواز هادئ بديل النيون */
-            --text-light: #f4f7f9;      /* أبيض مريح للنصوص */
-            --text-muted: #a3b8cc;      /* رمادي مزرق للنصوص الفرعية */
+            --bg-primary: #090d14;              /* أسود فحمي ملكي للخلفية الرئيسية */
+            --bg-card: #101826;                 /* كحلي ليلي عميق للبطاقات والأقسام */
+            --border-color: #1e2d42;            /* أزرق رمادي داكن للحدود والتظليل */
+            --gold-main: #d49b27;               /* ذهبي معدني دافئ للعناوين الرئيسية */
+            --gold-dark: #b88218;               /* درجة التدرج الذهبي للأزرار */
+            --text-primary: #e2e8f0;            /* أبيض بلاتيني ناعم للنصوص الأساسية */
+            --text-muted: #94a3b8;              /* فضي بلاتيني للنصوص الفرعية والوصف */
+            --royal-blue: #1a4b84;              /* أزرق ملكي متوسط للأيقونات */
+            --royal-hover: #2563eb;             /* أزرق ملكي للتفاعل عند التمرير */
+            --shadow-gold: rgba(212, 155, 39, 0.15); /* ظل ذهبي خفيف متوهج */
         }
 
         /* سلاسة التمرير ومنع الانزياح الأفقي */
@@ -32,20 +34,31 @@
             max-width: 100%;
             overflow-x: hidden;
             background-color: var(--bg-primary) !important;
-            color: var(--text-light) !important;
+            color: var(--text-primary) !important;
         }
 
         /* الهيدر وشريط التنقل */
         .header {
-            background-color: #060e17 !important;
+            background-color: var(--bg-primary) !important;
             border-bottom: 1px solid var(--border-color) !important;
         }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+            mix-blend-mode: lighten;
+            filter: contrast(1.05);
+        }
         .nav-link {
-            color: var(--text-light) !important;
+            color: var(--text-primary) !important;
             transition: 0.3s;
         }
         .nav-link i {
-            color: var(--teal-muted) !important;
+            color: var(--royal-blue) !important;
             transition: 0.3s;
         }
         .nav-link:hover, .nav-link:hover i {
@@ -53,11 +66,11 @@
         }
         .cart-badge {
             background-color: var(--gold-main) !important;
-            color: #08121e !important;
+            color: var(--bg-primary) !important;
             font-weight: bold;
         }
 
-        /* إصلاح عرض السلة الجانبية والهيدر على الموبايل */
+        /* السلة الجانبية */
         .cart-drawer {
             right: -100% !important;
             width: 320px;
@@ -73,7 +86,7 @@
                 padding: 10px 3%;
             }
             .logo img {
-                height: 32px !important;
+                height: 36px !important;
             }
             .nav-group {
                 gap: 10px !important;
@@ -86,18 +99,11 @@
             }
         }
 
-        /* تنسيق اللوجو في الهيدر */
-        .logo img {
-            height: 45px;
-            width: auto;
-            display: block;
-        }
-
         /* تنسيقات قسم الخدمات الكبرى */
         .core-services {
-            padding: 50px 5%;
-            background: var(--bg-primary) !important;
-            color: var(--text-light) !important;
+            padding: 55px 5%;
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
             text-align: center;
             border-bottom: 1px solid var(--border-color) !important;
         }
@@ -114,10 +120,10 @@
             margin-top: 30px;
         }
         .service-box, .card {
-            background: var(--bg-card) !important;
+            background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
             border-radius: 10px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
         .service-box {
             padding: 30px 20px;
@@ -126,7 +132,7 @@
         .service-box:hover, .card:hover {
             border-color: var(--gold-main) !important;
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 179, 0, 0.12);
+            box-shadow: 0 8px 25px var(--shadow-gold) !important;
         }
         .service-box h3, .card h3 {
             color: var(--gold-main) !important;
@@ -139,7 +145,7 @@
         }
         .service-box i {
             font-size: 2.5rem;
-            color: var(--teal-muted) !important;
+            color: var(--royal-blue) !important;
             margin-bottom: 15px;
             transition: 0.3s;
         }
@@ -149,15 +155,17 @@
 
         /* الأزرار الرئيسية */
         .btn-main {
-            background: linear-gradient(135deg, var(--gold-main), #e69500) !important;
-            color: #08121e !important;
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark)) !important;
+            color: var(--bg-primary) !important;
             font-weight: bold !important;
             border: none !important;
-            transition: 0.3s !important;
+            border-radius: 6px !important;
+            transition: 0.3s ease !important;
         }
         .btn-main:hover {
-            background: var(--teal-muted) !important;
+            background: linear-gradient(135deg, var(--royal-blue), var(--royal-hover)) !important;
             color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3) !important;
         }
 
         /* ضبط حركة شريط شركاء النجاح */
@@ -175,7 +183,7 @@
         }
 
         /* =========================================
-           وضع الخلفية البيضاء (White Mode)
+           الوضع النهاري (White Mode)
         ========================================= */
         body.white-mode, 
         body.white-mode section, 
@@ -184,28 +192,36 @@
         body.white-mode .core-services,
         body.white-mode .cart-drawer {
             background-color: #f8fafc !important;
-            color: #0d1e32 !important;
-            border-color: #dce4ec !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
         }
         body.white-mode .card,
         body.white-mode .service-box {
             background-color: #ffffff !important;
-            border-color: #dce4ec !important;
-            box-shadow: 0 4px 15px rgba(13, 30, 50, 0.06);
+            border-color: #cbd5e1 !important;
+            box-shadow: 0 4px 15px rgba(16, 24, 38, 0.08) !important;
         }
         body.white-mode h2,
         body.white-mode h3 {
-            color: #c78500 !important; /* ذهبي داكن مقروء على الأبيض */
+            color: #a67512 !important;
         }
         body.white-mode p, 
         body.white-mode span, 
         body.white-mode .nav-link,
         body.white-mode .drawer-header h3,
         body.white-mode .drawer-header span {
-            color: #0d1e32 !important;
+            color: #0f172a !important;
+        }
+        body.white-mode .logo {
+            background-color: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+        body.white-mode .logo img {
+            mix-blend-mode: normal;
         }
         body.white-mode #cartItemsList div {
-            color: #0d1e32 !important;
+            color: #0f172a !important;
             border-bottom-color: #e2e8f0 !important;
         }
     </style>
@@ -232,8 +248,8 @@
                 <span>تواصل معنا</span>
             </a>
             <a onclick="toggleColor()" class="nav-link" style="cursor:pointer;">
-                <i class="fas fa-adjust" style="color: #ffb300 !important;"></i>
-                <span style="color: #ffb300 !important;">تغيير اللون</span>
+                <i class="fas fa-adjust" style="color: #d49b27 !important;"></i>
+                <span style="color: #d49b27 !important;">تغيير اللون</span>
             </a>
             <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
                 <i class="fas fa-shopping-cart"></i>
@@ -246,7 +262,7 @@
     <!-- قسم الخدمات الإعلانية الكبرى -->
     <section class="core-services">
         <h2>حلول الدعاية والإعلان المتكاملة</h2>
-        <p style="color: #a3b8cc; margin-bottom: 30px;">من الخيال إلى أرض الواقع.. نصنع هويتك البصرية بأعلى معايير الجودة والتنفيذ</p>
+        <p style="color: #94a3b8; margin-bottom: 30px;">من الخيال إلى أرض الواقع.. نصنع هويتك البصرية بأعلى معايير الجودة والتنفيذ</p>
         <div class="services-container">
             <div class="service-box">
                 <i class="fas fa-building"></i>
@@ -271,9 +287,9 @@
     </main>
 
     <!-- قسم شركاء النجاح -->
-    <section id="clients" style="padding:60px 5%; background:#08121e; color:#f4f7f9; border-top: 1px solid #1a3350; direction: ltr;">
-      <h2 style="text-align:center; color:#ffb300; margin-bottom:10px; direction: rtl;">شركاء النجاح</h2>
-      <p style="text-align:center; color:#a3b8cc; margin-bottom:40px; direction: rtl;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
+    <section id="clients" style="padding:60px 5%; background:#090d14; color:#e2e8f0; border-top: 1px solid #1e2d42; direction: ltr;">
+      <h2 style="text-align:center; color:#d49b27; margin-bottom:10px; direction: rtl;">شركاء النجاح</h2>
+      <p style="text-align:center; color:#94a3b8; margin-bottom:40px; direction: rtl;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
       <div class="clients-slider" style="overflow: hidden; width: 100%;">
         <div id="clientsTrack">
         </div>
@@ -281,8 +297,8 @@
     </section>
 
     <!-- قسم طرق التواصل -->
-    <section id="contact-section" style="padding: 60px 5%; background: #08121e; border-top: 1px solid #1a3350;">
-        <h2 style="text-align: center; color: #ffb300; margin-bottom: 40px; font-size: 2rem;">طرق التواصل</h2>
+    <section id="contact-section" style="padding: 60px 5%; background: #090d14; border-top: 1px solid #1e2d42;">
+        <h2 style="text-align: center; color: #d49b27; margin-bottom: 40px; font-size: 2rem;">طرق التواصل</h2>
         <div class="grid">
             <div class="card" style="padding: 30px; text-align: center;">
                 <i class="fab fa-whatsapp" style="font-size: 3.5rem; color: #25d366; margin-bottom: 15px;"></i>
@@ -291,13 +307,13 @@
                 <a href="https://wa.me/201111049778" class="btn-main" style="margin: 0 auto;">مراسلة</a>
             </div>
             <div class="card" style="padding: 30px; text-align: center;">
-                <i class="fas fa-phone-volume" style="font-size: 3.5rem; color: #2b9eb3; margin-bottom: 15px;"></i>
+                <i class="fas fa-phone-volume" style="font-size: 3.5rem; color: #1a4b84; margin-bottom: 15px;"></i>
                 <h3>اتصال هاتفي</h3>
                 <p style="margin-bottom: 20px;">متاحون للرد على مكالماتكم</p>
                 <a href="tel:01111049778" class="btn-main" style="margin: 0 auto;">اتصل الآن</a>
             </div>
             <div class="card" style="padding: 30px; text-align: center;">
-                <i class="fas fa-map-marked-alt" style="font-size: 3.5rem; color: #ffb300; margin-bottom: 15px;"></i>
+                <i class="fas fa-map-marked-alt" style="font-size: 3.5rem; color: #d49b27; margin-bottom: 15px;"></i>
                 <h3>موقعنا</h3>
                 <p style="margin-bottom: 20px;">حلوان، القاهرة - تشرفنا بزيارتك</p>
                 <a href="https://maps.google.com" target="_blank" class="btn-main" style="margin: 0 auto;">الخريطة</a>
@@ -306,18 +322,18 @@
     </section>
 
     <div id="cartDrawer" class="cart-drawer">
-        <div class="drawer-header" style="border-bottom: 1px solid #1a3350;">
-            <h3 style="margin:0; color:#ffb300;">سلة الطلبات</h3>
-            <span onclick="UI.toggleCart(false)" style="cursor:pointer; color:#f4f7f9; font-size: 2.5rem;">×</span>
+        <div class="drawer-header" style="border-bottom: 1px solid #1e2d42;">
+            <h3 style="margin:0; color:#d49b27;">سلة الطلبات</h3>
+            <span onclick="UI.toggleCart(false)" style="cursor:pointer; color:#e2e8f0; font-size: 2.5rem;">×</span>
         </div>
         <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;">
         </div>
-        <div style="padding: 20px; border-top: 1px solid #1a3350;">
+        <div style="padding: 20px; border-top: 1px solid #1e2d42;">
             <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0;">إتمام الطلب</button>
         </div>
     </div>
 
-    <footer style="padding:20px; text-align:center; background:#060e17; color:#a3b8cc; border-top: 1px solid #1a3350;">
+    <footer style="padding:20px; text-align:center; background:#090d14; color:#94a3b8; border-top: 1px solid #1e2d42;">
       © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
 
