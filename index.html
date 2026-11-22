@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="فكرة للدعاية والإعلان - حلول متكاملة للافتات الخارجية، الداخلية، المطبوعات والهدايا الترويجية في حلوان.">
-    <title>فكرة للدعاية والإعلان | القاهرة</title>
+    <title>فكرة للدعاية والإعلان | حلوان</title>
     
     <link rel="icon" type="image/png" href="logo-main.png">
     
@@ -46,6 +46,7 @@
             display: flex;
             align-items: center;
         }
+        /* كود دمج اللوجو وإخفاء الخلفية السوداء */
         .logo img {
             height: 50px;
             width: auto;
@@ -53,9 +54,18 @@
             mix-blend-mode: lighten;
             filter: contrast(1.05);
         }
+        .nav-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
         .nav-link {
             color: var(--text-primary) !important;
             transition: 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         .nav-link i {
             color: var(--royal-blue) !important;
@@ -81,7 +91,7 @@
         .cart-drawer.active {
             right: 0 !important;
         }
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .header {
                 padding: 10px 3%;
             }
@@ -95,62 +105,8 @@
                 font-size: 0.65rem !important;
             }
             .nav-link i {
-                font-size: 1rem !important;
+                font-size: 0.9rem !important;
             }
-        }
-
-        /* تنسيقات قسم الخدمات الكبرى */
-        .core-services {
-            padding: 55px 5%;
-            background-color: var(--bg-primary) !important;
-            color: var(--text-primary) !important;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color) !important;
-        }
-        .core-services h2 {
-            color: var(--gold-main) !important;
-            margin-bottom: 10px;
-            font-size: 2rem;
-        }
-        .core-services .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .service-box, .card {
-            background-color: var(--bg-card) !important;
-            border: 1px solid var(--border-color) !important;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        .service-box {
-            padding: 30px 20px;
-            width: 300px;
-        }
-        .service-box:hover, .card:hover {
-            border-color: var(--gold-main) !important;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--shadow-gold) !important;
-        }
-        .service-box h3, .card h3 {
-            color: var(--gold-main) !important;
-            margin-bottom: 15px;
-        }
-        .service-box p, .card p {
-            color: var(--text-muted) !important;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .service-box i {
-            font-size: 2.5rem;
-            color: var(--royal-blue) !important;
-            margin-bottom: 15px;
-            transition: 0.3s;
-        }
-        .service-box:hover i {
-            color: var(--gold-main) !important;
         }
 
         /* الأزرار الرئيسية */
@@ -160,26 +116,15 @@
             font-weight: bold !important;
             border: none !important;
             border-radius: 6px !important;
+            padding: 10px 20px !important;
             transition: 0.3s ease !important;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-main:hover {
             background: linear-gradient(135deg, var(--royal-blue), var(--royal-hover)) !important;
             color: #ffffff !important;
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3) !important;
-        }
-
-        /* ضبط حركة شريط شركاء النجاح */
-        @keyframes marqueeClients {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-33.3333%); }
-        }
-        #clientsTrack {
-            display: flex;
-            width: max-content;
-            animation: marqueeClients 25s linear infinite;
-        }
-        #clientsTrack:hover {
-            animation-play-state: paused;
         }
 
         /* =========================================
@@ -232,24 +177,31 @@
 
     <header class="header">
         <div class="logo">
-            <img src="logo-main.png" alt="فكرة للدعاية والإعلان">
+            <!-- كود اللوجو الذكي الذي يبحث عن كل الامتدادات تلقائياً -->
+            <img src="logo-main.png" 
+                 onerror="if(!this.dataset.step){this.dataset.step=1;this.src='logo-main.jpeg';}else if(this.dataset.step==1){this.dataset.step=2;this.src='logo-main.jpg';}else if(this.dataset.step==2){this.dataset.step=3;this.src='assets/images/logo-main.png';}" 
+                 alt="فكرة للدعاية والإعلان">
         </div>
         <nav class="nav-group">
             <a href="index.html" class="nav-link">
                 <i class="fas fa-home"></i>
                 <span>الرئيسية</span>
             </a>
+            <a href="#our-services" class="nav-link">
+                <i class="fas fa-concierge-bell"></i>
+                <span>خدماتنا</span>
+            </a>
             <a href="gallery.html" class="nav-link">
                 <i class="fas fa-camera"></i>
-                <span>سابقة الأعمال</span>
+                <span>أعمالنا</span>
             </a>
-            <a href="index.html#contact-section" class="nav-link">
+            <a href="#contact-section" class="nav-link">
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
             </a>
             <a onclick="toggleColor()" class="nav-link" style="cursor:pointer;">
                 <i class="fas fa-adjust" style="color: #d49b27 !important;"></i>
-                <span style="color: #d49b27 !important;">تغيير اللون</span>
+                <span style="color: #d49b27 !important;">اللون</span>
             </a>
             <div onclick="UI.toggleCart(true)" style="cursor:pointer; position:relative;" class="nav-link">
                 <i class="fas fa-shopping-cart"></i>
@@ -259,80 +211,162 @@
         </nav>
     </header>
 
-    <!-- قسم الخدمات الإعلانية الكبرى -->
-    <section class="core-services">
-        <h2>حلول الدعاية والإعلان المتكاملة</h2>
-        <p style="color: #94a3b8; margin-bottom: 30px;">من الخيال إلى أرض الواقع.. نصنع هويتك البصرية بأعلى معايير الجودة والتنفيذ</p>
-        <div class="services-container">
-            <div class="service-box">
-                <i class="fas fa-building"></i>
-                <h3>اللافتات الخارجية (Outdoor)</h3>
-                <p>تصنيع وتجهيز واجهات الكلادينج والحروف البارزة المضيئة للفروع والشركات بخامات تقاوم العوامل الجوية.</p>
+    <!-- قسم خدماتنا المتكاملة -->
+    <section id="our-services" class="core-services" style="padding: 70px 5%; background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color);">
+        <h2 style="color: var(--gold-main); font-size: 2.2rem; margin-bottom: 12px; text-align: center;">خدماتنا المتكاملة</h2>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto 45px auto; font-size: 1.05rem; line-height: 1.7; text-align: center;">
+            من الفكرة والتصميم وحتى الطباعة والتنفيذ النهائي.. نوفر لك كل ما يحتاجه مشروعك في عالم الدعاية والإعلان تحت سقف واحد بأعلى جودة وأفضل سعر.
+        </p>
+
+        <div class="services-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1250px; margin: 0 auto;">
+            
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-ship" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">استيراد وتوريد هدايا الدعاية</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    نوفر لك من المصدر مباشرة! نستورد أرقى هدايا الدعاية التي تناسب براندك؛ من الأقلام والمجات، وحتى الفلاشات والوصلات المضيئة المبتكرة والبلوك نوت، مع ضمان خامات عالية وأسعار جملة.
+                </p>
             </div>
-            <div class="service-box">
-                <i class="fas fa-store"></i>
-                <h3>اللافتات الداخلية (Indoor)</h3>
-                <p>ديكورات الأكريليك المضيئة واللافتات الجدارية التي تعكس احترافية وفخامة مقرك من الداخل.</p>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-magic" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">الحفر والتقطيع بالليزر</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    الدقة عندنا تخصص وليست مجرد كلمة؛ ننفذ أدق التفاصيل بالحفر والتقطيع بالليزر على الخشب، الأكريليك، الجلد، والمعادن، لنخرج لك دروعاً تذكارية وهدايا بلمسة فنية استثنائية.
+                </p>
             </div>
-            <div class="service-box">
-                <i class="fas fa-print"></i>
-                <h3>تجهيز المعارض والمطبوعات</h3>
-                <p>تصميم وتنفيذ أجنحة العرض، الرول أب، والبوب أب كاونتر للفعاليات الكبرى، وكافة المطبوعات الورقية.</p>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-print" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">الطباعة الورقية والأوفست</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    نحول خيالك لواقع ملموس بأعلى دقة ألوان؛ من الكروت الشخصية والفلاير وحتى البروشورات، الفولدرات، والمنيو، لنقدم لك مطبوعات ورقية فاخرة تشرفك أمام عملائك.
+                </p>
             </div>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-gift" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">الهدايا الدعائية المخصصة</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    اجعل اسمك دائماً أمام عين عميلك؛ نوفر تشكيلة متكاملة من الهدايا الدعائية (أقلام، مجات، نوت بوك، ميداليات) مطبوعاً عليها لوجو شركتك بأحدث تقنيات الطباعة.
+                </p>
+            </div>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-pen-nib" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">تصميم اللوجو والهوية البصرية</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    اللوجو هو واجهة شركتك، ونحن نرسمه باحترافية؛ نصمم لك هوية بصرية متكاملة تعبر عن روح مشروعك وتجعلك مختلفاً ومميزاً وسط المنافسين في السوق.
+                </p>
+            </div>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-stamp" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">الأختام والمطبوعات السريعة</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    أنجز أوراقك في ثوانٍ؛ نصنع لك أختام أوتوماتيك وكريستال بأعلى جودة، بالإضافة إلى كافة خدمات الطباعة الرقمية السريعة والاستيكرز الليبل والملصقات.
+                </p>
+            </div>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-store-alt" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">اللافتات المضيئة والكلادينج</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    اجعل واجهة مقرك تلفت الأنظار ليلاً ونهاراً؛ نصمم وننفذ واجهات الكلادينج، الحروف البارزة المضيئة (أكريليك وإستانلس)، واللافتات الداخلية بأمتن الخامات.
+                </p>
+            </div>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-scroll" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">طباعة البانر والفينيل</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    طباعة الإعلانات الخارجية والداخلية بأحبار أصلية مقاومة للشمس؛ نوفر طباعة البانر، الفليكس، الفينيل اللاصق، والسي ثرو للواجهات الزجاجية والسيارات بدقة متناهية.
+                </p>
+            </div>
+
+            <div class="service-box card" style="text-align: right; padding: 30px 25px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <i class="fas fa-chalkboard-teacher" style="font-size: 2rem; color: var(--royal-blue);"></i>
+                    <h3 style="margin: 0; font-size: 1.25rem; color: var(--gold-main);">تجهيز المعارض والستاندات</h3>
+                </div>
+                <p style="margin: 0; line-height: 1.75; color: var(--text-muted);">
+                    ظهور مشرف لشركتك في كل فعالية؛ نوفر كافة ستاندات العرض (رول أب، بوب أب، إكس بانر) بالإضافة إلى طباعة التيشيرتات والكابات الموحدة لفريق العمل.
+                </p>
+            </div>
+
         </div>
     </section>
 
-    <!-- قسم المنتجات والهدايا الترويجية -->
-    <main id="productsGrid" class="grid" style="padding-top: 40px;">
+    <!-- قسم المنتجات (يتم تحميله ديناميكياً) -->
+    <main id="productsGrid" class="grid" style="padding: 60px 5%; background-color: var(--bg-primary);">
     </main>
 
     <!-- قسم شركاء النجاح -->
-    <section id="clients" style="padding:60px 5%; background:#090d14; color:#e2e8f0; border-top: 1px solid #1e2d42; direction: ltr;">
-      <h2 style="text-align:center; color:#d49b27; margin-bottom:10px; direction: rtl;">شركاء النجاح</h2>
-      <p style="text-align:center; color:#94a3b8; margin-bottom:40px; direction: rtl;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
+    <section id="clients" style="padding:60px 5%; background-color: var(--bg-card); color: var(--text-primary); border-top: 1px solid var(--border-color); direction: ltr;">
+      <h2 style="text-align:center; color: var(--gold-main); margin-bottom:10px; direction: rtl;">شركاء النجاح</h2>
+      <p style="text-align:center; color: var(--text-muted); margin-bottom:40px; direction: rtl;">نفخر بثقة كبرى الكيانات والمؤسسات في جودة أعمالنا</p>
       <div class="clients-slider" style="overflow: hidden; width: 100%;">
-        <div id="clientsTrack">
+        <div id="clientsTrack" style="display: flex; width: max-content; animation: marqueeClients 25s linear infinite;">
         </div>
       </div>
     </section>
 
     <!-- قسم طرق التواصل -->
-    <section id="contact-section" style="padding: 60px 5%; background: #090d14; border-top: 1px solid #1e2d42;">
-        <h2 style="text-align: center; color: #d49b27; margin-bottom: 40px; font-size: 2rem;">طرق التواصل</h2>
-        <div class="grid">
-            <div class="card" style="padding: 30px; text-align: center;">
+    <section id="contact-section" style="padding: 60px 5%; background-color: var(--bg-primary); border-top: 1px solid var(--border-color);">
+        <h2 style="text-align: center; color: var(--gold-main); margin-bottom: 40px; font-size: 2rem;">طرق التواصل</h2>
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div class="card" style="padding: 30px; text-align: center; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px;">
                 <i class="fab fa-whatsapp" style="font-size: 3.5rem; color: #25d366; margin-bottom: 15px;"></i>
-                <h3>واتساب</h3>
-                <p style="margin-bottom: 20px;">أرسل استفساراتك وملفاتك مباشرة</p>
+                <h3 style="color: var(--gold-main); margin-bottom: 10px;">واتساب</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">أرسل استفساراتك وملفاتك مباشرة</p>
                 <a href="https://wa.me/201111049778" class="btn-main" style="margin: 0 auto;">مراسلة</a>
             </div>
-            <div class="card" style="padding: 30px; text-align: center;">
-                <i class="fas fa-phone-volume" style="font-size: 3.5rem; color: #1a4b84; margin-bottom: 15px;"></i>
-                <h3>اتصال هاتفي</h3>
-                <p style="margin-bottom: 20px;">متاحون للرد على مكالماتكم</p>
+            <div class="card" style="padding: 30px; text-align: center; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px;">
+                <i class="fas fa-phone-volume" style="font-size: 3.5rem; color: var(--royal-blue); margin-bottom: 15px;"></i>
+                <h3 style="color: var(--gold-main); margin-bottom: 10px;">اتصال هاتفي</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">متاحون للرد على مكالماتكم</p>
                 <a href="tel:01111049778" class="btn-main" style="margin: 0 auto;">اتصل الآن</a>
             </div>
-          <div class="card" style="padding: 30px; text-align: center;">
-    <i class="fas fa-map-marked-alt" style="font-size: 3.5rem; color: #d49b27; margin-bottom: 15px;"></i>
-    <h3>موقعنا</h3>
-    <p style="margin-bottom: 20px;">حلوان، القاهرة - تشرفنا بزيارتك</p>
-    <a href="https://maps.app.goo.gl/QiyyzRtUs3dWJTRq6" target="_blank" class="btn-main" style="margin: 0 auto;">الخريطة</a>
-</div>
+            <div class="card" style="padding: 30px; text-align: center; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px;">
+                <i class="fas fa-map-marked-alt" style="font-size: 3.5rem; color: var(--gold-main); margin-bottom: 15px;"></i>
+                <h3 style="color: var(--gold-main); margin-bottom: 10px;">موقعنا</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">حلوان، القاهرة - تشرفنا بزيارتك</p>
+                <!-- تم تحديث رابط الخريطة الجديد هنا -->
+                <a href="https://maps.app.goo.gl/KJwTh8bToaBd5Nvs7?g_st=aw" target="_blank" class="btn-main" style="margin: 0 auto;">الخريطة</a>
+            </div>
+        </div>
     </section>
 
+    <!-- السلة الجانبية -->
     <div id="cartDrawer" class="cart-drawer">
-        <div class="drawer-header" style="border-bottom: 1px solid #1e2d42;">
-            <h3 style="margin:0; color:#d49b27;">سلة الطلبات</h3>
-            <span onclick="UI.toggleCart(false)" style="cursor:pointer; color:#e2e8f0; font-size: 2.5rem;">×</span>
+        <div class="drawer-header" style="border-bottom: 1px solid var(--border-color); padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin:0; color: var(--gold-main);">سلة الطلبات</h3>
+            <span onclick="UI.toggleCart(false)" style="cursor:pointer; color: var(--text-primary); font-size: 2rem;">&times;</span>
         </div>
-        <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex: 1;">
+        <div id="cartItemsList" style="padding: 15px; overflow-y: auto; height: calc(100vh - 160px);">
         </div>
-        <div style="padding: 20px; border-top: 1px solid #1e2d42;">
+        <div style="padding: 20px; border-top: 1px solid var(--border-color); position: absolute; bottom: 0; width: 100%; background: inherit;">
             <button onclick="window.location.href='checkout.html'" class="btn-main" style="width: 100%; margin:0;">إتمام الطلب</button>
         </div>
     </div>
 
-    <footer style="padding:20px; text-align:center; background:#090d14; color:#94a3b8; border-top: 1px solid #1e2d42;">
+    <footer style="padding:20px; text-align:center; background-color: var(--bg-primary); color: var(--text-muted); border-top: 1px solid var(--border-color);">
       © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
 
@@ -342,6 +376,7 @@
     <script src="js/api.js"></script>
 
     <script>
+        // دالة تغيير اللون (الوضع الليلي والنهاري)
         function toggleColor() {
             document.body.classList.toggle('white-mode');
             localStorage.setItem('siteColor', document.body.classList.contains('white-mode') ? 'white' : 'dark');
@@ -352,23 +387,26 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // تهيئة السلة
             if(typeof Cart !== 'undefined') Cart.init();
             
+            // جلب وعرض المنتجات الديناميكية
             const grid = document.getElementById('productsGrid');
             if(grid && typeof Products !== 'undefined') {
                 Object.keys(Products).forEach(key => {
                     const p = Products[key];
                     grid.innerHTML += `
-                        <div class="card">
-                            <div class="card-img-container">
-                                <img src="${p.images[0]}" alt="${p.name}">
+                        <div class="card" style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; text-align: center;">
+                            <div class="card-img-container" style="margin-bottom: 15px;">
+                                <img src="${p.images[0]}" alt="${p.name}" style="max-width: 100%; border-radius: 8px;">
                             </div>
-                            <h3>${p.name}</h3>
+                            <h3 style="color: var(--gold-main); margin-bottom: 15px;">${p.name}</h3>
                             <a href="product-details.html?type=${key}" class="btn-main">اطلب الآن</a>
                         </div>`;
                 });
             }
 
+            // تهيئة شريط عملاء وشركاء النجاح
             const track = document.getElementById('clientsTrack');
             if (track) {
                 const clientFiles = [
@@ -385,6 +423,7 @@
                                  alt="شريك نجاح">
                         </div>`;
                 });
+                // تكرار اللوجوهات لضمان استمرار شريط التمرير بدون تقطيع
                 track.innerHTML = logosHTML + logosHTML + logosHTML;
             }
         });
