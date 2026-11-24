@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://fekrah-adv.com/</loc>
     <lastmod>2026-11-24</lastmod>
@@ -9,5 +10,13 @@
     <loc>https://fekrah-adv.com/gallery.html</loc>
     <lastmod>2026-11-24</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://fekrah-adv.com/images/car-sunshade-printing-egypt.webp</image:loc>
+      <image:title>طباعة شماسي سيارات دعائية للشركات - فكرة للدعاية والإعلان</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://fekrah-adv.com/images/custom-cotton-canvas-tote-bags-printing-egypt.webp</image:loc>
+      <image:title>طباعة شنط قماش وتوت باج دعائية - فكرة للدعاية والإعلان</image:title>
+    </image:image>
   </url>
 </urlset>
