@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="سابقة أعمال فكرة للدعاية والإعلان - تصفح مشاريعنا مع كبرى الشركات.">
+    <meta name="description" content="سابقة أعمال فكرة للدعاية والإعلان - تصفح مشاريعنا في الطباعة، هدايا الشركات، تجهيز الفروع، والمطبوعات الدعائية لكبرى الشركات في مصر.">
     <title>سابقة الأعمال | فكرة للدعاية والإعلان</title>
     
     <link rel="icon" type="image/png" href="logo-main.png">
@@ -11,65 +11,151 @@
     <link rel="stylesheet" href="assets/styles/style.css">
     
     <style>
-        /* تنسيقات الهيدر */
-        .logo img { height: 45px; width: auto; display: block; }
+        :root {
+            --bg-primary: #090d14;              /* أسود فحمي ملكي للخلفية الرئيسية */
+            --bg-card: #101826;                 /* كحلي ليلي عميق للبطاقات والأقسام */
+            --border-color: #1e2d42;            /* أزرق رمادي داكن للحدود والتظليل */
+            --gold-main: #d49b27;               /* ذهبي معدني دافئ للعناوين الرئيسية */
+            --gold-dark: #b88218;               /* درجة التدرج الذهبي للأزرار */
+            --text-primary: #e2e8f0;            /* أبيض بلاتيني ناعم للنصوص الأساسية */
+            --text-muted: #94a3b8;              /* فضي بلاتيني للنصوص الفرعية والوصف */
+            --royal-blue: #1a4b84;              /* أزرق ملكي متوسط للأيقونات */
+            --royal-hover: #2563eb;             /* أزرق ملكي للتفاعل عند التمرير */
+            --shadow-gold: rgba(212, 155, 39, 0.15); /* ظل ذهبي خفيف متوهج */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* الهيدر وشريط التنقل */
+        .header {
+            background-color: var(--bg-primary) !important;
+            border-bottom: 1px solid var(--border-color) !important;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+            mix-blend-mode: lighten;
+            filter: contrast(1.05);
+        }
+        .nav-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .nav-link {
+            color: var(--text-primary) !important;
+            transition: 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-link i {
+            color: var(--royal-blue) !important;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link:hover i, .nav-link.active-page, .nav-link.active-page i {
+            color: var(--gold-main) !important;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 10px 3%; }
+            .logo img { height: 36px !important; }
+            .nav-group { gap: 10px !important; }
+            .nav-link { font-size: 0.65rem !important; }
+            .nav-link i { font-size: 0.9rem !important; }
+        }
         
         /* تنسيقات قسم معرض الأعمال */
         .gallery-header { 
             text-align: center; 
-            padding: 60px 20px 30px; 
-            background: #0a0a0a; 
-            color: #fff; 
-            border-bottom: 1px solid #222; 
+            padding: 60px 20px 35px; 
+            background-color: var(--bg-primary); 
+            color: var(--text-primary); 
+            border-bottom: 1px solid var(--border-color); 
         }
         .gallery-header h1 { 
-            color: #00bcd4; 
-            font-size: 2.5rem; 
+            color: var(--gold-main); 
+            font-size: 2.2rem; 
             margin-bottom: 15px; 
         }
         .gallery-header p {
-            color: #888;
-            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
         
         /* أزرار الفلترة التصنيفية */
         .filter-buttons { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; 
+            gap: 12px; 
             margin-top: 30px; 
             flex-wrap: wrap; 
+            max-width: 1150px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .filter-btn { 
-            background: transparent; 
-            border: 1px solid #00bcd4; 
-            color: #fff; 
-            padding: 10px 25px; 
+            background-color: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            color: var(--text-primary); 
+            padding: 10px 22px; 
             border-radius: 30px; 
             cursor: pointer; 
-            transition: 0.3s; 
-            font-size: 1rem; 
+            transition: 0.3s ease; 
+            font-size: 0.95rem; 
+            font-weight: 600;
         }
-        .filter-btn:hover, .filter-btn.active { 
-            background: #00bcd4; 
-            color: #000; 
+        .filter-btn:hover {
+            border-color: var(--gold-main);
+            color: var(--gold-main);
+        }
+        .filter-btn.active { 
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark)); 
+            color: var(--bg-primary); 
+            border-color: var(--gold-main);
             font-weight: bold;
+            box-shadow: 0 4px 15px var(--shadow-gold);
         }
         
         /* شبكة عرض الصور */
         .portfolio-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 25px; 
             padding: 50px 5%; 
-            background: #111; 
+            background-color: var(--bg-card); 
         }
         .portfolio-item { 
             position: relative; 
             overflow: hidden; 
             border-radius: 10px; 
-            border: 1px solid #222; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color); 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            background-color: var(--bg-primary);
+            transition: 0.3s ease;
+        }
+        .portfolio-item:hover {
+            border-color: var(--gold-main);
+            box-shadow: 0 6px 20px var(--shadow-gold);
         }
         .portfolio-item img { 
             width: 100%; 
@@ -79,36 +165,37 @@
             transition: 0.5s; 
         }
         .portfolio-item:hover img { 
-            transform: scale(1.1); 
-            filter: brightness(0.6); 
+            transform: scale(1.08); 
+            filter: brightness(0.55); 
         }
         .portfolio-info { 
             position: absolute; 
-            bottom: -80px; 
+            bottom: -95px; 
             left: 0; 
             width: 100%; 
-            background: rgba(0, 0, 0, 0.85); 
-            padding: 20px; 
+            background: rgba(9, 13, 20, 0.92); 
+            padding: 18px; 
             text-align: center; 
-            transition: 0.5s; 
-            border-top: 2px solid #00bcd4;
+            transition: 0.4s; 
+            border-top: 2px solid var(--gold-main);
+            box-sizing: border-box;
         }
         .portfolio-item:hover .portfolio-info { 
             bottom: 0; 
         }
         .portfolio-info h3 { 
-            color: #fff; 
+            color: var(--gold-main); 
             margin: 0 0 5px 0; 
-            font-size: 1.3rem; 
+            font-size: 1.15rem; 
         }
         .portfolio-info p { 
-            color: #00bcd4; 
+            color: var(--text-primary); 
             margin: 0; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
         }
 
         /* =========================================
-           كود تغيير اللون من الأسود إلى الأبيض
+           الوضع النهاري (White Mode) المتطابق مع الرئيسية
         ========================================= */
         body.white-mode, 
         body.white-mode section, 
@@ -116,27 +203,53 @@
         body.white-mode footer, 
         body.white-mode .gallery-header,
         body.white-mode .portfolio-grid {
-            background-color: #ffffff !important;
-            color: #000000 !important;
-            border-color: #dddddd !important;
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        body.white-mode .gallery-header h1 {
+            color: #a67512 !important;
         }
         body.white-mode .gallery-header p,
         body.white-mode span, 
-        body.white-mode .nav-link,
+        body.white-mode .nav-link {
+            color: #0f172a !important;
+        }
         body.white-mode .filter-btn {
-            color: #000000 !important;
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        body.white-mode .filter-btn:hover {
+            border-color: #a67512 !important;
+            color: #a67512 !important;
         }
         body.white-mode .filter-btn.active {
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark)) !important;
             color: #ffffff !important;
+            border-color: var(--gold-main) !important;
         }
         body.white-mode .portfolio-item {
-            border-color: #dddddd !important;
+            border-color: #cbd5e1 !important;
+            background-color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(16, 24, 38, 0.08) !important;
         }
         body.white-mode .portfolio-info {
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.96) !important;
         }
         body.white-mode .portfolio-info h3 {
-            color: #000000 !important;
+            color: #a67512 !important;
+        }
+        body.white-mode .portfolio-info p {
+            color: #0f172a !important;
+        }
+        body.white-mode .logo {
+            background-color: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+        body.white-mode .logo img {
+            mix-blend-mode: normal;
         }
     </style>
 </head>
@@ -146,7 +259,9 @@
     <header class="header">
         <div class="logo">
             <a href="index.html">
-                <img src="logo-main.png" alt="فكرة للدعاية والإعلان">
+                <img src="logo-main.png" 
+                     onerror="if(!this.dataset.step){this.dataset.step=1;this.src='logo-main.jpeg';}else if(this.dataset.step==1){this.dataset.step=2;this.src='logo-main.jpg';}else if(this.dataset.step==2){this.dataset.step=3;this.src='assets/images/logo-main.png';}" 
+                     alt="فكرة للدعاية والإعلان">
             </a>
         </div>
         <nav class="nav-group">
@@ -154,78 +269,272 @@
                 <i class="fas fa-home"></i>
                 <span>الرئيسية</span>
             </a>
-            <a href="gallery.html" class="nav-link" style="color: #00bcd4;">
+            <a href="index.html#our-services" class="nav-link">
+                <i class="fas fa-concierge-bell"></i>
+                <span>خدماتنا</span>
+            </a>
+            <a href="gallery.html" class="nav-link active-page">
                 <i class="fas fa-camera"></i>
-                <span>سابقة الأعمال</span>
+                <span>أعمالنا</span>
             </a>
             <a href="index.html#contact-section" class="nav-link">
                 <i class="fas fa-address-book"></i>
                 <span>تواصل معنا</span>
             </a>
-            <!-- زر تغيير اللون -->
-            <a onclick="toggleColor()" class="nav-link" style="cursor:pointer; color: #00bcd4;">
-                <i class="fas fa-adjust"></i>
-                <span>تغيير اللون</span>
+            <a onclick="toggleColor()" class="nav-link" style="cursor:pointer;">
+                <i class="fas fa-adjust" style="color: #d49b27 !important;"></i>
+                <span style="color: #d49b27 !important;">اللون</span>
             </a>
         </nav>
     </header>
 
     <!-- قسم معرض الأعمال والفلترة -->
     <section class="gallery-header">
-        <h1>سابقة أعمالنا</h1>
-        <p>تصفح أحدث المشاريع والتجهيزات التي قمنا بتنفيذها لشركاء نجاحنا</p>
+        <h1>سابقة أعمال فكرة للدعاية والإعلان: حلول الطباعة وهدايا الشركات في مصر</h1>
+        <p>نفخر بتصميم وتنفيذ الواجهات الإعلانية، المطبوعات الدعائية، وهدايا الشركات المخصصة لكبرى الكيانات والمؤسسات في القاهرة ومختلف المحافظات بأعلى معايير الجودة.</p>
         
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterGallery('all', this)">الكل</button>
-            <button class="filter-btn" onclick="filterGallery('outdoor', this)">واجهات ولافتات خارجية</button>
-            <button class="filter-btn" onclick="filterGallery('indoor', this)">لافتات وديكورات داخلية</button>
-            <button class="filter-btn" onclick="filterGallery('printing', this)">مطبوعات وتجهيزات</button>
+            <button class="filter-btn" onclick="filterGallery('branding', this)">واجهات ولافتات كبرى الشركات</button>
+            <button class="filter-btn" onclick="filterGallery('sunshades', this)">شماسي سيارات</button>
+            <button class="filter-btn" onclick="filterGallery('calendars', this)">نتائج مكتب</button>
+            <button class="filter-btn" onclick="filterGallery('mugs', this)">مجات حرارية</button>
+            <button class="filter-btn" onclick="filterGallery('caps', this)">كابات ويونيفورم</button>
+            <button class="filter-btn" onclick="filterGallery('bags', this)">شنط دعائية</button>
+            <button class="filter-btn" onclick="filterGallery('rollups', this)">رول أب ستاند</button>
+            <button class="filter-btn" onclick="filterGallery('gifts', this)">هدايا VIP</button>
         </div>
     </section>
 
-    <!-- شبكة الصور -->
+    <!-- شبكة الصور (الأعمال القديمة + الجديدة) -->
     <section class="portfolio-grid" id="portfolioGrid">
         
-        <!-- عمل 1 : يونيون اير (خارجي) -->
-        <div class="portfolio-item outdoor">
-            <img src="assets/images/portfolio-unionaire.jpg" alt="واجهة يونيون اير">
+        <!-- ================= الأعمال الكبرى السابقة ================= -->
+        <div class="portfolio-item branding">
+            <img src="assets/images/portfolio-unionaire.jpg" alt="تجهيز واجهات كلادينج وحروف مضيئة لشركة يونيون اير - فكرة للدعاية">
             <div class="portfolio-info">
                 <h3>يونيون اير (Unionaire)</h3>
                 <p>تجهيز واجهات كلادينج وحروف مضيئة</p>
             </div>
         </div>
 
-        <!-- عمل 2 : كاريير (داخلي) -->
-        <div class="portfolio-item indoor">
-            <img src="assets/images/portfolio-carrier.jpg" alt="لافتة كاريير الداخلية">
+        <div class="portfolio-item branding">
+            <img src="assets/images/portfolio-carrier.jpg" alt="لافتات أكريليك داخلية مضيئة لشركة كاريير - فكرة للدعاية">
             <div class="portfolio-info">
                 <h3>كاريير (Carrier)</h3>
                 <p>لافتات أكريليك داخلية مضيئة</p>
             </div>
         </div>
 
-        <!-- عمل 3 : راية (داخلي/خارجي) -->
-        <div class="portfolio-item outdoor indoor">
-            <img src="assets/images/portfolio-raya.jpg" alt="تجهيزات راية">
+        <div class="portfolio-item branding">
+            <img src="assets/images/portfolio-raya.jpg" alt="تجهيز لافتات الفروع والهوية البصرية لشركة راية - فكرة للدعاية">
             <div class="portfolio-info">
                 <h3>راية (Raya)</h3>
                 <p>تجهيز لافتات الفروع والهوية البصرية</p>
             </div>
         </div>
 
-        <!-- عمل 4 : غبور (خارجي) -->
-        <div class="portfolio-item outdoor">
-            <img src="assets/images/portfolio-ghabbour.jpg" alt="تجهيزات غبور">
+        <div class="portfolio-item branding">
+            <img src="assets/images/portfolio-ghabbour.jpg" alt="تجهيزات الفروع الخارجية والأعلام الإعلانية لمجموعة غبور">
             <div class="portfolio-info">
                 <h3>مجموعة غبور</h3>
-                <p>تجهيزات الفروع الخارجية</p>
+                <p>تجهيزات الفروع الخارجية والأعلام</p>
+            </div>
+        </div>
+
+        <!-- ================= 1. قسم شماسي السيارات (4 صور) ================= -->
+        <div class="portfolio-item sunshades">
+            <img src="assets/images/car-sunshade-printing-corporate-gifts-egypt.webp" alt="طباعة شماسي سيارات دعائية مخصصة للشركات في مصر - فكرة للدعاية" loading="lazy">
+            <div class="portfolio-info">
+                <h3>شماسي سيارات دعائية</h3>
+                <p>طباعة مخصصة لهدايا الشركات في مصر</p>
+            </div>
+        </div>
+        <div class="portfolio-item sunshades">
+            <img src="assets/images/promotional-car-sunshade-advertising-cairo.webp" alt="تصميم وتنفيذ شمسية سيارة إعلانية في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>شمسية سيارة إعلانية</h3>
+                <p>تصميم وتنفيذ دعاية السيارات في القاهرة</p>
+            </div>
+        </div>
+        <div class="portfolio-item sunshades">
+            <img src="assets/images/custom-logo-car-sunshade-printing-fekrah.webp" alt="طباعة شعارات الشركات على شماسي السيارات من تنفيذ وكالة فكرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>طباعة شعارات على الشماسي</h3>
+                <p>جودة طباعة ثابتة ومقاومة للشمس</p>
+            </div>
+        </div>
+        <div class="portfolio-item sunshades">
+            <img src="assets/images/branded-car-sunshade-giveaways-egypt.webp" alt="هدايا شركات دعائية شماسي سيارات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>هدايا دعائية للسيارات</h3>
+                <p>توريد كميات للشركات والبنوك</p>
+            </div>
+        </div>
+
+        <!-- ================= 2. قسم نتائج المكتب (4 صور) ================= -->
+        <div class="portfolio-item calendars">
+            <img src="assets/images/desk-calendar-printing-corporate-gifts-egypt.webp" alt="تصميم وطباعة نتيجة مكتب احترافية لهدايا الشركات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>نتيجة مكتب احترافية</h3>
+                <p>تصميم وطباعة لهدايا الشركات</p>
+            </div>
+        </div>
+        <div class="portfolio-item calendars">
+            <img src="assets/images/custom-desk-calendar-design-printing-cairo.webp" alt="طباعة نتائج مكتب مخصصة بشعار الشركة في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>نتيجة مكتب مخصصة</h3>
+                <p>تنفيذ خاص بهوية وشعار الشركة</p>
+            </div>
+        </div>
+        <div class="portfolio-item calendars">
+            <img src="assets/images/branded-desk-calendar-giveaways-fekrah.webp" alt="هدايا رأس السنة نتائج مكتب دعائية من فكرة للدعاية" loading="lazy">
+            <div class="portfolio-info">
+                <h3>نتيجة مكتب دعائية</h3>
+                <p>هدايا رأس السنة للشركات والمؤسسات</p>
+            </div>
+        </div>
+        <div class="portfolio-item calendars">
+            <img src="assets/images/corporate-desk-calendar-hardcover-printing-egypt.webp" alt="نتيجة مكتب كرتون مقوى وتكعيب سلك للشركات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>نتيجة مكتب هارد كفر</h3>
+                <p>كرتون مقوى وتكعيب سلك عالي الجودة</p>
+            </div>
+        </div>
+
+        <!-- ================= 3. قسم المجات الحرارية (3 صور) ================= -->
+        <div class="portfolio-item mugs">
+            <img src="assets/images/custom-thermal-mug-printing-corporate-gifts-egypt.webp" alt="طباعة وحفر ليزر على مج حراري لهدايا الشركات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>مج حراري مطبوع</h3>
+                <p>طباعة وحفر ليزر لهدايا الشركات</p>
+            </div>
+        </div>
+        <div class="portfolio-item mugs">
+            <img src="assets/images/branded-thermo-mug-logo-giveaways-cairo.webp" alt="مج حراري مطبوع بشعار الشركة هدايا دعائية في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>مج حراري بشعار الشركة</h3>
+                <p>هدايا دعائية للموظفين والعملاء</p>
+            </div>
+        </div>
+        <div class="portfolio-item mugs">
+            <img src="assets/images/stainless-steel-thermal-mug-branding-fekrah.webp" alt="مجات حرارية ستانلس ستيل مطبوعة من فكرة للدعاية" loading="lazy">
+            <div class="portfolio-info">
+                <h3>مج حراري ستانلس ستيل</h3>
+                <p>خامات فاخرة مع طباعة ثابتة</p>
+            </div>
+        </div>
+
+        <!-- ================= 4. قسم الكابات (5 صور) ================= -->
+        <div class="portfolio-item caps">
+            <img src="assets/images/custom-branded-caps-printing-embroidery-egypt.webp" alt="طباعة وتطريز كابات دعائية ويونيفورم للشركات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>كابات دعائية مطبوعة</h3>
+                <p>طباعة وتطريز للشركات في مصر</p>
+            </div>
+        </div>
+        <div class="portfolio-item caps">
+            <img src="assets/images/promotional-caps-corporate-giveaways-cairo.webp" alt="كابات دعائية للحملات الترويجية في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>كابات للحملات الإعلانية</h3>
+                <p>تجهيز الفعاليات والحملات الترويجية</p>
+            </div>
+        </div>
+        <div class="portfolio-item caps">
+            <img src="assets/images/company-uniform-caps-custom-logo-egypt.webp" alt="كابات يونيفورم للموظفين مطرزة بشعار الشركة في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>كابات يونيفورم للموظفين</h3>
+                <p>تطريز بارز لشعار الشركة</p>
+            </div>
+        </div>
+        <div class="portfolio-item caps">
+            <img src="assets/images/embroidered-logo-caps-branding-fekrah.webp" alt="تطريز شعارات الشركات على الكابات - وكالة فكرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>تطريز كابات عالي الدقة</h3>
+                <p>خامات قطنية عالية التحمل</p>
+            </div>
+        </div>
+        <div class="portfolio-item caps">
+            <img src="assets/images/bulk-promotional-caps-supplier-cairo-egypt.webp" alt="توريد كميات كابات دعائية للمعارض والفعاليات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>توريد كابات للمعارض</h3>
+                <p>قدرة إنتاجية لتوريد الكميات الكبيرة</p>
+            </div>
+        </div>
+
+        <!-- ================= 5. قسم الشنط الدعائية (3 صور) ================= -->
+        <div class="portfolio-item bags">
+            <img src="assets/images/custom-cotton-canvas-tote-bags-printing-egypt.webp" alt="طباعة شنط قماش قطن وكانفاس دعائية للشركات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>شنط قماش قطن (Tote Bags)</h3>
+                <p>طباعة عالية الدقة صديقة للبيئة</p>
+            </div>
+        </div>
+        <div class="portfolio-item bags">
+            <img src="assets/images/promotional-non-woven-bags-printing-cairo.webp" alt="طباعة شنط نون ووفن دعائية للمعارض والمؤتمرات في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>شنط نون ووفن (Non-Woven)</h3>
+                <p>حلول اقتصادية للمعارض والمؤتمرات</p>
+            </div>
+        </div>
+        <div class="portfolio-item bags">
+            <img src="assets/images/luxury-printed-cardboard-gift-bags-fekrah.webp" alt="طباعة شنط كرتون فاخرة لهدايا الشركات من فكرة للدعاية" loading="lazy">
+            <div class="portfolio-info">
+                <h3>شنط كرتون مقوى فاخرة</h3>
+                <p>تغليف راقي لهدايا الشركات والعملاء</p>
+            </div>
+        </div>
+
+        <!-- ================= 6. قسم الرول أب ستاند (3 صور) ================= -->
+        <div class="portfolio-item rollups">
+            <img src="assets/images/roll-up-banner-stand-printing-egypt.webp" alt="تصميم وطباعة رول أب ستاند للمعارض والشركات في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>رول أب ستاند (Roll-up)</h3>
+                <p>تصميم وطباعة للمعارض والمؤتمرات</p>
+            </div>
+        </div>
+        <div class="portfolio-item rollups">
+            <img src="assets/images/promotional-roll-up-display-stand-cairo.webp" alt="تجهيز معارض وفعاليات رول أب ستاند في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>ستاندات عرض للمعارض</h3>
+                <p>شاسيهات متينة وطباعة عالية الوضوح</p>
+            </div>
+        </div>
+        <div class="portfolio-item rollups">
+            <img src="assets/images/custom-roll-up-banner-design-branding-fekrah.webp" alt="طباعة رول أب عالي الجودة من تنفيذ فكرة للدعاية" loading="lazy">
+            <div class="portfolio-info">
+                <h3>رول أب إعلاني مخصص</h3>
+                <p>تنفيذ سريع بأعلى دقة لونية</p>
+            </div>
+        </div>
+
+        <!-- ================= 7. قسم هدايا VIP (3 صور) ================= -->
+        <div class="portfolio-item gifts">
+            <img src="assets/images/corporate-gifts-promotional-giveaways-egypt.webp" alt="توريد وتنفيذ هدايا الشركات الدعائية في مصر" loading="lazy">
+            <div class="portfolio-info">
+                <h3>هدايا شركات دعائية</h3>
+                <p>تشكيلة متكاملة من الهدايا المخصصة</p>
+            </div>
+        </div>
+        <div class="portfolio-item gifts">
+            <img src="assets/images/custom-branded-corporate-gift-sets-cairo.webp" alt="تجهيز أطقم هدايا الموظفين وكبار العملاء في القاهرة" loading="lazy">
+            <div class="portfolio-info">
+                <h3>أطقم هدايا الشركات</h3>
+                <p>تجهيز حقائب الترحيب للموظفين والعملاء</p>
+            </div>
+        </div>
+        <div class="portfolio-item gifts">
+            <img src="assets/images/vip-executive-corporate-gifts-branding-fekrah.webp" alt="هدايا VIP فاخرة لكبار العملاء من فكرة للدعاية" loading="lazy">
+            <div class="portfolio-info">
+                <h3>هدايا VIP لكبار العملاء</h3>
+                <p>هدايا تنفيذية فاخرة محفورة بالشعار</p>
             </div>
         </div>
 
     </section>
 
     <!-- الفوتر -->
-    <footer style="padding:20px; text-align:center; background:#000; color:#888; border-top: 1px solid #222;">
+    <footer style="padding:20px; text-align:center; background-color: var(--bg-primary); color: var(--text-muted); border-top: 1px solid var(--border-color);">
       © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
     </footer>
 
@@ -233,11 +542,7 @@
     <script>
         function toggleColor() {
             document.body.classList.toggle('white-mode');
-            if (document.body.classList.contains('white-mode')) {
-                localStorage.setItem('siteColor', 'white');
-            } else {
-                localStorage.setItem('siteColor', 'black');
-            }
+            localStorage.setItem('siteColor', document.body.classList.contains('white-mode') ? 'white' : 'dark');
         }
 
         if (localStorage.getItem('siteColor') === 'white') {
@@ -254,7 +559,7 @@
             items.forEach(item => {
                 if(category === 'all' || item.classList.contains(category)) {
                     item.style.display = 'block';
-                    item.animate([{opacity: 0, transform: 'scale(0.9)'}, {opacity: 1, transform: 'scale(1)'}], {duration: 400, fill: 'forwards'});
+                    item.animate([{opacity: 0, transform: 'scale(0.95)'}, {opacity: 1, transform: 'scale(1)'}], {duration: 350, fill: 'forwards'});
                 } else {
                     item.style.display = 'none';
                 }
