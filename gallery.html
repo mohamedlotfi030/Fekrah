@@ -101,6 +101,30 @@
             margin: 0 auto;
             line-height: 1.7;
         }
+
+        /* شريط الثقة للشركات B2B */
+        .b2b-trust-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 22px auto 0;
+            max-width: 950px;
+        }
+        .trust-badge {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .trust-badge i {
+            color: var(--gold-main);
+        }
         
         /* أزرار الفلترة التصنيفية */
         .filter-buttons { 
@@ -194,6 +218,112 @@
             font-size: 0.95rem; 
         }
 
+        /* قسم طلب عرض سعر وعينة للشركات (B2B CTA) */
+        .b2b-cta-section {
+            background-color: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 55px 20px;
+            text-align: center;
+        }
+        .b2b-cta-box {
+            max-width: 880px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border: 1px solid var(--gold-main);
+            border-radius: 14px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 30px var(--shadow-gold);
+        }
+        .b2b-cta-box h2 {
+            color: var(--gold-main);
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+        }
+        .b2b-cta-box p {
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            line-height: 1.7;
+            max-width: 680px;
+            margin: 0 auto 25px;
+        }
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 26px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.98rem;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+        .cta-btn-whatsapp {
+            background-color: #16a34a;
+            color: #ffffff !important;
+        }
+        .cta-btn-whatsapp:hover {
+            background-color: #15803d;
+            transform: translateY(-2px);
+        }
+        .cta-btn-call {
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
+            color: #090d14 !important;
+        }
+        .cta-btn-call:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+        }
+        .cta-btn-email {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary) !important;
+        }
+        .cta-btn-email:hover {
+            border-color: var(--gold-main);
+            color: var(--gold-main) !important;
+            transform: translateY(-2px);
+        }
+
+        /* أزرار التواصل العائمة */
+        .floating-contact {
+            position: fixed;
+            bottom: 22px;
+            left: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 9999;
+        }
+        .float-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+            transition: 0.3s ease;
+        }
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+        .float-whatsapp {
+            background-color: #16a34a;
+            color: #ffffff !important;
+        }
+        .float-call {
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
+            color: #090d14 !important;
+        }
+
         /* =========================================
            الوضع النهاري (White Mode) المتطابق مع الرئيسية
         ========================================= */
@@ -202,18 +332,31 @@
         body.white-mode header, 
         body.white-mode footer, 
         body.white-mode .gallery-header,
-        body.white-mode .portfolio-grid {
+        body.white-mode .portfolio-grid,
+        body.white-mode .b2b-cta-section {
             background-color: #f8fafc !important;
             color: #0f172a !important;
             border-color: #cbd5e1 !important;
         }
-        body.white-mode .gallery-header h1 {
+        body.white-mode .gallery-header h1,
+        body.white-mode .b2b-cta-box h2 {
             color: #a67512 !important;
         }
         body.white-mode .gallery-header p,
+        body.white-mode .b2b-cta-box p,
         body.white-mode span, 
         body.white-mode .nav-link {
             color: #0f172a !important;
+        }
+        body.white-mode .trust-badge,
+        body.white-mode .b2b-cta-box {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        body.white-mode .cta-btn-email {
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
         }
         body.white-mode .filter-btn {
             background-color: #ffffff !important;
@@ -277,9 +420,9 @@
                 <i class="fas fa-camera"></i>
                 <span>أعمالنا</span>
             </a>
-            <a href="index.html#contact-section" class="nav-link">
-                <i class="fas fa-address-book"></i>
-                <span>تواصل معنا</span>
+            <a href="#rfq-section" class="nav-link">
+                <i class="fas fa-file-invoice"></i>
+                <span>طلب عرض سعر</span>
             </a>
             <a onclick="toggleColor()" class="nav-link" style="cursor:pointer;">
                 <i class="fas fa-adjust" style="color: #d49b27 !important;"></i>
@@ -293,6 +436,13 @@
         <h1>سابقة أعمال فكرة للدعاية والإعلان: حلول الطباعة وهدايا الشركات في مصر</h1>
         <p>نفخر بتصميم وتنفيذ الواجهات الإعلانية، المطبوعات الدعائية، وهدايا الشركات المخصصة لكبرى الكيانات والمؤسسات في القاهرة ومختلف المحافظات بأعلى معايير الجودة.</p>
         
+        <!-- شريط اعتماد الموردين للشركات -->
+        <div class="b2b-trust-bar">
+            <div class="trust-badge"><i class="fas fa-check-circle"></i> مورد شركات معتمد</div>
+            <div class="trust-badge"><i class="fas fa-file-invoice-dollar"></i> سجل ضريبي: 471344052 (فاتورة إلكترونية)</div>
+            <div class="trust-badge"><i class="fas fa-truck"></i> توريد لجميع محافظات مصر</div>
+        </div>
+
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterGallery('all', this)">الكل</button>
             <button class="filter-btn" onclick="filterGallery('branding', this)">واجهات ولافتات كبرى الشركات</button>
@@ -533,9 +683,39 @@
 
     </section>
 
+    <!-- قسم طلب عرض سعر وعينة للشركات (B2B Conversion CTA) -->
+    <section class="b2b-cta-section" id="rfq-section">
+        <div class="b2b-cta-box">
+            <h2>هل تخطط لحملة هدايا دعائية أو تجهيز فروع لشركتك؟</h2>
+            <p>تواصل مباشرة مع فريق مبيعات الشركات في <strong>فكرة للدعاية والإعلان</strong> لطلب عينة معاينة لمقر شركتكم أو الحصول على مقايسة فنية وعرض سعر مخصص (متاح التعامل بالفاتورة الإلكترونية).</p>
+            <div class="cta-actions">
+                <a href="https://wa.me/201041349663?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%81%D9%83%D8%B1%D8%A9%20%D9%84%D9%84%D8%AF%D8%B9%D8%A7%D9%8A%D8%A9%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%B3%D8%B9%D8%B1%20%2F%20%D8%B9%D9%8A%D9%86%D8%A9%20%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9%20%D9%84%D8%B4%D8%B1%D9%83%D8%AA%D9%86%D8%A7." target="_blank" rel="noopener" class="cta-btn cta-btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> طلب عرض سعر عبر واتساب
+                </a>
+                <a href="tel:+201041349663" class="cta-btn cta-btn-call">
+                    <i class="fas fa-phone-alt"></i> اتصال مباشر: 01041349663
+                </a>
+                <a href="index.html#contact-section" class="cta-btn cta-btn-email">
+                    <i class="fas fa-envelope"></i> إرسال تفاصيل المقايسة
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- أزرار التواصل العائمة السريعة -->
+    <div class="floating-contact">
+        <a href="https://wa.me/201041349663?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%81%D9%83%D8%B1%D8%A9%20%D9%84%D9%84%D8%AF%D8%B9%D8%A7%D9%8A%D8%A9%D8%8C%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%D9%85%20%D9%85%D9%86%20%D8%AE%D9%84%D8%A7%D9%84%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A." target="_blank" rel="noopener" class="float-btn float-whatsapp" title="تواصل واتساب">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+201041349663" class="float-btn float-call" title="اتصال مباشر">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+
     <!-- الفوتر -->
-    <footer style="padding:20px; text-align:center; background-color: var(--bg-primary); color: var(--text-muted); border-top: 1px solid var(--border-color);">
-      © جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026
+    <footer style="padding:25px 20px; text-align:center; background-color: var(--bg-primary); color: var(--text-muted); border-top: 1px solid var(--border-color); line-height: 1.8;">
+        <div><strong>فكرة للدعاية والإعلان</strong> | القاهرة، مصر — هاتف / واتساب: <a href="tel:+201041349663" style="color: var(--gold-main); text-decoration: none;">01041349663</a> | سجل ضريبي: 471344052</div>
+        <div style="font-size: 0.9rem; margin-top: 5px;">© جميع الحقوق محفوظة لدى فكرة للدعاية والإعلان 2026</div>
     </footer>
 
     <!-- سكربت تغيير اللون وفلترة الأعمال -->
